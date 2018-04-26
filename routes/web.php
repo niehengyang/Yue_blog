@@ -25,11 +25,16 @@ Route::get('/home', 'HomeController@index')->name('home');
 //    Route::get("/auth/","IndexController@index");
 //    Route::post('/auth/login','LoginController@postLogin');
 //});
-
+//账户管理
 Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'auth'],function (){
-    Route::get('/index','IndexController@index');
+    Route::get('index','IndexController@index');
+    Route::get('getUserList','AccountController@getlist');
+    Route::post('deleteUser','AccountController@deleteaccount');
 });
 
-
-
+//管理员
+Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'auth'],function (){
+    Route::get('getUserInfo','UserController@getuserinfo');
+    Route::post('updateUserInfo','UserController@updateuserinfo');
+});
 

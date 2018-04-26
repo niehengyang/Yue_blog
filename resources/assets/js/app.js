@@ -14,7 +14,12 @@ import axios from 'axios'
 
 import App from './App.vue'//
 import index from './components/index.vue'//
+import userlist from './components/userlist.vue'//
+import profile from './components/profile.vue'//
 import ElementUI from 'element-ui'
+import 'font-awesome/css/font-awesome.min.css'//
+import 'element-ui/lib/theme-chalk/index.css'
+
 Vue.use(VueRouter)
 Vue.use(ElementUI)
 
@@ -26,6 +31,14 @@ const router = new VueRouter({
         {
             path:'/home',
             component: index
+        },
+        {
+            path:'/userlist',
+            component: userlist
+        },
+        {
+            path:'/user/profile',
+            component:profile
         }
     ]
 })

@@ -15,7 +15,9 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name',50)->comment('用户昵称');
+            $table->string('username',50)->comment('账号');
+            $table->string('name',50)->comment('用户姓名');
+            $table->string('nickname',50)->comment('用户昵称');
             $table->string('email',100)->unique()->comment('管理员邮箱');
             $table->string('password',120)->comment('管理员登录密码');
             $table->ipAddress('admin_lastloginip')->nullable()->comment('最后登录ip');

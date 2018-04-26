@@ -1,17 +1,11 @@
 <template>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Example Component</div>
-
-                    <div class="panel-body">
-                        I'm an example component!
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <el-row class="warp">
+        <el-col :span="24" class="warp-breadcrum">
+            <el-breadcrumb separator="/">
+                <el-breadcrumb-item :to="{path: '/home'}"><b>首页</b></el-breadcrumb-item>
+            </el-breadcrumb>
+        </el-col>
+    </el-row>
 </template>
 
 <script>

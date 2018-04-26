@@ -5,15 +5,17 @@
             <div class="topbar-title">
                 <span style="font-size: 18px;color: #fff;">博客后台管理系统</span>
             </div>
-            <div class="topbar-account topbar-btn">
+            <div class="topbar-btn">
                 <el-dropdown trigger="click">
-                    <span class="el-dropdown-link userinfo-inner">{{nickname}}</span>
+                    <span class="el-dropdown-link userinfo-inner">
+                        <i class="fa fa-user"></i>&nbsp;&nbsp;{{userform.nickname}}&nbsp;&nbsp;<i class="fa fa-caret-down"></i>
+                    </span>
                     <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item>
-                            <div @click="jumpTo('')"><span style="color: #555; font-size: 14px;">个人信息</span></div>
+                        <el-dropdown-item >
+                            <div @click="jumpTo('/user/profile')"><span style="color: #555;font-size: 14px;">个人信息</span></div>
                         </el-dropdown-item>
                         <el-dropdown-item>
-                            <div @click="jumpTo('')"><span style="color: #555; font-size: 14px;">修改密码</span></div>
+                            <div @click="jumpTo('/user/changepwd')"><span style="color: #555;font-size: 14px;">修改密码</span></div>
                         </el-dropdown-item>
                         <el-dropdown-item divided @click.native="logout">退出登录</el-dropdown-item>
                     </el-dropdown-menu>
@@ -24,56 +26,104 @@
         <!--中间-->
         <el-col :span="24" class="main">
             <!--左侧导航-->
-            <el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">
-                <el-radio-button :label="false">展开</el-radio-button>
-                <el-radio-button :label="true">收起</el-radio-button>
-            </el-radio-group>
-            <el-menu default-active="" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
-                <el-submenu index="1">
+            <!--<el-radio-group v-model="isCollapse" style="margin-bottom: 20px;">-->
+                <!--<el-radio-button :label="false">展开</el-radio-button>-->
+                <!--<el-radio-button :label="true">收起</el-radio-button>-->
+            <!--</el-radio-group>-->
+            <aside :class="{showSidebar:!isCollapse}">
+            <div class="menu-toggle" @click.prevent="changeCollapse" >
+                <i class="fa fa-exchange" v-show="!isCollapse"></i>
+                <i class="fa fa-exchange" v-show="isCollapse"></i>
+            </div>
+                <!--导航菜单-->
+            <el-menu default-active="defaultActiveIndex" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse" background-color="#333744" text-color="#ffffff">
+                <el-menu-item index="1" @click="jumpTo('/home')">
+                    <i  class="fa fa-home"></i>
+                    <span slot="title">&nbsp;&nbsp;首页</span>
+                </el-menu-item>
+                <el-menu-item index="2" @click="jumpTo('/userlist')">
+                    <i class="fa fa-users"></i>
+                    <span slot="title">&nbsp;&nbsp;用户列表</span>
+                </el-menu-item>
+                <el-submenu index="3">
                     <template slot="title">
-                        <i class="el-icon-home"></i>
-                        <span slot="title">首页</span>
+                        <i class="fa fa-bars"></i>
+                        <span slot="title">&nbsp;&nbsp;文章管理</span>
                     </template>
+                    <el-menu-item index="3-1">文章列表</el-menu-item>
+                    <el-menu-item index="3-2">文章分类</el-menu-item>
                 </el-submenu>
-                <el-submenu index="2">
-                    <i></i>
-                    <span slot="title">用户列表</span>
+                <el-submenu index="4">
+                    <template slot="title">
+                    <i class="fa fa-cog"></i>
+                    <span slot="title">&nbsp;&nbsp;设置</span>
+                    </template>
+                    <el-menu-item index="4-1" @click="jumpTo('/user/profile')">个人信息</el-menu-item>
+                    <el-menu-item index="4-2">修改密码</el-menu-item>
                 </el-submenu>
             </el-menu>
+            </aside>
             <!--右侧内容区-->
             <section class="content-container">
                 <div class="grid-content bg-purple-light">
                     <el-col :span="24" class="content-wrapper">
                         <transition name="fade" mode="out-in">
-                            <router-link></router-link>
+                            <router-view></router-view>
                         </transition>
                     </el-col>
                 </div>
             </section>
         </el-col>
     </el-row>
-
 </template>
 
 <script>
     export default{
-        name: 'home',
         create(){
            console.log('页面建立的时候执行此函数');
         },
     data(){
         return{
-            defaultActiveIndex: '0',
-            nickname: '',
-            collapsed: false,
+            defaultActiveIndex:'0',
+            userform:{
+                nickname:'aaa'
+            },
+            isCollapse: true
         }
     },
+        create(){
+            console.log('页面建立的时候执行此函数');
+            this.LoadUserInfo();
+        },
         methods: {
-            handleSelect(index){
-                this.defaultActiveIndex = index;
+            LoadUserInfo(){
+                let that = this;
+                that.loading = true;
+                axios.get('/admin/getUserInfo')
+                    .then(function (response) {
+                        if (response && response.data){
+                            that.userform = response.data;
+                            console.log('获取到的'+response.data);
+                        }else{
+                            that.$message.error({showClose:true,message:'信息获取失败！',duration:2000});
+                        }
+                    }).catch(function (error) {
+                    that.loading = false;
+                    console.log(error);
+                    that.$message.error({showClose:true,message:'用户信息请求异常',duration:2000});
+                })
             },
-            collapse:function(){
-                this.collapsed = !this.collapsed
+            changeCollapse(){
+                this.isCollapse = !this.isCollapse;
+            },
+            handleSelect(key,keyPath){
+                console.log(key,keyPath);
+            },
+            handleOpen(key,keyPath){
+              console.log(key,keyPath);
+            },
+            handleClose(key,keyPath){
+                console.log(key,keyPath);
             },
             jumpTo(url){
                 this.defaultActiveIndex = url;
@@ -83,12 +133,9 @@
                 let self =this;
                 console.log('退出登录');
             },
+            //获取当前用户信息
             mounted(){
-                let user = localStorage.getItem('access-user');
-                if (user){
-                    user = JSON.parse(user);
-                    this.nickname = user.nickname || '';
-                }
+                this.LoadUserInfo();
             }
         }
 
@@ -107,9 +154,13 @@
         line-height: 50px;
         background: #373D41;
         padding:0px;
-    }
-    .topbar-btn{
-        color: #fff;
+        width: 100%;
+        .topbar-btn{
+            color: #fff;
+            padding-right: 20px;
+            float: right;
+            height: 50px;
+        }
     }
 
     .topbar-title{
@@ -120,17 +171,24 @@
         border-left: 1px solid #000;
     }
 
-    .topbar-account{
-        float: right;
-        padding-right: 12px;
-    }
-
     .userinfo-inner{
         cursor: pointer;
         color: #fff;
         padding-left: 10px;
     }
-}
+
+    el-menu{
+       height: 50px;
+    }
+    .el-menu-vertical-demo:not(.el-menu--collapse){
+        width: 150px;
+        min-height: 400px;
+    }
+    .line{
+        width: 100%;
+        border: 1px solid #adadad;
+    }
+
     .main{
         display: -webkit-box;
         display: -webkit-flex;
@@ -145,43 +203,13 @@
         min-width: 50px;
         background: #333744;
         &::-webkit-scrollbar{
-            display:none;
+            display: none;
         }
-
-        &::showSidebar{
+        &.showSidebar{
             overflow-x: hidden;
             overflow-y: auto;
         }
-
-        .el-menu{
-            height: 100%;
-            height: -moz-calc(100% - 80px);
-            height: -webkit-calc(100% - 80px);
-            height: calc(100% - 80px);
-            border-radius: 0px;
-            background-color: #333744;
-            border-right: 0px;
-        }
-        .el-submenu .el-menu-item{
-            min-width: 60px;
-        }
-        .el-menu{
-            width: 180px;
-        }
-        .el-menu-collapse{
-            width: 60px;
-        }
-
-        .el-menu .el-menu-item .el-submenu .el-submenu__title{
-            height: 46px;
-            line-height: 46px;
-        }
-
-        .el-menu-item:hover, .el-submenu .el-menu-item:hover, .el-submenu__title:hover{
-            background-color: #7ed2df;
-        }
     }
-
     .menu-toggle{
         background: #4A5064;
         text-align: center;
@@ -189,18 +217,16 @@
         height: 26px;
         line-height: 30px;
     }
-
     .content-container{
         background: #fff;
         flex: 1;
         overflow-y: auto;
         padding: 10px;
         padding-bottom: 1px;
-
         .content-wrapper{
             background-color: #fff;
-            box-sizing:border-box;
+            box-sizing: border-box;
         }
     }
-
+}
 </style>
