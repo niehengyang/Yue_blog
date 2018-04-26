@@ -59,7 +59,7 @@
                     <span slot="title">&nbsp;&nbsp;设置</span>
                     </template>
                     <el-menu-item index="4-1" @click="jumpTo('/user/profile')">个人信息</el-menu-item>
-                    <el-menu-item index="4-2">修改密码</el-menu-item>
+                    <el-menu-item index="4-2" @click="jumpTo('/user/changepwd')">修改密码</el-menu-item>
                 </el-submenu>
             </el-menu>
             </aside>
@@ -85,9 +85,7 @@
     data(){
         return{
             defaultActiveIndex:'0',
-            userform:{
-                nickname:'aaa'
-            },
+            userform:{},
             isCollapse: true
         }
     },
@@ -129,9 +127,33 @@
                 this.defaultActiveIndex = url;
                 this.$router.push(url);//用go刷新
             },
+            //退出登录
             logout(){
-                let self =this;
-                console.log('退出登录');
+                let that = this;
+                that.$confirm('是否退出系统？','提示',{
+                    confirmButtonText:'确定',
+                    cancelButtonText:'取消',
+                    type:'warning'
+                }).then(()=>{
+                    axios.post('/admin/logout')
+                    .then(function (response) {
+                        window.location.assign('/login')
+                        that.$message({
+                            type:'success',
+                            message:response.data,
+                            center:true
+                        })
+                    }).catch(function (error) {
+                        that.$message({
+                            type:'warning',
+                            message:'出问题了！',
+                            center:true
+                        })
+                    })
+
+            }).catch(()=>{
+                    console.log('放弃退出');
+            })
             },
             //获取当前用户信息
             mounted(){

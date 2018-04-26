@@ -76,10 +76,16 @@
             },
             handleSaveProfile(){
                 let that =this;
-                that.$refs.userform.validate((valid)=>{
+                that.$confirm('是否修改该用户信息？','提示',{
+                    confirmButtonText:'确定',
+                    cancelButtonText:'取消',
+                    type:'warning'
+                }).then(()=>{
+                    that.$refs.userform.validate((valid)=>{
                     if(valid){
                         that.loading = true;
                         let args = {
+                            id:that.userform.id,
                             nickname: that.userform.nickname,
                             name:that.userform.name,
                             email:that.userform.email
@@ -88,23 +94,27 @@
                             .then(function (response) {
                                 that.loading = false;
                                 if (response.status == 200 ){
-                                    let user = JSON.parse(window.localStorage.getItem('access-user'));
-                                    user.nickname = that.userform.nickname;
-                                    user.name = that.userform.name;
-                                    user.email = that.userform.email;
-                                    localStorage.setItem('access-user',JSON.stringify(user));
-                                    bus.$emit('setNickName',that.userform.nickname);
+                                    // let user = JSON.parse(window.localStorage.getItem('access-user'));
+                                    // user.nickname = that.userform.nickname;
+                                    // user.name = that.userform.name;
+                                    // user.email = that.userform.email;
+                                    // localStorage.setItem('access-user',JSON.stringify(user));
+                                    // bus.$emit('setNickName',that.userform.nickname);
                                     that.$message.success({showClose:true,message:response.data,duration:2000});
                                 }else{
                                     that.$message.error({showClose:true,message:response.data,duration:2000});
                                 }
                             }).catch(function (error) {
-                                that.loading = false;
-                                console.log(error);
-                                that.$message.error({showClose:true,message:'请求出现异常',duration:2000});
+                            that.loading = false;
+                            console.log(error);
+                            that.$message.error({showClose:true,message:'请求出现异常',duration:2000});
                         });
                     }
                 });
+                }).catch(()=> {
+                    console.log('已取消')
+            })
+
             }
         },
         mounted(){

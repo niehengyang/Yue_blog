@@ -41,8 +41,13 @@ class LoginController extends Controller
      ***/
     public function logout(Request $request){
         $user = $request->user();
-        Auth::logout();
-        return redirect('/admin/login');
+        if(is_null($user)){
+            return response('注销出错！',500);
+        }else{
+            Auth::logout();
+            return response('已退出',200);
+//        return redirect('/login');
+        }
     }
 
 }

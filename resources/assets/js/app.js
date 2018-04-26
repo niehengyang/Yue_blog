@@ -16,6 +16,8 @@ import App from './App.vue'//
 import index from './components/index.vue'//
 import userlist from './components/userlist.vue'//
 import profile from './components/profile.vue'//
+import resetpwd from './components/resetpwd.vue'//
+
 import ElementUI from 'element-ui'
 import 'font-awesome/css/font-awesome.min.css'//
 import 'element-ui/lib/theme-chalk/index.css'
@@ -29,7 +31,7 @@ const router = new VueRouter({
     mode:'hash',
     routes:[
         {
-            path:'/home',
+            path:'/admin/home',
             component: index
         },
         {
@@ -39,6 +41,10 @@ const router = new VueRouter({
         {
             path:'/user/profile',
             component:profile
+        },
+        {
+            path:'/user/changepwd',
+            component:resetpwd
         }
     ]
 })
