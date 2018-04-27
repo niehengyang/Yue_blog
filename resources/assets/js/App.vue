@@ -50,7 +50,7 @@
                         <i class="fa fa-bars"></i>
                         <span slot="title">&nbsp;&nbsp;文章管理</span>
                     </template>
-                    <el-menu-item index="3-1">文章列表</el-menu-item>
+                    <el-menu-item index="3-1" @click="jumpTo('/articlelist')">文章列表</el-menu-item>
                     <el-menu-item index="3-2">文章分类</el-menu-item>
                 </el-submenu>
                 <el-submenu index="4">

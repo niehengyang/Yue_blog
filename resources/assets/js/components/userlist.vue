@@ -29,7 +29,7 @@
                 <el-table-column prop="password" width="200" label="密码"></el-table-column>
                 <el-table-column prop="admin_lastlogintime" width="200" label="最后登录时间"></el-table-column>
                 <el-table-column prop="admin_lastloginip" width="200" label="最后登录ip"></el-table-column>
-                <el-table-column fixed="right" width="100">
+                <el-table-column fixed="right" width="100" label="操作">
                     <template slot-scope="scope">
                         <el-button @click="handleEdit(scope.row)" type="text" size="small">编辑</el-button>
                         <el-button @click="handleDel(scope.row)" type="text" size="small">删除</el-button>
@@ -95,7 +95,7 @@
                         console.log(response);
                         that.total = response.data['total'];
                         that.users = response.data['data'];
-                        that.page = response.data['current_page'];
+                        // that.page = response.data['current_page'];
                     }else{
                         that.loading = false;
                         that.$message.error({showClose:true,message:response.data,duration:2000});

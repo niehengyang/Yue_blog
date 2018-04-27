@@ -16,6 +16,7 @@ class CreateArticlesTable extends Migration
         Schema::create('articles',function (Blueprint $table){
            $table->increments('id');
            $table->string('slug')->nullable()->unique();
+           $table->string('author',50)->comment('作者');
            $table->string('title',50)->nullable()->comment('文章标题');
            $table->longText('content')->nullable()->comment('文章内容');
            $table->string('classification',50)->nullable()->comment('文章分类');

@@ -11,27 +11,29 @@ window.Vue = require('vue');
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import axios from 'axios'
-
-import App from './App.vue'//
-import index from './components/index.vue'//
-import userlist from './components/userlist.vue'//
-import profile from './components/profile.vue'//
-import resetpwd from './components/resetpwd.vue'//
-
 import ElementUI from 'element-ui'
 import 'font-awesome/css/font-awesome.min.css'//
 import 'element-ui/lib/theme-chalk/index.css'
+import VueEditor from 'vue2-editor'
+
+import App from './App.vue'//
+import index from './components/index.vue'//主页
+import userlist from './components/userlist.vue'//账户列表
+import profile from './components/profile.vue'//个人信息
+import resetpwd from './components/resetpwd.vue'//重置密码
+import articlelist from './components/articlelist.vue'//文章列表
+import createarticle from './components/createarticle'//创建文章
 
 Vue.use(VueRouter)
 Vue.use(ElementUI)
-
+Vue.use(VueEditor)
 
 
 const router = new VueRouter({
     mode:'hash',
     routes:[
         {
-            path:'/admin/home',
+            path:'/home',
             component: index
         },
         {
@@ -45,6 +47,14 @@ const router = new VueRouter({
         {
             path:'/user/changepwd',
             component:resetpwd
+        },
+        {
+            path:'/articlelist',
+            component:articlelist
+        },
+        {
+            path:'/createarticle',
+            component:createarticle
         }
     ]
 })

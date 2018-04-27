@@ -46,3 +46,9 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'auth
     Route::post('resetpwd','UserController@resetpwd');
 });
 
+//文章管理
+Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'auth'],function (){
+   Route::get('getList','ArticleController@index');
+   Route::post('batchDelArticle','ArticleController@delarticle');
+});
+
