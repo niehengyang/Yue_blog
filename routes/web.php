@@ -50,5 +50,6 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'auth
 Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'auth'],function (){
    Route::get('getList','ArticleController@index');
    Route::post('batchDelArticle','ArticleController@delarticle');
+   Route::post('initArticle','ArticleController@store');
 });
 

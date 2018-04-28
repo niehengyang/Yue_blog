@@ -8,7 +8,7 @@
             <div class="topbar-btn">
                 <el-dropdown trigger="click">
                     <span class="el-dropdown-link userinfo-inner">
-                        <i class="fa fa-user"></i>&nbsp;&nbsp;{{userform.nickname}}&nbsp;&nbsp;<i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user"></i>&nbsp;&nbsp;{{nickname}}&nbsp;&nbsp;<i class="fa fa-caret-down"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item >
@@ -86,7 +86,8 @@
         return{
             defaultActiveIndex:'0',
             userform:{},
-            isCollapse: true
+            isCollapse: true,
+            nickname:'admin'
         }
     },
         create(){

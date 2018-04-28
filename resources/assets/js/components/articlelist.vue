@@ -29,12 +29,12 @@
                 <el-table-column type="selection" width="55"></el-table-column>
                 <el-table-column type="index" width="60"></el-table-column>
                 <el-table-column type="expand">
-                    <template slot-scope="props">
+                    <template slot-scope="scope">
                         <el-form label-position="left" inline class="demo-table-expand">
                             <el-form-item label="[文章简介]">
                                 <div class="article_introduction">
-                                <span><b>作者：</b>{{props.row.author}}</span>
-                                <span><b>摘要：</b>{{props.row.abstract}}</span>
+                                <span><b>作者：</b>{{scope.row.author}}</span>
+                                <span><b>摘要：</b>{{scope.row.abstract}}</span>
                                 </div>
                             </el-form-item>
                         </el-form>
@@ -141,7 +141,8 @@
             },
             //编辑
             editArticle(index,row){
-                console.log(index,row)
+                this.$router.push({name:'createarticle',params:{row}});
+                console.log(index,row.id)
             },
             //删除
             delArticle(index,row){

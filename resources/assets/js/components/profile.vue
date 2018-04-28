@@ -106,9 +106,14 @@
                                 }
                             }).catch(function (error) {
                             that.loading = false;
-                            console.log(error);
+                            if(error == 'Unauthenticated.'){
+                                window.location.href('/login');
+                            }
                             that.$message.error({showClose:true,message:'请求出现异常',duration:2000});
                         });
+                    }else{
+                        that.loading = false;
+                        that.$message.error({showClose:true,message:'请保证数据填写完整在提交！',duration:2000});
                     }
                 });
                 }).catch(()=> {

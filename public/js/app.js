@@ -16783,6 +16783,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         component: __WEBPACK_IMPORTED_MODULE_12__components_articlelist_vue___default.a
     }, {
         path: '/createarticle',
+        name: 'createarticle',
         component: __WEBPACK_IMPORTED_MODULE_13__components_createarticle___default.a
     }]
 });
@@ -92968,7 +92969,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         return {
             defaultActiveIndex: '0',
             userform: {},
-            isCollapse: true
+            isCollapse: true,
+            nickname: 'admin'
         };
     }
 }, _defineProperty(_create$data$create$m, 'create', function create() {
@@ -93070,7 +93072,7 @@ var render = function() {
               [
                 _c("span", { staticClass: "el-dropdown-link userinfo-inner" }, [
                   _c("i", { staticClass: "fa fa-user" }),
-                  _vm._v("  " + _vm._s(_vm.userform.nickname) + "  "),
+                  _vm._v("  " + _vm._s(_vm.nickname) + "  "),
                   _c("i", { staticClass: "fa fa-caret-down" })
                 ]),
                 _vm._v(" "),
@@ -94056,7 +94058,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -94169,9 +94171,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             }
                         }).catch(function (error) {
                             that.loading = false;
-                            console.log(error);
+                            if (error == 'Unauthenticated.') {
+                                window.location.href('/login');
+                            }
                             that.$message.error({ showClose: true, message: '请求出现异常', duration: 2000 });
                         });
+                    } else {
+                        that.loading = false;
+                        that.$message.error({ showClose: true, message: '请保证数据填写完整在提交！', duration: 2000 });
                     }
                 });
             }).catch(function () {
@@ -94979,7 +94986,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         //编辑
         editArticle: function editArticle(index, row) {
-            console.log(index, row);
+            this.$router.push({ name: 'createarticle', params: { row: row } });
+            console.log(index, row.id);
         },
 
         //删除
@@ -95217,7 +95225,7 @@ var render = function() {
                 scopedSlots: _vm._u([
                   {
                     key: "default",
-                    fn: function(props) {
+                    fn: function(scope) {
                       return [
                         _c(
                           "el-form",
@@ -95236,12 +95244,12 @@ var render = function() {
                                   [
                                     _c("span", [
                                       _c("b", [_vm._v("作者：")]),
-                                      _vm._v(_vm._s(props.row.author))
+                                      _vm._v(_vm._s(scope.row.author))
                                     ]),
                                     _vm._v(" "),
                                     _c("span", [
                                       _c("b", [_vm._v("摘要：")]),
-                                      _vm._v(_vm._s(props.row.abstract))
+                                      _vm._v(_vm._s(scope.row.abstract))
                                     ])
                                   ]
                                 )
@@ -95493,7 +95501,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -95537,13 +95545,119 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'createarticle',
     data: function data() {
         return {
             loading: false,
-            articleForm: {}
+            articles: {},
+            userform: {},
+            articleForm: {
+                title: '',
+                calssification: '技术',
+                release_size: false,
+                abstract: '',
+                istop: false
+            },
+            rules: {
+                title: [{ required: true, message: '请输入文章标题', trigger: 'blur' }, { min: 1, max: 100, message: '标题最多100个字符', trigger: 'blur' }],
+                content: [{ required: true, message: '请输入文章内容', trigger: 'blur' }]
+            }
         };
+    },
+
+    created: function created() {
+        //初始化
+        if (this.$route.params.row != null) {
+            this.articleForm = this.$route.params.row;
+        }
+        this.LoadUserInfo();
+    },
+    methods: {
+        LoadUserInfo: function LoadUserInfo() {
+            var that = this;
+            that.loading = true;
+            axios.get('/admin/getUserInfo').then(function (response) {
+                if (response && response.data) {
+                    that.userform = response.data;
+                    console.log('用户信息' + response.data);
+                } else {
+                    that.$message.error({ showClose: true, message: '信息获取失败！', duration: 2000 });
+                }
+            }).catch(function (error) {
+                that.loading = false;
+                console.log(error);
+                that.$message.error({ showClose: true, message: '用户信息请求异常', duration: 2000 });
+            });
+        },
+        onSubmit: function onSubmit(FormName) {
+            var that = this;
+            that.$confirm('是否确定提交？', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(function () {
+                that.$refs.articleForm.validate(function (valid) {
+                    if (valid) {
+                        that.articleForm.author = that.userform.nickname;
+                        var args = that.articleForm;
+                        that.loading = true;
+                        axios.post('/admin/initArticle', args).then(function (response) {
+                            that.loading = false;
+                            if (response.status == 200) {
+                                that.$message.success({ showClose: true, message: response.data, duration: 2000 });
+                            } else {
+                                that.$message.error({ showClose: true, message: response.data, duration: 2000 });
+                            }
+                        }).catch(function (error) {
+                            that.loading = false;
+                            if (error == 'Unauthenticated.') {
+                                window.location.href('/login');
+                            }
+                            that.$message.error({ showClose: true, message: '请求出现异常', duration: 2000 });
+                        });
+                    } else {
+                        that.loading = false;
+                        that.$message.error({ showClose: true, message: '请保证数据填写完整在提交！', duration: 2000 });
+                    }
+                });
+            }).catch(function () {
+                console.log('已取消');
+            });
+        },
+        reset_article: function reset_article(FormName) {
+            console.log(FormName);
+        }
+    },
+    mounted: function mounted() {
+        if (this.articles != null) {
+            this.articles = this.articleForm;
+        }
+        this.LoadUserInfo();
     }
 });
 
@@ -95588,14 +95702,15 @@ var render = function() {
         "el-col",
         {
           staticClass: "warp-main",
-          staticStyle: { "padding-top": "20px" },
-          attrs: { span: 24 }
+          staticStyle: { padding: "20px 0 0 40px" },
+          attrs: { span: 20 }
         },
         [
           _c(
             "el-form",
             {
               ref: "articleForm",
+              staticClass: "ruleForm",
               attrs: {
                 model: _vm.articleForm,
                 "label-width": "100px",
@@ -95605,10 +95720,11 @@ var render = function() {
             [
               _c(
                 "el-form-item",
-                { attrs: { label: "标题", prop: "title" } },
+                { attrs: { label: "文章标题：", prop: "title" } },
                 [
                   _c("el-input", {
                     attrs: {
+                      size: "small",
                       "auto-complate": "off",
                       placeholder: "为你的文章起个标题吧！"
                     },
@@ -95624,55 +95740,162 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("el-form-item", [
-                _c("span", [_vm._v("请为你的文章选择分类：")]),
-                _vm._v(" "),
-                _c(
-                  "div",
-                  [
-                    _c(
-                      "el-radio-group",
-                      {
-                        attrs: { size: "small" },
-                        model: {
-                          value: _vm.articleForm.calssification,
-                          callback: function($$v) {
-                            _vm.$set(_vm.articleForm, "calssification", $$v)
-                          },
-                          expression: "articleForm.calssification"
-                        }
+              _c(
+                "el-form-item",
+                { attrs: { label: "文章内容：", prop: "content" } },
+                [
+                  _c("vue-editor", {
+                    attrs: { placeholder: "在此输入文章内容" },
+                    model: {
+                      value: _vm.articleForm.content,
+                      callback: function($$v) {
+                        _vm.$set(_vm.articleForm, "content", $$v)
                       },
-                      [
-                        _c("el-radio", { attrs: { label: "1", border: "" } }, [
-                          _vm._v("分类一")
-                        ]),
-                        _vm._v(" "),
-                        _c("el-radio", { attrs: { label: "2", border: "" } }, [
-                          _vm._v("分类二")
-                        ]),
-                        _vm._v(" "),
-                        _c("el-radio", { attrs: { label: "3", border: "" } }, [
-                          _vm._v("分类三")
-                        ]),
-                        _vm._v(" "),
-                        _c("el-radio", { attrs: { label: "4", border: "" } }, [
-                          _vm._v("分类四")
-                        ]),
-                        _vm._v(" "),
-                        _c("el-radio", { attrs: { label: "5", border: "" } }, [
-                          _vm._v("分类五")
-                        ]),
-                        _vm._v(" "),
-                        _c("el-radio", { attrs: { label: "6", border: "" } }, [
-                          _vm._v("分类六")
-                        ])
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              ])
+                      expression: "articleForm.content"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: "文章摘要：", prop: "abstract" } },
+                [
+                  _c("el-input", {
+                    attrs: {
+                      type: "textarea",
+                      maxlength: "240",
+                      minlength: "10",
+                      placeholder:
+                        "请输入文章摘要,不得少于10个字和大于240个字!。"
+                    },
+                    model: {
+                      value: _vm.articleForm.abstract,
+                      callback: function($$v) {
+                        _vm.$set(_vm.articleForm, "abstract", $$v)
+                      },
+                      expression: "articleForm.abstract"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: "文章分类：", prop: "calssification" } },
+                [
+                  _c(
+                    "el-select",
+                    {
+                      attrs: { size: "small", placeholder: "请选择文章分类" },
+                      model: {
+                        value: _vm.articleForm.calssification,
+                        callback: function($$v) {
+                          _vm.$set(_vm.articleForm, "calssification", $$v)
+                        },
+                        expression: "articleForm.calssification"
+                      }
+                    },
+                    [
+                      _c("el-option", { attrs: { value: "技术" } }),
+                      _vm._v(" "),
+                      _c("el-option", { attrs: { value: "散文" } }),
+                      _vm._v(" "),
+                      _c("el-option", { attrs: { value: "其它" } })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: "是否置顶？", prop: "istop" } },
+                [
+                  _c(
+                    "el-radio-group",
+                    {
+                      attrs: { size: "small" },
+                      model: {
+                        value: _vm.articleForm.istop,
+                        callback: function($$v) {
+                          _vm.$set(_vm.articleForm, "istop", $$v)
+                        },
+                        expression: "articleForm.istop"
+                      }
+                    },
+                    [
+                      _c("el-radio-button", { attrs: { label: "true" } }, [
+                        _vm._v("是")
+                      ]),
+                      _vm._v(" "),
+                      _c("el-radio-button", { attrs: { label: "false" } }, [
+                        _vm._v("否")
+                      ])
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                { attrs: { label: "状态：", prop: "release_size" } },
+                [
+                  _c("el-switch", {
+                    staticStyle: { width: "100%" },
+                    attrs: { "active-text": "发表", "inactive-text": "下架" },
+                    model: {
+                      value: _vm.articleForm.release_size,
+                      callback: function($$v) {
+                        _vm.$set(_vm.articleForm, "release_size", $$v)
+                      },
+                      expression: "articleForm.release_size"
+                    }
+                  })
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
+                [
+                  _c(
+                    "el-button",
+                    {
+                      attrs: { type: "primary", size: "small" },
+                      on: {
+                        click: function($event) {
+                          _vm.onSubmit("articleForm")
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "立即" + _vm._s(_vm.articleForm.id ? "修改" : "创建")
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-button",
+                    {
+                      attrs: { size: "small" },
+                      on: {
+                        click: function($event) {
+                          _vm.reset_article("articleForm")
+                        }
+                      }
+                    },
+                    [_vm._v("重置")]
+                  )
+                ],
+                1
+              )
             ],
             1
           )

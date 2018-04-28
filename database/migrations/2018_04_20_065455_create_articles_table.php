@@ -22,6 +22,7 @@ class CreateArticlesTable extends Migration
            $table->string('classification',50)->nullable()->comment('文章分类');
            $table->boolean('release_size')->comment('文章状态');
            $table->text('abstract')->comment('文章摘要');
+           $table->boolean('istop')->comment('置顶');
            $table->string('img')->nullable()->comment('文章图片');
             $table->timestamps();
         });

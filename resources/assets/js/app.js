@@ -54,6 +54,7 @@ const router = new VueRouter({
         },
         {
             path:'/createarticle',
+            name:'createarticle',
             component:createarticle
         }
     ]

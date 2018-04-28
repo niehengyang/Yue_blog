@@ -8,23 +8,46 @@
             </el-breadcrumb>
         </el-col>
         <!--创建文章-->
-        <el-col class="warp-main" :span="24" style="padding-top: 20px">
-            <el-form :model="articleForm" label-width="100px" :rules="rules" ref="articleForm">
-                <el-form-item label="标题" prop="title">
-                    <el-input v-model="articleForm.title" auto-complate="off" placeholder="为你的文章起个标题吧！"></el-input>
+        <el-col class="warp-main" :span="20" style="padding: 20px 0 0 40px;">
+            <el-form :model="articleForm" label-width="100px" :rules="rules" ref="articleForm" class="ruleForm">
+                <el-form-item label="文章标题：" prop="title">
+                    <el-input size="small" v-model="articleForm.title" auto-complate="off" placeholder="为你的文章起个标题吧！"></el-input>
+                </el-form-item>
+                <el-form-item label="文章内容：" prop="content">
+                    <vue-editor v-model="articleForm.content" placeholder="在此输入文章内容"></vue-editor>
+                </el-form-item>
+                <el-form-item label="文章摘要：" prop="abstract">
+                    <el-input type="textarea" v-model="articleForm.abstract" maxlength="240" minlength="10" placeholder="请输入文章摘要,不得少于10个字和大于240个字!。"></el-input>
+                </el-form-item>
+                <el-form-item label="文章分类：" prop="calssification">
+                    <el-select size="small" v-model="articleForm.calssification" placeholder="请选择文章分类">
+                        <el-option value="技术"></el-option>
+                        <el-option value="散文"></el-option>
+                        <el-option value="其它"></el-option>
+                    </el-select>
+                </el-form-item>
+                <el-form-item label="是否置顶？" prop="istop">
+                    <el-radio-group size="small" v-model="articleForm.istop">
+                        <el-radio-button label="true">是</el-radio-button>
+                        <el-radio-button label="false">否</el-radio-button>
+                    </el-radio-group>
+                </el-form-item>
+                <!--<el-form-item label="文章标签：" prop=""labels>-->
+                    <!--<el-select disabled size="small" v-model="articleForm.labels" multiple placeholder="请选择文章标签">-->
+                        <!--<el-option value="html"></el-option>-->
+                        <!--<el-option value="css"></el-option>-->
+                        <!--<el-option value="javascript"></el-option>-->
+                        <!--<el-option value="jquery"></el-option>-->
+                        <!--<el-option value="vue"></el-option>-->
+                        <!--<el-option value="php"></el-option>-->
+                    <!--</el-select>-->
+                <!--</el-form-item>-->
+                <el-form-item label="状态：" prop="release_size">
+                    <el-switch active-text="发表" inactive-text="下架" v-model="articleForm.release_size" style="width: 100%;"></el-switch>
                 </el-form-item>
                 <el-form-item>
-                    <span>请为你的文章选择分类：</span>
-                    <div>
-                        <el-radio-group v-model="articleForm.calssification" size="small">
-                            <el-radio label="1" border >分类一</el-radio>
-                            <el-radio label="2" border >分类二</el-radio>
-                            <el-radio label="3" border >分类三</el-radio>
-                            <el-radio label="4" border >分类四</el-radio>
-                            <el-radio label="5" border >分类五</el-radio>
-                            <el-radio label="6" border >分类六</el-radio>
-                        </el-radio-group>
-                    </div>
+                    <el-button type="primary" size="small" @click="onSubmit('articleForm')">立即{{articleForm.id ? '修改': '创建'}}</el-button>
+                    <el-button size="small" @click="reset_article('articleForm')">重置</el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -33,12 +56,100 @@
 
 <script>
     export default {
+        name:'createarticle',
         data(){
             return{
                 loading:false,
-                articleForm:{}
+                articles:{},
+                userform:{},
+                articleForm:{
+                    title:'',
+                    calssification:'技术',
+                    release_size:false,
+                    abstract:'',
+                    istop:false
+                },
+                rules:{
+                    title:[
+                        {required:true ,message:'请输入文章标题' ,trigger:'blur'},
+                        {min:1 ,max: 100, message: '标题最多100个字符', trigger: 'blur'}
+                    ],
+                    content:[
+                        {required:true ,message:'请输入文章内容',trigger:'blur'}
+                    ],
+                }
             }
-        }
+        },
+        created:function () {//初始化
+            if(this.$route.params.row != null){
+                this.articleForm = this.$route.params.row;
+            }
+            this.LoadUserInfo();
+        },
+        methods:{
+            LoadUserInfo(){
+                let that = this;
+                that.loading = true;
+                axios.get('/admin/getUserInfo')
+                    .then(function (response) {
+                        if (response && response.data){
+                            that.userform = response.data;
+                            console.log('用户信息'+response.data);
+                        }else{
+                            that.$message.error({showClose:true,message:'信息获取失败！',duration:2000});
+                        }
+                    }).catch(function (error) {
+                    that.loading = false;
+                    console.log(error);
+                    that.$message.error({showClose:true,message:'用户信息请求异常',duration:2000});
+                })
+            },
+            onSubmit(FormName){
+                let that = this;
+                that.$confirm('是否确定提交？','提示',{
+                    confirmButtonText:'确定',
+                    cancelButtonText:'取消',
+                    type:'warning'
+                }).then(()=>{
+                    that.$refs.articleForm.validate((valid)=>{
+                        if(valid){
+                            that.articleForm.author = that.userform.nickname;
+                            let args = that.articleForm;
+                            that.loading = true;
+                            axios.post('/admin/initArticle',args)
+                                .then(function (response) {
+                                    that.loading = false;
+                                    if(response.status == 200){
+                                        that.$message.success({showClose:true,message:response.data,duration:2000});
+                                    }else{
+                                        that.$message.error({showClose:true,message:response.data,duration:2000});
+                                    }
+                                }).catch(function (error) {
+                                that.loading = false;
+                                if(error == 'Unauthenticated.'){
+                                    window.location.href('/login');
+                                }
+                                that.$message.error({showClose:true,message:'请求出现异常',duration:2000});
+                            })
+                        }else{
+                            that.loading = false;
+                            that.$message.error({showClose:true,message:'请保证数据填写完整在提交！',duration:2000});
+                    }
+                })
+                }).catch(()=> {
+                    console.log('已取消')
+            })
+            },
+            reset_article(FormName){
+                console.log(FormName)
+            }
+        },
+        mounted(){
+            if(this.articles != null){
+                this.articles = this.articleForm;
+            }
+            this.LoadUserInfo();
+        },
     }
 </script>
 
