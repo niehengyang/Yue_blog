@@ -51,5 +51,6 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'auth
    Route::get('getList','ArticleController@index');
    Route::post('batchDelArticle','ArticleController@delarticle');
    Route::post('initArticle','ArticleController@store');
+   Route::post('uploadfile','ArticleController@upload');
 });
 

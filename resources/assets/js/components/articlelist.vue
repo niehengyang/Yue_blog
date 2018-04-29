@@ -16,10 +16,10 @@
                         <el-input size="small" v-model="filters.title" placeholder="文章标题" @keyup.enter.native="handleSearch" @change="flashpage"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button size="small" type="primary" v-on:click="handleSearch">查询</el-button>
+                        <el-button size="small" type="primary" v-on:click="handleSearch"><i class="fa fa-search"></i>&nbsp;查询</el-button>
                     </el-form-item>
                     <el-form-item >
-                        <el-button size="small" type="primary" @click="createArticle">新增</el-button>
+                        <el-button size="small" type="primary" @click="createArticle"><i class="fa fa-plus-circle">&nbsp;</i>新增</el-button>
                     </el-form-item>
                 </el-form>
             </el-col>
@@ -48,18 +48,19 @@
                 </el-table-column>
                 <el-table-column prop="classification" label="分类" width="100" sortable></el-table-column>
                 <el-table-column prop="created_at" label="发表日期" width="270" sortable></el-table-column>
-                <el-table-column label="操作" width="250" style="float: right;">
+                <el-table-column label="操作" width="300" style="float: right;">
                     <template slot-scope="scope">
-                        <el-button size="mini" @click="topArticle(scope.$index,scope.row)">置顶</el-button>
-                        <el-button size="mini" @click="editArticle(scope.$index,scope.row)">编辑</el-button>
-                        <el-button size="mini" type="danger" @click="delArticle(scope.$index,scope.row)">删除</el-button>
+                        <el-button size="mini" @click="viewArticle(scope.$index,scope.row)" class="el-icon-view" title="查看"></el-button>
+                        <el-button size="mini" @click="topArticle(scope.$index,scope.row)" class="fa fa-arrow-circle-up" title="置顶"></el-button>
+                        <el-button size="mini" @click="editArticle(scope.$index,scope.row)" class="el-icon-edit" title="编辑"></el-button>
+                        <el-button size="mini" type="danger" @click="delArticle(scope.$index,scope.row)" class="el-icon-delete" title="删除"></el-button>
                     </template>
                 </el-table-column>
             </el-table>
 
             <!--底部工具条-->
             <el-col :span="24" class="toobar">
-                <el-button type="danger" size="small" @click="batchDeleteArticle" :disabled="this.sels.length===0">批量删除</el-button>
+                <el-button type="danger" size="small" @click="batchDeleteArticle" :disabled="this.sels.length===0"><i class="fa fa-trash-o"></i>&nbsp;批量删除</el-button>
                 <el-pagination background
                                @size-change="handleSizeChange"
                                @current-change = "handleCurrentChange"
@@ -134,6 +135,10 @@
             //多选
             selsChange(sels){
                 this.sels = sels;
+            },
+            //查看
+            viewArticle(index,row){
+                console.log(index,row)
             },
             //文章置顶
             topArticle(index,row){

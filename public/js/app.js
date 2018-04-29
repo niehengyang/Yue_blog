@@ -93426,6 +93426,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
@@ -93461,7 +93463,9 @@ var render = function() {
           )
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _c("el-col", { staticClass: "warp-main", attrs: { span: 24 } })
     ],
     1
   )
@@ -94914,6 +94918,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -94977,6 +94982,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         //多选
         selsChange: function selsChange(sels) {
             this.sels = sels;
+        },
+
+        //查看
+        viewArticle: function viewArticle(index, row) {
+            console.log(index, row);
         },
 
         //文章置顶
@@ -95179,7 +95189,10 @@ var render = function() {
                           attrs: { size: "small", type: "primary" },
                           on: { click: _vm.handleSearch }
                         },
-                        [_vm._v("查询")]
+                        [
+                          _c("i", { staticClass: "fa fa-search" }),
+                          _vm._v(" 查询")
+                        ]
                       )
                     ],
                     1
@@ -95194,7 +95207,12 @@ var render = function() {
                           attrs: { size: "small", type: "primary" },
                           on: { click: _vm.createArticle }
                         },
-                        [_vm._v("新增")]
+                        [
+                          _c("i", { staticClass: "fa fa-plus-circle" }, [
+                            _vm._v(" ")
+                          ]),
+                          _vm._v("新增")
+                        ]
                       )
                     ],
                     1
@@ -95311,50 +95329,55 @@ var render = function() {
               _vm._v(" "),
               _c("el-table-column", {
                 staticStyle: { float: "right" },
-                attrs: { label: "操作", width: "250" },
+                attrs: { label: "操作", width: "300" },
                 scopedSlots: _vm._u([
                   {
                     key: "default",
                     fn: function(scope) {
                       return [
-                        _c(
-                          "el-button",
-                          {
-                            attrs: { size: "mini" },
-                            on: {
-                              click: function($event) {
-                                _vm.topArticle(scope.$index, scope.row)
-                              }
+                        _c("el-button", {
+                          staticClass: "el-icon-view",
+                          attrs: { size: "mini", title: "查看" },
+                          on: {
+                            click: function($event) {
+                              _vm.viewArticle(scope.$index, scope.row)
                             }
-                          },
-                          [_vm._v("置顶")]
-                        ),
+                          }
+                        }),
                         _vm._v(" "),
-                        _c(
-                          "el-button",
-                          {
-                            attrs: { size: "mini" },
-                            on: {
-                              click: function($event) {
-                                _vm.editArticle(scope.$index, scope.row)
-                              }
+                        _c("el-button", {
+                          staticClass: "fa fa-arrow-circle-up",
+                          attrs: { size: "mini", title: "置顶" },
+                          on: {
+                            click: function($event) {
+                              _vm.topArticle(scope.$index, scope.row)
                             }
-                          },
-                          [_vm._v("编辑")]
-                        ),
+                          }
+                        }),
                         _vm._v(" "),
-                        _c(
-                          "el-button",
-                          {
-                            attrs: { size: "mini", type: "danger" },
-                            on: {
-                              click: function($event) {
-                                _vm.delArticle(scope.$index, scope.row)
-                              }
+                        _c("el-button", {
+                          staticClass: "el-icon-edit",
+                          attrs: { size: "mini", title: "编辑" },
+                          on: {
+                            click: function($event) {
+                              _vm.editArticle(scope.$index, scope.row)
                             }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("el-button", {
+                          staticClass: "el-icon-delete",
+                          attrs: {
+                            size: "mini",
+                            type: "danger",
+                            title: "删除"
                           },
-                          [_vm._v("删除")]
-                        )
+                          on: {
+                            click: function($event) {
+                              _vm.delArticle(scope.$index, scope.row)
+                            }
+                          }
+                        })
                       ]
                     }
                   }
@@ -95378,7 +95401,7 @@ var render = function() {
                   },
                   on: { click: _vm.batchDeleteArticle }
                 },
-                [_vm._v("批量删除")]
+                [_c("i", { staticClass: "fa fa-trash-o" }), _vm._v(" 批量删除")]
               ),
               _vm._v(" "),
               _c("el-pagination", {
@@ -95501,7 +95524,7 @@ exports = module.exports = __webpack_require__(6)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -95568,24 +95591,51 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'createarticle',
     data: function data() {
         return {
+            customToolbar: [[{ 'font': [] }], [{ 'header': [false, 1, 2, 3, 4, 5, 6] }], ['bold', 'italic', 'underline', 'strike'], [{ 'align': '' }, { 'align': 'center' }, { 'align': 'right' }, { 'align': 'justify' }], [{ 'list': 'ordered' }, { 'list': 'bullet' }], [{ 'script': 'sub' }, { 'script': 'super' }], [{ 'indent': '-1' }, { 'indent': '+1' }], [{ 'color': [] }, { 'background': [] }], ['code-block'], [{ 'direction': 'rtl' }], ['clean']],
+            files: [],
+            dialogImageUrl: '',
+            dialogVisible: false,
             loading: false,
             articles: {},
             userform: {},
             articleForm: {
+                id: 0,
+                img: '',
+                slug: '',
                 title: '',
+                content: '',
                 calssification: '技术',
                 release_size: false,
                 abstract: '',
+                author: '',
                 istop: false
             },
             rules: {
                 title: [{ required: true, message: '请输入文章标题', trigger: 'blur' }, { min: 1, max: 100, message: '标题最多100个字符', trigger: 'blur' }],
-                content: [{ required: true, message: '请输入文章内容', trigger: 'blur' }]
+                content: [{ required: true, message: '请输入文章内容', trigger: 'blur' }],
+                abstract: [{ required: true, message: '请输入文章摘要', trigger: 'blur' }]
             }
         };
     },
@@ -95621,12 +95671,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(function () {
-                that.$refs.articleForm.validate(function (valid) {
+                that.$refs[FormName].validate(function (valid) {
                     if (valid) {
-                        that.articleForm.author = that.userform.nickname;
-                        var args = that.articleForm;
                         that.loading = true;
-                        axios.post('/admin/initArticle', args).then(function (response) {
+                        that.articleForm.author = that.userform.nickname;
+                        axios.post('/admin/initArticle', that.articleForm).then(function (response) {
                             that.loading = false;
                             if (response.status == 200) {
                                 that.$message.success({ showClose: true, message: response.data, duration: 2000 });
@@ -95648,6 +95697,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             }).catch(function () {
                 console.log('已取消');
             });
+        },
+        handlePictureCardPreview: function handlePictureCardPreview(file) {
+            //创建预览
+            this.dialogImageUrl = file.url;
+            this.dialogVisible = true;
+        },
+        handleRemove: function handleRemove(file, fileList) {
+            console.log(file, fileList); //删除
+        },
+        handleSuccess: function handleSuccess(response, file, fileList) {
+            //上传成功
+            var self = this;
+            self.dialogImageUrl = response.url;
+            self.articleForm.img = response.url;
+            // self.dialogVisible = true;
+            console.log('上传成功', response);
+        },
+        handleBefore: function handleBefore(file) {
+            //上传限制条件
+            return this.files.length === 1 ? false : true; //只让同时上传一张
+        },
+        uploadError: function uploadError(response, file, fileList) {
+            //上传失败
+            console.log('上传失败，请重试!');
         },
         reset_article: function reset_article(FormName) {
             console.log(FormName);
@@ -95742,10 +95815,62 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "el-form-item",
+                { attrs: { label: "照片墙", prop: "img" } },
+                [
+                  _c(
+                    "el-upload",
+                    {
+                      attrs: {
+                        action: "/admin/uploadfile",
+                        "list-type": "picture-card",
+                        "file-list": _vm.files,
+                        "on-preview": _vm.handlePictureCardPreview,
+                        "on-remove": _vm.handleRemove,
+                        "on-success": _vm.handleSuccess,
+                        "before-upload": _vm.handleBefore,
+                        "on-error": _vm.uploadError
+                      }
+                    },
+                    [_c("i", { staticClass: "el-icon-plus" })]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-dialog",
+                    {
+                      attrs: { visible: _vm.dialogVisible },
+                      on: {
+                        "update:visible": function($event) {
+                          _vm.dialogVisible = $event
+                        }
+                      }
+                    },
+                    [
+                      _c("img", {
+                        attrs: {
+                          width: "100%",
+                          src: _vm.dialogImageUrl,
+                          alt: ""
+                        }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "tipss" }, [
+                    _vm._v("图片尺寸：500*500")
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "el-form-item",
                 { attrs: { label: "文章内容：", prop: "content" } },
                 [
                   _c("vue-editor", {
-                    attrs: { placeholder: "在此输入文章内容" },
+                    attrs: {
+                      placeholder: "在此输入文章内容",
+                      editorToolbar: _vm.customToolbar
+                    },
                     model: {
                       value: _vm.articleForm.content,
                       callback: function($$v) {

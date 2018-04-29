@@ -13,8 +13,25 @@
                 <el-form-item label="文章标题：" prop="title">
                     <el-input size="small" v-model="articleForm.title" auto-complate="off" placeholder="为你的文章起个标题吧！"></el-input>
                 </el-form-item>
+                <el-form-item label="照片墙" prop="img">
+                    <el-upload
+                            action="/admin/uploadfile"
+                            list-type="picture-card"
+                            :file-list = "files"
+                            :on-preview="handlePictureCardPreview"
+                            :on-remove="handleRemove"
+                            :on-success="handleSuccess"
+                            :before-upload="handleBefore"
+                            :on-error="uploadError">
+                        <i class="el-icon-plus"></i>
+                    </el-upload>
+                    <el-dialog :visible.sync="dialogVisible">
+                        <img width="100%" :src="dialogImageUrl" alt="">
+                    </el-dialog>
+                    <div class="tipss">图片尺寸：500*500</div>
+                </el-form-item>
                 <el-form-item label="文章内容：" prop="content">
-                    <vue-editor v-model="articleForm.content" placeholder="在此输入文章内容"></vue-editor>
+                    <vue-editor v-model="articleForm.content" placeholder="在此输入文章内容" :editorToolbar="customToolbar"></vue-editor>
                 </el-form-item>
                 <el-form-item label="文章摘要：" prop="abstract">
                     <el-input type="textarea" v-model="articleForm.abstract" maxlength="240" minlength="10" placeholder="请输入文章摘要,不得少于10个字和大于240个字!。"></el-input>
@@ -59,14 +76,35 @@
         name:'createarticle',
         data(){
             return{
+                customToolbar:[
+                    [{'font':[]}],
+                    [{'header':[false,1,2,3,4,5,6,]}],
+                    ['bold','italic','underline','strike'],
+                    [{'align':''},{'align':'center'},{'align':'right'},{'align':'justify'}],
+                    [{'list':'ordered'},{'list':'bullet'}],
+                    [{'script':'sub'},{'script':'super'}],
+                    [{'indent':'-1'},{'indent':'+1'}],
+                    [{'color':[]},{'background':[]}],
+                    ['code-block'],
+                    [{'direction':'rtl'}],
+                    ['clean']
+                ],
+                files: [],
+                dialogImageUrl:'',
+                dialogVisible: false,
                 loading:false,
                 articles:{},
                 userform:{},
                 articleForm:{
+                    id: 0,
+                    img:'',
+                    slug:'',
                     title:'',
+                    content:'',
                     calssification:'技术',
                     release_size:false,
                     abstract:'',
+                    author:'',
                     istop:false
                 },
                 rules:{
@@ -77,6 +115,9 @@
                     content:[
                         {required:true ,message:'请输入文章内容',trigger:'blur'}
                     ],
+                    abstract:[
+                        {required:true ,message:'请输入文章摘要',trigger:'blur'}
+                    ]
                 }
             }
         },
@@ -111,12 +152,11 @@
                     cancelButtonText:'取消',
                     type:'warning'
                 }).then(()=>{
-                    that.$refs.articleForm.validate((valid)=>{
+                    that.$refs[FormName].validate((valid)=>{
                         if(valid){
-                            that.articleForm.author = that.userform.nickname;
-                            let args = that.articleForm;
                             that.loading = true;
-                            axios.post('/admin/initArticle',args)
+                            that.articleForm.author = that.userform.nickname;
+                            axios.post('/admin/initArticle', that.articleForm)
                                 .then(function (response) {
                                     that.loading = false;
                                     if(response.status == 200){
@@ -139,6 +179,26 @@
                 }).catch(()=> {
                     console.log('已取消')
             })
+            },
+            handlePictureCardPreview(file){//创建预览
+                this.dialogImageUrl = file.url;
+                this.dialogVisible = true;
+            },
+            handleRemove(file,fileList){
+                console.log(file,fileList);//删除
+            },
+            handleSuccess(response,file,fileList){//上传成功
+                var self = this;
+                self.dialogImageUrl = response.url;
+                self.articleForm.img = response.url;
+                // self.dialogVisible = true;
+                console.log('上传成功',response);
+            },
+            handleBefore(file){//上传限制条件
+                return this.files.length === 1? false : true//只让同时上传一张
+            },
+            uploadError(response,file,fileList){//上传失败
+                console.log('上传失败，请重试!')
             },
             reset_article(FormName){
                 console.log(FormName)
