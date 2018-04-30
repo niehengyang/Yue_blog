@@ -4,7 +4,8 @@
             <el-breadcrumb separator="/">
                 <el-breadcrumb-item :to="{path: '/home'}"><b>首页</b></el-breadcrumb-item>
                 <el-breadcrumb-item >文章管理</el-breadcrumb-item>
-                <el-breadcrumb-item>创建文章</el-breadcrumb-item>
+                <el-breadcrumb-item :to="{path: '/articlelist'}">文章列表</el-breadcrumb-item>
+                <el-breadcrumb-item>{{articleForm.id ? '修改': '创建'}}文章</el-breadcrumb-item>
             </el-breadcrumb>
         </el-col>
         <!--创建文章-->
@@ -36,8 +37,8 @@
                 <el-form-item label="文章摘要：" prop="abstract">
                     <el-input type="textarea" v-model="articleForm.abstract" maxlength="240" minlength="10" placeholder="请输入文章摘要,不得少于10个字和大于240个字!。"></el-input>
                 </el-form-item>
-                <el-form-item label="文章分类：" prop="calssification">
-                    <el-select size="small" v-model="articleForm.calssification" placeholder="请选择文章分类">
+                <el-form-item label="文章分类：" prop="classification">
+                    <el-select size="small" v-model="articleForm.classification" placeholder="请选择文章分类">
                         <el-option value="技术"></el-option>
                         <el-option value="散文"></el-option>
                         <el-option value="其它"></el-option>
@@ -101,7 +102,7 @@
                     slug:'',
                     title:'',
                     content:'',
-                    calssification:'技术',
+                    classification:'',
                     release_size:false,
                     abstract:'',
                     author:'',
@@ -115,8 +116,17 @@
                     content:[
                         {required:true ,message:'请输入文章内容',trigger:'blur'}
                     ],
+                    classification:[
+                        {requured:true ,message:'请选择文章分类' ,trigger:'blur'}
+                        ],
                     abstract:[
                         {required:true ,message:'请输入文章摘要',trigger:'blur'}
+                    ],
+                    istop:[
+                        {required:true ,message:'请选择是否置顶', trigger:'blur'}
+                    ],
+                    release_size:[
+                        {required:true ,message:'请选择状态', trigger:'blur'}
                     ]
                 }
             }
@@ -161,6 +171,7 @@
                                     that.loading = false;
                                     if(response.status == 200){
                                         that.$message.success({showClose:true,message:response.data,duration:2000});
+                                        that.$router.push({path:'/articlelist'})
                                     }else{
                                         that.$message.error({showClose:true,message:response.data,duration:2000});
                                     }
@@ -205,10 +216,12 @@
             }
         },
         mounted(){
-            if(this.articles != null){
-                this.articles = this.articleForm;
-            }
+            // if(this.articles != null){
+            //     this.articles = this.articleForm;
+            // }
+            this.dialogImageUrl = this.articleForm.img;
             this.LoadUserInfo();
+
         },
     }
 </script>

@@ -22,7 +22,8 @@ import userlist from './components/userlist.vue'//账户列表
 import profile from './components/profile.vue'//个人信息
 import resetpwd from './components/resetpwd.vue'//重置密码
 import articlelist from './components/articlelist.vue'//文章列表
-import createarticle from './components/createarticle'//创建文章
+import createarticle from './components/createarticle.vue'//创建文章
+import articleview from './components/articleview.vue'//文章预览,查看
 
 Vue.use(VueRouter)
 Vue.use(ElementUI)
@@ -56,6 +57,10 @@ const router = new VueRouter({
             path:'/createarticle',
             name:'createarticle',
             component:createarticle
+        },
+        {
+            path:'/articleview',
+            component:articleview
         }
     ]
 })
