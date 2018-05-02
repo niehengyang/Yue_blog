@@ -138,7 +138,7 @@
             },
             //查看
             viewArticle(index,row){
-                this.$router.push({path:'/articleview'})
+                this.$router.push({name:'articleview',params:{row}});
                 console.log(index,row)
             },
             //文章置顶

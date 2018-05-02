@@ -60,6 +60,7 @@ const router = new VueRouter({
         },
         {
             path:'/articleview',
+            name:'articleview',
             component:articleview
         }
     ]

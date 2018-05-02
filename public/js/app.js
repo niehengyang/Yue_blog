@@ -16790,6 +16790,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         component: __WEBPACK_IMPORTED_MODULE_13__components_createarticle_vue___default.a
     }, {
         path: '/articleview',
+        name: 'articleview',
         component: __WEBPACK_IMPORTED_MODULE_14__components_articleview_vue___default.a
     }]
 });
@@ -94992,7 +94993,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         //查看
         viewArticle: function viewArticle(index, row) {
-            this.$router.push({ path: '/articleview' });
+            this.$router.push({ name: 'articleview', params: { row: row } });
             console.log(index, row);
         },
 
@@ -95531,7 +95532,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n.previre_item[data-v-6be4fa1a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.img-item[data-v-6be4fa1a]{\n    width: 100%;\n    height: 400px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.show_box[data-v-6be4fa1a]{\n    width: 80%;\n    display:-webkit-box;\n    display:-ms-flexbox;\n    display:flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-family: 宋体;\n    margin-top: 40px;\n    margin-bottom: 40px;\n}\n.header[data-v-6be4fa1a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -ms-flex-line-pack: center;\n        align-content: center;\n}\n.warp_main[data-v-6be4fa1a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    margin: 20px 0 0 20px;\n    -webkit-box-shadow: 10px 10px 10px 10px #5e5d5d;\n            box-shadow: 10px 10px 10px 10px #5e5d5d;\n}\n.articleinfo_cade[data-v-6be4fa1a]{\n    padding-top: 10px;\n    padding-bottom: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-size: 2px;\n}\n.err_show_box[data-v-6be4fa1a]{\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    color: #adadad;\n}\n", ""]);
 
 // exports
 
@@ -95542,6 +95543,43 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -95628,6 +95666,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             loading: false,
             articles: {},
             userform: {},
+            previewVisible: false,
             articleForm: {
                 id: 0,
                 img: '',
@@ -95736,6 +95775,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         reset_article: function reset_article(FormName) {
             console.log(FormName);
+        },
+        showPreviewDialog: function showPreviewDialog(FormName) {
+            // this.previewVisible = true;
+            var row = this.articleForm;
+            this.$router.push({ name: 'articleview', params: { row: row } });
         }
     },
     mounted: function mounted() {
@@ -96038,6 +96082,19 @@ var render = function() {
                       }
                     },
                     [_vm._v("重置")]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-button",
+                    {
+                      attrs: { size: "small" },
+                      on: {
+                        click: function($event) {
+                          _vm.showPreviewDialog("articleForm")
+                        }
+                      }
+                    },
+                    [_vm._v("预览")]
                   )
                 ],
                 1
@@ -96148,7 +96205,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n.header{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -ms-flex-line-pack: center;\n        align-content: center;\n}\n", ""]);
+exports.push([module.i, "\n.page{\n    width: 100%;\n}\n.img-item{\n    width: 100%;\n    height: 400px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.show_box{\n    width: 80%;\n    display:-webkit-box;\n    display:-ms-flexbox;\n    display:flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-family: 宋体;\n    margin-top: 40px;\n    margin-bottom: 40px;\n}\n.header{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -ms-flex-line-pack: center;\n        align-content: center;\n}\n.warp_main{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    margin: 20px 0 0 20px;\n    -webkit-box-shadow: 10px 10px 10px 10px #5e5d5d;\n            box-shadow: 10px 10px 10px 10px #5e5d5d;\n}\n.articleinfo_cade{\n    padding-top: 10px;\n    padding-bottom: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-size: 2px;\n}\n.err_show_box{\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    color: #adadad;\n}\n", ""]);
 
 // exports
 
@@ -96187,21 +96244,62 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    name: 'articleview',
     data: function data() {
         return {
+            loading: false,
             articleForm: {
-                title: 'Caminar',
-                created_at: '2017-08-25',
-                views: 1564,
-                img: '/storage/bg.jpg'
-            },
-            loading: false
+                id: 0,
+                img: '',
+                slug: '',
+                title: '',
+                content: '',
+                classification: '',
+                release_size: false,
+                abstract: '',
+                author: '',
+                istop: false
+            }
         };
     },
 
-    methods: {}
+    created: function created() {
+        //初始化
+        this.loading = true;
+        if (this.$route.params.row != null) {
+            this.articleForm = this.$route.params.row;
+        }
+        console.log('接收到的:' + this.articleForm);
+        this.loading = false;
+    },
+    methods: {},
+    mounted: function mounted() {
+        // if(this.$route.params.row != null){
+        //     this.articleForm = this.$route.params.row;
+        // }
+    }
 });
 
 /***/ }),
@@ -96213,35 +96311,46 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "el-row",
-    { staticClass: "warp" },
+    "div",
+    { staticClass: "page" },
     [
       _c(
-        "el-col",
-        {
-          staticClass: "warp-breadcrum",
-          attrs: { span: 24, loading: _vm.loading }
-        },
+        "el-row",
+        { staticClass: "warp", staticStyle: { width: "100%" } },
         [
           _c(
-            "el-breadcrumb",
-            { attrs: { separator: "/" } },
+            "el-col",
+            {
+              staticClass: "warp-breadcrum",
+              attrs: { span: 24, loading: _vm.loading }
+            },
             [
-              _c("el-breadcrumb-item", { attrs: { to: { path: "/home" } } }, [
-                _c("b", [_vm._v("首页")])
-              ]),
-              _vm._v(" "),
-              _c("el-breadcrumb-item", [_vm._v("文章管理")]),
-              _vm._v(" "),
               _c(
-                "el-breadcrumb-item",
-                { attrs: { to: { path: "/articlelist" } } },
-                [_vm._v("文章列表")]
-              ),
-              _vm._v(" "),
-              _c("el-breadcrumb-item", [
-                _vm._v(_vm._s(_vm.articleForm.id ? "查看" : "预览") + "文章")
-              ])
+                "el-breadcrumb",
+                { attrs: { separator: "/" } },
+                [
+                  _c(
+                    "el-breadcrumb-item",
+                    { attrs: { to: { path: "/home" } } },
+                    [_c("b", [_vm._v("首页")])]
+                  ),
+                  _vm._v(" "),
+                  _c("el-breadcrumb-item", [_vm._v("文章管理")]),
+                  _vm._v(" "),
+                  _c(
+                    "el-breadcrumb-item",
+                    { attrs: { to: { path: "/articlelist" } } },
+                    [_vm._v("文章列表")]
+                  ),
+                  _vm._v(" "),
+                  _c("el-breadcrumb-item", [
+                    _vm._v(
+                      _vm._s(_vm.articleForm.id ? "查看" : "预览") + "文章"
+                    )
+                  ])
+                ],
+                1
+              )
             ],
             1
           )
@@ -96249,25 +96358,173 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("el-col", { staticClass: "warp_main" }, [
-        _c("div", { staticClass: "img-circle" }, [
-          _c("img", { attrs: { src: _vm.articleForm.img } })
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "main" }, [
-          _c("div", { staticClass: "header" }, [
-            _c("span", { staticStyle: { "font-size": "30px" } }, [
-              _c("h1", [_vm._v(_vm._s(_vm.articleForm.title))])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "articleinfo_cade" }, [
-            _c("span", { staticClass: "fa fa-calendar date" }, [
-              _vm._v(_vm._s(_vm.articleForm.created_at))
-            ])
-          ])
-        ])
-      ])
+      _c(
+        "el-row",
+        { staticClass: "warp_mid", attrs: { type: "flex", justify: "center" } },
+        [
+          _c(
+            "el-col",
+            { staticClass: "warp_main", attrs: { span: 18, offset: 6 } },
+            [
+              _c(
+                "div",
+                {
+                  directives: [
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.articleForm.img,
+                      expression: "articleForm.img"
+                    }
+                  ],
+                  staticClass: "img-item"
+                },
+                [
+                  _c("img", {
+                    staticStyle: { width: "100%" },
+                    attrs: { src: _vm.articleForm.img, alt: "" }
+                  })
+                ]
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "show_box" }, [
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.articleForm.title,
+                        expression: "articleForm.title"
+                      }
+                    ],
+                    staticClass: "main"
+                  },
+                  [
+                    _c("div", { staticClass: "header" }, [
+                      _c("span", {
+                        staticStyle: {
+                          "font-size": "30px",
+                          "font-weight": "bold"
+                        },
+                        domProps: { innerHTML: _vm._s(_vm.articleForm.title) }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "articleinfo_cade" }, [
+                      _c("span", {
+                        staticClass: "fa fa-calendar date",
+                        staticStyle: { color: "#a4aaae" },
+                        domProps: {
+                          innerHTML: _vm._s(_vm.articleForm.created_at)
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", { staticStyle: { color: "#a4aaae" } }, [
+                        _vm._v(" · ")
+                      ]),
+                      _vm._v(" "),
+                      _c("span", {
+                        domProps: {
+                          innerHTML: _vm._s(_vm.articleForm.classification)
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "content_item",
+                        staticStyle: {
+                          padding: "20px 0 30px 30px",
+                          "border-top": "1px solid #e3e3e3"
+                        }
+                      },
+                      [
+                        _c("span", {
+                          staticStyle: { color: "#636b6f" },
+                          attrs: { alt: "" },
+                          domProps: {
+                            innerHTML: _vm._s(_vm.articleForm.content)
+                          }
+                        })
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        staticClass: "author_item",
+                        staticStyle: {
+                          "margin-top": "10px",
+                          "padding-bottom": "20px",
+                          "border-bottom": "1px solid #e3e3e3"
+                        }
+                      },
+                      [
+                        _c(
+                          "span",
+                          {
+                            staticStyle: {
+                              "font-weight": "bold",
+                              "font-family": "仿宋",
+                              "font-size": "2px"
+                            }
+                          },
+                          [_vm._v("发布：")]
+                        ),
+                        _vm._v(" "),
+                        _c("span", {
+                          staticClass: "author",
+                          staticStyle: { color: "#a4aaae", "font-size": "3px" },
+                          domProps: {
+                            innerHTML: _vm._s(_vm.articleForm.author)
+                          }
+                        })
+                      ]
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    directives: [
+                      {
+                        name: "show",
+                        rawName: "v-show",
+                        value: _vm.articleForm.title === "",
+                        expression: "articleForm.title === ''"
+                      }
+                    ],
+                    staticClass: "err_show_box"
+                  },
+                  [_c("span", [_vm._v("无任何信息!")])]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  { staticClass: "footer_btn" },
+                  [
+                    _c(
+                      "el-button",
+                      {
+                        staticClass: "callback_btn",
+                        staticStyle: { "margin-top": "10px" },
+                        attrs: { size: "small" }
+                      },
+                      [_vm._v("返回")]
+                    )
+                  ],
+                  1
+                )
+              ])
+            ]
+          )
+        ],
+        1
+      )
     ],
     1
   )
