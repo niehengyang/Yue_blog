@@ -101,9 +101,10 @@
                                     // localStorage.setItem('access-user',JSON.stringify(user));
                                     // bus.$emit('setNickName',that.userform.nickname);
                                     that.$message.success({showClose:true,message:response.data,duration:2000});
-                                }else{
-                                    that.$message.error({showClose:true,message:response.data,duration:2000});
                                 }
+                            },function (err) {
+                                that.loading = false;
+                                that.$message.error({showClose:true,message:err.response.data,duration:2000});
                             }).catch(function (error) {
                             that.loading = false;
                             if(error == 'Unauthenticated.'){

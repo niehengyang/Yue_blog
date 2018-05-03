@@ -77,10 +77,10 @@
         },
         methods:{
             handleSearch(){
-                this.search();
+                this.searchUserList();
             },
             //获取用户列表
-            search:function(){
+            searchUserList:function(){
               let that = this;
               let params = {
                   page:that.currentPage,
@@ -96,11 +96,11 @@
                         that.total = response.data['total'];
                         that.users = response.data['data'];
                         // that.page = response.data['current_page'];
-                    }else{
-                        that.loading = false;
-                        that.$message.error({showClose:true,message:response.data,duration:2000});
                     }
-                })
+                },function (err) {
+                      that.loading = false;
+                      that.$message({showClose:true,message:err.response.data,duration:2000});
+                  })
                   .catch(function (error) {
                       that.loading = false;
                       if(error == 'Unauthenticated.'){
@@ -121,15 +121,21 @@
                     cancelButtonText:'取消',
                     type:'warning'
                 }).then(()=> {
+                    that.loading =true;
                     axios.post('/admin/deleteUser',row)
                     .then(function(response){
+                        that.loading = false;
                         that.$message({
                             type:'success',
                             message:response.data,
                             center:true
                         })
+                    },function (err) {
+                        that.loading = false;
+                        that.$message.error({showClose:true,message:err.response.data,duration:2000});
                     })
                     .catch(function (error) {
+                        that.loading = false;
                         that.$message.error({showClose:true,message:'提交出现错误！',duration:2000});
                     })
                 }).catch(()=> {

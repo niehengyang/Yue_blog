@@ -13,10 +13,10 @@
             <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
                 <el-form :inline="true" :model="filters">
                     <el-form-item>
-                        <el-input size="small" v-model="filters.title" placeholder="文章标题" @keyup.enter.native="handleSearch" @change="flashpage"></el-input>
+                        <el-input size="small" v-model="filters.title" placeholder="文章标题" @keyup.enter.native="searchArticle" @change="flashpage"></el-input>
                     </el-form-item>
                     <el-form-item>
-                        <el-button size="small" type="primary" v-on:click="handleSearch"><i class="fa fa-search"></i>&nbsp;查询</el-button>
+                        <el-button size="small" type="primary" v-on:click="searchArticle"><i class="fa fa-search"></i>&nbsp;查询</el-button>
                     </el-form-item>
                     <el-form-item >
                         <el-button size="small" type="primary" @click="createArticle"><i class="fa fa-plus-circle">&nbsp;</i>新增</el-button>
@@ -61,6 +61,7 @@
             <!--底部工具条-->
             <el-col :span="24" class="toobar">
                 <el-button type="danger" size="small" @click="batchDeleteArticle" :disabled="this.sels.length===0"><i class="fa fa-trash-o"></i>&nbsp;批量删除</el-button>
+                <el-button type="primary" size="small" @click="publishedAs" :disabled="this.sels.length===0||this.sels.length>1">发表</el-button>
                 <el-pagination background
                                @size-change="handleSizeChange"
                                @current-change = "handleCurrentChange"
@@ -93,7 +94,7 @@
         },
         methods:{
             //查询
-            handleSearch(){
+            searchArticle(){
                 this.total = 0;
                 this.currentPage = 1;
                 this.search();
@@ -107,17 +108,17 @@
                     limit: 7,
                     title: that.filters.title
                 }
-
                 that.loading = true;
                 axios.get('/admin/getList',{params:params})
                     .then(function (response) {
                         that.loading = false;
-                        if (response.status == 200){
+                        if (response.data && response.data['data']){
                             that.total = response.data['total'];
                             that.articles = response.data['data'];
-                        }else{
-                            that.$message.error({showClose:true,message:response.data,duration:2000});
                         }
+                    },function (err) {
+                        that.loading = false;
+                        that.$message.error({showClose:true,message:err.response.data,duration:2000});
                     }).catch(function (error) {
                         that.loading = false;
                         console.log(error);
@@ -143,6 +144,39 @@
             },
             //文章置顶
             topArticle(index,row){
+                let that = this;
+                if(row.istop){
+                    that.$message.error({showClose:true,message:'此文章已经置顶',duration:2000});
+                }else{
+                    row.istop = true;
+                    that.$confirm('是否置顶？','提示',{
+                        confirmButtonText:'确定',
+                        cancelButtonText:'取消',
+                        type:'warning'
+                    }).then(()=>{
+                        that.loading = true;
+                        axios.post('/admin/initArticle', row)
+                            .then(function (response) {
+                            that.loading = false;
+                            if(response && response.errorCode == 200){
+                                that.$message.success({showClose:true,message:response.data,duration:2000});
+                                that.searchArticle();
+                            }
+                        },function (err) {
+                            that.loading = false;
+                            that.$message.error({showClose:true,message:err.response.data,duration:2000});
+                        }).catch(function (error) {
+                        that.loading = false;
+                        if(error == 'Unauthenticated.'){
+                            window.location.href('/login');
+                        }
+                        that.$message.error({showClose:true,message:'请求出现异常',duration:2000});
+                    })
+                    }).catch(()=> {
+                        console.log('已取消')
+                    row.istop = false;
+                })
+                }
                 console.log(index,row)
             },
             //编辑
@@ -152,22 +186,32 @@
             },
             //删除
             delArticle(index,row){
+                let s_img = '';
+                if (row['img'] != null){
+                    s_img = row['img'].substring(9);
+                }
+                let args = {
+                    id : row.id,
+                    img : s_img
+                }
                 let that = this;
                 this.$confirm('确认删除该记录吗？','提示',{
+                    confirmButtonText:'确定',
+                    cancelButtonText:'取消',
                     type:'warning'
                 }).then(() => {
                     that.loading = true;
-                axios.post('/admin/batchDelArticle',{id:row.id})
+                axios.post('/admin/batchDelArticle',args)
                     .then(function (response) {
                         that.loading = false;
-                        if(response && response.status == 200){
+                        if(response && response.data){
                             that.$message.success({showClose:true,message:response.data,duration:2000});
-                            that.search();
-                        }else{
-                            that.$message.error({showClose:true,message:response.data,duration:2000});
                         }
-                    })
-                    .catch(function (error) {
+                        that.searchArticle();
+                    },function (err) {
+                        that.loading = false;
+                        that.$message.error({showClose:true,message:err.response.data,duration:2000});
+                    }).catch(function (error) {
                         that.loading = false;
                         console.log(error);
                         if(error == 'Unauthenticated.'){
@@ -183,22 +227,35 @@
             //批量删除
             batchDeleteArticle(){
                 let ids = this.sels.map(item => item.id).toString();
+                let imgs = this.sels.map(item => item.img).toString();
+                let array_id = ids.split(",");
+                let array_img = imgs.split(",");
+                array_img.forEach(function (val,index,arr) {
+                    arr[index] = val.substring(9);
+                });
+                array_img = array_img.filter(item=>item);
+                let args = {
+                    id : array_id,
+                    img : array_img
+                }
                 let that = this;
                 this.$confirm('确认删除选中记录吗？','提示',{
+                    confirmButtonText:'确定',
+                    cancelButtonText:'取消',
                     type:'warning'
                 }).then(() => {
                     that.loading = true;
-                    axios.post('/admin/batchDelArticle',{id:ids})
+                    axios.post('/admin/batchDelArticle',args)
                         .then(function (response) {
                             that.loading = false;
-                            if(response && response.status == 200){
+                            if(response && response.data){
                                 that.$message.success({showClose:true,message:response.data,duration:2000});
-                                that.search();
-                            }else{
-                                that.$message.error({showClose:true,message:response.data,duration:2000});
+                                that.searchArticle();
                             }
-                        })
-                        .catch(function (error) {
+                        },function (err) {
+                            that.loading =  false;
+                            that.$message.error({showClose:true,message:err.response.data,duration:2000});
+                        }).catch(function (error) {
                             that.loading = false;
                             console.log(error);
                             if(error == 'Unauthenticated.'){
@@ -213,7 +270,7 @@
             },
             //搜索框脱焦刷新
             flashpage(){
-                this.handleSearch()
+                this.searchArticle()
             },
             //分页操作
             handleSizeChange:function (val) {
@@ -222,10 +279,42 @@
             handleCurrentChange:function (currentPage) {
                 this.currentPage = currentPage;
                 this.search()
+            },
+            //发布
+            publishedAs(){
+                let id = this.sels.map(item => item.id).toString();
+                let that = this;
+                that.$confirm('是否发布？','提示',{
+                    confirmButtonText:'确定',
+                    cancelButtonText:'取消',
+                    type:'warning'
+                }).then(() => {
+                    that.loading = true;
+                    axios.post('/admin/publishedarticle',{id:id})
+                        .then(function (response) {
+                            that.loading = false;
+                            if(response && response.data){
+                                that.$message.success({showClose:true,message:response.data,duration:2000});
+                                that.searchArticle();
+                            }
+                        },function (err) {
+                            that.loading = false;
+                            that.$message.error({showClose:true,message:err.response.data,duration:2000});
+                        }).catch(function (error) {
+                        that.loading = false;
+                        console.log(error);
+                        if(error == 'Unauthenticated.'){
+                            window.location.href('/login');
+                        }
+                        that.$message.error({showClose:true,message:'请求出现异常',duration:2000});
+                    })
+                }).catch(() => {
+                    console.log('取消发布')
+                })
             }
         },
         mounted(){
-            this.handleSearch()
+            this.searchArticle()
         }
     }
 </script>

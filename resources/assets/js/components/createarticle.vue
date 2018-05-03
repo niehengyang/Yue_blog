@@ -46,8 +46,8 @@
                 </el-form-item>
                 <el-form-item label="是否置顶？" prop="istop">
                     <el-radio-group size="small" v-model="articleForm.istop">
-                        <el-radio-button label="true">是</el-radio-button>
-                        <el-radio-button label="false">否</el-radio-button>
+                        <el-radio-button label=1>是</el-radio-button>
+                        <el-radio-button label=0>否</el-radio-button>
                     </el-radio-group>
                 </el-form-item>
                 <!--<el-form-item label="文章标签：" prop=""labels>-->
@@ -61,7 +61,7 @@
                     <!--</el-select>-->
                 <!--</el-form-item>-->
                 <el-form-item label="状态：" prop="release_size">
-                    <el-switch active-text="发表" inactive-text="下架" v-model="articleForm.release_size" style="width: 100%;"></el-switch>
+                    <el-switch active-text="发表" inactive-text="下架" active-value=1 inactive-value=0 active-color="#409EFF" inactive-color="#C0CCDA" v-model="articleForm.release_size" style="width: 100%;"></el-switch>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" size="small" @click="onSubmit('articleForm')">立即{{articleForm.id ? '修改': '创建'}}</el-button>
@@ -72,40 +72,40 @@
         </el-col>
 
         <!---预览-->
-            <!--<el-dialog title="预览" :visible.sync="previewVisible" :close-on-click-model="false">-->
-                <!--<div class="previre_item">-->
-                <!--<el-col class="warp_main" :span="18" :offset="6">-->
-                    <!--<div class="img-item" v-show="articleForm.img">-->
-                        <!--<img style="width: 100%;" :src="articleForm.img" alt=""/>-->
-                    <!--</div>-->
-                    <!--<div class="show_box">-->
-                        <!--<div class="main" v-show="articleForm.title">-->
-                            <!--<div class="header">-->
-                                <!--<span style="font-size: 30px;font-weight: bold" v-html="articleForm.title"></span>-->
-                            <!--</div>-->
-                            <!--<div class="articleinfo_cade" >-->
-                                <!--<span style="color: #a4aaae;" class="fa fa-calendar date" v-html="articleForm.created_at"></span>-->
-                                <!--<span style="color: #a4aaae;">&nbsp;·&nbsp;</span>-->
-                                <!--<span v-html="articleForm.classification"></span>-->
-                            <!--</div>-->
-                            <!--<div class="content_item" style="padding:20px 0 30px 30px; border-top: 1px solid #e3e3e3;">-->
-                                <!--<span style="color: #636b6f;" v-html="articleForm.content" alt=""></span>-->
-                            <!--</div>-->
-                            <!--<div class="author_item" style="margin-top: 10px; padding-bottom: 20px; border-bottom: 1px solid #e3e3e3;">-->
-                                <!--<span style="font-weight: bold; font-family: 仿宋;font-size: 2px;">发布：</span>-->
-                                <!--<span class="author" style="color: #a4aaae;font-size: 3px;" v-html="articleForm.author"></span>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <!--<div class="err_show_box" v-show="articleForm.title === ''">-->
-                            <!--<span>无任何信息!</span>-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</el-col>-->
-                <!--<div slot="footer" class="dialog-footer" style="padding-top: 10px;">-->
-                    <!--<el-button @click.native="previewVisible = false">关闭</el-button>-->
-                <!--</div>-->
-                <!--</div>-->
-            <!--</el-dialog>-->
+            <el-dialog title="预览" :visible.sync="previewVisible" :close-on-click-model="false" :fullscreen="true">
+                <div class="previre_item">
+                <el-col class="warp_main" :span="18" :offset="6">
+                    <div class="img-item" v-show="articleForm.img">
+                        <img style="width: 100%;" :src="articleForm.img" alt=""/>
+                    </div>
+                    <div class="show_box">
+                        <div class="main" v-show="articleForm.title">
+                            <div class="header">
+                                <span style="font-size: 30px;font-weight: bold" v-html="articleForm.title"></span>
+                            </div>
+                            <div class="articleinfo_cade" >
+                                <span style="color: #a4aaae;" class="fa fa-calendar date" v-html="articleForm.created_at"></span>
+                                <span style="color: #a4aaae;">&nbsp;·&nbsp;</span>
+                                <span v-html="articleForm.classification"></span>
+                            </div>
+                            <div class="content_item" style="padding:20px 0 30px 30px; border-top: 1px solid #e3e3e3;">
+                                <span style="color: #636b6f;" v-html="articleForm.content" alt=""></span>
+                            </div>
+                            <div class="author_item" style="margin-top: 10px; padding-bottom: 20px; border-bottom: 1px solid #e3e3e3;">
+                                <span style="font-weight: bold; font-family: 仿宋;font-size: 2px;">发布：</span>
+                                <span class="author" style="color: #a4aaae;font-size: 3px;" v-html="articleForm.author"></span>
+                            </div>
+                        </div>
+                        <div class="err_show_box" v-show="articleForm.title === ''">
+                            <span>无任何信息!</span>
+                        </div>
+                    </div>
+                </el-col>
+                <div slot="footer" class="dialog-footer" style="padding-top: 10px;">
+                    <el-button @click.native="previewVisible = false">关闭</el-button>
+                </div>
+                </div>
+            </el-dialog>
     </el-row>
 </template>
 
@@ -141,10 +141,10 @@
                     title:'',
                     content:'',
                     classification:'',
-                    release_size:false,
+                    release_size:0,
                     abstract:'',
                     author:'',
-                    istop:false
+                    istop:0
                 },
                 rules:{
                     title:[
@@ -207,13 +207,14 @@
                             axios.post('/admin/initArticle', that.articleForm)
                                 .then(function (response) {
                                     that.loading = false;
-                                    if(response.status == 200){
+                                    if(response && response.data){
                                         that.$message.success({showClose:true,message:response.data,duration:2000});
                                         that.$router.push({path:'/articlelist'})
-                                    }else{
-                                        that.$message.error({showClose:true,message:response.data,duration:2000});
                                     }
-                                }).catch(function (error) {
+                                },function (err) {
+                                    that.loading = false;
+                                    that.$message.error({showClose:true,message:err.response.data,duration:2000});
+                                    }).catch(function (error) {
                                 that.loading = false;
                                 if(error == 'Unauthenticated.'){
                                     window.location.href('/login');
@@ -253,9 +254,10 @@
                 console.log(FormName)
             },
             showPreviewDialog(FormName){
-                // this.previewVisible = true;
+                this.previewVisible = true;
                 let row = this.articleForm;
-                this.$router.push({name:'articleview',params:{row}});
+                // window.open('http://yue_blog.com/admin/index#/articleview')
+                // this.$router.push({name:'articleview',params:{row}});
             }
         },
         mounted(){
@@ -271,8 +273,11 @@
 
 <style scoped>
     .previre_item{
+        width: 100%;
         display: flex;
         flex-direction: column;
+        align-content: center;
+        align-items: center;
         justify-content: center;
     }
     .img-item{

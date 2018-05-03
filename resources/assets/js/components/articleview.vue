@@ -11,7 +11,7 @@
         </el-col>
     </el-row>
         <!---文章页面-->
-        <el-row class="warp_mid" type="flex" justify="center">
+        <el-row class="warp_mid" type="flex" justify="center" style="">
             <el-col class="warp_main" :span="18" :offset="6">
                 <div class="img-item" v-show="articleForm.img">
                     <img style="width: 100%;" :src="articleForm.img" alt=""/>
@@ -38,7 +38,7 @@
                             <span>无任何信息!</span>
                         </div>
                         <div class="footer_btn">
-                            <el-button class="callback_btn" size="small" style="margin-top: 10px;">返回</el-button>
+                            <el-button class="callback_btn" size="small" style="margin-top: 10px;" onClick="history.go(-1);">返回</el-button>
                         </div>
                 </div>
             </el-col>
@@ -88,6 +88,10 @@
 <style>
     .page{
         width: 100%;
+        /*background-image: url("/storage/bg.jpg");*/
+        /*background-repeat: no-repeat;*/
+        /*-webkit-background-size: 100% 100%;*/
+        /*background-size: 100% 100%;*/
     }
     .img-item{
         width: 100%;
@@ -118,6 +122,7 @@
         flex-direction: column;
         margin: 20px 0 0 20px;
         box-shadow: 10px 10px 10px 10px #5e5d5d;
+        background-color: white;
     }
     .articleinfo_cade{
         padding-top: 10px;

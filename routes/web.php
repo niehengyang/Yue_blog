@@ -29,28 +29,29 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'auth'],function (){
     Route::post('login','LoginController@postLogin');
     Route::post('logout','LoginController@logout');
+    Route::get('index','IndexController@index');//首页展示
 
 });
 
 //用户账户管理
 Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'auth'],function (){
-    Route::get('index','IndexController@index');
-    Route::get('getUserList','AccountController@getlist');
-    Route::post('deleteUser','AccountController@deleteaccount');
+    Route::get('getUserList','AccountController@getlist');//获取账户列表
+    Route::post('deleteUser','AccountController@deleteaccount');//删除账户
 });
 
 //管理员信息修改
 Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'auth'],function (){
-    Route::get('getUserInfo','UserController@getuserinfo');
-    Route::post('updateUserInfo','UserController@updateuserinfo');
-    Route::post('resetpwd','UserController@resetpwd');
+    Route::get('getUserInfo','UserController@getuserinfo');//获取管理员信息
+    Route::post('updateUserInfo','UserController@updateuserinfo');//修改管理员信息
+    Route::post('resetpwd','UserController@resetpwd');//修改密码
 });
 
 //文章管理
 Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'auth'],function (){
-   Route::get('getList','ArticleController@index');
-   Route::post('batchDelArticle','ArticleController@delarticle');
-   Route::post('initArticle','ArticleController@store');
-   Route::post('uploadfile','ArticleController@upload');
+   Route::get('getList','ArticleController@index');//获取文章列表
+   Route::post('batchDelArticle','ArticleController@delarticle');//批量删除
+   Route::post('initArticle','ArticleController@store');//初始化文章
+   Route::post('uploadfile','ArticleController@upload');//上传图片
+   Route::post('publishedarticle','ArticleController@published');//发表
 });
 

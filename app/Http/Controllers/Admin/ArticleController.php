@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Model\Article;
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mockery\Exception;
@@ -34,10 +35,18 @@ class ArticleController extends Controller
     public function delarticle(Request $request){
         try{
             $ids = $request->get('id');
+            $imgs = $request->get('img');
             if($ids == 0){
                 throw new Exception('不能删除根!');
             }
-            if($num = Article::destroy($ids)){
+            if(is_null($imgs)){
+                if(Article::destroy($ids)){
+                    return response('删除成功！',200);
+                }else{
+                    throw new Exception('删除失败！');
+                }
+            }
+            if(Article::destroy($ids) && Storage::disk('public')->delete($imgs)){
                 return response('删除成功！',200);
             }else{
                 throw new Exception('删除失败！');
@@ -49,6 +58,10 @@ class ArticleController extends Controller
     public function store(Request $request){
         try{
             if($request->get('id') == 0 || $request->get('id') == null){
+                $istopnum = Article::where('istop',true)->count();
+                if($request->get('istop') && $istopnum >= 3){
+                    throw new Exception('置顶个数已达最大值！');
+                }
                 $article = new Article;
                 $article->title = $request->get('title');
                 $article->slug = $request->get('slug');
@@ -65,6 +78,10 @@ class ArticleController extends Controller
                     throw new Exception('创建失败！');
                 }
             }else{
+                $istopnum = Article::where('istop',true)->count();
+                if($request->get('istop') && $istopnum >= 3){
+                    throw new Exception('置顶个数已达最大值！');
+                }
                 $article = Article::find($request->get('id'));
                 if (is_null($article)){
                     throw new Exception('文章不存在');
@@ -89,13 +106,13 @@ class ArticleController extends Controller
         }
     }
 
-    public function createnewarticle($articleData){
-        try{
-
-    }catch ( Exception $e){
-            return response($e->getMessage(),500);
-        }
-    }
+//    public function createnewarticle($articleData){
+//        try{
+//
+//    }catch ( Exception $e){
+//            return response($e->getMessage(),500);
+//        }
+//    }
     public function upload(Request $request){
         if ($request->hasFile('file') && $request->file('file')->isValid()){
             $photo = $request->file('file');
@@ -120,5 +137,30 @@ class ArticleController extends Controller
             return response('上传失败',500);
         }
 
+    }
+    public function published(Request $request){
+        try{
+            if(is_null($request->get('id'))){
+                throw new Exception('请重新选择');
+            }else{
+                $articleId = $request->get('id');
+                if (is_null(Article::find($articleId))){
+                    throw new Exception('数据不存在');
+                }else{
+                    $articleinfo = Article::find($articleId);
+                    if($articleinfo->release_size == 1){
+                        throw new Exception('该文章已经发布');
+                    }
+                    $articleinfo->release_size = 1;
+                    if ($articleinfo->save()){
+                        return response('发表成功!',200);
+                    }else{
+                        throw new Exception('发表失败！');
+                    }
+                }
+            }
+        }catch ( Exception $e){
+            return response($e->getMessage(),500);
+        }
     }
 }

@@ -73,6 +73,7 @@ const router = new VueRouter({
 
 
 new Vue(Vue.util.extend({router},App)).$mount('#app')
+
 // Vue.component('example', require('./components/Example.vue'));
 //
 // const app = new Vue({

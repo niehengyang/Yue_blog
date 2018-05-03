@@ -16801,6 +16801,7 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
  */
 
 new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MODULE_0_vue___default.a.util.extend({ router: router }, __WEBPACK_IMPORTED_MODULE_7__App_vue___default.a)).$mount('#app');
+
 // Vue.component('example', require('./components/Example.vue'));
 //
 // const app = new Vue({
@@ -93664,11 +93665,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         handleSearch: function handleSearch() {
-            this.search();
+            this.searchUserList();
         },
 
         //获取用户列表
-        search: function search() {
+        searchUserList: function searchUserList() {
             var that = this;
             var params = {
                 page: that.currentPage,
@@ -93683,10 +93684,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     that.total = response.data['total'];
                     that.users = response.data['data'];
                     // that.page = response.data['current_page'];
-                } else {
-                    that.loading = false;
-                    that.$message.error({ showClose: true, message: response.data, duration: 2000 });
                 }
+            }, function (err) {
+                that.loading = false;
+                that.$message({ showClose: true, message: err.response.data, duration: 2000 });
             }).catch(function (error) {
                 that.loading = false;
                 if (error == 'Unauthenticated.') {
@@ -93708,13 +93709,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(function () {
+                that.loading = true;
                 axios.post('/admin/deleteUser', row).then(function (response) {
+                    that.loading = false;
                     that.$message({
                         type: 'success',
                         message: response.data,
                         center: true
                     });
+                }, function (err) {
+                    that.loading = false;
+                    that.$message.error({ showClose: true, message: err.response.data, duration: 2000 });
                 }).catch(function (error) {
+                    that.loading = false;
                     that.$message.error({ showClose: true, message: '提交出现错误！', duration: 2000 });
                 });
             }).catch(function () {
@@ -94069,7 +94076,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -94177,9 +94184,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                                 // localStorage.setItem('access-user',JSON.stringify(user));
                                 // bus.$emit('setNickName',that.userform.nickname);
                                 that.$message.success({ showClose: true, message: response.data, duration: 2000 });
-                            } else {
-                                that.$message.error({ showClose: true, message: response.data, duration: 2000 });
                             }
+                        }, function (err) {
+                            that.loading = false;
+                            that.$message.error({ showClose: true, message: err.response.data, duration: 2000 });
                         }).catch(function (error) {
                             that.loading = false;
                             if (error == 'Unauthenticated.') {
@@ -94534,12 +94542,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             that.loading = true;
             axios.get('/admin/getUserInfo').then(function (response) {
                 that.loading = false;
-                if (response && response.data) {
+                if (response && response.status == 200) {
                     that.userInfo = response.data;
                     console.log('获取到的' + response.data);
-                } else {
-                    that.$message.error({ showClose: true, message: '信息获取失败！', duration: 2000 });
                 }
+            }, function (err) {
+                that.loading = false;
+                that.$message.error({ showClose: true, message: err.response.data, duration: 2000 });
             }).catch(function (error) {
                 that.loading = false;
                 console.log(error);
@@ -94559,11 +94568,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     };
                     axios.post('/admin/resetpwd', args).then(function (response) {
                         that.loading = false;
-                        if (response.status == 200) {
+                        if (response && response.errorCode == 200) {
                             that.$message.success({ showClose: true, message: response.data, duration: 2000 });
-                        } else {
-                            that.$message.error({ showClose: true, message: response.data, duration: 2000 });
                         }
+                    }, function (err) {
+                        that.loading = false;
+                        that.$message.error({ showClose: true, message: err.response.data, duration: 2000 });
                     }).catch(function (response) {
                         that.loading = false;
                         that.$message.error({ showClose: true, message: response.data, duration: 2000 });
@@ -94926,6 +94936,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -94945,7 +94956,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
     methods: {
         //查询
-        handleSearch: function handleSearch() {
+        searchArticle: function searchArticle() {
             this.total = 0;
             this.currentPage = 1;
             this.search();
@@ -94960,16 +94971,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 limit: 7,
                 title: that.filters.title
             };
-
             that.loading = true;
             axios.get('/admin/getList', { params: params }).then(function (response) {
                 that.loading = false;
-                if (response.status == 200) {
+                if (response.data && response.data['data']) {
                     that.total = response.data['total'];
                     that.articles = response.data['data'];
-                } else {
-                    that.$message.error({ showClose: true, message: response.data, duration: 2000 });
                 }
+            }, function (err) {
+                that.loading = false;
+                that.$message.error({ showClose: true, message: err.response.data, duration: 2000 });
             }).catch(function (error) {
                 that.loading = false;
                 console.log(error);
@@ -94999,6 +95010,38 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         //文章置顶
         topArticle: function topArticle(index, row) {
+            var that = this;
+            if (row.istop) {
+                that.$message.error({ showClose: true, message: '此文章已经置顶', duration: 2000 });
+            } else {
+                row.istop = true;
+                that.$confirm('是否置顶？', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(function () {
+                    that.loading = true;
+                    axios.post('/admin/initArticle', row).then(function (response) {
+                        that.loading = false;
+                        if (response && response.errorCode == 200) {
+                            that.$message.success({ showClose: true, message: response.data, duration: 2000 });
+                            that.searchArticle();
+                        }
+                    }, function (err) {
+                        that.loading = false;
+                        that.$message.error({ showClose: true, message: err.response.data, duration: 2000 });
+                    }).catch(function (error) {
+                        that.loading = false;
+                        if (error == 'Unauthenticated.') {
+                            window.location.href('/login');
+                        }
+                        that.$message.error({ showClose: true, message: '请求出现异常', duration: 2000 });
+                    });
+                }).catch(function () {
+                    console.log('已取消');
+                    row.istop = false;
+                });
+            }
             console.log(index, row);
         },
 
@@ -95010,19 +95053,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         //删除
         delArticle: function delArticle(index, row) {
+            var s_img = '';
+            if (row['img'] != null) {
+                s_img = row['img'].substring(9);
+            }
+            var args = {
+                id: row.id,
+                img: s_img
+            };
             var that = this;
             this.$confirm('确认删除该记录吗？', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
                 type: 'warning'
             }).then(function () {
                 that.loading = true;
-                axios.post('/admin/batchDelArticle', { id: row.id }).then(function (response) {
+                axios.post('/admin/batchDelArticle', args).then(function (response) {
                     that.loading = false;
-                    if (response && response.status == 200) {
+                    if (response && response.data) {
                         that.$message.success({ showClose: true, message: response.data, duration: 2000 });
-                        that.search();
-                    } else {
-                        that.$message.error({ showClose: true, message: response.data, duration: 2000 });
                     }
+                    that.searchArticle();
+                }, function (err) {
+                    that.loading = false;
+                    that.$message.error({ showClose: true, message: err.response.data, duration: 2000 });
                 }).catch(function (error) {
                     that.loading = false;
                     console.log(error);
@@ -95042,19 +95096,37 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var ids = this.sels.map(function (item) {
                 return item.id;
             }).toString();
+            var imgs = this.sels.map(function (item) {
+                return item.img;
+            }).toString();
+            var array_id = ids.split(",");
+            var array_img = imgs.split(",");
+            array_img.forEach(function (val, index, arr) {
+                arr[index] = val.substring(9);
+            });
+            array_img = array_img.filter(function (item) {
+                return item;
+            });
+            var args = {
+                id: array_id,
+                img: array_img
+            };
             var that = this;
             this.$confirm('确认删除选中记录吗？', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
                 type: 'warning'
             }).then(function () {
                 that.loading = true;
-                axios.post('/admin/batchDelArticle', { id: ids }).then(function (response) {
+                axios.post('/admin/batchDelArticle', args).then(function (response) {
                     that.loading = false;
-                    if (response && response.status == 200) {
+                    if (response && response.data) {
                         that.$message.success({ showClose: true, message: response.data, duration: 2000 });
-                        that.search();
-                    } else {
-                        that.$message.error({ showClose: true, message: response.data, duration: 2000 });
+                        that.searchArticle();
                     }
+                }, function (err) {
+                    that.loading = false;
+                    that.$message.error({ showClose: true, message: err.response.data, duration: 2000 });
                 }).catch(function (error) {
                     that.loading = false;
                     console.log(error);
@@ -95071,7 +95143,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
         //搜索框脱焦刷新
         flashpage: function flashpage() {
-            this.handleSearch();
+            this.searchArticle();
         },
 
         //分页操作
@@ -95081,10 +95153,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         handleCurrentChange: function handleCurrentChange(currentPage) {
             this.currentPage = currentPage;
             this.search();
+        },
+        //发布
+        publishedAs: function publishedAs() {
+            var id = this.sels.map(function (item) {
+                return item.id;
+            }).toString();
+            var that = this;
+            that.$confirm('是否发布？', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(function () {
+                that.loading = true;
+                axios.post('/admin/publishedarticle', { id: id }).then(function (response) {
+                    that.loading = false;
+                    if (response && response.data) {
+                        that.$message.success({ showClose: true, message: response.data, duration: 2000 });
+                        that.searchArticle();
+                    }
+                }, function (err) {
+                    that.loading = false;
+                    that.$message.error({ showClose: true, message: err.response.data, duration: 2000 });
+                }).catch(function (error) {
+                    that.loading = false;
+                    console.log(error);
+                    if (error == 'Unauthenticated.') {
+                        window.location.href('/login');
+                    }
+                    that.$message.error({ showClose: true, message: '请求出现异常', duration: 2000 });
+                });
+            }).catch(function () {
+                console.log('取消发布');
+            });
         }
     },
     mounted: function mounted() {
-        this.handleSearch();
+        this.searchArticle();
     }
 });
 
@@ -95173,7 +95278,7 @@ var render = function() {
                             ) {
                               return null
                             }
-                            return _vm.handleSearch($event)
+                            return _vm.searchArticle($event)
                           }
                         },
                         model: {
@@ -95195,7 +95300,7 @@ var render = function() {
                         "el-button",
                         {
                           attrs: { size: "small", type: "primary" },
-                          on: { click: _vm.handleSearch }
+                          on: { click: _vm.searchArticle }
                         },
                         [
                           _c("i", { staticClass: "fa fa-search" }),
@@ -95412,6 +95517,19 @@ var render = function() {
                 [_c("i", { staticClass: "fa fa-trash-o" }), _vm._v(" 批量删除")]
               ),
               _vm._v(" "),
+              _c(
+                "el-button",
+                {
+                  attrs: {
+                    type: "primary",
+                    size: "small",
+                    disabled: this.sels.length === 0 || this.sels.length > 1
+                  },
+                  on: { click: _vm.publishedAs }
+                },
+                [_vm._v("发表")]
+              ),
+              _vm._v(" "),
               _c("el-pagination", {
                 staticStyle: { float: "right" },
                 attrs: {
@@ -95532,7 +95650,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n.previre_item[data-v-6be4fa1a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.img-item[data-v-6be4fa1a]{\n    width: 100%;\n    height: 400px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.show_box[data-v-6be4fa1a]{\n    width: 80%;\n    display:-webkit-box;\n    display:-ms-flexbox;\n    display:flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-family: 宋体;\n    margin-top: 40px;\n    margin-bottom: 40px;\n}\n.header[data-v-6be4fa1a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -ms-flex-line-pack: center;\n        align-content: center;\n}\n.warp_main[data-v-6be4fa1a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    margin: 20px 0 0 20px;\n    -webkit-box-shadow: 10px 10px 10px 10px #5e5d5d;\n            box-shadow: 10px 10px 10px 10px #5e5d5d;\n}\n.articleinfo_cade[data-v-6be4fa1a]{\n    padding-top: 10px;\n    padding-bottom: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-size: 2px;\n}\n.err_show_box[data-v-6be4fa1a]{\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    color: #adadad;\n}\n", ""]);
+exports.push([module.i, "\n.previre_item[data-v-6be4fa1a]{\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -ms-flex-line-pack: center;\n        align-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.img-item[data-v-6be4fa1a]{\n    width: 100%;\n    height: 400px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.show_box[data-v-6be4fa1a]{\n    width: 80%;\n    display:-webkit-box;\n    display:-ms-flexbox;\n    display:flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-family: 宋体;\n    margin-top: 40px;\n    margin-bottom: 40px;\n}\n.header[data-v-6be4fa1a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -ms-flex-line-pack: center;\n        align-content: center;\n}\n.warp_main[data-v-6be4fa1a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    margin: 20px 0 0 20px;\n    -webkit-box-shadow: 10px 10px 10px 10px #5e5d5d;\n            box-shadow: 10px 10px 10px 10px #5e5d5d;\n}\n.articleinfo_cade[data-v-6be4fa1a]{\n    padding-top: 10px;\n    padding-bottom: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-size: 2px;\n}\n.err_show_box[data-v-6be4fa1a]{\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    color: #adadad;\n}\n", ""]);
 
 // exports
 
@@ -95674,10 +95792,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 title: '',
                 content: '',
                 classification: '',
-                release_size: false,
+                release_size: 0,
                 abstract: '',
                 author: '',
-                istop: false
+                istop: 0
             },
             rules: {
                 title: [{ required: true, message: '请输入文章标题', trigger: 'blur' }, { min: 1, max: 100, message: '标题最多100个字符', trigger: 'blur' }],
@@ -95727,12 +95845,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         that.articleForm.author = that.userform.nickname;
                         axios.post('/admin/initArticle', that.articleForm).then(function (response) {
                             that.loading = false;
-                            if (response.status == 200) {
+                            if (response && response.data) {
                                 that.$message.success({ showClose: true, message: response.data, duration: 2000 });
                                 that.$router.push({ path: '/articlelist' });
-                            } else {
-                                that.$message.error({ showClose: true, message: response.data, duration: 2000 });
                             }
+                        }, function (err) {
+                            that.loading = false;
+                            that.$message.error({ showClose: true, message: err.response.data, duration: 2000 });
                         }).catch(function (error) {
                             that.loading = false;
                             if (error == 'Unauthenticated.') {
@@ -95777,9 +95896,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log(FormName);
         },
         showPreviewDialog: function showPreviewDialog(FormName) {
-            // this.previewVisible = true;
+            this.previewVisible = true;
             var row = this.articleForm;
-            this.$router.push({ name: 'articleview', params: { row: row } });
+            // window.open('http://yue_blog.com/admin/index#/articleview')
+            // this.$router.push({name:'articleview',params:{row}});
         }
     },
     mounted: function mounted() {
@@ -96018,11 +96138,11 @@ var render = function() {
                       }
                     },
                     [
-                      _c("el-radio-button", { attrs: { label: "true" } }, [
+                      _c("el-radio-button", { attrs: { label: "1" } }, [
                         _vm._v("是")
                       ]),
                       _vm._v(" "),
-                      _c("el-radio-button", { attrs: { label: "false" } }, [
+                      _c("el-radio-button", { attrs: { label: "0" } }, [
                         _vm._v("否")
                       ])
                     ],
@@ -96038,7 +96158,14 @@ var render = function() {
                 [
                   _c("el-switch", {
                     staticStyle: { width: "100%" },
-                    attrs: { "active-text": "发表", "inactive-text": "下架" },
+                    attrs: {
+                      "active-text": "发表",
+                      "inactive-text": "下架",
+                      "active-value": "1",
+                      "inactive-value": "0",
+                      "active-color": "#409EFF",
+                      "inactive-color": "#C0CCDA"
+                    },
                     model: {
                       value: _vm.articleForm.release_size,
                       callback: function($$v) {
@@ -96104,6 +96231,204 @@ var render = function() {
           )
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-dialog",
+        {
+          attrs: {
+            title: "预览",
+            visible: _vm.previewVisible,
+            "close-on-click-model": false,
+            fullscreen: true
+          },
+          on: {
+            "update:visible": function($event) {
+              _vm.previewVisible = $event
+            }
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "previre_item" },
+            [
+              _c(
+                "el-col",
+                { staticClass: "warp_main", attrs: { span: 18, offset: 6 } },
+                [
+                  _c(
+                    "div",
+                    {
+                      directives: [
+                        {
+                          name: "show",
+                          rawName: "v-show",
+                          value: _vm.articleForm.img,
+                          expression: "articleForm.img"
+                        }
+                      ],
+                      staticClass: "img-item"
+                    },
+                    [
+                      _c("img", {
+                        staticStyle: { width: "100%" },
+                        attrs: { src: _vm.articleForm.img, alt: "" }
+                      })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "show_box" }, [
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.articleForm.title,
+                            expression: "articleForm.title"
+                          }
+                        ],
+                        staticClass: "main"
+                      },
+                      [
+                        _c("div", { staticClass: "header" }, [
+                          _c("span", {
+                            staticStyle: {
+                              "font-size": "30px",
+                              "font-weight": "bold"
+                            },
+                            domProps: {
+                              innerHTML: _vm._s(_vm.articleForm.title)
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "articleinfo_cade" }, [
+                          _c("span", {
+                            staticClass: "fa fa-calendar date",
+                            staticStyle: { color: "#a4aaae" },
+                            domProps: {
+                              innerHTML: _vm._s(_vm.articleForm.created_at)
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", { staticStyle: { color: "#a4aaae" } }, [
+                            _vm._v(" · ")
+                          ]),
+                          _vm._v(" "),
+                          _c("span", {
+                            domProps: {
+                              innerHTML: _vm._s(_vm.articleForm.classification)
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "content_item",
+                            staticStyle: {
+                              padding: "20px 0 30px 30px",
+                              "border-top": "1px solid #e3e3e3"
+                            }
+                          },
+                          [
+                            _c("span", {
+                              staticStyle: { color: "#636b6f" },
+                              attrs: { alt: "" },
+                              domProps: {
+                                innerHTML: _vm._s(_vm.articleForm.content)
+                              }
+                            })
+                          ]
+                        ),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          {
+                            staticClass: "author_item",
+                            staticStyle: {
+                              "margin-top": "10px",
+                              "padding-bottom": "20px",
+                              "border-bottom": "1px solid #e3e3e3"
+                            }
+                          },
+                          [
+                            _c(
+                              "span",
+                              {
+                                staticStyle: {
+                                  "font-weight": "bold",
+                                  "font-family": "仿宋",
+                                  "font-size": "2px"
+                                }
+                              },
+                              [_vm._v("发布：")]
+                            ),
+                            _vm._v(" "),
+                            _c("span", {
+                              staticClass: "author",
+                              staticStyle: {
+                                color: "#a4aaae",
+                                "font-size": "3px"
+                              },
+                              domProps: {
+                                innerHTML: _vm._s(_vm.articleForm.author)
+                              }
+                            })
+                          ]
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      {
+                        directives: [
+                          {
+                            name: "show",
+                            rawName: "v-show",
+                            value: _vm.articleForm.title === "",
+                            expression: "articleForm.title === ''"
+                          }
+                        ],
+                        staticClass: "err_show_box"
+                      },
+                      [_c("span", [_vm._v("无任何信息!")])]
+                    )
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "dialog-footer",
+                  staticStyle: { "padding-top": "10px" },
+                  attrs: { slot: "footer" },
+                  slot: "footer"
+                },
+                [
+                  _c(
+                    "el-button",
+                    {
+                      nativeOn: {
+                        click: function($event) {
+                          _vm.previewVisible = false
+                        }
+                      }
+                    },
+                    [_vm._v("关闭")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ]
       )
     ],
     1
@@ -96205,7 +96530,7 @@ exports = module.exports = __webpack_require__(5)(false);
 
 
 // module
-exports.push([module.i, "\n.page{\n    width: 100%;\n}\n.img-item{\n    width: 100%;\n    height: 400px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.show_box{\n    width: 80%;\n    display:-webkit-box;\n    display:-ms-flexbox;\n    display:flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-family: 宋体;\n    margin-top: 40px;\n    margin-bottom: 40px;\n}\n.header{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -ms-flex-line-pack: center;\n        align-content: center;\n}\n.warp_main{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    margin: 20px 0 0 20px;\n    -webkit-box-shadow: 10px 10px 10px 10px #5e5d5d;\n            box-shadow: 10px 10px 10px 10px #5e5d5d;\n}\n.articleinfo_cade{\n    padding-top: 10px;\n    padding-bottom: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-size: 2px;\n}\n.err_show_box{\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    color: #adadad;\n}\n", ""]);
+exports.push([module.i, "\n.page{\n    width: 100%;\n    /*background-image: url(\"/storage/bg.jpg\");*/\n    /*background-repeat: no-repeat;*/\n    /*-webkit-background-size: 100% 100%;*/\n    /*background-size: 100% 100%;*/\n}\n.img-item{\n    width: 100%;\n    height: 400px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.show_box{\n    width: 80%;\n    display:-webkit-box;\n    display:-ms-flexbox;\n    display:flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-family: 宋体;\n    margin-top: 40px;\n    margin-bottom: 40px;\n}\n.header{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -ms-flex-line-pack: center;\n        align-content: center;\n}\n.warp_main{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    margin: 20px 0 0 20px;\n    -webkit-box-shadow: 10px 10px 10px 10px #5e5d5d;\n            box-shadow: 10px 10px 10px 10px #5e5d5d;\n    background-color: white;\n}\n.articleinfo_cade{\n    padding-top: 10px;\n    padding-bottom: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-size: 2px;\n}\n.err_show_box{\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    color: #adadad;\n}\n", ""]);
 
 // exports
 
@@ -96512,7 +96837,7 @@ var render = function() {
                       {
                         staticClass: "callback_btn",
                         staticStyle: { "margin-top": "10px" },
-                        attrs: { size: "small" }
+                        attrs: { size: "small", onClick: "history.go(-1);" }
                       },
                       [_vm._v("返回")]
                     )

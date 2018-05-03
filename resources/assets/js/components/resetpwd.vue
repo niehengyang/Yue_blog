@@ -78,12 +78,13 @@
                 axios.get('/admin/getUserInfo')
                     .then(function (response) {
                         that.loading = false;
-                        if (response && response.data){
+                        if (response && response.status == 200){
                             that.userInfo = response.data;
                             console.log('获取到的'+response.data);
-                        }else{
-                            that.$message.error({showClose:true,message:'信息获取失败！',duration:2000});
                         }
+                    },function (err) {
+                        that.loading = false;
+                        that.$message.error({showClose:true,message:err.response.data,duration:2000});
                     }).catch(function (error) {
                         that.loading = false;
                         console.log(error);
@@ -104,13 +105,13 @@
                         axios.post('/admin/resetpwd',args)
                             .then(function (response) {
                                 that.loading = false;
-                                if(response.status == 200){
+                                if(response && response.errorCode == 200){
                                     that.$message.success({showClose:true,message:response.data,duration:2000});
-                                }else{
-                                    that.$message.error({showClose:true,message:response.data,duration:2000});
                                 }
-                            })
-                            .catch(function (response) {
+                            },function (err) {
+                                that.loading = false;
+                                that.$message.error({showClose:true,message:err.response.data,duration:2000});
+                            }).catch(function (response) {
                                 that.loading = false;
                                 that.$message.error({showClose:true,message:response.data,duration:2000});
                             })
