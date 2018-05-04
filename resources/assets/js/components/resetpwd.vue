@@ -78,7 +78,7 @@
                 axios.get('/admin/getUserInfo')
                     .then(function (response) {
                         that.loading = false;
-                        if (response && response.status == 200){
+                        if (response && response.data){
                             that.userInfo = response.data;
                             console.log('获取到的'+response.data);
                         }
@@ -105,7 +105,7 @@
                         axios.post('/admin/resetpwd',args)
                             .then(function (response) {
                                 that.loading = false;
-                                if(response && response.errorCode == 200){
+                                if(response && response.data){
                                     that.$message.success({showClose:true,message:response.data,duration:2000});
                                 }
                             },function (err) {

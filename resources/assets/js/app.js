@@ -24,6 +24,7 @@ import resetpwd from './components/resetpwd.vue'//重置密码
 import articlelist from './components/articlelist.vue'//文章列表
 import createarticle from './components/createarticle.vue'//创建文章
 import articleview from './components/articleview.vue'//文章预览,查看
+import commentslist from './components/commentslist.vue'//评论管理
 
 Vue.use(VueRouter)
 Vue.use(ElementUI)
@@ -62,6 +63,10 @@ const router = new VueRouter({
             path:'/articleview',
             name:'articleview',
             component:articleview
+        },
+        {
+            path:'/commentslist',
+            component:commentslist
         }
     ]
 })

@@ -93,7 +93,7 @@
                         axios.post('/admin/updateUserInfo',args)
                             .then(function (response) {
                                 that.loading = false;
-                                if (response.status == 200 ){
+                                if (response && response.data){
                                     // let user = JSON.parse(window.localStorage.getItem('access-user'));
                                     // user.nickname = that.userform.nickname;
                                     // user.name = that.userform.name;

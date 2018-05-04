@@ -141,6 +141,7 @@
                     title:'',
                     content:'',
                     classification:'',
+                    classification_id:1,
                     release_size:0,
                     abstract:'',
                     author:'',

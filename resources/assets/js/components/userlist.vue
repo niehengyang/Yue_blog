@@ -91,7 +91,7 @@
               axios.get('/admin/getUserList',{params:params})
                   .then(function (response) {
                     that.loading = false;
-                    if(response.data && response.data['data']){
+                    if(response && response.data['data']){
                         console.log(response);
                         that.total = response.data['total'];
                         that.users = response.data['data'];
@@ -130,9 +130,11 @@
                             message:response.data,
                             center:true
                         })
+                        this.flashpage();
                     },function (err) {
                         that.loading = false;
                         that.$message.error({showClose:true,message:err.response.data,duration:2000});
+                        this.flashpage();
                     })
                     .catch(function (error) {
                         that.loading = false;

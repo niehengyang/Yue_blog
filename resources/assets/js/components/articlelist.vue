@@ -158,19 +158,21 @@
                         axios.post('/admin/initArticle', row)
                             .then(function (response) {
                             that.loading = false;
-                            if(response && response.errorCode == 200){
+                            if(response && response.data){
                                 that.$message.success({showClose:true,message:response.data,duration:2000});
                                 that.searchArticle();
                             }
                         },function (err) {
                             that.loading = false;
                             that.$message.error({showClose:true,message:err.response.data,duration:2000});
+                            row.istop = false;
                         }).catch(function (error) {
                         that.loading = false;
                         if(error == 'Unauthenticated.'){
                             window.location.href('/login');
                         }
                         that.$message.error({showClose:true,message:'请求出现异常',duration:2000});
+                        row.istop = false;
                     })
                     }).catch(()=> {
                         console.log('已取消')
@@ -233,7 +235,7 @@
                 array_img.forEach(function (val,index,arr) {
                     arr[index] = val.substring(9);
                 });
-                array_img = array_img.filter(item=>item);
+                array_img = array_img.filter(item => item);
                 let args = {
                     id : array_id,
                     img : array_img

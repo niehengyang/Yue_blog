@@ -53,5 +53,19 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'auth
    Route::post('initArticle','ArticleController@store');//初始化文章
    Route::post('uploadfile','ArticleController@upload');//上传图片
    Route::post('publishedarticle','ArticleController@published');//发表
+   Route::post('commentslist','ArticleController@getcommentslist');//获取评论列表
 });
 
+//分类管理
+Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'auth'],function (){
+    Route::get('classificationList','classificationController@index');//获取文章分类列表
+    Route::post('initclassification','classificationController@store');//初始化分类
+    Route::post('delclassification','classificationController@deltype');//删除分类
+});
+
+//评论管理
+Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'auth'],function (){
+    Route::get('commentslist','commentsController@getcommentslist');//获取评论列表
+    Route::post('disablecomments','commentsController@disableFun');//禁用评论
+    Route::post('delcomments','commentsController@delcomments');//删除评论
+});

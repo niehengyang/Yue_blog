@@ -45,21 +45,25 @@
                     <i class="fa fa-users"></i>
                     <span slot="title">&nbsp;&nbsp;用户列表</span>
                 </el-menu-item>
-                <el-submenu index="3">
+                <el-menu-item index="3" @click="jumpTo('/commentslist')">
+                <i class="fa fa-comments"></i>
+                <span slot="title">&nbsp;&nbsp;评论管理</span>
+                 </el-menu-item>
+                <el-submenu index="4">
                     <template slot="title">
                         <i class="fa fa-bars"></i>
                         <span slot="title">&nbsp;&nbsp;文章管理</span>
                     </template>
-                    <el-menu-item index="3-1" @click="jumpTo('/articlelist')">文章列表</el-menu-item>
-                    <el-menu-item index="3-2">文章分类</el-menu-item>
+                    <el-menu-item index="4-1" @click="jumpTo('/articlelist')">文章列表</el-menu-item>
+                    <el-menu-item index="4-2">文章分类</el-menu-item>
                 </el-submenu>
-                <el-submenu index="4">
+                <el-submenu index="5">
                     <template slot="title">
                     <i class="fa fa-cog"></i>
                     <span slot="title">&nbsp;&nbsp;设置</span>
                     </template>
-                    <el-menu-item index="4-1" @click="jumpTo('/user/profile')">个人信息</el-menu-item>
-                    <el-menu-item index="4-2" @click="jumpTo('/user/changepwd')">修改密码</el-menu-item>
+                    <el-menu-item index="5-1" @click="jumpTo('/user/profile')">个人信息</el-menu-item>
+                    <el-menu-item index="5-2" @click="jumpTo('/user/changepwd')">修改密码</el-menu-item>
                 </el-submenu>
             </el-menu>
             </aside>
