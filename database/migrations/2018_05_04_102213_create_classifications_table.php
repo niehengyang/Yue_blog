@@ -16,6 +16,7 @@ class CreateClassificationsTable extends Migration
         Schema::create('classifications', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name',50)->comment('分类名称');
+            $table->string('describe',100)->comment('分类描述');
             $table->timestamps();
         });
     }

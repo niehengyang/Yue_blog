@@ -8,7 +8,7 @@
             </el-breadcrumb>
         </el-col>
 
-        <el-col :span="24" class="war-main" style="padding-top: 20px;">
+        <el-col :span="24" v-loading="loading" class="war-main" style="padding-top: 20px;">
             <el-header height="30px">
                 <span class="fa fa-key">&nbsp;修改管理员密码</span>
             </el-header>

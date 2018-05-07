@@ -8,7 +8,7 @@
             </el-breadcrumb>
         </el-col>
 
-        <el-col :span="24" class="warp-main" v-loading="loading" element-loading-text="拼命加载中" style="padding-top: 20px;">
+        <el-col :span="24" v-loading="loading" class="warp-main" element-loading-text="拼命加载中" style="padding-top: 20px;">
             <!--头部工具条-->
             <el-col :span="24" class="toolbar" style="padding-bottom: 0px;">
                 <el-form :inline="true" :model="filters">
@@ -46,7 +46,11 @@
                         {{scope.row.release_size? '发表':'下架'}}
                     </template>
                 </el-table-column>
-                <el-table-column prop="classification" label="分类" width="100" sortable></el-table-column>
+                <el-table-column prop="classification_id" label="分类" width="100" sortable>
+                    <template slot-scope='scope'>
+                        {{classifications.find(e => e.id == scope.row.classification_id).name}}
+                    </template>
+                </el-table-column>
                 <el-table-column prop="created_at" label="发表日期" width="270" sortable></el-table-column>
                 <el-table-column label="操作" width="300" style="float: right;">
                     <template slot-scope="scope">
@@ -84,6 +88,7 @@
                 filters:{
                     title:''
                 },
+                classifications:[],
                 articles:[],
                 currentPage:1,
                 total:0,
@@ -92,7 +97,31 @@
                 sels:[]//列表选中列
             }
         },
+        created:function () {//初始化
+            // if(this.$route.params.row != null){
+            //     this.articleForm = this.$route.params.row;
+            // }
+            this.LoadClassification();
+        },
         methods:{
+            //获取分类信息
+            LoadClassification(){
+                let that = this;
+                that.loading = true;
+                axios.get('/admin/classificationList')
+                    .then(function (response) {
+                        if (response && response.data){
+                            that.loading = false;
+                            that.classifications = response.data;
+                        }
+                    },function (err) {
+                        that.loading = false;
+                        that.$message.error({showClose:true,message:err.repsonse.data,duration:2000});
+                    }).catch(function (error) {
+                    that.loading = false;
+                    that.$message.error({showClose:true,message:'分类信息请求异常',duration:2000});
+                })
+            },
             //查询
             searchArticle(){
                 this.total = 0;
@@ -184,7 +213,6 @@
             //编辑
             editArticle(index,row){
                 this.$router.push({name:'createarticle',params:{row}});
-                console.log(index,row.id)
             },
             //删除
             delArticle(index,row){

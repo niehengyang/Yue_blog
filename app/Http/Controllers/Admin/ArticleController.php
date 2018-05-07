@@ -69,7 +69,7 @@ class ArticleController extends Controller
                 $article->release_size = $request->get('release_size');
                 $article->img = $request->get('img');
                 $article->abstract = $request->get('abstract');
-                $article->classification = $request->get('classification');
+                $article->classification_id = $request->get('classification_id');
                 $article->author = $request->get('author');
                 $article->istop = $request->get('istop');
                 if ($article->save()){
@@ -92,7 +92,7 @@ class ArticleController extends Controller
                 $article->release_size = $request->get('release_size');
                 $article->img = $request->get('img');
                 $article->abstract = $request->get('abstract');
-                $article->classification = $request->get('classification');
+                $article->classification_id = $request->get('classification_id');
                 $article->author = $request->get('author');
                 $article->istop = $request->get('istop');
                 if ($article->save()){

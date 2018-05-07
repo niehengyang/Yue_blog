@@ -11,7 +11,7 @@
         </el-col>
     </el-row>
         <!---文章页面-->
-        <el-row class="warp_mid" type="flex" justify="center" style="">
+        <el-row class="warp_mid" type="flex" justify="center" v-loading="loading" style="">
             <el-col class="warp_main" :span="18" :offset="6">
                 <div class="img-item" v-show="articleForm.img">
                     <img style="width: 100%;" :src="articleForm.img" alt=""/>

@@ -8,7 +8,7 @@
             </el-breadcrumb>
         </el-col>
 
-        <el-col :span="24" class="warp-main" style="padding-top: 20px;">
+        <el-col :span="24" v-loading="loading" class="warp-main" style="padding-top: 20px;">
             <el-form ref="userform" :model="userform" :rules="rules" label-width="80px">
                 <el-form-item label="账号">
                     <el-input size="small" v-model="userform.username" disabled></el-input>

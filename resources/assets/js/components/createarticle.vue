@@ -9,7 +9,7 @@
             </el-breadcrumb>
         </el-col>
         <!--创建文章-->
-        <el-col class="warp-main" :span="20" style="padding: 20px 0 0 40px;">
+        <el-col class="warp-main" :span="20" v-loading="loading" style="padding: 20px 0 0 40px;">
             <el-form :model="articleForm" label-width="100px" :rules="rules" ref="articleForm" class="ruleForm">
                 <el-form-item label="文章标题：" prop="title">
                     <el-input size="small" v-model="articleForm.title" auto-complate="off" placeholder="为你的文章起个标题吧！"></el-input>
@@ -37,11 +37,14 @@
                 <el-form-item label="文章摘要：" prop="abstract">
                     <el-input type="textarea" v-model="articleForm.abstract" maxlength="240" minlength="10" placeholder="请输入文章摘要,不得少于10个字和大于240个字!。"></el-input>
                 </el-form-item>
-                <el-form-item label="文章分类：" prop="classification">
-                    <el-select size="small" v-model="articleForm.classification" placeholder="请选择文章分类">
-                        <el-option value="技术"></el-option>
-                        <el-option value="散文"></el-option>
-                        <el-option value="其它"></el-option>
+                <el-form-item label="文章分类：" prop="classification_id">
+                    <el-select size="small" v-model="articleForm.classification_id" placeholder="请选择文章分类">
+                        <el-option
+                                v-for="item in classifications"
+                                :key="item.id"
+                                :label="item.name"
+                                :value="item.id"
+                        ></el-option>
                     </el-select>
                 </el-form-item>
                 <el-form-item label="是否置顶？" prop="istop">
@@ -86,7 +89,7 @@
                             <div class="articleinfo_cade" >
                                 <span style="color: #a4aaae;" class="fa fa-calendar date" v-html="articleForm.created_at"></span>
                                 <span style="color: #a4aaae;">&nbsp;·&nbsp;</span>
-                                <span v-html="articleForm.classification"></span>
+                                <span v-html="show_classification"></span>
                             </div>
                             <div class="content_item" style="padding:20px 0 30px 30px; border-top: 1px solid #e3e3e3;">
                                 <span style="color: #636b6f;" v-html="articleForm.content" alt=""></span>
@@ -131,7 +134,8 @@
                 dialogImageUrl:'',
                 dialogVisible: false,
                 loading:false,
-                articles:{},
+                classifications:[],
+                show_classification:'',
                 userform:{},
                 previewVisible:false,
                 articleForm:{
@@ -140,7 +144,6 @@
                     slug:'',
                     title:'',
                     content:'',
-                    classification:'',
                     classification_id:1,
                     release_size:0,
                     abstract:'',
@@ -175,6 +178,7 @@
                 this.articleForm = this.$route.params.row;
             }
             this.LoadUserInfo();
+            this.LoadClassification();
         },
         methods:{
             LoadUserInfo(){
@@ -182,16 +186,35 @@
                 that.loading = true;
                 axios.get('/admin/getUserInfo')
                     .then(function (response) {
+                        that.loading = false;
                         if (response && response.data){
                             that.userform = response.data;
                             console.log('用户信息'+response.data);
-                        }else{
-                            that.$message.error({showClose:true,message:'信息获取失败！',duration:2000});
                         }
+                    },function (err) {
+                        that.loading = false;
+                        that.$message.error({showClose:true,message:err.response.data,duration:2000});
                     }).catch(function (error) {
                     that.loading = false;
                     console.log(error);
                     that.$message.error({showClose:true,message:'用户信息请求异常',duration:2000});
+                })
+            },
+            LoadClassification(){
+                let that = this;
+                that.loading = true;
+                axios.get('/admin/classificationList')
+                    .then(function (response) {
+                        if (response && response.data){
+                            that.loading = false;
+                            that.classifications = response.data;
+                        }
+                    },function (err) {
+                        that.loading = false;
+                        that.$message.error({showClose:true,message:err.repsonse.data,duration:2000});
+                    }).catch(function (error) {
+                    that.loading = false;
+                    that.$message.error({showClose:true,message:'分类信息请求异常',duration:2000});
                 })
             },
             onSubmit(FormName){
@@ -223,7 +246,6 @@
                                 that.$message.error({showClose:true,message:'请求出现异常',duration:2000});
                             })
                         }else{
-                            that.loading = false;
                             that.$message.error({showClose:true,message:'请保证数据填写完整在提交！',duration:2000});
                     }
                 })
@@ -266,7 +288,7 @@
             //     this.articles = this.articleForm;
             // }
             this.dialogImageUrl = this.articleForm.img;
-            this.LoadUserInfo();
+            // this.show_classification = this.classifications.find(e => e.id === this.articleForm.classification_id).name;
 
         },
     }
