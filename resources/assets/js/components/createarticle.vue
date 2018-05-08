@@ -89,7 +89,10 @@
                             <div class="articleinfo_cade" >
                                 <span style="color: #a4aaae;" class="fa fa-calendar date" v-html="articleForm.created_at"></span>
                                 <span style="color: #a4aaae;">&nbsp;·&nbsp;</span>
-                                <span v-html="show_classification"></span>
+                                <span  v-for="item in classifications"
+                                       :key="item.id"
+                                       v-if="articleForm.classification_id == item.id"
+                                       v-html="item.name"></span>
                             </div>
                             <div class="content_item" style="padding:20px 0 30px 30px; border-top: 1px solid #e3e3e3;">
                                 <span style="color: #636b6f;" v-html="articleForm.content" alt=""></span>

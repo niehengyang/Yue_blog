@@ -12,10 +12,10 @@ class AccountController extends Controller
     public function getlist(Request $request){
         $perPage = $request->get('limit');
         $page = $request->get('page');
-        if($page > 1 && $request->get('name') != null){
-            $users = Account::where('name','like','%'.$request->get('name').'%')->paginate($perPage,'','',$page);
+        if($page > 1 && $request->get('nickname') != null){
+            $users = Account::where('nickname','like','%'.$request->get('nickname').'%')->paginate($perPage,'','',$page);
         }else {
-            $users = Account::where('name', 'like', '%' . $request->get('name') . '%')->paginate($perPage);
+            $users = Account::where('nickname', 'like', '%' . $request->get('nickname') . '%')->paginate($perPage);
         }
         if (is_null($users)){
             return response('数据不存在',500);

@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\Account;
 use App\Model\Article;
+use App\Model\comments;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -46,6 +48,7 @@ class ArticleController extends Controller
                     throw new Exception('删除失败！');
                 }
             }
+            //删除文章同时删除图片和评论
             if(Article::destroy($ids) && Storage::disk('public')->delete($imgs)){
                 return response('删除成功！',200);
             }else{

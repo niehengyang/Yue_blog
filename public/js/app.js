@@ -93688,17 +93688,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             filters: {
-                name: ''
+                nickname: ''
             },
-            users: [{
-                id: '1',
-                name: 'aaa',
-                email: 'NHY@163.com',
-                password: '123',
-                admin_lastlogintime: '2018-5-11',
-                admin_lastloginip: '152.155.102.0',
-                admin_status: '1'
-            }],
+            users: [],
             loading: false,
             total: 0,
             currentPage: 1,
@@ -93718,7 +93710,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var params = {
                 page: that.currentPage,
                 limit: 7,
-                name: that.filters.name
+                nickname: that.filters.nickname
             };
             that.loading = true;
             axios.get('/admin/getUserList', { params: params }).then(function (response) {
@@ -93881,11 +93873,11 @@ var render = function() {
                           }
                         },
                         model: {
-                          value: _vm.filters.name,
+                          value: _vm.filters.nickname,
                           callback: function($$v) {
-                            _vm.$set(_vm.filters, "name", $$v)
+                            _vm.$set(_vm.filters, "nickname", $$v)
                           },
-                          expression: "filters.name"
+                          expression: "filters.nickname"
                         }
                       })
                     ],
@@ -93931,7 +93923,7 @@ var render = function() {
               _c("el-table-column", { attrs: { type: "index", width: "60" } }),
               _vm._v(" "),
               _c("el-table-column", {
-                attrs: { prop: "name", width: "200", label: "昵称" }
+                attrs: { prop: "nickname", width: "200", label: "昵称" }
               }),
               _vm._v(" "),
               _c("el-table-column", {
@@ -94999,10 +94991,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -95026,6 +95014,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         // if(this.$route.params.row != null){
         //     this.articleForm = this.$route.params.row;
         // }
+        this.searchArticle();
         this.LoadClassification();
     },
     methods: {
@@ -95281,9 +95270,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             });
         }
     },
-    mounted: function mounted() {
-        this.searchArticle();
-    }
+    mounted: function mounted() {}
 });
 
 /***/ }),
@@ -95517,29 +95504,11 @@ var render = function() {
               _vm._v(" "),
               _c("el-table-column", {
                 attrs: {
-                  prop: "classification_id",
+                  prop: "classification_name",
                   label: "分类",
                   width: "100",
                   sortable: ""
-                },
-                scopedSlots: _vm._u([
-                  {
-                    key: "default",
-                    fn: function(scope) {
-                      return [
-                        _vm._v(
-                          "\n                    " +
-                            _vm._s(
-                              _vm.classifications.find(function(e) {
-                                return e.id == scope.row.classification_id
-                              }).name
-                            ) +
-                            "\n                "
-                        )
-                      ]
-                    }
-                  }
-                ])
+                }
               }),
               _vm._v(" "),
               _c("el-table-column", {
@@ -95772,6 +95741,9 @@ exports.push([module.i, "\n.previre_item[data-v-6be4fa1a]{\n    width: 100%;\n  
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
 //
 //
 //
@@ -96444,25 +96416,34 @@ var render = function() {
                           })
                         ]),
                         _vm._v(" "),
-                        _c("div", { staticClass: "articleinfo_cade" }, [
-                          _c("span", {
-                            staticClass: "fa fa-calendar date",
-                            staticStyle: { color: "#a4aaae" },
-                            domProps: {
-                              innerHTML: _vm._s(_vm.articleForm.created_at)
-                            }
-                          }),
-                          _vm._v(" "),
-                          _c("span", { staticStyle: { color: "#a4aaae" } }, [
-                            _vm._v(" · ")
-                          ]),
-                          _vm._v(" "),
-                          _c("span", {
-                            domProps: {
-                              innerHTML: _vm._s(_vm.show_classification)
-                            }
-                          })
-                        ]),
+                        _c(
+                          "div",
+                          { staticClass: "articleinfo_cade" },
+                          [
+                            _c("span", {
+                              staticClass: "fa fa-calendar date",
+                              staticStyle: { color: "#a4aaae" },
+                              domProps: {
+                                innerHTML: _vm._s(_vm.articleForm.created_at)
+                              }
+                            }),
+                            _vm._v(" "),
+                            _c("span", { staticStyle: { color: "#a4aaae" } }, [
+                              _vm._v(" · ")
+                            ]),
+                            _vm._v(" "),
+                            _vm._l(_vm.classifications, function(item) {
+                              return _vm.articleForm.classification_id ==
+                                item.id
+                                ? _c("span", {
+                                    key: item.id,
+                                    domProps: { innerHTML: _vm._s(item.name) }
+                                  })
+                                : _vm._e()
+                            })
+                          ],
+                          2
+                        ),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -96734,18 +96715,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             loading: false,
-            articleForm: {
-                id: 0,
-                img: '',
-                slug: '',
-                title: '',
-                content: '',
-                classification: '',
-                release_size: false,
-                abstract: '',
-                author: '',
-                istop: false
-            }
+            articleForm: {}
         };
     },
 
@@ -96755,7 +96725,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         if (this.$route.params.row != null) {
             this.articleForm = this.$route.params.row;
         }
-        console.log('接收到的:' + this.articleForm);
         this.loading = false;
     },
     methods: {},
@@ -96902,7 +96871,7 @@ var render = function() {
                       _vm._v(" "),
                       _c("span", {
                         domProps: {
-                          innerHTML: _vm._s(_vm.articleForm.classification)
+                          innerHTML: _vm._s(_vm.articleForm.classification_name)
                         }
                       })
                     ]),
@@ -97100,7 +97069,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -97172,14 +97141,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
             loading: false,
             filters: {
-                title: ''
+                content: ''
             },
             commentsForm: [],
             currentPage: 1,
@@ -97190,6 +97158,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
+    created: function created() {
+        this.searchComments();
+    },
     methods: {
         //获取评论列表
         searchComments: function searchComments() {
@@ -97205,7 +97176,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var params = {
                 page: that.currentPage,
                 limit: 7,
-                article_title: that.filters.title
+                comment_content: that.filters.content
             };
             that.loading = true;
             axios.get('/admin/commentslist', params).then(function (response) {
@@ -97348,9 +97319,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             this.search();
         }
     },
-    mounted: function mounted() {
-        this.searchComments();
-    }
+    mounted: function mounted() {}
 });
 
 /***/ }),

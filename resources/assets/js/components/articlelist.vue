@@ -46,11 +46,7 @@
                         {{scope.row.release_size? '发表':'下架'}}
                     </template>
                 </el-table-column>
-                <el-table-column prop="classification_id" label="分类" width="100" sortable>
-                    <template slot-scope='scope'>
-                        {{classifications.find(e => e.id == scope.row.classification_id).name}}
-                    </template>
-                </el-table-column>
+                <el-table-column prop="classification_name" label="分类" width="100" sortable></el-table-column>
                 <el-table-column prop="created_at" label="发表日期" width="270" sortable></el-table-column>
                 <el-table-column label="操作" width="300" style="float: right;">
                     <template slot-scope="scope">
@@ -101,6 +97,7 @@
             // if(this.$route.params.row != null){
             //     this.articleForm = this.$route.params.row;
             // }
+            this.searchArticle()
             this.LoadClassification();
         },
         methods:{
@@ -344,7 +341,7 @@
             }
         },
         mounted(){
-            this.searchArticle()
+
         }
     }
 </script>

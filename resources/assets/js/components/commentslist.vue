@@ -12,7 +12,7 @@
             <!--<el-col :span="24" class="toolbar" style="padding-bottom: 0px;">-->
                 <!--<el-form :inline="true" :model="filters">-->
                     <!--<el-form-item>-->
-                        <!--<el-input size="small" v-model="filters.title" placeholder="文章标题" @keyup.enter.native="searchComments" @change="flashpage"></el-input>-->
+                        <!--<el-input size="small" v-model="filters.content" placeholder="评论内容 @keyup.enter.native="searchComments" @change="flashpage"></el-input>-->
                     <!--</el-form-item>-->
                     <!--<el-form-item>-->
                         <!--<el-button size="small" type="primary" v-on:click="searchComments"><i class="fa fa-search"></i>&nbsp;查询</el-button>-->
@@ -23,7 +23,6 @@
             <!--列表-->
             <el-table :data="commentsForm" highlight-current-row @selection-change="selsChange" style="width: 100%;">
                 <el-table-column type="selection" width="55"></el-table-column>
-                <!--<el-table-column type="index" width="60"></el-table-column>-->
                 <el-table-column prop="article_title" label="文章" width="200"></el-table-column>
                 <el-table-column prop="comment_content" label="内容" width="200"></el-table-column>
                 <el-table-column prop="nickname" label="昵称" width="150"></el-table-column>
@@ -66,7 +65,7 @@
             return{
                 loading:false,
                 filters:{
-                    title:''
+                    content:''
                 },
                 commentsForm:[],
                 currentPage:1,
@@ -75,6 +74,9 @@
                 limit:7,
                 sels:[]//列表选中列
             }
+        },
+        created:function(){
+            this.searchComments()
         },
         methods:{
             //获取评论列表
@@ -90,7 +92,7 @@
                 let params = {
                     page:that.currentPage,
                     limit: 7,
-                    article_title: that.filters.title
+                    comment_content: that.filters.content
                 }
                 that.loading = true;
                 axios.get('/admin/commentslist',params)
@@ -232,7 +234,7 @@
             },
         },
         mounted(){
-            this.searchComments()
+
         }
     }
 </script>

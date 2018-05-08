@@ -24,7 +24,7 @@
                             <div class="articleinfo_cade" >
                                 <span style="color: #a4aaae;" class="fa fa-calendar date" v-html="articleForm.created_at"></span>
                                 <span style="color: #a4aaae;">&nbsp;·&nbsp;</span>
-                                <span v-html="articleForm.classification"></span>
+                                <span v-html="articleForm.classification_name"></span>
                             </div>
                             <div class="content_item" style="padding:20px 0 30px 30px; border-top: 1px solid #e3e3e3;">
                                 <span style="color: #636b6f;" v-html="articleForm.content" alt=""></span>
@@ -52,18 +52,7 @@
         data(){
             return{
                 loading:false,
-                articleForm:{
-                    id: 0,
-                    img:'',
-                    slug:'',
-                    title:'',
-                    content:'',
-                    classification:'',
-                    release_size:false,
-                    abstract:'',
-                    author:'',
-                    istop:false
-                },
+                articleForm:{},
             }
         },
         created:function () {//初始化
@@ -71,7 +60,6 @@
             if(this.$route.params.row != null){
                 this.articleForm = this.$route.params.row;
             }
-            console.log('接收到的:'+this.articleForm)
             this.loading = false;
         },
         methods:{

@@ -13,7 +13,7 @@
             <el-col :span="24" class="toolbar" style="padding-bottom: 0px; padding-top: 10px">
                 <el-form :inline="true" :model="filters">
                 <el-form-item>
-                    <el-input v-model="filters.name" placeholder="用户名/姓名/昵称" size="small" style="min-width: 240px;" @keyup.enter.native="handleSearch" @change="flashpage"></el-input>
+                    <el-input v-model="filters.nickname" placeholder="用户名/姓名/昵称" size="small" style="min-width: 240px;" @keyup.enter.native="handleSearch" @change="flashpage"></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" size="small" @click="handleSearch">查询</el-button>
@@ -24,7 +24,7 @@
             <!--列表-->
             <el-table :data="users" highlight-current-row v-loading="loading" style="width: 100%;">
                 <el-table-column type="index" width="60"></el-table-column>
-                <el-table-column prop="name" width="200" label="昵称"></el-table-column>
+                <el-table-column prop="nickname" width="200" label="昵称"></el-table-column>
                 <el-table-column prop="email" width="200" label="登录邮箱"></el-table-column>
                 <el-table-column prop="password" width="200" label="密码"></el-table-column>
                 <el-table-column prop="admin_lastlogintime" width="200" label="最后登录时间"></el-table-column>
@@ -57,17 +57,9 @@
         data(){
             return{
                 filters:{
-                    name:''
+                    nickname:''
                 },
-                users:[{
-                    id:'1',
-                    name:'aaa',
-                    email:'NHY@163.com',
-                    password:'123',
-                    admin_lastlogintime:'2018-5-11',
-                    admin_lastloginip:'152.155.102.0',
-                    admin_status:'1',
-                }],
+                users:[],
                 loading: false,
                 total:0,
                 currentPage:1,
@@ -85,7 +77,7 @@
               let params = {
                   page:that.currentPage,
                   limit:7,
-                  name:that.filters.name
+                  nickname:that.filters.nickname
               };
               that.loading = true;
               axios.get('/admin/getUserList',{params:params})

@@ -13,11 +13,11 @@ class commentsController extends Controller
         try{
             $perPage = $request->get('limit');
             $page = $request->get('page');
-            $title = $request->get('article_title');
-            if ($page > 1 && $title !=null ){
-                $comments = comments::where('article_title','like','%'.$title.'%')->paginate($perPage,'','',$page);
+            $content = $request->get('comment_content');
+            if ($page > 1 && $content !=null ){
+                $comments = comments::where('comment_content','like','%'.$content.'%')->paginate($perPage,'','',$page);
             }else{
-                $comments =comments::where('article_title','like','%'.$title.'%')->paginate($perPage);
+                $comments =comments::where('comment_content','like','%'.$content.'%')->paginate($perPage);
             }
             if (is_null($comments)){
                 return response('数据不存在',500);
@@ -33,7 +33,7 @@ class commentsController extends Controller
         try{
             $commentsId = $request->get('id');
             if ($commentsId == 0 ){
-                throw new Exception('删除出错');
+                throw new Exception('无法禁用');
             }
             if (is_null($commentsId)){
                 throw new Exception('请重新选择');
@@ -65,6 +65,37 @@ class commentsController extends Controller
                 return response('删除成功',200);
             }else{
                 throw new Exception('删除失败');
+            }
+        }catch (Exception $e){
+            return response($e->getMessage(),500);
+        }
+    }
+    public function createComments(Request $request){
+        try{
+            if (is_null($request->get('parent_id'))){
+                $comment = new comments;
+                $comment->article_id = $request->get('article_id');
+                $comment->comment_content = $request->get('comment_content');
+                $comment->release_size = $request->get('release_size');
+                $comment->parent_id = $request->get('article_id');
+                $comment->user_id = $request->get('user_id');
+                if ($comment->save()){
+                    return response('评论成功',200);
+                }else{
+                    throw new Exception('评论失败');
+                }
+            }else{
+                $comment = new comments;
+                $comment->article_id = $request->get('article_id');
+                $comment->comment_content = $request->get('comment_content');
+                $comment->release_size = $request->get('release_size');
+                $comment->user_id = $request->get('user_id');
+                $comment->parent_id = $request->get('parent_id');
+                if ($comment->save()){
+                    return response('评论成功',200);
+                }else{
+                    throw new Exception('评论失败');
+                }
             }
         }catch (Exception $e){
             return response($e->getMessage(),500);

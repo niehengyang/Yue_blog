@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Model\Article;
 use App\Model\classification;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -28,17 +29,19 @@ class classificationController extends Controller
         try {
             if (is_null($request->get('id'))) {
                 $name = $request->get('name');
-                if(classification::where('name','like','%'.$name.'%')){
+                if(classification::where('name',$name)->count() == 0){
+                    $classification = new classification;
+                    $classification->name = $request->get('name');
+                    $classification->describe = $request->get('describe');
+                    if ($classification->save()) {
+                        return response('添加成功', 200);
+                    } else {
+                        throw new Exception('添加失败');
+                    }
+                }else{
                     throw new Exception('该分类已存在，请勿重复创建');
                 }
-                $classification = new classification;
-                $classification->name = $request->get('name');
-                $classification->describe = $request->get('describe');
-                if ($classification->save()) {
-                    return response('添加成功', 200);
-                } else {
-                    throw new Exception('添加失败');
-                }
+
             } else {
                 $id = $request->get('id');
                 $infodata = classification::find($id);
@@ -64,7 +67,7 @@ class classificationController extends Controller
                 if(is_null($id)){
                     throw new Exception('请重新选择删除');
                 }
-                if(classification::destroy($id)){
+                if(classification::destroy($id) && Article::where('classification_id',$id)->update(['classification_id' => 1])){
                     return response('删除成功',200);
                 }else{
                     throw new Exception('删除失败');

@@ -17,15 +17,20 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
 
 
-//blog
-//Route::group(['prefix' => 'admin','namespace' => 'Admin','middleware' => 'gust'],function (){
-//    Route::get("/auth/","IndexController@index");
-//    Route::post('/auth/login','LoginController@postLogin');
-//});
-//登录
+
+//前台
+Route::group(['middleware' => 'web'],function (){
+   Route::any('home/login','Auth\AuthController@login');
+   Route::get('home/logout','Auth\AuthController@logout');
+   Route::any('home/register','Auth\AuthController@register');
+
+    Route::get('/home', 'HomeController@index')->name('home');
+});
+
+
+//后台登录
 Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'auth'],function (){
     Route::post('login','LoginController@postLogin');
     Route::post('logout','LoginController@logout');
@@ -68,4 +73,5 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'auth
     Route::get('commentslist','commentsController@getcommentslist');//获取评论列表
     Route::post('disablecomments','commentsController@disableFun');//禁用评论
     Route::post('delcomments','commentsController@delcomments');//删除评论
+    Route::post('initcomments','commentsController@createComments');//生成评论
 });
