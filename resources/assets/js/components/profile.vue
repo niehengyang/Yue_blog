@@ -62,12 +62,16 @@
                 that.loading = true;
                 axios.get('/admin/getUserInfo')
                     .then(function (response) {
+                        that.loading = false;
                         if (response && response.data){
                             that.userform = response.data;
                             console.log('获取到的'+response.data);
                         }else{
                             that.$message.error({showClose:true,message:'信息获取失败！',duration:2000});
                         }
+                    },function (err) {
+                        that.loading = false;
+                        that.$message.error({showClose:true,message:err.response.data,duration:2000});
                     }).catch(function (error) {
                     that.loading = false;
                     console.log(error);

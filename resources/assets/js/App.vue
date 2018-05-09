@@ -1,7 +1,7 @@
 <template>
     <el-row class="container">
         <!--头部-->
-        <el-col :span="24" class="topbar-wrap">
+        <el-col :span="24" class="topbar-wrap" :loading="loading" element-loading-text="拼命加载中">
             <div class="topbar-title">
                 <span style="font-size: 18px;color: #fff;">博客后台管理系统</span>
             </div>
@@ -83,18 +83,16 @@
 
 <script>
     export default{
-        create(){
-           console.log('页面建立的时候执行此函数');
-        },
     data(){
         return{
+            loading:false,
             defaultActiveIndex:'0',
             userform:{},
             isCollapse: true,
             nickname:'admin'
         }
     },
-        create(){
+        created(){
             console.log('页面建立的时候执行此函数');
             this.LoadUserInfo();
         },
@@ -104,12 +102,16 @@
                 that.loading = true;
                 axios.get('/admin/getUserInfo')
                     .then(function (response) {
+                        that.loading = false;
                         if (response && response.data){
                             that.userform = response.data;
                             console.log('获取到的'+response.data);
                         }else{
                             that.$message.error({showClose:true,message:'信息获取失败！',duration:2000});
                         }
+                    },function (err) {
+                        that.loading = false;
+                        that.$message.error({showClose:true,message:err.response.data,duration:2000});
                     }).catch(function (error) {
                     that.loading = false;
                     console.log(error);
@@ -140,15 +142,21 @@
                     cancelButtonText:'取消',
                     type:'warning'
                 }).then(()=>{
+                    that.loading = true;
                     axios.post('/admin/logout')
                     .then(function (response) {
+                        that.loading = false;
                         window.location.assign('/login')
                         that.$message({
                             type:'success',
                             message:response.data,
                             center:true
+                        },function (err) {
+                            that.loading = false;
+                            that.$message.error({showClose:true,message:err.response.data,duration:2000});
                         })
                     }).catch(function (error) {
+                        that.loading = false;
                         that.$message({
                             type:'warning',
                             message:'出问题了！',
@@ -162,7 +170,7 @@
             },
             //获取当前用户信息
             mounted(){
-                this.LoadUserInfo();
+                // this.LoadUserInfo();
             }
         }
 

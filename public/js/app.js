@@ -16720,26 +16720,28 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_5_element_ui_lib_theme_chalk_index_css___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_5_element_ui_lib_theme_chalk_index_css__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vue2_editor__ = __webpack_require__(201);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_6_vue2_editor___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_6_vue2_editor__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__App_vue__ = __webpack_require__(202);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__App_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__App_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_index_vue__ = __webpack_require__(208);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__components_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__components_index_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_userlist_vue__ = __webpack_require__(211);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_userlist_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_userlist_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_profile_vue__ = __webpack_require__(216);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_profile_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_profile_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_resetpwd_vue__ = __webpack_require__(221);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_resetpwd_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_resetpwd_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_articlelist_vue__ = __webpack_require__(226);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_articlelist_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_articlelist_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_createarticle_vue__ = __webpack_require__(231);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_createarticle_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_createarticle_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_articleview_vue__ = __webpack_require__(236);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_articleview_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_articleview_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_commentslist_vue__ = __webpack_require__(241);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_commentslist_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_commentslist_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_classification__ = __webpack_require__(246);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_classification___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__components_classification__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__login_vue__ = __webpack_require__(262);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_7__login_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_7__login_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__App_vue__ = __webpack_require__(202);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_8__App_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_8__App_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_index_vue__ = __webpack_require__(208);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_9__components_index_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_9__components_index_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_userlist_vue__ = __webpack_require__(211);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_10__components_userlist_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_10__components_userlist_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_profile_vue__ = __webpack_require__(216);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_11__components_profile_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_11__components_profile_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_resetpwd_vue__ = __webpack_require__(221);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_resetpwd_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_resetpwd_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_articlelist_vue__ = __webpack_require__(226);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_articlelist_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_articlelist_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_createarticle_vue__ = __webpack_require__(231);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_createarticle_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_createarticle_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_articleview_vue__ = __webpack_require__(236);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_articleview_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_articleview_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_commentslist_vue__ = __webpack_require__(241);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_commentslist_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__components_commentslist_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_classification__ = __webpack_require__(246);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__components_classification___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_17__components_classification__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -16758,7 +16760,10 @@ window.Vue = __webpack_require__(3);
 
 
 
- //
+ //登录
+ //主题框架
+
+
  //主页
  //账户列表
  //个人信息
@@ -16776,34 +16781,34 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_6_vue2
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     mode: 'hash',
     routes: [{
-        path: '/home',
-        component: __WEBPACK_IMPORTED_MODULE_8__components_index_vue___default.a
+        path: '/admin/home',
+        component: __WEBPACK_IMPORTED_MODULE_9__components_index_vue___default.a
     }, {
         path: '/userlist',
-        component: __WEBPACK_IMPORTED_MODULE_9__components_userlist_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_10__components_userlist_vue___default.a
     }, {
         path: '/user/profile',
-        component: __WEBPACK_IMPORTED_MODULE_10__components_profile_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_11__components_profile_vue___default.a
     }, {
         path: '/user/changepwd',
-        component: __WEBPACK_IMPORTED_MODULE_11__components_resetpwd_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_12__components_resetpwd_vue___default.a
     }, {
         path: '/articlelist',
-        component: __WEBPACK_IMPORTED_MODULE_12__components_articlelist_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_13__components_articlelist_vue___default.a
     }, {
         path: '/createarticle',
         name: 'createarticle',
-        component: __WEBPACK_IMPORTED_MODULE_13__components_createarticle_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_14__components_createarticle_vue___default.a
     }, {
         path: '/articleview',
         name: 'articleview',
-        component: __WEBPACK_IMPORTED_MODULE_14__components_articleview_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_15__components_articleview_vue___default.a
     }, {
         path: '/commentslist',
-        component: __WEBPACK_IMPORTED_MODULE_15__components_commentslist_vue___default.a
+        component: __WEBPACK_IMPORTED_MODULE_16__components_commentslist_vue___default.a
     }, {
         path: '/classification',
-        component: __WEBPACK_IMPORTED_MODULE_16__components_classification___default.a
+        component: __WEBPACK_IMPORTED_MODULE_17__components_classification___default.a
     }]
 });
 /**
@@ -16812,7 +16817,8 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MODULE_0_vue___default.a.util.extend({ router: router }, __WEBPACK_IMPORTED_MODULE_7__App_vue___default.a)).$mount('#app');
+new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MODULE_0_vue___default.a.util.extend({ router: router }, __WEBPACK_IMPORTED_MODULE_7__login_vue___default.a)).$mount('#login');
+new __WEBPACK_IMPORTED_MODULE_0_vue___default.a(__WEBPACK_IMPORTED_MODULE_0_vue___default.a.util.extend({ router: router }, __WEBPACK_IMPORTED_MODULE_8__App_vue___default.a)).$mount('#app');
 
 // Vue.component('example', require('./components/Example.vue'));
 //
@@ -92897,10 +92903,6 @@ module.exports = function listToStyles (parentId, list) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-var _create$data$create$m;
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
 //
 //
 //
@@ -92985,87 +92987,99 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 
-/* harmony default export */ __webpack_exports__["default"] = (_create$data$create$m = {
-    create: function create() {
-        console.log('页面建立的时候执行此函数');
-    },
+/* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
         return {
+            loading: false,
             defaultActiveIndex: '0',
             userform: {},
             isCollapse: true,
             nickname: 'admin'
         };
-    }
-}, _defineProperty(_create$data$create$m, 'create', function create() {
-    console.log('页面建立的时候执行此函数');
-    this.LoadUserInfo();
-}), _defineProperty(_create$data$create$m, 'methods', {
-    LoadUserInfo: function LoadUserInfo() {
-        var that = this;
-        that.loading = true;
-        axios.get('/admin/getUserInfo').then(function (response) {
-            if (response && response.data) {
-                that.userform = response.data;
-                console.log('获取到的' + response.data);
-            } else {
-                that.$message.error({ showClose: true, message: '信息获取失败！', duration: 2000 });
-            }
-        }).catch(function (error) {
-            that.loading = false;
-            console.log(error);
-            that.$message.error({ showClose: true, message: '用户信息请求异常', duration: 2000 });
-        });
     },
-    changeCollapse: function changeCollapse() {
-        this.isCollapse = !this.isCollapse;
-    },
-    handleSelect: function handleSelect(key, keyPath) {
-        console.log(key, keyPath);
-    },
-    handleOpen: function handleOpen(key, keyPath) {
-        console.log(key, keyPath);
-    },
-    handleClose: function handleClose(key, keyPath) {
-        console.log(key, keyPath);
-    },
-    jumpTo: function jumpTo(url) {
-        this.defaultActiveIndex = url;
-        this.$router.push(url); //用go刷新
-    },
-
-    //退出登录
-    logout: function logout() {
-        var that = this;
-        that.$confirm('是否退出系统？', '提示', {
-            confirmButtonText: '确定',
-            cancelButtonText: '取消',
-            type: 'warning'
-        }).then(function () {
-            axios.post('/admin/logout').then(function (response) {
-                window.location.assign('/login');
-                that.$message({
-                    type: 'success',
-                    message: response.data,
-                    center: true
-                });
-            }).catch(function (error) {
-                that.$message({
-                    type: 'warning',
-                    message: '出问题了！',
-                    center: true
-                });
-            });
-        }).catch(function () {
-            console.log('放弃退出');
-        });
-    },
-
-    //获取当前用户信息
-    mounted: function mounted() {
+    created: function created() {
+        console.log('页面建立的时候执行此函数');
         this.LoadUserInfo();
+    },
+
+    methods: {
+        LoadUserInfo: function LoadUserInfo() {
+            var that = this;
+            that.loading = true;
+            axios.get('/admin/getUserInfo').then(function (response) {
+                that.loading = false;
+                if (response && response.data) {
+                    that.userform = response.data;
+                    console.log('获取到的' + response.data);
+                } else {
+                    that.$message.error({ showClose: true, message: '信息获取失败！', duration: 2000 });
+                }
+            }, function (err) {
+                that.loading = false;
+                that.$message.error({ showClose: true, message: err.response.data, duration: 2000 });
+            }).catch(function (error) {
+                that.loading = false;
+                console.log(error);
+                that.$message.error({ showClose: true, message: '用户信息请求异常', duration: 2000 });
+            });
+        },
+        changeCollapse: function changeCollapse() {
+            this.isCollapse = !this.isCollapse;
+        },
+        handleSelect: function handleSelect(key, keyPath) {
+            console.log(key, keyPath);
+        },
+        handleOpen: function handleOpen(key, keyPath) {
+            console.log(key, keyPath);
+        },
+        handleClose: function handleClose(key, keyPath) {
+            console.log(key, keyPath);
+        },
+        jumpTo: function jumpTo(url) {
+            this.defaultActiveIndex = url;
+            this.$router.push(url); //用go刷新
+        },
+
+        //退出登录
+        logout: function logout() {
+            var that = this;
+            that.$confirm('是否退出系统？', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(function () {
+                that.loading = true;
+                axios.post('/admin/logout').then(function (response) {
+                    that.loading = false;
+                    window.location.assign('/login');
+                    that.$message({
+                        type: 'success',
+                        message: response.data,
+                        center: true
+                    }, function (err) {
+                        that.loading = false;
+                        that.$message.error({ showClose: true, message: err.response.data, duration: 2000 });
+                    });
+                }).catch(function (error) {
+                    that.loading = false;
+                    that.$message({
+                        type: 'warning',
+                        message: '出问题了！',
+                        center: true
+                    });
+                });
+            }).catch(function () {
+                console.log('放弃退出');
+            });
+        },
+
+        //获取当前用户信息
+        mounted: function mounted() {
+            // this.LoadUserInfo();
+        }
     }
-}), _create$data$create$m);
+
+});
 
 /***/ }),
 /* 207 */
@@ -93079,103 +93093,120 @@ var render = function() {
     "el-row",
     { staticClass: "container" },
     [
-      _c("el-col", { staticClass: "topbar-wrap", attrs: { span: 24 } }, [
-        _c("div", { staticClass: "topbar-title" }, [
-          _c("span", { staticStyle: { "font-size": "18px", color: "#fff" } }, [
-            _vm._v("博客后台管理系统")
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "topbar-btn" },
-          [
+      _c(
+        "el-col",
+        {
+          staticClass: "topbar-wrap",
+          attrs: {
+            span: 24,
+            loading: _vm.loading,
+            "element-loading-text": "拼命加载中"
+          }
+        },
+        [
+          _c("div", { staticClass: "topbar-title" }, [
             _c(
-              "el-dropdown",
-              { attrs: { trigger: "click" } },
-              [
-                _c("span", { staticClass: "el-dropdown-link userinfo-inner" }, [
-                  _c("i", { staticClass: "fa fa-user" }),
-                  _vm._v("  " + _vm._s(_vm.nickname) + "  "),
-                  _c("i", { staticClass: "fa fa-caret-down" })
-                ]),
-                _vm._v(" "),
-                _c(
-                  "el-dropdown-menu",
-                  { attrs: { slot: "dropdown" }, slot: "dropdown" },
-                  [
-                    _c("el-dropdown-item", [
-                      _c(
-                        "div",
-                        {
-                          on: {
-                            click: function($event) {
-                              _vm.jumpTo("/user/profile")
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "span",
-                            {
-                              staticStyle: {
-                                color: "#555",
-                                "font-size": "14px"
-                              }
-                            },
-                            [_vm._v("个人信息")]
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c("el-dropdown-item", [
-                      _c(
-                        "div",
-                        {
-                          on: {
-                            click: function($event) {
-                              _vm.jumpTo("/user/changepwd")
-                            }
-                          }
-                        },
-                        [
-                          _c(
-                            "span",
-                            {
-                              staticStyle: {
-                                color: "#555",
-                                "font-size": "14px"
-                              }
-                            },
-                            [_vm._v("修改密码")]
-                          )
-                        ]
-                      )
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "el-dropdown-item",
-                      {
-                        attrs: { divided: "" },
-                        nativeOn: {
-                          click: function($event) {
-                            return _vm.logout($event)
-                          }
-                        }
-                      },
-                      [_vm._v("退出登录")]
-                    )
-                  ],
-                  1
-                )
-              ],
-              1
+              "span",
+              { staticStyle: { "font-size": "18px", color: "#fff" } },
+              [_vm._v("博客后台管理系统")]
             )
-          ],
-          1
-        )
-      ]),
+          ]),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "topbar-btn" },
+            [
+              _c(
+                "el-dropdown",
+                { attrs: { trigger: "click" } },
+                [
+                  _c(
+                    "span",
+                    { staticClass: "el-dropdown-link userinfo-inner" },
+                    [
+                      _c("i", { staticClass: "fa fa-user" }),
+                      _vm._v("  " + _vm._s(_vm.nickname) + "  "),
+                      _c("i", { staticClass: "fa fa-caret-down" })
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "el-dropdown-menu",
+                    { attrs: { slot: "dropdown" }, slot: "dropdown" },
+                    [
+                      _c("el-dropdown-item", [
+                        _c(
+                          "div",
+                          {
+                            on: {
+                              click: function($event) {
+                                _vm.jumpTo("/user/profile")
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "span",
+                              {
+                                staticStyle: {
+                                  color: "#555",
+                                  "font-size": "14px"
+                                }
+                              },
+                              [_vm._v("个人信息")]
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("el-dropdown-item", [
+                        _c(
+                          "div",
+                          {
+                            on: {
+                              click: function($event) {
+                                _vm.jumpTo("/user/changepwd")
+                              }
+                            }
+                          },
+                          [
+                            _c(
+                              "span",
+                              {
+                                staticStyle: {
+                                  color: "#555",
+                                  "font-size": "14px"
+                                }
+                              },
+                              [_vm._v("修改密码")]
+                            )
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "el-dropdown-item",
+                        {
+                          attrs: { divided: "" },
+                          nativeOn: {
+                            click: function($event) {
+                              return _vm.logout($event)
+                            }
+                          }
+                        },
+                        [_vm._v("退出登录")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ]
+      ),
       _vm._v(" "),
       _c("el-col", { staticClass: "main", attrs: { span: 24 } }, [
         _c(
@@ -94114,7 +94145,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -94184,12 +94215,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             var that = this;
             that.loading = true;
             axios.get('/admin/getUserInfo').then(function (response) {
+                that.loading = false;
                 if (response && response.data) {
                     that.userform = response.data;
                     console.log('获取到的' + response.data);
                 } else {
                     that.$message.error({ showClose: true, message: '信息获取失败！', duration: 2000 });
                 }
+            }, function (err) {
+                that.loading = false;
+                that.$message.error({ showClose: true, message: err.response.data, duration: 2000 });
             }).catch(function (error) {
                 that.loading = false;
                 console.log(error);
@@ -98204,6 +98239,337 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+function injectStyle (ssrContext) {
+  if (disposed) return
+  __webpack_require__(263)
+  __webpack_require__(265)
+}
+var normalizeComponent = __webpack_require__(5)
+/* script */
+var __vue_script__ = __webpack_require__(267)
+/* template */
+var __vue_template__ = __webpack_require__(268)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = injectStyle
+/* scopeId */
+var __vue_scopeId__ = "data-v-5353f027"
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/assets/js/login.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-5353f027", Component.options)
+  } else {
+    hotAPI.reload("data-v-5353f027", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 263 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(264);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(7)("3f93b424", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../node_modules/_vue-loader@13.7.1@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5353f027\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/_vue-loader@13.7.1@vue-loader/lib/selector.js?type=styles&index=0!./login.vue", function() {
+     var newContent = require("!!../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../node_modules/_vue-loader@13.7.1@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5353f027\",\"scoped\":false,\"hasInlineConfig\":true}!../../../node_modules/_vue-loader@13.7.1@vue-loader/lib/selector.js?type=styles&index=0!./login.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 264 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nbody{\n    background: #DFE9FB;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 265 */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(266);
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var update = __webpack_require__(7)("156e1f20", content, false, {});
+// Hot Module Replacement
+if(false) {
+ // When the styles change, update the <style> tags
+ if(!content.locals) {
+   module.hot.accept("!!../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../node_modules/_vue-loader@13.7.1@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5353f027\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/_sass-loader@6.0.7@sass-loader/lib/loader.js!../../../node_modules/_vue-loader@13.7.1@vue-loader/lib/selector.js?type=styles&index=1!./login.vue", function() {
+     var newContent = require("!!../../../node_modules/_css-loader@0.28.11@css-loader/index.js!../../../node_modules/_vue-loader@13.7.1@vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-5353f027\",\"scoped\":true,\"hasInlineConfig\":true}!../../../node_modules/_sass-loader@6.0.7@sass-loader/lib/loader.js!../../../node_modules/_vue-loader@13.7.1@vue-loader/lib/selector.js?type=styles&index=1!./login.vue");
+     if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
+     update(newContent);
+   });
+ }
+ // When the module is disposed, remove the <style> tags
+ module.hot.dispose(function() { update(); });
+}
+
+/***/ }),
+/* 266 */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(4)(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n@charset \"UTF-8\";\n.login-container[data-v-5353f027] {\n  border-radius: 5px;\n  -moz-border-radius: 5px;\n  background-clip: padding-box;\n  margin: 160px auto;\n  width: 350px;\n  padding: 35px 35px 15px 35px;\n  background: #fff;\n  border: 1px solid #eaeaea;\n  -webkit-box-shadow: 0 0 25px #cac6c6;\n          box-shadow: 0 0 25px #cac6c6;\n  /*IE 10*/\n  /*谷歌*/\n  /*谷歌*/\n  background: -o-linear-gradient(top, #ace, #00C1DE);\n}\n.login-container .title[data-v-5353f027] {\n    margin: 0px auto 40px auto;\n    text-align: center;\n    color: #505458;\n}\n.login-container .remember[data-v-5353f027] {\n    margin: 0px 0px 35px 0px;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+/* 267 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            loading: false,
+            AccountForm: {
+                account_number: 'admin',
+                password: '123456'
+            },
+            rules: {
+                account_number: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+                password: [{ required: true, message: '请输入密码', trigger: 'blur' }]
+            },
+            checked: true
+        };
+    },
+
+    methods: {
+        handleLogin: function handleLogin(FormName) {
+            var that = this;
+            that.$refs[FormName].validate(function (valid) {
+                if (valid) {
+                    that.loading = true;
+                    // let loginParams = {account_number:that.account.username,password:that.account.password};
+                    axios.post('/admin/login', that.AccountForm).then(function (response) {
+                        that.loading = false;
+                        if (response && response.data) {
+                            // localStorage.setItem('access-user',JSON.stringify(response.data));
+                            that.$message.success({ showClose: true, message: response.data, duration: 2000 });
+                            that.$router.push({ path: '/home' });
+                        } else {
+                            that.$message.error({ showClose: true, message: '登录失败', duration: 2000 });
+                        }
+                    }, function (err) {
+                        that.loading = false;
+                        that.$message.error({ showClose: true, message: err.response.data, duration: 2000 });
+                    }).catch(function (error) {
+                        that.loading = false;
+                        that.$message.error({ showClose: true, message: '请求出现异常', duration: 2000 });
+                    });
+                } else {
+                    that.$message.error({ showClose: true, message: '请确保数据填写完整再提交!', duration: 2000 });
+                }
+            });
+        }
+    }
+});
+
+/***/ }),
+/* 268 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "el-form",
+    {
+      ref: "AccountForm",
+      staticClass: "demo-ruleForm login-container",
+      attrs: {
+        model: _vm.AccountForm,
+        rules: _vm.rules,
+        "label-position": "left",
+        "label-width": "0px"
+      }
+    },
+    [
+      _c("h3", { staticClass: "title" }, [_vm._v("管理员登录")]),
+      _vm._v(" "),
+      _c(
+        "el-form-item",
+        { attrs: { prop: "account_number" } },
+        [
+          _c("el-input", {
+            attrs: {
+              type: "text",
+              "auto-complete": "off",
+              placeholder: "账号"
+            },
+            model: {
+              value: _vm.AccountForm.account_number,
+              callback: function($$v) {
+                _vm.$set(_vm.AccountForm, "account_number", $$v)
+              },
+              expression: "AccountForm.account_number"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-form-item",
+        { attrs: { prop: "password" } },
+        [
+          _c("el-input", {
+            attrs: {
+              type: "password",
+              "auto-complete": "off",
+              placeholder: "密码"
+            },
+            model: {
+              value: _vm.AccountForm.password,
+              callback: function($$v) {
+                _vm.$set(_vm.AccountForm, "password", $$v)
+              },
+              expression: "AccountForm.password"
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-checkbox",
+        {
+          staticClass: "remember",
+          attrs: { checked: "" },
+          model: {
+            value: _vm.checked,
+            callback: function($$v) {
+              _vm.checked = $$v
+            },
+            expression: "checked"
+          }
+        },
+        [_vm._v("记住密码")]
+      ),
+      _vm._v(" "),
+      _c(
+        "el-form-item",
+        { staticStyle: { width: "100%" } },
+        [
+          _c(
+            "el-button",
+            {
+              staticStyle: { width: "100%" },
+              attrs: { type: "primary", loading: _vm.loading },
+              nativeOn: {
+                click: function($event) {
+                  $event.preventDefault()
+                  _vm.handleLogin("AccountForm")
+                }
+              }
+            },
+            [_vm._v("登录")]
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-loader/node_modules/vue-hot-reload-api")      .rerender("data-v-5353f027", module.exports)
+  }
+}
 
 /***/ })
 /******/ ]);

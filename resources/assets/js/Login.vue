@@ -1,35 +1,34 @@
 <template>
-    <el-form ref="AccountForm" :model="account" :rules="rules" label-position="left" label-width="0px"
+    <el-form ref="AccountForm" :model="AccountForm" :rules="rules" label-position="left" label-width="0px"
     class="demo-ruleForm login-container">
         <h3 class="title">管理员登录</h3>
-        <el-form-item prop="username">
-            <el-input type="text" v-model="account.username" auto-complete="off" placeholder="账号"></el-input>
+        <el-form-item prop="account_number">
+            <el-input type="text" v-model="AccountForm.account_number" auto-complete="off" placeholder="账号"></el-input>
         </el-form-item>
-        <el-form-item prop="pwd">
-            <el-input type="password" v-model="account.pwd" auto-complete="off" placeholder="密码"></el-input>
+        <el-form-item prop="password">
+            <el-input type="password" v-model="AccountForm.password" auto-complete="off" placeholder="密码"></el-input>
         </el-form-item>
         <el-checkbox v-model="checked" checked class="remember">记住密码</el-checkbox>
         <el-form-item style="width: 100%;">
-            <el-button type="primary" style="width: 100%;" @click.native.prevent="handleLogin" :loading="loading">登录</el-button>
+            <el-button type="primary" style="width: 100%;" @click.native.prevent="handleLogin('AccountForm')" :loading="loading">登录</el-button>
         </el-form-item>
     </el-form>
 </template>
 
 <script>
     export default {
-        name: "login",
         data(){
             return{
                 loading:false,
-                account:{
-                  username:'admin',
-                  pwd:'123456'
+                AccountForm:{
+                    account_number:'admin',
+                    password:'123456'
                 },
                 rules:{
-                    username:[
+                    account_number:[
                         {required:true,message:'请输入账号',trigger:'blur'}
                     ],
-                    pwd:[
+                    password:[
                         {required:true,message:'请输入密码',trigger:'blur'}
                     ]
                 },
@@ -37,16 +36,17 @@
             };
         },
         methods:{
-            handleLogin(){
+            handleLogin(FormName){
                 let that = this;
-                this.$refs.AccountForm.validate((valid)=>{
+                that.$refs[FormName].validate((valid)=>{
                     if(valid){
-                        this.loading = true;
-                        let loginParams = {username:this.account.username,pwd:this.account.pwd};
-                        axios.post('/admin/login').then(function (response) {
+                        that.loading = true;
+                        // let loginParams = {account_number:that.account.username,password:that.account.password};
+                        axios.post('/admin/login',that.AccountForm).then(function (response) {
                             that.loading = false;
                             if(response && response.data){
                                 // localStorage.setItem('access-user',JSON.stringify(response.data));
+                                that.$message.success({showClose:true,message:response.data,duration:2000});
                                 that.$router.push({path:'/home'});
                             }else{
                                 that.$message.error({showClose:true,message:'登录失败',duration:2000});
@@ -58,6 +58,8 @@
                             that.loading = false;
                             that.$message.error({showClose:true,message:'请求出现异常',duration:2000});
                         });
+                    }else{
+                        that.$message.error({showClose:true,message:'请确保数据填写完整再提交!',duration:2000});
                     }
                 });
             }
