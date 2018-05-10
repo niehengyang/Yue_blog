@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\User;
+use App\Model\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -11,7 +11,7 @@ class UserController extends Controller
 {
     public function getuserinfo(Request $request)
     {
-        $user = $request->user();
+        $user = Auth::guard('admin')->user();
         if (is_null($user)) {
             return response('获取信息失败', 500);
         } else {
@@ -22,7 +22,7 @@ class UserController extends Controller
     public function updateuserinfo(Request $request)
     {
         $userId = $request->get('id');
-        $user = User::find($userId);
+        $user = Admin::find($userId);
         if (is_null($user)) {
             throw new Exception('用户不存在');
         }
@@ -44,7 +44,7 @@ class UserController extends Controller
             if (false === $adminId) {
                 return response('参数错误', 500);
             }
-            $admin = User::find($adminId);
+            $admin = Admin::find($adminId);
             if (is_null($admin)) {
                 return response('用户不存在', 404);
             }

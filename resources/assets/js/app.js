@@ -16,7 +16,6 @@ import 'font-awesome/css/font-awesome.min.css'//
 import 'element-ui/lib/theme-chalk/index.css'
 import VueEditor from 'vue2-editor'
 
-import Login from './login.vue'//登录
 import App from './App.vue'//主题框架
 
 
@@ -84,9 +83,7 @@ const router = new VueRouter({
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-new Vue(Vue.util.extend({router},Login)).$mount('#login')
 new Vue(Vue.util.extend({router},App)).$mount('#app')
-
 
 
 // Vue.component('example', require('./components/Example.vue'));

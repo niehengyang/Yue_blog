@@ -11,7 +11,7 @@
         <el-col :span="24" v-loading="loading" class="warp-main" style="padding-top: 20px;">
             <el-form ref="userform" :model="userform" :rules="rules" label-width="80px">
                 <el-form-item label="账号">
-                    <el-input size="small" v-model="userform.username" disabled></el-input>
+                    <el-input size="small" v-model="userform.account_number" disabled></el-input>
                 </el-form-item>
                 <el-form-item prop="nickname" label="昵称">
                     <el-input maxlength="50" size="small" v-model="userform.nickname"></el-input>
@@ -36,7 +36,7 @@
             return{
                 loading:false,
                 userform:{
-                    username:'',
+                    account_number:'',
                     nickname:'',
                     name:'',
                     email:''

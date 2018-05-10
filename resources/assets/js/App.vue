@@ -146,7 +146,7 @@
                     axios.post('/admin/logout')
                     .then(function (response) {
                         that.loading = false;
-                        window.location.assign('/login')
+                        window.location.assign('/admin/login')
                         that.$message({
                             type:'success',
                             message:response.data,

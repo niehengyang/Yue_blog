@@ -14,7 +14,7 @@
             </el-header>
             <el-form ref="resetPwdForm" :model="resetPwdForm" :element-loading-text="loadingText" :rules="rules" label-width="120px">
                 <el-form-item label="账户名:">
-                    <span>{{userInfo.username}}</span>
+                    <span>{{userInfo.account_number}}</span>
                 </el-form-item>
                 <el-form-item prop="oldpwd" label="原密码:">
                     <el-input class="input" maxlength="120" size="small" v-model="resetPwdForm.oldpwd" placeholder="请输入当前密码"></el-input>

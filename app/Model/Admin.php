@@ -2,11 +2,10 @@
 
 namespace App\Model;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class Admin extends Model
+class Admin extends Authenticatable
 {
     use Notifiable;
 
@@ -16,10 +15,10 @@ class Admin extends Model
     ];
 
     //表名
-//    protected $table = 'admins';
+    protected $table = 'admins';
 
     //指定键名
-//    protected $primaryKey = 'adminid';
+    protected $primaryKey = 'adminid';
 
 
 

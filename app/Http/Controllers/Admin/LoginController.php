@@ -2,10 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Exceptions\AuthenticatesLogout;
 use App\Model\Admin;
-use App\Providers\RouteServiceProvider;
-use App\User;
-use Dotenv\Validator;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -16,56 +15,95 @@ use Mockery\Exception;
 class LoginController extends Controller
 {
 
-    use AuthenticatesUsers;
+    use AuthenticatesUsers,AuthenticatesLogout{
+        AuthenticatesLogout::logout insteadof  AuthenticatesUsers;
+    }
 
-    protected $redirectTo = 'admin/home';
+    protected $redirectTo = '/admin/home';
     protected $guard = 'admin';
+    protected $username;
 //    protected $loginView = 'admin.login';
 //    protected $registerView = 'admin.register';
 
     public function __construct()
     {
-        $this->middleware('guest:admin',['except' => 'logout']);
-//        $this->username = config('admin.global.username');
+        $this->middleware('guest.admin:admin',['except' => 'logout']);
+        $this->username = config('admin.global.username');
     }
 
+    //show admin login model
     public function showLoginForm()
     {
         return view('admin.login');
     }
 
+    //use admin guard
     protected function guard()
     {
         return auth()->guard('admin');
     }
 
+    public function username()
+    {
+        return 'account_number';
+    }
+
     /**
         登录
      **/
+
     public function postLogin(Request $request){
-        try{
-            $adminLogin = $request->get('account_number');
-            $adminPassword = $request->get('password');
-            if(Auth::attempt(array('account_number' => $adminLogin,'password' => $adminPassword))){
-                $admin =Admin::where('account_number',$adminLogin)->first();
-                $admin->admin_lastloginip = $request->getClientIp();
-                $admin->admin_lastlogintime =date("Y-m-d H:i:s");
-                $admin->save();
-                return Redirect::to('admin/home')->with('success','登陆成功！');
-//                return response()->json([
-//                    'url' => '/home/'
-//                ]);
-
-            }else{
-                return response('用户名或密码错误！',400);
-                return view('admin.login');
+        if($request->isMethod('post')){
+            $validator = $this->validateLogin($request->input());
+            if ($validator->fails()){
+                return back()->withErrors($validator)->withInput();
             }
-            return view('admin.login');
-        }catch (Exception $e){
-            return response($e->getMessage(),500);
+            if (Auth::guard('admin')->attempt(['account_number' =>$request->account_number,'password' =>$request->password])){
+                return Redirect::to('admin/home')->with('success','登录成功!');
+            }else{
+                return back()->with('error','账号或密码错误')->withInput();
+            }
         }
-
+        return view('admin.login');
     }
+    //登录页面验证
+    protected function validateLogin(array $data)
+    {
+        return Validator::make($data ,[
+            'account_number' => 'required|alpha_num',
+            'password' => 'required'
+        ],[
+            'required' => ':attribute 为必填项',
+            'min' => ':attribute 长度不符合要求'
+        ],[
+            'account_number' => '账号',
+            'password' => '密码'
+        ]);
+    }
+//    public function postLogin(Request $request){
+//        try{
+//            $adminLogin = $request->get('account_number');
+//            $adminPassword = $request->get('password');
+//            if(Auth::guard('admin')->attempt(array('account_number' => $adminLogin,'password' => $adminPassword))){
+//                $admin =Admin::where('account_number',$adminLogin)->first();
+//                $admin->admin_lastloginip = $request->getClientIp();
+//                $admin->admin_lastlogintime =date("Y-m-d H:i:s");
+//                $admin->save();
+//                return Redirect::to('admin/home')->with('success','登陆成功！');
+////                return response()->json([
+////                    'url' => '/home/'
+////                ]);
+//
+//            }else{
+//                return response('用户名或密码错误！',400);
+//                return view('admin.login');
+//            }
+//            return view('admin.login');
+//        }catch (Exception $e){
+//            return response($e->getMessage(),500);
+//        }
+//
+//    }
 
     /***
         退出登录
