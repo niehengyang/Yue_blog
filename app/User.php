@@ -8,7 +8,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable
 {
     use Notifiable;
-
+    public function comments(){
+        return $this->hasMany('App\Model\comments','user_id','id');
+    }
     /**
      * The attributes that are mass assignable.
      *

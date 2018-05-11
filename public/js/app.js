@@ -92989,12 +92989,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             loading: false,
             defaultActiveIndex: '0',
             userform: {},
-            isCollapse: true,
-            nickname: 'admin'
+            isCollapse: true
         };
     },
     created: function created() {
-        console.log('页面建立的时候执行此函数');
         this.LoadUserInfo();
     },
 
@@ -93006,7 +93004,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 that.loading = false;
                 if (response && response.data) {
                     that.userform = response.data;
-                    console.log('获取到的' + response.data);
                 } else {
                     that.$message.error({ showClose: true, message: '信息获取失败！', duration: 2000 });
                 }
@@ -93104,7 +93101,7 @@ var render = function() {
             _c(
               "span",
               { staticStyle: { "font-size": "18px", color: "#fff" } },
-              [_vm._v("博客后台管理系统")]
+              [_vm._v("Yue_blog后台管理系统")]
             )
           ]),
           _vm._v(" "),
@@ -93121,7 +93118,7 @@ var render = function() {
                     { staticClass: "el-dropdown-link userinfo-inner" },
                     [
                       _c("i", { staticClass: "fa fa-user" }),
-                      _vm._v("  " + _vm._s(_vm.nickname) + "  "),
+                      _vm._v("  " + _vm._s(this.userform.nickname) + "  "),
                       _c("i", { staticClass: "fa fa-caret-down" })
                     ]
                   ),
@@ -93266,7 +93263,7 @@ var render = function() {
                     attrs: { index: "1" },
                     on: {
                       click: function($event) {
-                        _vm.jumpTo("/home")
+                        _vm.jumpTo("admin/home")
                       }
                     }
                   },
@@ -93709,6 +93706,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "userlist",
@@ -93950,15 +93948,15 @@ var render = function() {
               _c("el-table-column", { attrs: { type: "index", width: "60" } }),
               _vm._v(" "),
               _c("el-table-column", {
+                attrs: { prop: "username", width: "200", label: "账号" }
+              }),
+              _vm._v(" "),
+              _c("el-table-column", {
                 attrs: { prop: "nickname", width: "200", label: "昵称" }
               }),
               _vm._v(" "),
               _c("el-table-column", {
-                attrs: { prop: "email", width: "200", label: "登录邮箱" }
-              }),
-              _vm._v(" "),
-              _c("el-table-column", {
-                attrs: { prop: "password", width: "200", label: "密码" }
+                attrs: { prop: "email", width: "250", label: "登录邮箱" }
               }),
               _vm._v(" "),
               _c("el-table-column", {
@@ -93978,7 +93976,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("el-table-column", {
-                attrs: { fixed: "right", width: "100", label: "操作" },
+                attrs: { fixed: "right", width: "200", label: "操作" },
                 scopedSlots: _vm._u([
                   {
                     key: "default",

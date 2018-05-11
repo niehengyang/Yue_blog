@@ -14,20 +14,20 @@
 Route::get('/', function () {
     return view('welcome');
 });
+Auth::routes();
 
 
 
 
-
-
-//登录
-Route::group(['middleware' => 'auth'],function (){
+//前台登录
+Route::group(['middleware' => 'web'],function (){
     //前台使用默认登录框架
-    Auth::routes();
-    Route::get('/home', 'HomeController@index')->name('home');
-
-//    Route::get('admin/home','Admin\IndexController@index');//首页展示
+    Route::get('/home', 'HomeController@index')->name('home');//前台首页
+//    Route::get('/article','')
 });
+
+
+
 
 //后台管理员登录
 Route::group(['prefix' => 'admin','middleware' => 'web' ],function (){
@@ -48,7 +48,7 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'
 
 //管理员信息修改
 Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'],function (){
-    Route::get('getUserInfo','UserController@getuserinfo');//获取管理员信息
+    Route::get('getUserInfo','AdminController@getuserinfo');//获取管理员信息
     Route::post('updateUserInfo','UserController@updateuserinfo');//修改管理员信息
     Route::post('resetpwd','UserController@resetpwd');//修改密码
 });

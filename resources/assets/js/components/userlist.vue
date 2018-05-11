@@ -24,12 +24,13 @@
             <!--列表-->
             <el-table :data="users" highlight-current-row v-loading="loading" style="width: 100%;">
                 <el-table-column type="index" width="60"></el-table-column>
+                <el-table-column prop="username" width="200" label="账号"></el-table-column>
                 <el-table-column prop="nickname" width="200" label="昵称"></el-table-column>
-                <el-table-column prop="email" width="200" label="登录邮箱"></el-table-column>
-                <el-table-column prop="password" width="200" label="密码"></el-table-column>
+                <el-table-column prop="email" width="250" label="登录邮箱"></el-table-column>
+                <!--<el-table-column prop="password" width="200" label="密码"></el-table-column>-->
                 <el-table-column prop="admin_lastlogintime" width="200" label="最后登录时间"></el-table-column>
                 <el-table-column prop="admin_lastloginip" width="200" label="最后登录ip"></el-table-column>
-                <el-table-column fixed="right" width="100" label="操作">
+                <el-table-column fixed="right" width="200" label="操作">
                     <template slot-scope="scope">
                         <el-button @click="handleEdit(scope.row)" type="text" size="small">编辑</el-button>
                         <el-button @click="handleDel(scope.row)" type="text" size="small">删除</el-button>

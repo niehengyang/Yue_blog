@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Model\Account;
+use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
@@ -13,9 +13,9 @@ class AccountController extends Controller
         $perPage = $request->get('limit');
         $page = $request->get('page');
         if($page > 1 && $request->get('nickname') != null){
-            $users = Account::where('nickname','like','%'.$request->get('nickname').'%')->paginate($perPage,'','',$page);
+            $users = User::where('nickname','like','%'.$request->get('nickname').'%')->paginate($perPage,'','',$page);
         }else {
-            $users = Account::where('nickname', 'like', '%' . $request->get('nickname') . '%')->paginate($perPage);
+            $users = User::where('nickname', 'like', '%' . $request->get('nickname') . '%')->paginate($perPage);
         }
         if (is_null($users)){
             return response('数据不存在',500);
@@ -28,7 +28,7 @@ class AccountController extends Controller
         if(is_null($userID)){
             throw new Exception('删除失败！');
         }
-        if($num = Account::destroy($userID)){
+        if($num = User::destroy($userID)){
             return response('删除成功！',200);
         }else{
             return response('删除失败！',500);

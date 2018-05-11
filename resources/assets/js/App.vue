@@ -3,12 +3,12 @@
         <!--头部-->
         <el-col :span="24" class="topbar-wrap" :loading="loading" element-loading-text="拼命加载中">
             <div class="topbar-title">
-                <span style="font-size: 18px;color: #fff;">博客后台管理系统</span>
+                <span style="font-size: 18px;color: #fff;">Yue_blog后台管理系统</span>
             </div>
             <div class="topbar-btn">
                 <el-dropdown trigger="click">
                     <span class="el-dropdown-link userinfo-inner">
-                        <i class="fa fa-user"></i>&nbsp;&nbsp;{{nickname}}&nbsp;&nbsp;<i class="fa fa-caret-down"></i>
+                        <i class="fa fa-user"></i>&nbsp;&nbsp;{{this.userform.nickname}}&nbsp;&nbsp;<i class="fa fa-caret-down"></i>
                     </span>
                     <el-dropdown-menu slot="dropdown">
                         <el-dropdown-item >
@@ -37,7 +37,7 @@
             </div>
                 <!--导航菜单-->
             <el-menu default-active="defaultActiveIndex" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse" background-color="#333744" text-color="#ffffff">
-                <el-menu-item index="1" @click="jumpTo('/home')">
+                <el-menu-item index="1" @click="jumpTo('admin/home')">
                     <i  class="fa fa-home"></i>
                     <span slot="title">&nbsp;&nbsp;首页</span>
                 </el-menu-item>
@@ -89,11 +89,9 @@
             defaultActiveIndex:'0',
             userform:{},
             isCollapse: true,
-            nickname:'admin'
         }
     },
         created(){
-            console.log('页面建立的时候执行此函数');
             this.LoadUserInfo();
         },
         methods: {
@@ -105,7 +103,6 @@
                         that.loading = false;
                         if (response && response.data){
                             that.userform = response.data;
-                            console.log('获取到的'+response.data);
                         }else{
                             that.$message.error({showClose:true,message:'信息获取失败！',duration:2000});
                         }

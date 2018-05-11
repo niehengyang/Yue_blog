@@ -2,6 +2,7 @@
 
 namespace App\Model;
 
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 
 class comments extends Model
@@ -13,8 +14,8 @@ class comments extends Model
         return $this->belongsTo('App\Model\Article','article_id','id');
     }
 
-    public function account(){
-        return $this->belongsTo('App\Model\Account','user_id','id');
+    public function user(){
+        return $this->belongsTo('App\User','user_id','id');
     }
 
 
@@ -32,7 +33,7 @@ class comments extends Model
     protected function getNicknameAttribute(){
         $accountId = $this->attributes['user_id'];
         if ($accountId){
-            $account = Account::find($accountId);
+            $account = User::find($accountId);
             return $account->nickname;
         }else{
             return;
@@ -41,7 +42,7 @@ class comments extends Model
     protected function getEmailAttribute(){
         $accountId = $this->attributes['user_id'];
         if ($accountId){
-            $account = Account::find($accountId);
+            $account = User::find($accountId);
             return $account->email;
         }else{
             return;
