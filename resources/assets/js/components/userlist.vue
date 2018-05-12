@@ -13,7 +13,7 @@
             <el-col :span="24" class="toolbar" style="padding-bottom: 0px; padding-top: 10px">
                 <el-form :inline="true" :model="filters">
                 <el-form-item>
-                    <el-input v-model="filters.nickname" placeholder="用户名/姓名/昵称" size="small" style="min-width: 240px;" @keyup.enter.native="handleSearch" @change="flashpage"></el-input>
+                    <el-input v-model="filters.nickname" placeholder="昵称查找" size="small" style="min-width: 240px;" @keyup.enter.native="handleSearch" @change="flashpage"></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" size="small" @click="handleSearch">查询</el-button>
@@ -24,8 +24,8 @@
             <!--列表-->
             <el-table :data="users" highlight-current-row v-loading="loading" style="width: 100%;">
                 <el-table-column type="index" width="60"></el-table-column>
-                <el-table-column prop="username" width="200" label="账号"></el-table-column>
                 <el-table-column prop="nickname" width="200" label="昵称"></el-table-column>
+                <el-table-column prop="username" width="200" label="账号"></el-table-column>
                 <el-table-column prop="email" width="250" label="登录邮箱"></el-table-column>
                 <!--<el-table-column prop="password" width="200" label="密码"></el-table-column>-->
                 <el-table-column prop="admin_lastlogintime" width="200" label="最后登录时间"></el-table-column>
@@ -88,7 +88,7 @@
                         console.log(response);
                         that.total = response.data['total'];
                         that.users = response.data['data'];
-                        // that.page = response.data['current_page'];
+                        // that.current_page = response.data['current_page'];
                     }
                 },function (err) {
                       that.loading = false;
@@ -108,14 +108,15 @@
             },
             //删除账户
             handleDel(row){
-                var that = this;
+                let that = this;
+                let userId = row.id;
                 that.$confirm('是否删除该账户？','提示',{
                     confirmButtonText:'确定',
                     cancelButtonText:'取消',
                     type:'warning'
-                }).then(()=> {
-                    that.loading =true;
-                    axios.post('/admin/deleteUser',row)
+                }).then(() => {
+                    that.loading = true;
+                    axios.post('/admin/deleteUser', {id:userId})
                     .then(function(response){
                         that.loading = false;
                         that.$message({
@@ -123,13 +124,12 @@
                             message:response.data,
                             center:true
                         })
-                        this.flashpage();
+                        that.flashpage();
                     },function (err) {
                         that.loading = false;
                         that.$message.error({showClose:true,message:err.response.data,duration:2000});
-                        this.flashpage();
-                    })
-                    .catch(function (error) {
+                        that.flashpage();
+                    }).catch(function (error) {
                         that.loading = false;
                         that.$message.error({showClose:true,message:'提交出现错误！',duration:2000});
                     })
@@ -147,6 +147,8 @@
             },
             //刷新页面
             flashpage(){
+                this.total = 0;
+                this.currentPage = 1;
                 this.handleSearch()
             }
         },

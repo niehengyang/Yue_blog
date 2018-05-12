@@ -18,7 +18,7 @@
                 <el-table-column prop="name" label="分类名称" width="300"></el-table-column>
                 <el-table-column prop="describe" label="分类描述" width="300"></el-table-column>
                 <el-table-column prop="created_at" label="创建时间" width="300"></el-table-column>
-                <el-table-column label="操作" width="300" style="float: right;">
+                <el-table-column label="操作" width="200" fixed="right">
                     <template slot-scope="scope">
                         <el-button size="mini" @click="editclassification(scope.row)" class="el-icon-edit" title="编辑"></el-button>
                         <el-button size="mini" type="danger" @click="delclassification(scope.row)" class="el-icon-delete" title="删除"></el-button>

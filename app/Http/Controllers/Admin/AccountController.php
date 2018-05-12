@@ -6,10 +6,11 @@ use App\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Mockery\Exception;
 
 class AccountController extends Controller
 {
-    public function getlist(Request $request){
+    public function getList(Request $request){
         $perPage = $request->get('limit');
         $page = $request->get('page');
         if($page > 1 && $request->get('nickname') != null){
@@ -23,15 +24,20 @@ class AccountController extends Controller
             return response($users,200);
         }
     }
-    public function deleteaccount(Request $request){
+    public function deleteAccount(Request $request){
+        try{
         $userID = $request->get('id');
         if(is_null($userID)){
-            throw new Exception('删除失败！');
+            throw new Exception('信息获取失败请重新选择删除！');
         }
-        if($num = User::destroy($userID)){
+        if(User::destroy($userID)){
             return response('删除成功！',200);
         }else{
-            return response('删除失败！',500);
+            throw new Exception('删除失败！');
+        }
+        }catch (Exception $e){
+            return response($e->getMessage(),500);
         }
     }
+
 }

@@ -33,7 +33,7 @@
                     </template>
                 </el-table-column>
                 <el-table-column prop="created_at" label="评论时间" width="200"></el-table-column>
-                <el-table-column label="操作" width="150" style="float: right;">
+                <el-table-column label="操作" width="150" fixed="right">
                     <template slot-scope="scope">
                         <el-button size="mini" @click="disableComments(scope.row)" class="fa fa-eye-slash" title="禁用"></el-button>
                         <el-button size="mini" type="danger" @click="delComments(scope.row)" class="el-icon-delete" title="删除"></el-button>

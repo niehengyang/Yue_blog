@@ -14,22 +14,18 @@
                 <el-form-item label="文章标题：" prop="title">
                     <el-input size="small" v-model="articleForm.title" auto-complate="off" placeholder="为你的文章起个标题吧！"></el-input>
                 </el-form-item>
-                <el-form-item label="照片墙" prop="img">
+                <el-form-item label="顶部图片" prop="img">
                     <el-upload
+                            class="avatar-uploader"
                             action="/admin/uploadfile"
-                            list-type="picture-card"
-                            :file-list = "files"
-                            :on-preview="handlePictureCardPreview"
-                            :on-remove="handleRemove"
+                            :show-file-list = "false"
                             :on-success="handleSuccess"
                             :before-upload="handleBefore"
                             :on-error="uploadError">
-                        <i class="el-icon-plus"></i>
+                        <img v-if="imageUrl" :src="imageUrl" class="avatar">
+                        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
-                    <el-dialog :visible.sync="dialogVisible">
-                        <img width="100%" :src="dialogImageUrl" alt="">
-                    </el-dialog>
-                    <div class="tipss">图片尺寸：500*500</div>
+                    <el-button class="delete_picture" @click="delete_picture" title="删除图片" style="margin-top: 30px;">删除图片</el-button>
                 </el-form-item>
                 <el-form-item label="文章内容：" prop="content">
                     <vue-editor v-model="articleForm.content" placeholder="在此输入文章内容" :editorToolbar="customToolbar"></vue-editor>
@@ -133,9 +129,9 @@
                     [{'direction':'rtl'}],
                     ['clean']
                 ],
-                files: [],
-                dialogImageUrl:'',
-                dialogVisible: false,
+                imageUrl:'',
+                showImage:'',
+                oldImageUrl:'',
                 loading:false,
                 classifications:[],
                 show_classification:'',
@@ -179,6 +175,7 @@
         created:function () {//初始化
             if(this.$route.params.row != null){
                 this.articleForm = this.$route.params.row;
+                this.imageUrl = this.$route.params.row.img;
             }
             this.LoadUserInfo();
             this.LoadClassification();
@@ -230,6 +227,7 @@
                     that.$refs[FormName].validate((valid)=>{
                         if(valid){
                             that.loading = true;
+                            that.articleForm.img = that.showImage;
                             that.articleForm.author = that.userform.nickname;
                             axios.post('/admin/initArticle', that.articleForm)
                                 .then(function (response) {
@@ -256,22 +254,74 @@
                     console.log('已取消')
             })
             },
-            handlePictureCardPreview(file){//创建预览
-                this.dialogImageUrl = file.url;
-                this.dialogVisible = true;
-            },
-            handleRemove(file,fileList){
-                console.log(file,fileList);//删除
-            },
-            handleSuccess(response,file,fileList){//上传成功
-                var self = this;
-                self.dialogImageUrl = response.url;
-                self.articleForm.img = response.url;
-                // self.dialogVisible = true;
-                console.log('上传成功',response);
+            handleSuccess(response,res,file){//上传成功
+                let that = this;
+                that.imageUrl = response.url;
+                // that.replace_picture();
+                console.log('上传成功返回图片信息',response);
             },
             handleBefore(file){//上传限制条件
-                return this.files.length === 1? false : true//只让同时上传一张
+                let that = this;
+                that.oldImageUrl = that.imageUrl;
+                const isJPG = file.type === 'image/jpeg';
+                const isLt20M = file.size /1024/1024 < 20;
+                if (!isJPG){
+                    that.$message.error({showClose:true,message:'上传图片只能是JPG格式!'});
+                }
+                if (!isLt20M){
+                    that.$message.error({showClose:true,message:'删除图片大小不能超过20MB！'});
+                }
+                return isJPG && isLt20M;
+
+            },
+            replace_picture(){
+                let that = this;
+                if (that.oldImageUrl){
+                    let picture_name = that.oldImageUrl.substring(9);
+                    that.loading = true;
+                    axios.post('/admin/deletepicture',{name:picture_name})
+                        .then(function (response) {
+                            that.loading = false;
+                            if (response && response.data){
+                                that.$message.success({showClose:true,message:'图片已替换!',duration:2000});
+                            }
+                            that.imageUrl = null;
+                        },function (err) {
+                            that.loading = false;
+                            that.$message.error({showCLose:true,message:'替换出错!',duration:2000});
+                        }).catch(function (error) {
+                        that.loading = false;
+                        that.$message.error({showClose:true,message:'请求出现异常!',duration:2000});
+                    })
+                }
+            },
+            delete_picture(){
+                let that = this;
+                let picture_name = that.imageUrl.substring(9);
+                that.$confirm('是否删除顶部图片？','提示',{
+                    confirmButtonText:'确定',
+                    cancelButtonText:'取消',
+                    type:'warning'
+                }).then(()=>{
+                    that.loading = true;
+                    axios.post('/admin/deletepicture',{name:picture_name})
+                        .then(function (response) {
+                            that.loading = false;
+                            if (response && response.data){
+                                that.$message.success({showClose:true,message:response.data,duration:2000});
+                            }
+                            that.imageUrl = null;
+                        },function (err) {
+                            that.loading = false;
+                            that.$message.error({showCLose:true,message:err.response.data,duration:2000});
+                        }).catch(function (error) {
+                            that.loading = false;
+                            that.$message.error({showClose:true,message:'请求出现异常',duration:2000});
+                    })
+                }).catch(()=> {
+                    console.log('已取消');
+            })
+                console.log('删除图片');
             },
             uploadError(response,file,fileList){//上传失败
                 console.log('上传失败，请重试!')
@@ -348,5 +398,35 @@
         display: flex;
         justify-content: center;
         color: #adadad;
+    }
+
+    /*图片框样式*/
+    .avatar-uploader .el-upload{
+        border:1px dashed #d9d9d9;
+        border-radius: 6px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .avatar-uploader .el-upload:hover{
+        border-color: #409EFF;
+    }
+
+    .avatar-uploader-icon{
+        font-size: 28px;
+        color: #8c939d;
+        width: 178px;
+        height: 178px;
+        line-height: 178px;
+        text-align: center;
+        border: 1px dashed #d4d4d4;
+        border-radius: 6px;
+    }
+    
+    .avatar{
+        width: 500px;
+        height: 330px;
+        display: block;
     }
 </style>

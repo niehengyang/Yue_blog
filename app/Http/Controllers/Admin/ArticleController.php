@@ -166,4 +166,19 @@ class ArticleController extends Controller
             return response($e->getMessage(),500);
         }
     }
+
+    public function deletePicture(Request $request){
+        try{
+            if (is_null(  $request->get('name'))){
+                throw new Exception('请重新选择删除！');
+            }
+            if(Storage::disk('public')->delete($request->get('name'))){
+                return response('删除成功！',200);
+            }else{
+                throw new Exception('删除失败！');
+            }
+        }catch (Exception $e){
+            return response($e->getMessage(),500);
+        }
+    }
 }

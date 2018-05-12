@@ -42,8 +42,8 @@ Route::group(['prefix' => 'admin','middleware' => 'web' ],function (){
 
 //用户账户管理
 Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'],function (){
-    Route::get('getUserList','AccountController@getlist');//获取账户列表
-    Route::post('deleteUser','AccountController@deleteaccount');//删除账户
+    Route::get('getUserList','AccountController@getList');//获取账户列表
+    Route::post('deleteUser','AccountController@deleteAccount');//删除账户
 });
 
 //管理员信息修改
@@ -59,6 +59,7 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'
    Route::post('batchDelArticle','ArticleController@delarticle');//批量删除
    Route::post('initArticle','ArticleController@store');//初始化文章
    Route::post('uploadfile','ArticleController@upload');//上传图片
+   Route::post('deletepicture','ArticleController@deletePicture');//删除图片
    Route::post('publishedarticle','ArticleController@published');//发表
    Route::post('commentslist','ArticleController@getcommentslist');//获取评论列表
 });

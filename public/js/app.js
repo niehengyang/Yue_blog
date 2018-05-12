@@ -92989,7 +92989,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             loading: false,
             defaultActiveIndex: '0',
             userform: {},
-            isCollapse: true
+            isCollapse: false
         };
     },
     created: function created() {
@@ -93744,7 +93744,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     console.log(response);
                     that.total = response.data['total'];
                     that.users = response.data['data'];
-                    // that.page = response.data['current_page'];
+                    // that.current_page = response.data['current_page'];
                 }
             }, function (err) {
                 that.loading = false;
@@ -93765,24 +93765,25 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         //删除账户
         handleDel: function handleDel(row) {
             var that = this;
+            var userId = row.id;
             that.$confirm('是否删除该账户？', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(function () {
                 that.loading = true;
-                axios.post('/admin/deleteUser', row).then(function (response) {
+                axios.post('/admin/deleteUser', { id: userId }).then(function (response) {
                     that.loading = false;
                     that.$message({
                         type: 'success',
                         message: response.data,
                         center: true
                     });
-                    this.flashpage();
+                    that.flashpage();
                 }, function (err) {
                     that.loading = false;
                     that.$message.error({ showClose: true, message: err.response.data, duration: 2000 });
-                    this.flashpage();
+                    that.flashpage();
                 }).catch(function (error) {
                     that.loading = false;
                     that.$message.error({ showClose: true, message: '提交出现错误！', duration: 2000 });
@@ -93802,6 +93803,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         //刷新页面
         flashpage: function flashpage() {
+            this.total = 0;
+            this.currentPage = 1;
             this.handleSearch();
         }
     },
@@ -93875,10 +93878,7 @@ var render = function() {
                     [
                       _c("el-input", {
                         staticStyle: { "min-width": "240px" },
-                        attrs: {
-                          placeholder: "用户名/姓名/昵称",
-                          size: "small"
-                        },
+                        attrs: { placeholder: "昵称查找", size: "small" },
                         on: { change: _vm.flashpage },
                         nativeOn: {
                           keyup: function($event) {
@@ -93948,11 +93948,11 @@ var render = function() {
               _c("el-table-column", { attrs: { type: "index", width: "60" } }),
               _vm._v(" "),
               _c("el-table-column", {
-                attrs: { prop: "username", width: "200", label: "账号" }
+                attrs: { prop: "nickname", width: "200", label: "昵称" }
               }),
               _vm._v(" "),
               _c("el-table-column", {
-                attrs: { prop: "nickname", width: "200", label: "昵称" }
+                attrs: { prop: "username", width: "200", label: "账号" }
               }),
               _vm._v(" "),
               _c("el-table-column", {
@@ -95759,7 +95759,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.previre_item[data-v-6be4fa1a]{\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -ms-flex-line-pack: center;\n        align-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.img-item[data-v-6be4fa1a]{\n    width: 100%;\n    height: 400px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.show_box[data-v-6be4fa1a]{\n    width: 80%;\n    display:-webkit-box;\n    display:-ms-flexbox;\n    display:flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-family: 宋体;\n    margin-top: 40px;\n    margin-bottom: 40px;\n}\n.header[data-v-6be4fa1a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -ms-flex-line-pack: center;\n        align-content: center;\n}\n.warp_main[data-v-6be4fa1a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    margin: 20px 0 0 20px;\n    -webkit-box-shadow: 10px 10px 10px 10px #5e5d5d;\n            box-shadow: 10px 10px 10px 10px #5e5d5d;\n}\n.articleinfo_cade[data-v-6be4fa1a]{\n    padding-top: 10px;\n    padding-bottom: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-size: 2px;\n}\n.err_show_box[data-v-6be4fa1a]{\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    color: #adadad;\n}\n", ""]);
+exports.push([module.i, "\n.previre_item[data-v-6be4fa1a]{\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -ms-flex-line-pack: center;\n        align-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.img-item[data-v-6be4fa1a]{\n    width: 100%;\n    height: 400px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.show_box[data-v-6be4fa1a]{\n    width: 80%;\n    display:-webkit-box;\n    display:-ms-flexbox;\n    display:flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-family: 宋体;\n    margin-top: 40px;\n    margin-bottom: 40px;\n}\n.header[data-v-6be4fa1a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -ms-flex-line-pack: center;\n        align-content: center;\n}\n.warp_main[data-v-6be4fa1a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    margin: 20px 0 0 20px;\n    -webkit-box-shadow: 10px 10px 10px 10px #5e5d5d;\n            box-shadow: 10px 10px 10px 10px #5e5d5d;\n}\n.articleinfo_cade[data-v-6be4fa1a]{\n    padding-top: 10px;\n    padding-bottom: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-size: 2px;\n}\n.err_show_box[data-v-6be4fa1a]{\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    color: #adadad;\n}\n\n/*图片框样式*/\n.avatar-uploader .el-upload[data-v-6be4fa1a]{\n    border:1px dashed #d9d9d9;\n    border-radius: 6px;\n    cursor: pointer;\n    position: relative;\n    overflow: hidden;\n}\n.avatar-uploader .el-upload[data-v-6be4fa1a]:hover{\n    border-color: #409EFF;\n}\n.avatar-uploader-icon[data-v-6be4fa1a]{\n    font-size: 28px;\n    color: #8c939d;\n    width: 178px;\n    height: 178px;\n    line-height: 178px;\n    text-align: center;\n    border: 1px dashed #d4d4d4;\n    border-radius: 6px;\n}\n.avatar[data-v-6be4fa1a]{\n    width: 500px;\n    height: 330px;\n    display: block;\n}\n", ""]);
 
 // exports
 
@@ -95883,19 +95883,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'createarticle',
     data: function data() {
         return {
             customToolbar: [[{ 'font': [] }], [{ 'header': [false, 1, 2, 3, 4, 5, 6] }], ['bold', 'italic', 'underline', 'strike'], [{ 'align': '' }, { 'align': 'center' }, { 'align': 'right' }, { 'align': 'justify' }], [{ 'list': 'ordered' }, { 'list': 'bullet' }], [{ 'script': 'sub' }, { 'script': 'super' }], [{ 'indent': '-1' }, { 'indent': '+1' }], [{ 'color': [] }, { 'background': [] }], ['code-block'], [{ 'direction': 'rtl' }], ['clean']],
-            files: [],
-            dialogImageUrl: '',
-            dialogVisible: false,
+            imageUrl: '',
+            showImage: '',
+            oldImageUrl: '',
             loading: false,
             classifications: [],
             show_classification: '',
@@ -95928,6 +95924,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         //初始化
         if (this.$route.params.row != null) {
             this.articleForm = this.$route.params.row;
+            this.imageUrl = this.$route.params.row.img;
         }
         this.LoadUserInfo();
         this.LoadClassification();
@@ -95977,6 +95974,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 that.$refs[FormName].validate(function (valid) {
                     if (valid) {
                         that.loading = true;
+                        that.articleForm.img = that.showImage;
                         that.articleForm.author = that.userform.nickname;
                         axios.post('/admin/initArticle', that.articleForm).then(function (response) {
                             that.loading = false;
@@ -96002,25 +96000,73 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 console.log('已取消');
             });
         },
-        handlePictureCardPreview: function handlePictureCardPreview(file) {
-            //创建预览
-            this.dialogImageUrl = file.url;
-            this.dialogVisible = true;
-        },
-        handleRemove: function handleRemove(file, fileList) {
-            console.log(file, fileList); //删除
-        },
-        handleSuccess: function handleSuccess(response, file, fileList) {
+        handleSuccess: function handleSuccess(response, res, file) {
             //上传成功
-            var self = this;
-            self.dialogImageUrl = response.url;
-            self.articleForm.img = response.url;
-            // self.dialogVisible = true;
-            console.log('上传成功', response);
+            var that = this;
+            that.imageUrl = response.url;
+            // that.replace_picture();
+            console.log('上传成功返回图片信息', response);
         },
         handleBefore: function handleBefore(file) {
             //上传限制条件
-            return this.files.length === 1 ? false : true; //只让同时上传一张
+            var that = this;
+            that.oldImageUrl = that.imageUrl;
+            var isJPG = file.type === 'image/jpeg';
+            var isLt20M = file.size / 1024 / 1024 < 20;
+            if (!isJPG) {
+                that.$message.error({ showClose: true, message: '上传图片只能是JPG格式!' });
+            }
+            if (!isLt20M) {
+                that.$message.error({ showClose: true, message: '删除图片大小不能超过20MB！' });
+            }
+            return isJPG && isLt20M;
+        },
+        replace_picture: function replace_picture() {
+            var that = this;
+            if (that.oldImageUrl) {
+                var picture_name = that.oldImageUrl.substring(9);
+                that.loading = true;
+                axios.post('/admin/deletepicture', { name: picture_name }).then(function (response) {
+                    that.loading = false;
+                    if (response && response.data) {
+                        that.$message.success({ showClose: true, message: '图片已替换!', duration: 2000 });
+                    }
+                    that.imageUrl = null;
+                }, function (err) {
+                    that.loading = false;
+                    that.$message.error({ showCLose: true, message: '替换出错!', duration: 2000 });
+                }).catch(function (error) {
+                    that.loading = false;
+                    that.$message.error({ showClose: true, message: '请求出现异常!', duration: 2000 });
+                });
+            }
+        },
+        delete_picture: function delete_picture() {
+            var that = this;
+            var picture_name = that.imageUrl.substring(9);
+            that.$confirm('是否删除顶部图片？', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(function () {
+                that.loading = true;
+                axios.post('/admin/deletepicture', { name: picture_name }).then(function (response) {
+                    that.loading = false;
+                    if (response && response.data) {
+                        that.$message.success({ showClose: true, message: response.data, duration: 2000 });
+                    }
+                    that.imageUrl = null;
+                }, function (err) {
+                    that.loading = false;
+                    that.$message.error({ showCLose: true, message: err.response.data, duration: 2000 });
+                }).catch(function (error) {
+                    that.loading = false;
+                    that.$message.error({ showClose: true, message: '请求出现异常', duration: 2000 });
+                });
+            }).catch(function () {
+                console.log('已取消');
+            });
+            console.log('删除图片');
         },
         uploadError: function uploadError(response, file, fileList) {
             //上传失败
@@ -96142,49 +96188,42 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "el-form-item",
-                { attrs: { label: "照片墙", prop: "img" } },
+                { attrs: { label: "顶部图片", prop: "img" } },
                 [
                   _c(
                     "el-upload",
                     {
+                      staticClass: "avatar-uploader",
                       attrs: {
                         action: "/admin/uploadfile",
-                        "list-type": "picture-card",
-                        "file-list": _vm.files,
-                        "on-preview": _vm.handlePictureCardPreview,
-                        "on-remove": _vm.handleRemove,
+                        "show-file-list": false,
                         "on-success": _vm.handleSuccess,
                         "before-upload": _vm.handleBefore,
                         "on-error": _vm.uploadError
                       }
                     },
-                    [_c("i", { staticClass: "el-icon-plus" })]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "el-dialog",
-                    {
-                      attrs: { visible: _vm.dialogVisible },
-                      on: {
-                        "update:visible": function($event) {
-                          _vm.dialogVisible = $event
-                        }
-                      }
-                    },
                     [
-                      _c("img", {
-                        attrs: {
-                          width: "100%",
-                          src: _vm.dialogImageUrl,
-                          alt: ""
-                        }
-                      })
+                      _vm.imageUrl
+                        ? _c("img", {
+                            staticClass: "avatar",
+                            attrs: { src: _vm.imageUrl }
+                          })
+                        : _c("i", {
+                            staticClass: "el-icon-plus avatar-uploader-icon"
+                          })
                     ]
                   ),
                   _vm._v(" "),
-                  _c("div", { staticClass: "tipss" }, [
-                    _vm._v("图片尺寸：500*500")
-                  ])
+                  _c(
+                    "el-button",
+                    {
+                      staticClass: "delete_picture",
+                      staticStyle: { "margin-top": "30px" },
+                      attrs: { title: "删除图片" },
+                      on: { click: _vm.delete_picture }
+                    },
+                    [_vm._v("删除图片")]
+                  )
                 ],
                 1
               ),
@@ -97453,8 +97492,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("el-table-column", {
-                staticStyle: { float: "right" },
-                attrs: { label: "操作", width: "150" },
+                attrs: { label: "操作", width: "150", fixed: "right" },
                 scopedSlots: _vm._u([
                   {
                     key: "default",
@@ -97951,8 +97989,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("el-table-column", {
-                staticStyle: { float: "right" },
-                attrs: { label: "操作", width: "300" },
+                attrs: { label: "操作", width: "200", fixed: "right" },
                 scopedSlots: _vm._u([
                   {
                     key: "default",

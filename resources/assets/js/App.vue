@@ -49,7 +49,7 @@
                 <i class="fa fa-comments"></i>
                 <span slot="title">&nbsp;&nbsp;评论管理</span>
                  </el-menu-item>
-                <el-submenu index="4">
+                <el-submenu index="4" >
                     <template slot="title">
                         <i class="fa fa-bars"></i>
                         <span slot="title">&nbsp;&nbsp;文章管理</span>
@@ -88,7 +88,7 @@
             loading:false,
             defaultActiveIndex:'0',
             userform:{},
-            isCollapse: true,
+            isCollapse: false,
         }
     },
         created(){
