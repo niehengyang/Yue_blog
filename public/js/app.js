@@ -95884,6 +95884,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: 'createarticle',
@@ -96020,6 +96022,26 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 that.$message.error({ showClose: true, message: '删除图片大小不能超过20MB！' });
             }
             return isJPG && isLt20M;
+        },
+
+        handleImageAdded: function handleImageAdded(file, Editor, cursorLocation, resetUploade) {
+            var formData = new FormData();
+            var that = this;
+            formData.append('image', file);
+            ///admin/uploadfile
+            that.loading = true;
+            axios.post('https://fakeapi.yoursite.com/images', formData).then(function (result) {
+                that.loading = false;
+                var url = result.data.url;
+                Editor.insertEmbed(cursorLocation, 'image', url);
+                resetUploader();
+            }, function (err) {
+                that.loading = false;
+                that.$message.error({ showClose: true, message: err.data, duration: 2000 });
+            }).catch(function (error) {
+                that.loading = false;
+                console.log(err);
+            });
         },
         replace_picture: function replace_picture() {
             var that = this;
@@ -96234,8 +96256,10 @@ var render = function() {
                   _c("vue-editor", {
                     attrs: {
                       placeholder: "在此输入文章内容",
-                      editorToolbar: _vm.customToolbar
+                      editorToolbar: _vm.customToolbar,
+                      useCustomImageHandle: ""
                     },
+                    on: { imageAdded: _vm.handleImageAdded },
                     model: {
                       value: _vm.articleForm.content,
                       callback: function($$v) {

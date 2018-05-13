@@ -28,7 +28,9 @@
                     <el-button class="delete_picture" @click="delete_picture" title="删除图片" style="margin-top: 30px;">删除图片</el-button>
                 </el-form-item>
                 <el-form-item label="文章内容：" prop="content">
-                    <vue-editor v-model="articleForm.content" placeholder="在此输入文章内容" :editorToolbar="customToolbar"></vue-editor>
+                    <vue-editor v-model="articleForm.content" placeholder="在此输入文章内容" :editorToolbar="customToolbar"
+                        useCustomImageHandle @imageAdded = "handleImageAdded">
+                    </vue-editor>
                 </el-form-item>
                 <el-form-item label="文章摘要：" prop="abstract">
                     <el-input type="textarea" v-model="articleForm.abstract" maxlength="100" placeholder="文章摘要最多300字符,放空将默认提取!。"></el-input>
@@ -272,6 +274,26 @@
                 }
                 return isJPG && isLt20M;
 
+            },
+            handleImageAdded:function (file,Editor,cursorLocation,resetUploade) {
+               var formData = new FormData();
+               let that = this;
+               formData.append('image',file);
+               ///admin/uploadfile
+                that.loading =true;
+               axios.post('https://fakeapi.yoursite.com/images',formData)
+                   .then(function (result) {
+                       that.loading = false;
+                       let url = result.data.url;
+                       Editor.insertEmbed(cursorLocation,'image',url);
+                       resetUploader();
+                   },function (err) {
+                       that.loading = false;
+                       that.$message.error({showClose:true,message:err.data,duration:2000});
+                   }).catch(function (error) {
+                        that.loading = false;
+                       console.log(err);
+               })
             },
             replace_picture(){
                 let that = this;
