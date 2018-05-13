@@ -58,6 +58,11 @@
                                     <button type="submit" class="btn btn-primary">
                                         <i class="fa fa-btn fa-sign-in"></i>&nbsp;登录
                                     </button>
+                                    @if($errors->has('login_error'))
+                                        <span class="help-block">
+                                            <strong>{{$errors->first('login_error')}}</strong>
+                                        </span>
+                                    @endif
                                 </div>
                             </div>
                         </form>

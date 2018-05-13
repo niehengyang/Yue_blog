@@ -53,7 +53,7 @@ class LoginController extends Controller
      **/
 
     public function postLogin(Request $request){
-        if($request->isMethod('post')){
+        if($request->isMethod('POST')){
             $validator = $this->validateLogin($request->input());
             if ($validator->fails()){
                 return back()->withErrors($validator)->withInput();
@@ -61,7 +61,7 @@ class LoginController extends Controller
             if (Auth::guard('admin')->attempt(['account_number' =>$request->account_number,'password' =>$request->password])){
                 return Redirect::to('admin/home')->with('success','登录成功!');
             }else{
-                return back()->with('error','账号或密码错误')->withInput();
+                return back()->withErrors(['login_error' => '账号或密码错误'])->withInput();
             }
         }
         return view('admin.login');
@@ -80,30 +80,6 @@ class LoginController extends Controller
             'password' => '密码'
         ]);
     }
-//    public function postLogin(Request $request){
-//        try{
-//            $adminLogin = $request->get('account_number');
-//            $adminPassword = $request->get('password');
-//            if(Auth::guard('admin')->attempt(array('account_number' => $adminLogin,'password' => $adminPassword))){
-//                $admin =Admin::where('account_number',$adminLogin)->first();
-//                $admin->admin_lastloginip = $request->getClientIp();
-//                $admin->admin_lastlogintime =date("Y-m-d H:i:s");
-//                $admin->save();
-//                return Redirect::to('admin/home')->with('success','登陆成功！');
-////                return response()->json([
-////                    'url' => '/home/'
-////                ]);
-//
-//            }else{
-//                return response('用户名或密码错误！',400);
-//                return view('admin.login');
-//            }
-//            return view('admin.login');
-//        }catch (Exception $e){
-//            return response($e->getMessage(),500);
-//        }
-//
-//    }
 
     /***
         退出登录

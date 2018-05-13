@@ -23,7 +23,7 @@
                     <el-input  maxlength="200" size="small" v-model="userform.email"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button size="small" type="primary" @click="handleSaveProfile">修改并保存</el-button>
+                    <el-button size="small" type="primary" @click="handleSaveProfile('userform')">修改并保存</el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -35,12 +35,7 @@
         data(){
             return{
                 loading:false,
-                userform:{
-                    account_number:'',
-                    nickname:'',
-                    name:'',
-                    email:''
-                },
+                userform:{},
                 rules:{
                     nickname:[
                         {required:true,message:'请输入昵称',trigger:'blur'}
@@ -78,14 +73,14 @@
                     that.$message.error({showClose:true,message:'用户信息请求异常',duration:2000});
                 })
             },
-            handleSaveProfile(){
+            handleSaveProfile(FormName){
                 let that =this;
                 that.$confirm('是否修改该用户信息？','提示',{
                     confirmButtonText:'确定',
                     cancelButtonText:'取消',
                     type:'warning'
                 }).then(()=>{
-                    that.$refs.userform.validate((valid)=>{
+                    that.$refs[FormName].validate((valid)=>{
                     if(valid){
                         that.loading = true;
                         let args = {
@@ -117,7 +112,6 @@
                             that.$message.error({showClose:true,message:'请求出现异常',duration:2000});
                         });
                     }else{
-                        that.loading = false;
                         that.$message.error({showClose:true,message:'请保证数据填写完整在提交！',duration:2000});
                     }
                 });

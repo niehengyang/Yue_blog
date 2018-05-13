@@ -49,8 +49,8 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'
 //管理员信息修改
 Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'],function (){
     Route::get('getUserInfo','AdminController@getuserinfo');//获取管理员信息
-    Route::post('updateUserInfo','UserController@updateuserinfo');//修改管理员信息
-    Route::post('resetpwd','UserController@resetpwd');//修改密码
+    Route::post('updateUserInfo','AdminController@updateuserinfo');//修改管理员信息
+    Route::post('resetpwd','AdminController@resetpwd');//修改密码
 });
 
 //文章管理

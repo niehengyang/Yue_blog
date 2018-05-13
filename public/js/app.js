@@ -93952,7 +93952,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("el-table-column", {
-                attrs: { prop: "username", width: "200", label: "账号" }
+                attrs: { prop: "username", width: "100", label: "账号" }
               }),
               _vm._v(" "),
               _c("el-table-column", {
@@ -94139,7 +94139,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -94187,12 +94187,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     data: function data() {
         return {
             loading: false,
-            userform: {
-                account_number: '',
-                nickname: '',
-                name: '',
-                email: ''
-            },
+            userform: {},
             rules: {
                 nickname: [{ required: true, message: '请输入昵称', trigger: 'blur' }],
                 email: [{ required: true, message: '请输入邮箱', trigger: 'blur' }, { type: 'email', message: '请输入正确的邮箱地址', trigger: 'blur,change' }]
@@ -94225,14 +94220,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 that.$message.error({ showClose: true, message: '用户信息请求异常', duration: 2000 });
             });
         },
-        handleSaveProfile: function handleSaveProfile() {
+        handleSaveProfile: function handleSaveProfile(FormName) {
             var that = this;
             that.$confirm('是否修改该用户信息？', '提示', {
                 confirmButtonText: '确定',
                 cancelButtonText: '取消',
                 type: 'warning'
             }).then(function () {
-                that.$refs.userform.validate(function (valid) {
+                that.$refs[FormName].validate(function (valid) {
                     if (valid) {
                         that.loading = true;
                         var args = {
@@ -94263,7 +94258,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                             that.$message.error({ showClose: true, message: '请求出现异常', duration: 2000 });
                         });
                     } else {
-                        that.loading = false;
                         that.$message.error({ showClose: true, message: '请保证数据填写完整在提交！', duration: 2000 });
                     }
                 });
@@ -94420,7 +94414,11 @@ var render = function() {
                     "el-button",
                     {
                       attrs: { size: "small", type: "primary" },
-                      on: { click: _vm.handleSaveProfile }
+                      on: {
+                        click: function($event) {
+                          _vm.handleSaveProfile("userform")
+                        }
+                      }
                     },
                     [_vm._v("修改并保存")]
                   )
@@ -94744,6 +94742,7 @@ var render = function() {
                   _c("el-input", {
                     staticClass: "input",
                     attrs: {
+                      type: "password",
                       maxlength: "120",
                       size: "small",
                       placeholder: "请输入当前密码"
@@ -94767,6 +94766,7 @@ var render = function() {
                   _c("el-input", {
                     staticClass: "input",
                     attrs: {
+                      type: "password",
                       maxlength: "120",
                       size: "small",
                       placeholder: "请输入新密码"
@@ -94790,6 +94790,7 @@ var render = function() {
                   _c("el-input", {
                     staticClass: "input",
                     attrs: {
+                      type: "password",
                       maxlength: "120",
                       size: "small",
                       placeholder: "请再次输入新密码"
@@ -95888,9 +95889,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     name: 'createarticle',
     data: function data() {
         return {
-            customToolbar: [[{ 'font': [] }], [{ 'header': [false, 1, 2, 3, 4, 5, 6] }], ['bold', 'italic', 'underline', 'strike'], [{ 'align': '' }, { 'align': 'center' }, { 'align': 'right' }, { 'align': 'justify' }], [{ 'list': 'ordered' }, { 'list': 'bullet' }], [{ 'script': 'sub' }, { 'script': 'super' }], [{ 'indent': '-1' }, { 'indent': '+1' }], [{ 'color': [] }, { 'background': [] }], ['code-block'], [{ 'direction': 'rtl' }], ['clean']],
+            customToolbar: [[{ 'font': [] }], [{ 'header': [false, 1, 2, 3, 4, 5, 6] }], ['bold', 'italic', 'underline', 'strike'], [{ 'align': '' }, { 'align': 'center' }, { 'align': 'right' }, { 'align': 'justify' }], [{ 'list': 'ordered' }, { 'list': 'bullet' }], [{ 'script': 'sub' }, { 'script': 'super' }], [{ 'indent': '-1' }, { 'indent': '+1' }], [{ 'color': [] }, { 'background': [] }], ['code-block', 'image'], [{ 'direction': 'rtl' }], ['clean']],
             imageUrl: '',
-            showImage: '',
             oldImageUrl: '',
             loading: false,
             classifications: [],
@@ -95913,7 +95913,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 title: [{ required: true, message: '请输入文章标题', trigger: 'blur' }, { min: 1, max: 100, message: '标题最多100个字符', trigger: 'blur' }],
                 content: [{ required: true, message: '请输入文章内容', trigger: 'blur' }],
                 classification: [{ requured: true, message: '请选择文章分类', trigger: 'blur' }],
-                abstract: [{ required: true, message: '请输入文章摘要', trigger: 'blur' }],
+                abstract: [{ min: 1, max: 100, message: '标题最多100个字符', trigger: 'blur' }],
                 istop: [{ required: true, message: '请选择是否置顶', trigger: 'blur' }],
                 release_size: [{ required: true, message: '请选择状态', trigger: 'blur' }]
             }
@@ -95974,7 +95974,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 that.$refs[FormName].validate(function (valid) {
                     if (valid) {
                         that.loading = true;
-                        that.articleForm.img = that.showImage;
+                        that.articleForm.img = that.imageUrl;
                         that.articleForm.author = that.userform.nickname;
                         axios.post('/admin/initArticle', that.articleForm).then(function (response) {
                             that.loading = false;
@@ -96004,7 +96004,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             //上传成功
             var that = this;
             that.imageUrl = response.url;
-            // that.replace_picture();
+            that.replace_picture();
             console.log('上传成功返回图片信息', response);
         },
         handleBefore: function handleBefore(file) {
@@ -96031,7 +96031,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                     if (response && response.data) {
                         that.$message.success({ showClose: true, message: '图片已替换!', duration: 2000 });
                     }
-                    that.imageUrl = null;
                 }, function (err) {
                     that.loading = false;
                     that.$message.error({ showCLose: true, message: '替换出错!', duration: 2000 });
@@ -96073,7 +96072,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             console.log('上传失败，请重试!');
         },
         reset_article: function reset_article(FormName) {
-            console.log(FormName);
+            console.log('返回首页');
         },
         showPreviewDialog: function showPreviewDialog(FormName) {
             this.previewVisible = true;
@@ -96188,7 +96187,7 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "el-form-item",
-                { attrs: { label: "顶部图片", prop: "img" } },
+                { attrs: { label: "顶部图片：", prop: "img" } },
                 [
                   _c(
                     "el-upload",
@@ -96256,10 +96255,8 @@ var render = function() {
                   _c("el-input", {
                     attrs: {
                       type: "textarea",
-                      maxlength: "240",
-                      minlength: "10",
-                      placeholder:
-                        "请输入文章摘要,不得少于10个字和大于240个字!。"
+                      maxlength: "100",
+                      placeholder: "文章摘要最多300字符,放空将默认提取!。"
                     },
                     model: {
                       value: _vm.articleForm.abstract,
@@ -96380,14 +96377,14 @@ var render = function() {
                   _c(
                     "el-button",
                     {
-                      attrs: { size: "small" },
+                      attrs: { type: "success", size: "small" },
                       on: {
                         click: function($event) {
-                          _vm.reset_article("articleForm")
+                          _vm.showPreviewDialog("articleForm")
                         }
                       }
                     },
-                    [_vm._v("重置")]
+                    [_vm._v("预览")]
                   ),
                   _vm._v(" "),
                   _c(
@@ -96396,11 +96393,11 @@ var render = function() {
                       attrs: { size: "small" },
                       on: {
                         click: function($event) {
-                          _vm.showPreviewDialog("articleForm")
+                          _vm.reset_article()
                         }
                       }
                     },
-                    [_vm._v("预览")]
+                    [_vm._v("返回首页")]
                   )
                 ],
                 1
@@ -97682,7 +97679,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.type_input[data-v-bbc64a86]{\r\n    width:400px;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -97765,6 +97762,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         return {
             loading: false,
             previewVisible: false,
+            addVisible: false,
             tableData: [],
             formData: {},
             addnewData: {},
@@ -97798,6 +97796,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 that.loading = false;
                 that.$message.error({ showClose: true, message: '请求出现异常', duration: 2000 });
             });
+        },
+        addclassification: function addclassification() {
+            var that = this;
+            that.addVisible = true;
         },
         editclassification: function editclassification(row) {
             var that = this;
@@ -97877,10 +97879,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                         axios.post('/admin/initclassification', that.addnewData).then(function (response) {
                             that.loading = false;
                             that.$message.success({ showClose: true, message: response.data, duration: 2000 });
+                            that.addVisible = false;
                             that.LoadpageInfo();
                         }, function (err) {
                             that.loading = false;
                             that.$message.error({ showClose: true, message: err.response.data, duration: 2000 });
+                            that.addVisible = false;
                             that.LoadpageInfo();
                         }).catch(function (error) {
                             that.loading = false;
@@ -97955,10 +97959,11 @@ var render = function() {
               "el-button",
               {
                 staticClass: "fa fa-plus-circle",
-                attrs: {
-                  type: "success",
-                  plain: "",
-                  onclick: "window.location.href='#add'"
+                attrs: { type: "success", plain: "" },
+                on: {
+                  click: function($event) {
+                    _vm.addclassification()
+                  }
                 }
               },
               [_vm._v(" 添加分类")]
@@ -97985,7 +97990,7 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("el-table-column", {
-                attrs: { prop: "created_at", label: "创建时间", width: "300" }
+                attrs: { prop: "created_at", label: "创建时间", width: "200" }
               }),
               _vm._v(" "),
               _c("el-table-column", {
@@ -98031,11 +98036,18 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
-        "el-col",
+        "el-dialog",
         {
-          staticClass: "warp-form",
-          staticStyle: { border: "1px solid #d4d4d4", "margin-top": "10px" },
-          attrs: { sapn: 24, id: "add" }
+          attrs: {
+            titel: "添加分类",
+            visible: _vm.addVisible,
+            "close-on-click-model": false
+          },
+          on: {
+            "update:visible": function($event) {
+              _vm.addVisible = $event
+            }
+          }
         },
         [
           _c(

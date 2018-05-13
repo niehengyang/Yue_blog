@@ -67,7 +67,10 @@ class classificationController extends Controller
                 if(is_null($id)){
                     throw new Exception('请重新选择删除');
                 }
-                if(classification::destroy($id) && Article::where('classification_id',$id)->update(['classification_id' => 1])){
+                if (Article::where('classification_id',$id)){
+                    Article::where('classification_id',$id)->update(['classification_id' => 1]);
+                }
+                if(classification::destroy($id)){
                     return response('删除成功',200);
                 }else{
                     throw new Exception('删除失败');

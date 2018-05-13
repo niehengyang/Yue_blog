@@ -14,7 +14,7 @@
                 <el-form-item label="文章标题：" prop="title">
                     <el-input size="small" v-model="articleForm.title" auto-complate="off" placeholder="为你的文章起个标题吧！"></el-input>
                 </el-form-item>
-                <el-form-item label="顶部图片" prop="img">
+                <el-form-item label="顶部图片：" prop="img">
                     <el-upload
                             class="avatar-uploader"
                             action="/admin/uploadfile"
@@ -31,7 +31,7 @@
                     <vue-editor v-model="articleForm.content" placeholder="在此输入文章内容" :editorToolbar="customToolbar"></vue-editor>
                 </el-form-item>
                 <el-form-item label="文章摘要：" prop="abstract">
-                    <el-input type="textarea" v-model="articleForm.abstract" maxlength="240" minlength="10" placeholder="请输入文章摘要,不得少于10个字和大于240个字!。"></el-input>
+                    <el-input type="textarea" v-model="articleForm.abstract" maxlength="100" placeholder="文章摘要最多300字符,放空将默认提取!。"></el-input>
                 </el-form-item>
                 <el-form-item label="文章分类：" prop="classification_id">
                     <el-select size="small" v-model="articleForm.classification_id" placeholder="请选择文章分类">
@@ -64,8 +64,8 @@
                 </el-form-item>
                 <el-form-item>
                     <el-button type="primary" size="small" @click="onSubmit('articleForm')">立即{{articleForm.id ? '修改': '创建'}}</el-button>
-                    <el-button size="small" @click="reset_article('articleForm')">重置</el-button>
-                    <el-button size="small" @click="showPreviewDialog('articleForm')">预览</el-button>
+                    <el-button type="success" size="small" @click="showPreviewDialog('articleForm')">预览</el-button>
+                    <el-button size="small" @click="reset_article()">返回首页</el-button>
                 </el-form-item>
             </el-form>
         </el-col>
@@ -125,12 +125,11 @@
                     [{'script':'sub'},{'script':'super'}],
                     [{'indent':'-1'},{'indent':'+1'}],
                     [{'color':[]},{'background':[]}],
-                    ['code-block'],
+                    ['code-block','image'],
                     [{'direction':'rtl'}],
                     ['clean']
                 ],
                 imageUrl:'',
-                showImage:'',
                 oldImageUrl:'',
                 loading:false,
                 classifications:[],
@@ -161,7 +160,7 @@
                         {requured:true ,message:'请选择文章分类' ,trigger:'blur'}
                         ],
                     abstract:[
-                        {required:true ,message:'请输入文章摘要',trigger:'blur'}
+                        {min:1 ,max: 100, message: '标题最多100个字符', trigger: 'blur'}
                     ],
                     istop:[
                         {required:true ,message:'请选择是否置顶', trigger:'blur'}
@@ -227,7 +226,7 @@
                     that.$refs[FormName].validate((valid)=>{
                         if(valid){
                             that.loading = true;
-                            that.articleForm.img = that.showImage;
+                            that.articleForm.img = that.imageUrl;
                             that.articleForm.author = that.userform.nickname;
                             axios.post('/admin/initArticle', that.articleForm)
                                 .then(function (response) {
@@ -257,7 +256,7 @@
             handleSuccess(response,res,file){//上传成功
                 let that = this;
                 that.imageUrl = response.url;
-                // that.replace_picture();
+                that.replace_picture();
                 console.log('上传成功返回图片信息',response);
             },
             handleBefore(file){//上传限制条件
@@ -285,7 +284,6 @@
                             if (response && response.data){
                                 that.$message.success({showClose:true,message:'图片已替换!',duration:2000});
                             }
-                            that.imageUrl = null;
                         },function (err) {
                             that.loading = false;
                             that.$message.error({showCLose:true,message:'替换出错!',duration:2000});
@@ -327,7 +325,7 @@
                 console.log('上传失败，请重试!')
             },
             reset_article(FormName){
-                console.log(FormName)
+                console.log('返回首页')
             },
             showPreviewDialog(FormName){
                 this.previewVisible = true;

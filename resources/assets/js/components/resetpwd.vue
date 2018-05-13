@@ -17,13 +17,13 @@
                     <span>{{userInfo.account_number}}</span>
                 </el-form-item>
                 <el-form-item prop="oldpwd" label="原密码:">
-                    <el-input class="input" maxlength="120" size="small" v-model="resetPwdForm.oldpwd" placeholder="请输入当前密码"></el-input>
+                    <el-input type="password" class="input" maxlength="120" size="small" v-model="resetPwdForm.oldpwd" placeholder="请输入当前密码"></el-input>
                 </el-form-item>
                 <el-form-item prop="newpwd" label="新密码:">
-                    <el-input class="input" maxlength="120" size="small" v-model="resetPwdForm.newpwd" placeholder="请输入新密码"></el-input>
+                    <el-input type="password" class="input" maxlength="120" size="small" v-model="resetPwdForm.newpwd" placeholder="请输入新密码"></el-input>
                 </el-form-item>
                 <el-form-item prop="confirmpwd" label="确认新密码:">
-                    <el-input class="input" maxlength="120" size="small" v-model="resetPwdForm.confirmpwd" placeholder="请再次输入新密码"></el-input>
+                    <el-input type="password" class="input" maxlength="120" size="small" v-model="resetPwdForm.confirmpwd" placeholder="请再次输入新密码"></el-input>
                 </el-form-item>
                 <el-form-item>
                     <el-button class="submitbtn" size="small" type="default" @click="handleChangepwd('resetPwdForm')">提交</el-button>

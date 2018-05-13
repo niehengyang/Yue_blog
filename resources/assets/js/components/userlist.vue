@@ -25,7 +25,7 @@
             <el-table :data="users" highlight-current-row v-loading="loading" style="width: 100%;">
                 <el-table-column type="index" width="60"></el-table-column>
                 <el-table-column prop="nickname" width="200" label="昵称"></el-table-column>
-                <el-table-column prop="username" width="200" label="账号"></el-table-column>
+                <el-table-column prop="username" width="100" label="账号"></el-table-column>
                 <el-table-column prop="email" width="250" label="登录邮箱"></el-table-column>
                 <!--<el-table-column prop="password" width="200" label="密码"></el-table-column>-->
                 <el-table-column prop="admin_lastlogintime" width="200" label="最后登录时间"></el-table-column>

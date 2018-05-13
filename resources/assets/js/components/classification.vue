@@ -11,13 +11,13 @@
         <!--分类表-->
         <el-col :span="24" class="warp-main" v-loading="loading" element-loading-text="拼命加载中" style="padding-top: 20px;">
             <template>
-                <el-button class="fa fa-plus-circle" type="success" plain onclick="window.location.href='#add'">&nbsp;添加分类</el-button>
+                <el-button class="fa fa-plus-circle" type="success" plain @click="addclassification()">&nbsp;添加分类</el-button>
             </template>
             <el-table :data="tableData" style="width: 100%;" :stripe="true">
                 <el-table-column prop="id" label="ID" width="200"></el-table-column>
                 <el-table-column prop="name" label="分类名称" width="300"></el-table-column>
                 <el-table-column prop="describe" label="分类描述" width="300"></el-table-column>
-                <el-table-column prop="created_at" label="创建时间" width="300"></el-table-column>
+                <el-table-column prop="created_at" label="创建时间" width="200"></el-table-column>
                 <el-table-column label="操作" width="200" fixed="right">
                     <template slot-scope="scope">
                         <el-button size="mini" @click="editclassification(scope.row)" class="el-icon-edit" title="编辑"></el-button>
@@ -28,7 +28,7 @@
         </el-col>
 
         <!--分类创建-->
-        <el-col :sapn="24" class="warp-form" style="border: 1px solid #d4d4d4;margin-top: 10px;" id="add">
+        <el-dialog titel="添加分类" :visible.sync="addVisible" :close-on-click-model="false" >
             <span class="fa fa-edit" style="padding: 20px;">&nbsp;添加分类</span>
             <el-form :model="addnewData" label-width="100px" :rules="rules" ref="addnewData" class="ruleForm" style="padding: 30px;">
                 <el-form-item label="分类名称" prop="name">
@@ -38,10 +38,10 @@
                     <el-input :maxlength="240" class="type_input" type="textarea" v-model="addnewData.describe" placeholder="请填写分类描述"></el-input>
                 </el-form-item>
                 <el-form-item>
-                    <el-button size="small" type="primary" @click="addSubmit('addnewData')" class="fa fa-check-circle">&nbsp;提交</el-button>
+                    <el-button size="small" type="primary" @click="addSubmit('addnewData')" class="fa fa-check-circle" >&nbsp;提交</el-button>
                 </el-form-item>
             </el-form>
-        </el-col>
+        </el-dialog>
 
         <!--编辑-->
         <el-dialog titel="编辑分类" :visible.sync="previewVisible" :close-on-click-model="false" >
@@ -70,6 +70,7 @@
             return{
                 loading:false,
                 previewVisible:false,
+                addVisible:false,
                 tableData: [],
                 formData: {},
                 addnewData:{},
@@ -108,6 +109,10 @@
                         that.loading = false;
                         that.$message.error({showClose:true,message:'请求出现异常',duration:2000});
                 })
+            },
+            addclassification(){
+                let that = this;
+                that.addVisible = true;
             },
             editclassification(row){
                 let that =this;
@@ -190,10 +195,12 @@
                        .then(function (response) {
                            that.loading = false
                            that.$message.success({showClose:true,message:response.data,duration:2000});
+                           that.addVisible = false;
                            that.LoadpageInfo();
                        },function (err) {
                            that.loading = false;
                            that.$message.error({showClose:true,message:err.response.data,duration:2000});
+                           that.addVisible = false;
                            that.LoadpageInfo();
                        }).catch(function (error) {
                            that.loading = false;
@@ -212,7 +219,4 @@
 </script>
 
 <style scoped>
-.type_input{
-    width:400px;
-}
 </style>
