@@ -26,8 +26,8 @@
                                 <span style="color: #a4aaae;">&nbsp;·&nbsp;</span>
                                 <span v-html="articleForm.classification_name"></span>
                             </div>
-                            <div class="content_item" style="padding:20px 0 30px 30px; border-top: 1px solid #e3e3e3;">
-                                <span style="color: #636b6f;" v-html="articleForm.content" alt=""></span>
+                            <div class="content_item" >
+                                <span class="content_style"  v-html="articleForm.content" alt=""></span>
                             </div>
                             <div class="author_item" style="margin-top: 10px; padding-bottom: 20px; border-bottom: 1px solid #e3e3e3;">
                                 <span style="font-weight: bold; font-family: 仿宋;font-size: 2px;">发布：</span>
@@ -124,5 +124,18 @@
         display: flex;
         justify-content: center;
         color: #adadad;
+    }
+    /*文章内图片样式*/
+    .content_item{
+        padding:20px 0 30px 30px;
+        border-top: 1px solid #e3e3e3;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    .content_style {
+        width: 100%;
+        color: #636b6f;
+
     }
 </style>

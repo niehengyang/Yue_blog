@@ -35,7 +35,8 @@
                 <el-table-column prop="created_at" label="评论时间" width="200"></el-table-column>
                 <el-table-column label="操作" width="150" fixed="right">
                     <template slot-scope="scope">
-                        <el-button size="mini" @click="disableComments(scope.row)" class="fa fa-eye-slash" title="禁用"></el-button>
+                        <el-button v-if="scope.row.release_size" size="mini" @click="disableComments(scope.row)" class="fa fa-eye-slash" title="禁用"></el-button>
+                        <el-button v-else size="mini" @click="disableComments(scope.row)" class="fa fa-eye" title="显示"></el-button>
                         <el-button size="mini" type="danger" @click="delComments(scope.row)" class="el-icon-delete" title="删除"></el-button>
                     </template>
                 </el-table-column>
@@ -123,7 +124,36 @@
                 // console.log(row);
                 let that = this;
                 if(row.release_size == 0){
-                    that.$message.error({showClose:true,message:'该评论已经禁用',duration:2000});
+                    that.$confirm('是否显示该条评论？','提示',{
+                        confirmButtonText:'确定',
+                        cancelButtonText:'取消',
+                        type:'warning'
+                    }).then(() => {
+                        row.release_size = 1;
+                    that.loading = true;
+                    axios.post('/admin/disablecomments',row)
+                        .then(function (response) {
+                            that.loading = false;
+                            if (response && response.data){
+                                that.$message.success({showClose:true,message:response.data,duration:2000});
+                            }
+                            that.searchComments();
+                        },function (err) {
+                            that.loading = false;
+                            that.$message.error({showCLose:true,message:response.data,duration:2000});
+                            row.release_size = 1;
+                            that.searchComments();
+                        }).catch(function (error) {
+                        that.loading = false;
+                        if(error == 'Unauthenticated.'){
+                            window.location.href('/login');
+                        }
+                        that.$message.error({showClose:true,message:'请求出现异常',duration:2000});
+                        row.release_size = 1;
+                    })
+                }).catch(()=> {
+                        console.log('已取消')
+                })
                 }else{
                 that.$confirm('是否禁用该条评论？','提示',{
                     confirmButtonText:'确定',

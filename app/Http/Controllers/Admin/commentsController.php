@@ -44,9 +44,9 @@ class commentsController extends Controller
             }
             $comments ->release_size = $request->get('release_size');
             if ($comments->save()){
-                return response('禁用成功',200);
+                return response('操作成功',200);
             }else{
-                throw new Exception('禁用失败');
+                throw new Exception('操作失败');
             }
         }catch (Exception $e){
             return response($e->getMessage(),500);

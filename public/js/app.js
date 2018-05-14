@@ -95760,7 +95760,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.previre_item[data-v-6be4fa1a]{\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -ms-flex-line-pack: center;\n        align-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.img-item[data-v-6be4fa1a]{\n    width: 100%;\n    height: 400px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.show_box[data-v-6be4fa1a]{\n    width: 80%;\n    display:-webkit-box;\n    display:-ms-flexbox;\n    display:flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-family: 宋体;\n    margin-top: 40px;\n    margin-bottom: 40px;\n}\n.header[data-v-6be4fa1a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -ms-flex-line-pack: center;\n        align-content: center;\n}\n.warp_main[data-v-6be4fa1a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    margin: 20px 0 0 20px;\n    -webkit-box-shadow: 10px 10px 10px 10px #5e5d5d;\n            box-shadow: 10px 10px 10px 10px #5e5d5d;\n}\n.articleinfo_cade[data-v-6be4fa1a]{\n    padding-top: 10px;\n    padding-bottom: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-size: 2px;\n}\n.err_show_box[data-v-6be4fa1a]{\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    color: #adadad;\n}\n\n/*图片框样式*/\n.avatar-uploader .el-upload[data-v-6be4fa1a]{\n    border:1px dashed #d9d9d9;\n    border-radius: 6px;\n    cursor: pointer;\n    position: relative;\n    overflow: hidden;\n}\n.avatar-uploader .el-upload[data-v-6be4fa1a]:hover{\n    border-color: #409EFF;\n}\n.avatar-uploader-icon[data-v-6be4fa1a]{\n    font-size: 28px;\n    color: #8c939d;\n    width: 178px;\n    height: 178px;\n    line-height: 178px;\n    text-align: center;\n    border: 1px dashed #d4d4d4;\n    border-radius: 6px;\n}\n.avatar[data-v-6be4fa1a]{\n    width: 500px;\n    height: 330px;\n    display: block;\n}\n", ""]);
+exports.push([module.i, "\n.previre_item[data-v-6be4fa1a]{\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -ms-flex-line-pack: center;\n        align-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.img-item[data-v-6be4fa1a]{\n    width: 100%;\n    height: 400px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.show_box[data-v-6be4fa1a]{\n    width: 80%;\n    display:-webkit-box;\n    display:-ms-flexbox;\n    display:flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-family: 宋体;\n    margin-top: 40px;\n    margin-bottom: 40px;\n}\n.header[data-v-6be4fa1a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -ms-flex-line-pack: center;\n        align-content: center;\n}\n.warp_main[data-v-6be4fa1a]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    margin: 20px 0 0 20px;\n    -webkit-box-shadow: 10px 10px 10px 10px #5e5d5d;\n            box-shadow: 10px 10px 10px 10px #5e5d5d;\n}\n.articleinfo_cade[data-v-6be4fa1a]{\n    padding-top: 10px;\n    padding-bottom: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-size: 2px;\n}\n.err_show_box[data-v-6be4fa1a]{\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    color: #adadad;\n}\n\n/*图片框样式*/\n.avatar-uploader .el-upload[data-v-6be4fa1a]{\n    border:1px dashed #d9d9d9;\n    border-radius: 6px;\n    cursor: pointer;\n    position: relative;\n    overflow: hidden;\n}\n.avatar-uploader .el-upload[data-v-6be4fa1a]:hover{\n    border-color: #409EFF;\n}\n.avatar-uploader-icon[data-v-6be4fa1a]{\n    font-size: 28px;\n    color: #8c939d;\n    width: 178px;\n    height: 178px;\n    line-height: 178px;\n    text-align: center;\n    border: 1px dashed #d4d4d4;\n    border-radius: 6px;\n}\n.avatar[data-v-6be4fa1a]{\n    width: 500px;\n    height: 330px;\n    display: block;\n}\n/*文章内图片样式*/\n.content_item[data-v-6be4fa1a]{\n    padding:20px 0 30px 30px;\n    border-top: 1px solid #e3e3e3;\n    cursor: pointer;\n    position: relative;\n    overflow: hidden;\n}\n.content_style[data-v-6be4fa1a] {\n    width: 100%;\n    color: #636b6f;\n}\n", ""]);
 
 // exports
 
@@ -96024,11 +96024,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             return isJPG && isLt20M;
         },
 
-        handleImageAdded: function handleImageAdded(file, Editor, cursorLocation, resetUploade) {
+        handleImageAdded: function handleImageAdded(file, Editor, cursorLocation, resetUploader) {
             var formData = new FormData();
             var that = this;
             formData.append('image', file);
-            ///admin/uploadfile
             that.loading = true;
             axios.post('https://fakeapi.yoursite.com/images', formData).then(function (result) {
                 that.loading = false;
@@ -96098,7 +96097,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         },
         showPreviewDialog: function showPreviewDialog(FormName) {
             this.previewVisible = true;
-            var row = this.articleForm;
+            var row = FormName;
             // window.open('http://yue_blog.com/admin/index#/articleview')
             // this.$router.push({name:'articleview',params:{row}});
         }
@@ -96486,8 +96485,8 @@ var render = function() {
                           {
                             name: "show",
                             rawName: "v-show",
-                            value: _vm.articleForm.title,
-                            expression: "articleForm.title"
+                            value: _vm.articleForm,
+                            expression: "articleForm"
                           }
                         ],
                         staticClass: "main"
@@ -96534,25 +96533,15 @@ var render = function() {
                           2
                         ),
                         _vm._v(" "),
-                        _c(
-                          "div",
-                          {
-                            staticClass: "content_item",
-                            staticStyle: {
-                              padding: "20px 0 30px 30px",
-                              "border-top": "1px solid #e3e3e3"
+                        _c("div", { staticClass: "content_item" }, [
+                          _c("span", {
+                            staticClass: "content_style",
+                            attrs: { alt: "" },
+                            domProps: {
+                              innerHTML: _vm._s(_vm.articleForm.content)
                             }
-                          },
-                          [
-                            _c("span", {
-                              staticStyle: { color: "#636b6f" },
-                              attrs: { alt: "" },
-                              domProps: {
-                                innerHTML: _vm._s(_vm.articleForm.content)
-                              }
-                            })
-                          ]
-                        ),
+                          })
+                        ]),
                         _vm._v(" "),
                         _c(
                           "div",
@@ -96599,8 +96588,8 @@ var render = function() {
                           {
                             name: "show",
                             rawName: "v-show",
-                            value: _vm.articleForm.title === "",
-                            expression: "articleForm.title === ''"
+                            value: _vm.articleForm == null,
+                            expression: "articleForm == null"
                           }
                         ],
                         staticClass: "err_show_box"
@@ -96739,7 +96728,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.page{\n    width: 100%;\n    /*background-image: url(\"/storage/bg.jpg\");*/\n    /*background-repeat: no-repeat;*/\n    /*-webkit-background-size: 100% 100%;*/\n    /*background-size: 100% 100%;*/\n}\n.img-item{\n    width: 100%;\n    height: 400px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.show_box{\n    width: 80%;\n    display:-webkit-box;\n    display:-ms-flexbox;\n    display:flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-family: 宋体;\n    margin-top: 40px;\n    margin-bottom: 40px;\n}\n.header{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -ms-flex-line-pack: center;\n        align-content: center;\n}\n.warp_main{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    margin: 20px 0 0 20px;\n    -webkit-box-shadow: 10px 10px 10px 10px #5e5d5d;\n            box-shadow: 10px 10px 10px 10px #5e5d5d;\n    background-color: white;\n}\n.articleinfo_cade{\n    padding-top: 10px;\n    padding-bottom: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-size: 2px;\n}\n.err_show_box{\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    color: #adadad;\n}\n", ""]);
+exports.push([module.i, "\n.page{\n    width: 100%;\n    /*background-image: url(\"/storage/bg.jpg\");*/\n    /*background-repeat: no-repeat;*/\n    /*-webkit-background-size: 100% 100%;*/\n    /*background-size: 100% 100%;*/\n}\n.img-item{\n    width: 100%;\n    height: 400px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.show_box{\n    width: 80%;\n    display:-webkit-box;\n    display:-ms-flexbox;\n    display:flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-family: 宋体;\n    margin-top: 40px;\n    margin-bottom: 40px;\n}\n.header{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -ms-flex-line-pack: center;\n        align-content: center;\n}\n.warp_main{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    margin: 20px 0 0 20px;\n    -webkit-box-shadow: 10px 10px 10px 10px #5e5d5d;\n            box-shadow: 10px 10px 10px 10px #5e5d5d;\n    background-color: white;\n}\n.articleinfo_cade{\n    padding-top: 10px;\n    padding-bottom: 10px;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-size: 2px;\n}\n.err_show_box{\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    color: #adadad;\n}\n/*文章内图片样式*/\n.content_item{\n    padding:20px 0 30px 30px;\n    border-top: 1px solid #e3e3e3;\n    cursor: pointer;\n    position: relative;\n    overflow: hidden;\n}\n.content_style {\n    width: 100%;\n    color: #636b6f;\n}\n", ""]);
 
 // exports
 
@@ -96965,25 +96954,13 @@ var render = function() {
                       })
                     ]),
                     _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "content_item",
-                        staticStyle: {
-                          padding: "20px 0 30px 30px",
-                          "border-top": "1px solid #e3e3e3"
-                        }
-                      },
-                      [
-                        _c("span", {
-                          staticStyle: { color: "#636b6f" },
-                          attrs: { alt: "" },
-                          domProps: {
-                            innerHTML: _vm._s(_vm.articleForm.content)
-                          }
-                        })
-                      ]
-                    ),
+                    _c("div", { staticClass: "content_item" }, [
+                      _c("span", {
+                        staticClass: "content_style",
+                        attrs: { alt: "" },
+                        domProps: { innerHTML: _vm._s(_vm.articleForm.content) }
+                      })
+                    ]),
                     _vm._v(" "),
                     _c(
                       "div",
@@ -97158,7 +97135,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -97169,6 +97146,7 @@ exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
 //
 //
 //
@@ -97297,7 +97275,35 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             // console.log(row);
             var that = this;
             if (row.release_size == 0) {
-                that.$message.error({ showClose: true, message: '该评论已经禁用', duration: 2000 });
+                that.$confirm('是否显示该条评论？', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(function () {
+                    row.release_size = 1;
+                    that.loading = true;
+                    axios.post('/admin/disablecomments', row).then(function (response) {
+                        that.loading = false;
+                        if (response && response.data) {
+                            that.$message.success({ showClose: true, message: response.data, duration: 2000 });
+                        }
+                        that.searchComments();
+                    }, function (err) {
+                        that.loading = false;
+                        that.$message.error({ showCLose: true, message: response.data, duration: 2000 });
+                        row.release_size = 1;
+                        that.searchComments();
+                    }).catch(function (error) {
+                        that.loading = false;
+                        if (error == 'Unauthenticated.') {
+                            window.location.href('/login');
+                        }
+                        that.$message.error({ showClose: true, message: '请求出现异常', duration: 2000 });
+                        row.release_size = 1;
+                    });
+                }).catch(function () {
+                    console.log('已取消');
+                });
             } else {
                 that.$confirm('是否禁用该条评论？', '提示', {
                     confirmButtonText: '确定',
@@ -97519,15 +97525,25 @@ var render = function() {
                     key: "default",
                     fn: function(scope) {
                       return [
-                        _c("el-button", {
-                          staticClass: "fa fa-eye-slash",
-                          attrs: { size: "mini", title: "禁用" },
-                          on: {
-                            click: function($event) {
-                              _vm.disableComments(scope.row)
-                            }
-                          }
-                        }),
+                        scope.row.release_size
+                          ? _c("el-button", {
+                              staticClass: "fa fa-eye-slash",
+                              attrs: { size: "mini", title: "禁用" },
+                              on: {
+                                click: function($event) {
+                                  _vm.disableComments(scope.row)
+                                }
+                              }
+                            })
+                          : _c("el-button", {
+                              staticClass: "fa fa-eye",
+                              attrs: { size: "mini", title: "显示" },
+                              on: {
+                                click: function($event) {
+                                  _vm.disableComments(scope.row)
+                                }
+                              }
+                            }),
                         _vm._v(" "),
                         _c("el-button", {
                           staticClass: "el-icon-delete",

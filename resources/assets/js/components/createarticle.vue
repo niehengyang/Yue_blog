@@ -80,7 +80,7 @@
                         <img style="width: 100%;" :src="articleForm.img" alt=""/>
                     </div>
                     <div class="show_box">
-                        <div class="main" v-show="articleForm.title">
+                        <div class="main" v-show="articleForm">
                             <div class="header">
                                 <span style="font-size: 30px;font-weight: bold" v-html="articleForm.title"></span>
                             </div>
@@ -92,15 +92,15 @@
                                        v-if="articleForm.classification_id == item.id"
                                        v-html="item.name"></span>
                             </div>
-                            <div class="content_item" style="padding:20px 0 30px 30px; border-top: 1px solid #e3e3e3;">
-                                <span style="color: #636b6f;" v-html="articleForm.content" alt=""></span>
+                            <div class="content_item" >
+                                <span class="content_style" v-html="articleForm.content" alt=""></span>
                             </div>
                             <div class="author_item" style="margin-top: 10px; padding-bottom: 20px; border-bottom: 1px solid #e3e3e3;">
                                 <span style="font-weight: bold; font-family: 仿宋;font-size: 2px;">发布：</span>
                                 <span class="author" style="color: #a4aaae;font-size: 3px;" v-html="articleForm.author"></span>
                             </div>
                         </div>
-                        <div class="err_show_box" v-show="articleForm.title === ''">
+                        <div class="err_show_box" v-show="articleForm == null">
                             <span>无任何信息!</span>
                         </div>
                     </div>
@@ -275,11 +275,10 @@
                 return isJPG && isLt20M;
 
             },
-            handleImageAdded:function (file,Editor,cursorLocation,resetUploade) {
+            handleImageAdded:function (file,Editor,cursorLocation,resetUploader) {
                var formData = new FormData();
                let that = this;
                formData.append('image',file);
-               ///admin/uploadfile
                 that.loading =true;
                axios.post('https://fakeapi.yoursite.com/images',formData)
                    .then(function (result) {
@@ -351,7 +350,7 @@
             },
             showPreviewDialog(FormName){
                 this.previewVisible = true;
-                let row = this.articleForm;
+                let row = FormName;
                 // window.open('http://yue_blog.com/admin/index#/articleview')
                 // this.$router.push({name:'articleview',params:{row}});
             }
@@ -448,5 +447,18 @@
         width: 500px;
         height: 330px;
         display: block;
+    }
+    /*文章内图片样式*/
+    .content_item{
+        padding:20px 0 30px 30px;
+        border-top: 1px solid #e3e3e3;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+    }
+    .content_style {
+        width: 100%;
+        color: #636b6f;
+
     }
 </style>
