@@ -32,7 +32,7 @@
                 <el-table-column prop="admin_lastloginip" width="200" label="最后登录ip"></el-table-column>
                 <el-table-column fixed="right" width="200" label="操作">
                     <template slot-scope="scope">
-                        <el-button @click="handleEdit(scope.row)" type="text" size="small">编辑</el-button>
+                        <el-button @click="handleview(scope.row)" type="text" size="small">查看</el-button>
                         <el-button @click="handleDel(scope.row)" type="text" size="small">删除</el-button>
                     </template>
                 </el-table-column>
@@ -49,6 +49,43 @@
                            :page-size="pagesize"
             ></el-pagination>
         </el-col>
+
+        <!--查看-->
+        <el-dialog title="账户信息" :visible.sync="previewVisible" :close-on-click-model="false" :fullscreen="false">
+            <div class="preview_item">
+                <el-col class="warp_main" :span="10" :offset="6">
+                    <div class="show_box">
+                    <div class="username_item">
+                        <span><b>用户名：</b></span>
+                        <span class="username" v-html="user_info.username"></span>
+                    </div>
+                    <div class="nickname_item">
+                        <span><b>昵称：</b></span>
+                        <span class="nickname" v-html="user_info.nickname"></span>
+                    </div>
+                    <div class="name_item">
+                        <span><b>姓名：</b></span>
+                        <span class="name" v-html="user_info.name"></span>
+                    </div>
+                    <div class="email_item">
+                        <span><b>邮箱：</b></span>
+                        <span class="email" v-html="user_info.email"></span>
+                    </div>
+                    <div class="latloginip_item">
+                        <span><b>最后登录IP：</b></span>
+                        <span class="lastloginip" v-html="user_info.admin_lastloginip"></span>
+                    </div>
+                    <div class="lastlogintime_item">
+                        <span><b>最后登录时间：</b></span>
+                        <span class="lastlogintime" v-html="user_info.admin_lastlogintime"></span>
+                    </div>
+                    </div>
+                </el-col>
+                <div slot="footer" class="dialog-footer" style="padding-top: 10px;">
+                    <el-button @click.native="previewVisible = false">关闭</el-button>
+                </div>
+            </div>
+        </el-dialog>
     </el-row>
 </template>
 
@@ -61,6 +98,8 @@
                     nickname:''
                 },
                 users:[],
+                previewVisible:false,
+                user_info:{},
                 loading: false,
                 total:0,
                 currentPage:1,
@@ -102,8 +141,12 @@
                       that.$message.error({showClose:true,message:'请求出现异常',duration:2000});
                   })
             },
-            //编辑账户
-            handleEdit(row){
+            //查看账户
+            handleview(row){
+                this.previewVisible = true;
+                this.user_info = row;
+                // window.open('http://yue_blog.com/admin/index#/articleview')
+                // this.$router.push({name:'articleview',params:{row}});
                 console.log(row);
             },
             //删除账户
@@ -164,5 +207,35 @@
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    .preview_item{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        font-family: 宋体;
+    }
+    .warp_main{
+        width: 60%;
+        border: 1px dashed #a4aaae;
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        margin: 20px 0 0 20px;
+        box-shadow: 10px 10px 10px 10px #5e5d5d;
+    }
+    .show_box{
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        align-items: left;
+        justify-content: center;
+    }
+    .el-col-offset-6 {
+        margin-left: unset;
     }
 </style>

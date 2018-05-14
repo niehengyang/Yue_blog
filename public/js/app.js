@@ -93642,7 +93642,7 @@ exports = module.exports = __webpack_require__(4)(false);
 
 
 // module
-exports.push([module.i, "\n.pagination[data-v-03637100]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n", ""]);
+exports.push([module.i, "\n.pagination[data-v-03637100]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.preview_item[data-v-03637100]{\n    width: 100%;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -ms-flex-line-pack: center;\n        align-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    font-family: 宋体;\n}\n.warp_main[data-v-03637100]{\n    width: 60%;\n    border: 1px dashed #a4aaae;\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -ms-flex-line-pack: center;\n        align-content: center;\n    -webkit-box-align: center;\n        -ms-flex-align: center;\n            align-items: center;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n    margin: 20px 0 0 20px;\n    -webkit-box-shadow: 10px 10px 10px 10px #5e5d5d;\n            box-shadow: 10px 10px 10px 10px #5e5d5d;\n}\n.show_box[data-v-03637100]{\n    display: -webkit-box;\n    display: -ms-flexbox;\n    display: flex;\n    -webkit-box-orient: vertical;\n    -webkit-box-direction: normal;\n        -ms-flex-direction: column;\n            flex-direction: column;\n    -ms-flex-line-pack: center;\n        align-content: center;\n    -webkit-box-align: left;\n        -ms-flex-align: left;\n            align-items: left;\n    -webkit-box-pack: center;\n        -ms-flex-pack: center;\n            justify-content: center;\n}\n.el-col-offset-6[data-v-03637100] {\n    margin-left: unset;\n}\n", ""]);
 
 // exports
 
@@ -93707,6 +93707,43 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "userlist",
@@ -93716,6 +93753,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 nickname: ''
             },
             users: [],
+            previewVisible: false,
+            user_info: {},
             loading: false,
             total: 0,
             currentPage: 1,
@@ -93757,8 +93796,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 that.$message.error({ showClose: true, message: '请求出现异常', duration: 2000 });
             });
         },
-        //编辑账户
-        handleEdit: function handleEdit(row) {
+        //查看账户
+        handleview: function handleview(row) {
+            this.previewVisible = true;
+            this.user_info = row;
+            // window.open('http://yue_blog.com/admin/index#/articleview')
+            // this.$router.push({name:'articleview',params:{row}});
             console.log(row);
         },
 
@@ -93988,11 +94031,11 @@ var render = function() {
                             attrs: { type: "text", size: "small" },
                             on: {
                               click: function($event) {
-                                _vm.handleEdit(scope.row)
+                                _vm.handleview(scope.row)
                               }
                             }
                           },
-                          [_vm._v("编辑")]
+                          [_vm._v("查看")]
                         ),
                         _vm._v(" "),
                         _c(
@@ -94038,6 +94081,121 @@ var render = function() {
           })
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "el-dialog",
+        {
+          attrs: {
+            title: "账户信息",
+            visible: _vm.previewVisible,
+            "close-on-click-model": false,
+            fullscreen: false
+          },
+          on: {
+            "update:visible": function($event) {
+              _vm.previewVisible = $event
+            }
+          }
+        },
+        [
+          _c(
+            "div",
+            { staticClass: "preview_item" },
+            [
+              _c(
+                "el-col",
+                { staticClass: "warp_main", attrs: { span: 10, offset: 6 } },
+                [
+                  _c("div", { staticClass: "show_box" }, [
+                    _c("div", { staticClass: "username_item" }, [
+                      _c("span", [_c("b", [_vm._v("用户名：")])]),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "username",
+                        domProps: { innerHTML: _vm._s(_vm.user_info.username) }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "nickname_item" }, [
+                      _c("span", [_c("b", [_vm._v("昵称：")])]),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "nickname",
+                        domProps: { innerHTML: _vm._s(_vm.user_info.nickname) }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "name_item" }, [
+                      _c("span", [_c("b", [_vm._v("姓名：")])]),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "name",
+                        domProps: { innerHTML: _vm._s(_vm.user_info.name) }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "email_item" }, [
+                      _c("span", [_c("b", [_vm._v("邮箱：")])]),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "email",
+                        domProps: { innerHTML: _vm._s(_vm.user_info.email) }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "latloginip_item" }, [
+                      _c("span", [_c("b", [_vm._v("最后登录IP：")])]),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "lastloginip",
+                        domProps: {
+                          innerHTML: _vm._s(_vm.user_info.admin_lastloginip)
+                        }
+                      })
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "lastlogintime_item" }, [
+                      _c("span", [_c("b", [_vm._v("最后登录时间：")])]),
+                      _vm._v(" "),
+                      _c("span", {
+                        staticClass: "lastlogintime",
+                        domProps: {
+                          innerHTML: _vm._s(_vm.user_info.admin_lastlogintime)
+                        }
+                      })
+                    ])
+                  ])
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                {
+                  staticClass: "dialog-footer",
+                  staticStyle: { "padding-top": "10px" },
+                  attrs: { slot: "footer" },
+                  slot: "footer"
+                },
+                [
+                  _c(
+                    "el-button",
+                    {
+                      nativeOn: {
+                        click: function($event) {
+                          _vm.previewVisible = false
+                        }
+                      }
+                    },
+                    [_vm._v("关闭")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ]
       )
     ],
     1
@@ -95915,7 +96073,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 title: [{ required: true, message: '请输入文章标题', trigger: 'blur' }, { min: 1, max: 100, message: '标题最多100个字符', trigger: 'blur' }],
                 content: [{ required: true, message: '请输入文章内容', trigger: 'blur' }],
                 classification: [{ requured: true, message: '请选择文章分类', trigger: 'blur' }],
-                abstract: [{ min: 1, max: 100, message: '标题最多100个字符', trigger: 'blur' }],
+                abstract: [{ min: 1, max: 300, message: '摘要最多300个字符', trigger: 'blur' }],
                 istop: [{ required: true, message: '请选择是否置顶', trigger: 'blur' }],
                 release_size: [{ required: true, message: '请选择状态', trigger: 'blur' }]
             }
@@ -96278,7 +96436,7 @@ var render = function() {
                   _c("el-input", {
                     attrs: {
                       type: "textarea",
-                      maxlength: "100",
+                      maxlength: "300",
                       placeholder: "文章摘要最多300字符,放空将默认提取!。"
                     },
                     model: {

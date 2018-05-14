@@ -33,7 +33,7 @@
                     </vue-editor>
                 </el-form-item>
                 <el-form-item label="文章摘要：" prop="abstract">
-                    <el-input type="textarea" v-model="articleForm.abstract" maxlength="100" placeholder="文章摘要最多300字符,放空将默认提取!。"></el-input>
+                    <el-input type="textarea" v-model="articleForm.abstract" maxlength="300" placeholder="文章摘要最多300字符,放空将默认提取!。"></el-input>
                 </el-form-item>
                 <el-form-item label="文章分类：" prop="classification_id">
                     <el-select size="small" v-model="articleForm.classification_id" placeholder="请选择文章分类">
@@ -162,7 +162,7 @@
                         {requured:true ,message:'请选择文章分类' ,trigger:'blur'}
                         ],
                     abstract:[
-                        {min:1 ,max: 100, message: '标题最多100个字符', trigger: 'blur'}
+                        {min:1 ,max: 300, message: '摘要最多300个字符', trigger: 'blur'}
                     ],
                     istop:[
                         {required:true ,message:'请选择是否置顶', trigger:'blur'}
