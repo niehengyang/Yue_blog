@@ -37,7 +37,7 @@
             </div>
                 <!--导航菜单-->
             <el-menu default-active="defaultActiveIndex" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse" background-color="#333744" text-color="#ffffff">
-                <el-menu-item index="1" @click="jumpTo('admin/home')">
+                <el-menu-item index="1" @click="jumpTo('/admin/home')">
                     <i  class="fa fa-home"></i>
                     <span slot="title">&nbsp;&nbsp;首页</span>
                 </el-menu-item>
@@ -51,19 +51,26 @@
                  </el-menu-item>
                 <el-submenu index="4" >
                     <template slot="title">
-                        <i class="fa fa-bars"></i>
+                        <i class="fa fa-file-text"></i>
                         <span slot="title">&nbsp;&nbsp;文章管理</span>
                     </template>
                     <el-menu-item index="4-1" @click="jumpTo('/articlelist')">文章列表</el-menu-item>
                     <el-menu-item index="4-2" @click="jumpTo('/classification')">文章分类</el-menu-item>
                 </el-submenu>
-                <el-submenu index="5">
+                <el-submenu index="5" >
+                    <template slot="title">
+                        <i class="fa fa-puzzle-piece"></i>
+                        <span slot="title">&nbsp;&nbsp;页面设计</span>
+                    </template>
+                    <el-menu-item index="5-1" @click="jumpTo('/picturelist')">图片列表</el-menu-item>
+                </el-submenu>
+                <el-submenu index="6">
                     <template slot="title">
                     <i class="fa fa-cog"></i>
                     <span slot="title">&nbsp;&nbsp;设置</span>
                     </template>
-                    <el-menu-item index="5-1" @click="jumpTo('/user/profile')">个人信息</el-menu-item>
-                    <el-menu-item index="5-2" @click="jumpTo('/user/changepwd')">修改密码</el-menu-item>
+                    <el-menu-item index="6-1" @click="jumpTo('/user/profile')">个人信息</el-menu-item>
+                    <el-menu-item index="6-2" @click="jumpTo('/user/changepwd')">修改密码</el-menu-item>
                 </el-submenu>
             </el-menu>
             </aside>

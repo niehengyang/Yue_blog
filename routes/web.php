@@ -78,3 +78,11 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'
     Route::post('delcomments','commentsController@delcomments');//删除评论
     Route::post('initcomments','commentsController@createComments');//生成评论
 });
+
+//图片管理
+Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'],function (){
+    Route::get('imagelist','imageController@getimagelist');//获取评论列表
+    Route::post('disablecomments','imageController@disableFun');//禁用评论
+    Route::post('delcomments','imageController@delcomments');//删除评论
+    Route::post('initcomments','imageController@createComments');//生成评论
+});

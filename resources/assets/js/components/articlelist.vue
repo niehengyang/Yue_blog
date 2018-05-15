@@ -98,7 +98,7 @@
             //     this.articleForm = this.$route.params.row;
             // }
             this.searchArticle()
-            this.LoadClassification();
+            this.LoadClassification()
         },
         methods:{
             //获取分类信息
