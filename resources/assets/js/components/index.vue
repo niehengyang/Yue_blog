@@ -12,24 +12,8 @@
                     <div class="traffic_item">
                         <div class="show_face">
                             <div class="left_main">
-                                <span>44人</span>
-                                <span>浏览量</span>
-                            </div>
-                            <div class="right_main">
-                                <i class="fa fa-user-plus"></i>
-                            </div>
-                        </div>
-                        <div class="operation_btn">
-                            <button>更多信息<i class="fa fa-arrow-circle-right"></i></button>
-                        </div>
-                    </div>
-                </el-col>
-                <el-col :span="6">
-                    <div class="traffic_item">
-                        <div class="show_face">
-                            <div class="left_main">
-                                <span>44人</span>
-                                <span>浏览量</span>
+                                <span class="number">44人</span>
+                                <span class="show_type">浏览量</span>
                             </div>
                             <div class="right_main">
                                 <i class="fa fa-user-plus"></i>
@@ -60,8 +44,24 @@
                     <div class="traffic_item">
                         <div class="show_face">
                             <div class="left_main">
-                                <span>44人</span>
-                                <span>浏览量</span>
+                                <span class="number">44人</span>
+                                <span class="show_type">浏览量</span>
+                            </div>
+                            <div class="right_main">
+                                <i class="fa fa-user-plus"></i>
+                            </div>
+                        </div>
+                        <div class="operation_btn">
+                            <button>更多信息<i class="fa fa-arrow-circle-right"></i></button>
+                        </div>
+                    </div>
+                </el-col>
+                <el-col :span="6">
+                    <div class="traffic_item">
+                        <div class="show_face">
+                            <div class="left_main">
+                                <span class="number">44人</span>
+                                <span class="show_type">浏览量</span>
                             </div>
                             <div class="right_main">
                                 <i class="fa fa-user-plus"></i>
