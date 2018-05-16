@@ -1,0 +1,46 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:300,400,600);@charset "UTF-8";
+
+/**
+    home页面样式
+**/
+
+.panel{
+    border: unset;
+    border-radius: unset;
+    border-bottom: 1px solid #cccccc;
+}
+.panel-heading{
+    padding: 5px 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: unset;
+}
+.panel-heading left{
+    font-family: Andalus;
+}
+.title_span , .author_a{
+    font-size: small;
+    padding: 3px;
+}
+@media (min-width: 992px){
+    .col-md-8 {
+        width: 80.66666667%;
+    }
+}
+
+@media (min-width: 992px){
+    .col-md-offset-2 {
+        margin-left: 8.66666667%;
+    }
+}
+
+.panel-body{
+    font-family: 宋体;
+    padding-top: unset;
+}
+.title_item san h3{
+    font-style: normal;
+    font-weight: bold;
+}

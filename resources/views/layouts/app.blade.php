@@ -2,8 +2,9 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html">
+    {{--<meta http-equiv="X-UA-Compatible" content="IE=edge">--}}
+    {{--<meta name="viewport" content="width=device-width, initial-scale=1">--}}
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -12,6 +13,26 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{asset('css/home.css')}}" rel="stylesheet">
+    <style>
+        .navbar{
+            width: 100%;
+            height: 300px;
+            background: url("{{config('app.home_background','/images/Yue_blog.jpg')}}");
+            background-size: 100% 100%;
+        }
+        .warp_title{
+            text-align: center;
+            color: white;
+        }
+        .speak_title{
+            font-family: "Courier New", monospace;
+        }
+        .describe_title{
+            font-family: Aharoni;
+            font-style: italic;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
@@ -28,7 +49,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" style="color: white" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
                 </div>
@@ -47,7 +68,7 @@
                             <li><a href="{{ route('register') }}">注册</a></li>
                         @else
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                <a href="#" style="color: white" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                     {{ Auth::user()->name }} <span class="caret"></span>
                                 </a>
 
@@ -56,7 +77,7 @@
                                         <a href="{{ route('logout') }}"
                                             onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                                            Logout
+                                            退出
                                         </a>
 
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -67,6 +88,10 @@
                             </li>
                         @endif
                     </ul>
+                </div>
+                <div class="warp_title">
+                    <span class="speak_title"><h2>HELLO,I AM NHY</h2></span>
+                    <span class="describe_title">Yue_blog是一个基于laravel5开发的博客系统</span>
                 </div>
             </div>
         </nav>

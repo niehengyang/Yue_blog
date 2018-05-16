@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Article;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,6 +24,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('/welcome');
+        $articleList = Article::paginate(8);
+        if (is_null($articleList)){
+            return view('/home')->withErrors('暂无信息');
+        }else{
+            return view('/home',$articleList);
+        }
     }
 }
