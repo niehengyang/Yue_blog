@@ -54,16 +54,19 @@
     <body>
     <!--操作栏-->
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">主页</a>
-                    @else
-                        <a href="{{ url('/login') }}">请登录</a>
-                        <a href="{{ url('/register') }}">注册</a>
-                    @endif
-                </div>
-            @endif
+            <div class="top-right links">
+                <a href="{{ url('/home') }}">主页</a>
+            </div>
+            {{--@if (Route::has('login'))--}}
+                {{--<div class="top-right links">--}}
+                    {{--@if (Auth::check())--}}
+                        {{--<a href="{{ url('/home') }}">主页</a>--}}
+                    {{--@else--}}
+                        {{--<a href="{{ url('/login') }}">请登录</a>--}}
+                        {{--<a href="{{ url('/register') }}">注册</a>--}}
+                    {{--@endif--}}
+                {{--</div>--}}
+            {{--@endif--}}
         </div>
 
             <!-- Header -->

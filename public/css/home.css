@@ -26,13 +26,13 @@
 }
 @media (min-width: 992px){
     .col-md-8 {
-        width: 80.66666667%;
+        width: 80.06666667%;
     }
 }
 
 @media (min-width: 992px){
     .col-md-offset-2 {
-        margin-left: 8.66666667%;
+        margin-left: 9.68888887%;
     }
 }
 
@@ -43,4 +43,7 @@
 .title_item san h3{
     font-style: normal;
     font-weight: bold;
+}
+.pagination_item{
+    text-align: center;
 }

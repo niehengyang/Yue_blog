@@ -28,7 +28,7 @@ class HomeController extends Controller
         if (is_null($articleList)){
             return view('/home')->withErrors('暂无信息');
         }else{
-            return view('/home',$articleList);
+            return view('/home',['articleList' =>$articleList]);
         }
     }
 }

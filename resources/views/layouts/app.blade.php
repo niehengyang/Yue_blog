@@ -22,7 +22,10 @@
             background-size: 100% 100%;
         }
         .warp_title{
-            text-align: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
             color: white;
         }
         .speak_title{
@@ -31,6 +34,21 @@
         .describe_title{
             font-family: Aharoni;
             font-style: italic;
+        }
+        nav a{
+        display: block;
+        }
+        summary{
+            cursor: pointer;
+        }
+        .go_home{
+            border: 1px solid #dddddd;
+            text-align: center;
+            margin: 10px;
+            width: 60px;
+            height: 30px;
+            background: none;
+            color: #dddddd ;
         }
     </style>
 </head>
@@ -56,12 +74,16 @@
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
-                        &nbsp;
+                    <ul class="nav navbar-nav navbar-left">
+                        {{--<li></li>--}}
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
+                        <!--route Links-->
+                        {{--<li class="details_item">--}}
+                           {{----}}
+                        {{--</li>--}}
                         <!-- Authentication Links -->
                         @if (Auth::guest())
                             <li><a href="{{ route('login') }}">登录</a></li>
@@ -69,7 +91,7 @@
                         @else
                             <li class="dropdown">
                                 <a href="#" style="color: white" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->name }} <span class="caret"></span>
+                                    {{ Auth::user()->nickname }} <span class="caret"></span>
                                 </a>
 
                                 <ul class="dropdown-menu" role="menu">
@@ -79,7 +101,6 @@
                                                      document.getElementById('logout-form').submit();">
                                             退出
                                         </a>
-
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                             {{ csrf_field() }}
                                         </form>
@@ -92,13 +113,14 @@
                 <div class="warp_title">
                     <span class="speak_title"><h2>HELLO,I AM NHY</h2></span>
                     <span class="describe_title">Yue_blog是一个基于laravel5开发的博客系统</span>
+                    <a :href="/home"><button class="go_home">HOME</button></a>
                 </div>
+
             </div>
         </nav>
 
         @yield('content')
     </div>
-
     <!-- Scripts -->
     {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 </body>

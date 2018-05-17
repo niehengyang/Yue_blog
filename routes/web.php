@@ -19,11 +19,11 @@ Auth::routes();
 
 
 
-//前台登录
+//前台页面
 Route::group(['middleware' => 'web'],function (){
     //前台使用默认登录框架
     Route::get('/home', 'HomeController@index')->name('home');//前台首页
-//    Route::get('/article','')
+    Route::get('/article/show','ArticleController@index')->name('article_show');//前台文章页面
 });
 
 
