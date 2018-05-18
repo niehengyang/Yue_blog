@@ -4,6 +4,7 @@ namespace App\Model;
 
 use App\User;
 use Illuminate\Database\Eloquent\Model;
+use Psy\Command\Command;
 
 class comments extends Model
 {
@@ -17,7 +18,6 @@ class comments extends Model
     public function user(){
         return $this->belongsTo('App\User','user_id','id');
     }
-
 
     //数据层添加article_id,nickname,email字段并查找赋值
     protected $appends = ['article_title','nickname','email'];

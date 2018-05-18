@@ -4,31 +4,12 @@
 <div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <div class="panel-heading left">
-                        <span class="title_span">2018-05-10</span>
-                        <span>|</span>
-                        <a href="##" class="author_a">NHY</a>
-                    </div>
-                    <a href="##" class="comments_span">1 评论</a>
-                </div>
-
-                <div class="panel-body">
-                    <div class="title_item">
-                        <san><h3>这是测试标题</h3></san>
-                    </div>
-                    <div class="describe_item">
-                        <span>这里是测试标题文章的摘要顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶顶...<a href="##">查看全文</a></span>
-                    </div>
-                </div>
-            </div>
             @if(!empty($articleList))
                 @foreach($articleList as $article)
                     <div class="panel panel-default">
                         <div class="panel-heading">
                             <div class="panel-heading left">
-                                <span class="title_span">{{mb_substr($article->created_at,0,10)}}</span>
+                                <span class="title_span"><time style="color: #a4aaae;" class="fa fa-calendar date" datetime="{{$article->created_at->format('C')}}" itemprop="datePublished" pubdate="">&nbsp;{!!$article->created_at->format('d F,Y')!!}</time></span>
                                 <span>|</span>
                                 <a href="##" class="author_a">{{$article->author}}</a>
                             </div>
@@ -51,5 +32,6 @@
         {{$articleList->links()}}
         </div>
     </div>
+    <div class="clear"></div>
 </div>
 @endsection

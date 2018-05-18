@@ -24,7 +24,7 @@ class Article extends Model
         $classificationId = $this->attributes['classification_id'];
         if ($classificationId){
             $classification = classification::find($classificationId);
-            return $classification->name;
+            return $classification['name'];
         }else{
             return;
         }
@@ -34,7 +34,7 @@ class Article extends Model
     $articleId = $this->attributes['id'] ;
     if ($articleId){
         $comments = comments::where('article_id',$articleId);
-        return $comments;
+        return ['comments'=>$comments];
     }else{
         return;
     }
