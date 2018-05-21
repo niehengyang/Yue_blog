@@ -24,7 +24,7 @@ Route::group(['middleware' => 'web'],function (){
     //前台使用默认登录框架
     Route::get('/home', 'HomeController@index')->name('home');//前台首页
     Route::get('/article/show','ArticleController@index')->name('article_show');//前台文章页面
-    Route::post('/comments/store','CommentController@store')->name('coments_store');//评论创建
+    Route::post('/comments/store','CommentController@store')->name('comments_store');//评论创建
 });
 
 

@@ -19,7 +19,7 @@ class Article extends Model
     }
 
     //数据层添加classification_name字段并查找赋值
-    protected $appends = ['classification_name','comments_number','comments'];
+    protected $appends = ['classification_name','comments_number'];
     protected function getClassificationNameAttribute(){
         $classificationId = $this->attributes['classification_id'];
         if ($classificationId){
@@ -29,16 +29,6 @@ class Article extends Model
             return;
         }
     }
-
-    protected function getCommentsAttribute(){
-    $articleId = $this->attributes['id'] ;
-    if ($articleId){
-        $comments = comments::where('article_id',$articleId);
-        return ['comments'=>$comments];
-    }else{
-        return;
-    }
-}
 
     protected function getCommentsNumberAttribute(){
         $articleId = $this->attributes['id'] ;

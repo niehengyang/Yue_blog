@@ -4,7 +4,6 @@ namespace App\Model;
 
 use App\User;
 use Illuminate\Database\Eloquent\Model;
-use Psy\Command\Command;
 
 class comments extends Model
 {

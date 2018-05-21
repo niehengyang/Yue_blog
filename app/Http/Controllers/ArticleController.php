@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Model\Article;
+use App\Model\comments;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
@@ -13,9 +15,11 @@ class ArticleController extends Controller
         $prev_article_title = Article::find($article_prev)['title'];
         $article_next = Article::where('id','>',$articleId)->min('id');
         $next_article_title = Article::find($article_next)['title'];
+        $currentUser = Auth::user();
+        $comments = comments::where('article_id',$articleId)->get();
         if(Article::find($articleId)){
             $article = Article::find($articleId);
-            return view('article',['article'=>$article,'prev_id'=>$article_prev,'next_id'=>$article_next,'prev_article_title'=>$prev_article_title,'next_article_title'=>$next_article_title]);
+            return view('article',['article'=>$article,'prev_id'=>$article_prev,'next_id'=>$article_next,'prev_article_title'=>$prev_article_title,'next_article_title'=>$next_article_title,'currentUser' => $currentUser,'comments' =>$comments]);
         }
     }
 

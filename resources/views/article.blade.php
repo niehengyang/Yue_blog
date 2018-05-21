@@ -81,71 +81,91 @@
     <div class="warp_comments">
         <div class="comments_item">
             <a name="comment-input" class="auchor" href="#comment-input">评论区</a>
-            <textarea id="comment_text" class="form-control" rows="3" placeholder="用心评论,文明发言!"></textarea>
-            <p class="text-right"><button id="comment_sub" type="button" class="btn btn-primary btn-xs">提交评论</button></p>
+
+            <div class="comment-input">
+                {!! Form::open(['route' => 'comments_store','method' => 'POST']) !!}
+                <input type="hidden" name="article_id" value="{{$article->id}}"/>
+                <input type="hidden" name="user_id" value="{{$currentUser->id}}"/>
+                <div class="form-group">
+                    {!! Form::textarea('comment_content',null,['class' => 'form-control',
+                                'rows' => 3,'placeholder' => '用心评论,文明发言!']) !!}
+                </div>
+                @if($errors->has('comment_content'))
+                    <span class="help-block">
+                        <strong>{{$errors->first('comment_content')}}</strong>
+                    </span>
+                @endif
+                <div></div>
+                <div class="form-group status-post-submit">
+                    <p class="text-right">{!! Form::submit('提交评论',['class'=>'btn btn-primary btn-xs','id'=>'reply-create-submit']) !!}</p>
+
+                </div>
+                {!! Form::close() !!}
+            </div>
 
 
             {{--<div class="comment-input">--}}
-                {{--{{Form::open(['route'=>'coments_store','method'=>'post'])}}--}}
-                {{--<input type="hidden" name="post_id" value="{{$article->id}}"/>--}}
-                {{--<div class="form-group">--}}
-                    {{--@if($currentUser)--}}
-                        {{--{{Form::textarea('body',null,['class' =>'form-control',--}}
-                            {{--'rows'=>5,--}}
-                            {{--'placeholder'=>land('leave a comment?'),--}}
-                            {{--'style'=>'overflow:hidden',--}}
-                            {{--'id'=>'reply_content'])}}--}}
-                    {{--@else--}}
-                        {{--{{Form::textarea('body',null,['class'=>'form-control','rows'=>5, 'placeholder'=>land('用心评论,文明发言!')])}}--}}
-                    {{--@endif--}}
+            {{--{{Form::open(['route'=>'comments_store','method'=>'post'])}}--}}
+            {{--<input type="hidden" name="article_id" value="{{$article->id}}"/>--}}
+            {{--<div class="form-group">--}}
+                {{--@if($currentUser)--}}
+                    {{--{{Form::textarea('body',null,['class' =>'form-control',--}}
+                        {{--'rows'=>5,--}}
+                        {{--'placeholder'=>'是否评论?',--}}
+                        {{--'style'=>'overflow:hidden',--}}
+                        {{--'id'=>'reply_content'])}}--}}
+                {{--@else--}}
+                    {{--{{Form::textarea('body',null,['class'=>'form-control','rows'=>5, 'placeholder'=>'用心评论,文明发言!'])}}--}}
+                {{--@endif--}}
 
-                {{--</div>--}}
-                {{--<div class="form-group status-post-submit">--}}
-                    {{--<p class="text-right">{{Form::submit(lang('Comment'),['class'=>'btn btn-primary btn-xs'.($currentUser ? '':'disabled'),'id'=>'reply-create-submit'])}}</p>--}}
-
-                {{--</div>--}}
-            {{--{{Form::close()}}--}}
             {{--</div>--}}
+            {{--<div class="form-group status-post-submit">--}}
+                {{--<p class="text-right">{{Form::submit('提交评论',['class'=>'btn btn-primary btn-xs'.($currentUser ? '':'disabled'),'id'=>'reply-create-submit'])}}</p>--}}
+
+            {{--</div>--}}
+            {{--{{Form::close()}}--}}
         {{--</div>--}}
+
+    </div>
 
         <div class="show_comments">
             <div class="comments_list">
                 <p class="small">全部评论</p>
                 <div class="show_box">
-                    <div class="comment_item">
-                        <div class="show_nickname"><span><b>John Doe</b></span></div>
-                        <div class="reply_item">
-                            <time style="color: #a4aaae;" datetime="" itemprop="datePublished" pubdate="">Jul 12,2016 @ 24:05</time>
-                            <span>&nbsp;/&nbsp;</span>
-                            <a href="">回复</a>
-                        </div>
-                        <div class="comment_content"><p class="small">评论测试1，这是评论的内容！！！！</p></div>
-                    </div>
-                    <div class="comment_item">
-                        <div class="show_nickname"><span><b>John Doe</b></span></div>
-                        <div class="reply_item">
-                            <time style="color: #a4aaae;" datetime="" itemprop="datePublished" pubdate="">Jul 12,2016 @ 24:05</time>
-                            <span>&nbsp;/&nbsp;</span>
-                            <a href="">回复</a>
-                        </div>
-                        <div class="comment_content"><p class="small">评论测试2，这是评论的内容！！！！</p></div>
-                        <div class="clear"></div>
-                    </div>
-                    {{--@if(!empty($article->comments->comment_content))--}}
-                        {{--@foreach($article->comments as $comment)--}}
                     {{--<div class="comment_item">--}}
-                    {{--<div class="show_nickname"><span><b>John Doe</b></span></div>--}}
-                            {{--<div class="reply_item">--}}
-                                {{--<time style="color: #a4aaae;" datetime="" itemprop="datePublished" pubdate="">Jul 12,2016 @ 24:05</time>--}}
-                                {{--<span>&nbsp;/&nbsp;</span>--}}
-                                {{--<a href="">回复</a>--}}
-                            {{--</div>--}}
-                            {{--<div class="comment_content"><p class="small">评论测试1，这是评论的内容！！！！</p></div>--}}
+                        {{--<div class="show_nickname"><span><b>John Doe</b></span></div>--}}
+                        {{--<div class="reply_item">--}}
+                            {{--<time style="color: #a4aaae;" datetime="" itemprop="datePublished" pubdate="">Jul 12,2016 @ 24:05</time>--}}
+                            {{--<span>&nbsp;/&nbsp;</span>--}}
+                            {{--<a href="">回复</a>--}}
+                        {{--</div>--}}
+                        {{--<div class="comment_content"><p class="small">评论测试1，这是评论的内容！！！！</p></div>--}}
                     {{--</div>--}}
-                        {{--@endforeach--}}
-                    {{--@else--}}
-                        {{--<div class="comment_content"><p class="small">暂无评论</p></div>--}}
-                    {{--@endif--}}
+                    {{--<div class="comment_item">--}}
+                        {{--<div class="show_nickname"><span><b>John Doe</b></span></div>--}}
+                        {{--<div class="reply_item">--}}
+                            {{--<time style="color: #a4aaae;" datetime="" itemprop="datePublished" pubdate="">Jul 12,2016 @ 24:05</time>--}}
+                            {{--<span>&nbsp;/&nbsp;</span>--}}
+                            {{--<a href="">回复</a>--}}
+                        {{--</div>--}}
+                        {{--<div class="comment_content"><p class="small">评论测试2，这是评论的内容！！！！</p></div>--}}
+                        {{--<div class="clear"></div>--}}
+                    {{--</div>--}}
+                    @if(!empty($comments))
+                        @foreach($comments as $comment)
+                    <div class="comment_item">
+                    <div class="show_nickname"><span><b>{{$comment->nickname}}</b></span></div>
+                            <div class="reply_item">
+                                <time style="color: #a4aaae;" datetime="{{$comment->created_at->format('C')}}" itemprop="datePublished" pubdate="">{{$comment->created_at->format('d F,Y')}} @ {{mb_substr($comment->created_at,10)}}</time>
+                                <span>&nbsp;/&nbsp;</span>
+                                <a href="">回复</a>
+                            </div>
+                            <div class="comment_content"><p class="small">{{$comment->comment_content}}</p></div>
+                    </div>
+                        @endforeach
+                    @else
+                        <div class="comment_content"><p class="small">暂无评论</p></div>
+                    @endif
                 </div>
             </div>
         </div>
