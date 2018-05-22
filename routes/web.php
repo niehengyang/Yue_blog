@@ -25,6 +25,9 @@ Route::group(['middleware' => 'web'],function (){
     Route::get('/home', 'HomeController@index')->name('home');//前台首页
     Route::get('/article/show','ArticleController@index')->name('article_show');//前台文章页面
     Route::post('/comments/store','CommentController@store')->name('comments_store');//评论创建
+    Route::post('/comments/destroy{id}','CommentController@destroy')->name('comments_destroy');//评论删除
+    Route::get('/classification/show','ClassificationController@index')->name('classifications_show');//分类列表
+    Route::get('/articlelist','ArticleController@getlist')->name('article_list');//文章列表
 });
 
 
@@ -83,7 +86,7 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'
 //图片管理
 Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'],function (){
     Route::get('imagelist','imageController@getimagelist');//获取评论列表
-    Route::post('disablecomments','imageController@disableFun');//禁用评论
-    Route::post('delcomments','imageController@delcomments');//删除评论
-    Route::post('initcomments','imageController@createComments');//生成评论
+//    Route::post('disablecomments','imageController@disableFun');//禁用评论
+//    Route::post('delcomments','imageController@delcomments');//删除评论
+//    Route::post('initcomments','imageController@createComments');//生成评论
 });

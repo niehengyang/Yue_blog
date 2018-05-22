@@ -23,4 +23,14 @@ class ArticleController extends Controller
         }
     }
 
+    public function getlist(Request $request){
+        $classificationId = $request->input('id');
+        $articleList = Article::where('classification_id',$classificationId)->get();
+        if (is_null($articleList)){
+            return view('/articlelist')->withErrors('暂无信息');
+        }else{
+            return view('/articlelist',['articleList' =>$articleList]);
+        }
+    }
+
 }

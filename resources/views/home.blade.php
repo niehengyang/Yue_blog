@@ -3,6 +3,15 @@
 @section('content')
 <div class="container">
     <div class="row">
+        <!--首页路径-->
+        <div class="warp-breadcrumb">
+            <ul class="breadcrumb">
+                <li>
+                    <a href="/">Yue_blog</a>
+                </li>
+                <li  href="/home" class="active">首页</li>
+            </ul>
+        </div>
         <div class="col-md-8 col-md-offset-2">
             @if(!empty($articleList))
                 @foreach($articleList as $article)

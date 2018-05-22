@@ -35,7 +35,7 @@ class comments extends Model
             $account = User::find($accountId);
             return $account->nickname;
         }else{
-            return;
+            return '游客';
         }
     }
     protected function getEmailAttribute(){
@@ -44,7 +44,7 @@ class comments extends Model
             $account = User::find($accountId);
             return $account->email;
         }else{
-            return;
+            return $this->attributes['email'];
         }
     }
 }

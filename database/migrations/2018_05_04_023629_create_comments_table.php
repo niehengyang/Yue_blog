@@ -18,6 +18,7 @@ class CreateCommentsTable extends Migration
             $table->integer('article_id')->comment('文章id');
             $table->integer('parent_id')->comment('父节点id');
             $table->integer('user_id')->comment('评论者id');
+            $table->string('email',100)->unique()->comment('邮箱');
             $table->boolean('release_size')->comment('评论状态');
             $table->text('comment_content')->comment('评论内容');
             $table->timestamps();

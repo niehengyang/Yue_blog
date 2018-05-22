@@ -10,8 +10,22 @@
 
 </script>
 @section('content')
-<!---文章页面-->
+
+
 <div class="page">
+    <!--首页路径-->
+    <div class="warp-breadcrumb">
+    <ul class="breadcrumb">
+        <li>
+            <a href="/">Yue_blog</a>
+        </li>
+        <li>
+            <a href="/home">首页</a>
+        </li>
+        <li class="active">文章详情</li>
+    </ul>
+    </div>
+    <!---文章页面-->
 @if(!empty($article))
 <el-row class="warp_mid" type="flex" justify="center">
     <el-col class="warp_main" :span="18" :offset="6">
@@ -85,7 +99,22 @@
             <div class="comment-input">
                 {!! Form::open(['route' => 'comments_store','method' => 'POST']) !!}
                 <input type="hidden" name="article_id" value="{{$article->id}}"/>
+                @if(!empty($currentUser))
                 <input type="hidden" name="user_id" value="{{$currentUser->id}}"/>
+                @endif
+                <input type="hidden" name="parent_id" value="{{$article->id}}"/>
+                @if(empty($currentUser))
+                    <div class="form-group">
+                    {!! Form::email('email',null,['class' =>'form-control','row' => 3,'placeholder' => '请输入邮箱']) !!}
+                    </div>
+                    @else
+                    <input type="hidden" name="email" value="{{$currentUser->email}}"/>
+                @endif
+                @if($errors->has('email'))
+                    <span class="help-block">
+                        <strong>{{$errors->first('email')}}</strong>
+                    </span>
+                @endif
                 <div class="form-group">
                     {!! Form::textarea('comment_content',null,['class' => 'form-control',
                                 'rows' => 3,'placeholder' => '用心评论,文明发言!']) !!}
@@ -132,33 +161,22 @@
             <div class="comments_list">
                 <p class="small">全部评论</p>
                 <div class="show_box">
-                    {{--<div class="comment_item">--}}
-                        {{--<div class="show_nickname"><span><b>John Doe</b></span></div>--}}
-                        {{--<div class="reply_item">--}}
-                            {{--<time style="color: #a4aaae;" datetime="" itemprop="datePublished" pubdate="">Jul 12,2016 @ 24:05</time>--}}
-                            {{--<span>&nbsp;/&nbsp;</span>--}}
-                            {{--<a href="">回复</a>--}}
-                        {{--</div>--}}
-                        {{--<div class="comment_content"><p class="small">评论测试1，这是评论的内容！！！！</p></div>--}}
-                    {{--</div>--}}
-                    {{--<div class="comment_item">--}}
-                        {{--<div class="show_nickname"><span><b>John Doe</b></span></div>--}}
-                        {{--<div class="reply_item">--}}
-                            {{--<time style="color: #a4aaae;" datetime="" itemprop="datePublished" pubdate="">Jul 12,2016 @ 24:05</time>--}}
-                            {{--<span>&nbsp;/&nbsp;</span>--}}
-                            {{--<a href="">回复</a>--}}
-                        {{--</div>--}}
-                        {{--<div class="comment_content"><p class="small">评论测试2，这是评论的内容！！！！</p></div>--}}
-                        {{--<div class="clear"></div>--}}
-                    {{--</div>--}}
                     @if(!empty($comments))
                         @foreach($comments as $comment)
                     <div class="comment_item">
-                    <div class="show_nickname"><span><b>{{$comment->nickname}}</b></span></div>
+                        <div class="show_nickname"><span><b>{{$comment->nickname}}</b></span></div>
+                        @if(empty($comment->nickname))
+                            <div class="show_nickname"><span><b>游客</b></span></div>
+                        @endif
                             <div class="reply_item">
                                 <time style="color: #a4aaae;" datetime="{{$comment->created_at->format('C')}}" itemprop="datePublished" pubdate="">{{$comment->created_at->format('d F,Y')}} @ {{mb_substr($comment->created_at,10)}}</time>
                                 <span>&nbsp;/&nbsp;</span>
                                 <a href="">回复</a>
+                                {{--@if($currentUser->id == $comment->user_id)--}}
+                                    {{--<div class="pull-right meta">--}}
+                                        {{--<a href="{{route('comments_destroy',$comment->id)}}" data-method="delete"><i class="fa fa-trash">删除</i></a>--}}
+                                    {{--</div>--}}
+                                {{--@endif--}}
                             </div>
                             <div class="comment_content"><p class="small">{{$comment->comment_content}}</p></div>
                     </div>

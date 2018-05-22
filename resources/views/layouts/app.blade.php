@@ -113,12 +113,14 @@
                 <div class="warp_title">
                     <span class="speak_title"><h2>HELLO,I AM NHY</h2></span>
                     <span class="describe_title">Yue_blog是一个基于laravel5开发的博客系统</span>
+                    <div>
                     <a href="/home"><button class="go_home">HOME</button></a>
+                    <a href="{{route('classifications_show')}}" ><button class="go_home">分类</button></a>
+                    </div>
                 </div>
 
             </div>
         </nav>
-
         @yield('content')
     </div>
     <!-- Scripts -->

@@ -35,11 +35,11 @@ class commentsController extends Controller
             if ($commentsId == 0 ){
                 throw new Exception('无法禁用');
             }
-            if (is_null($commentsId)){
+            if (empty($commentsId)){
                 throw new Exception('请重新选择');
             }
             $comments = comments::find($commentsId);
-            if (is_null($comments)){
+            if (empty($comments)){
                 throw new Exception('该评论不存在');
             }
             $comments ->release_size = $request->get('release_size');

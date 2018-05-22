@@ -1,0 +1,18 @@
+.row{
+    width: 100%;
+}
+
+.show_box{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    width: 80%;
+}
+.warp-classification{
+    padding: 10px;
+}
+
+.box{
+
+}
