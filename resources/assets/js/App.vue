@@ -60,9 +60,10 @@
                 <el-submenu index="5" >
                     <template slot="title">
                         <i class="fa fa-puzzle-piece"></i>
-                        <span slot="title">&nbsp;&nbsp;页面设计</span>
+                        <span slot="title">&nbsp;&nbsp;站点管理</span>
                     </template>
                     <el-menu-item index="5-1" @click="jumpTo('/picturelist')">图片列表</el-menu-item>
+                    <el-menu-item index="5-2" @click="jumpTo('/deskpage')">前台页面</el-menu-item>
                 </el-submenu>
                 <el-submenu index="6">
                     <template slot="title">

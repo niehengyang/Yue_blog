@@ -75,7 +75,11 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-left">
-                        {{--<li></li>--}}
+                        <li class="details_item"><a href="/home">首页</a></li>
+                        <li class="details_item"><a href="{{route('classifications_show')}}">文章分类</a></li>
+                        <li class="details_item"><a href="">作者档案</a></li>
+                        <li class="details_item"><a href="">关于</a></li>
+                        <li class="details_item"><a href="">联系</a></li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->
@@ -85,44 +89,54 @@
                            {{----}}
                         {{--</li>--}}
                         <!-- Authentication Links -->
-                        @if (Auth::guest())
-                            <li><a href="{{ route('login') }}">登录</a></li>
-                            <li><a href="{{ route('register') }}">注册</a></li>
-                        @else
-                            <li class="dropdown">
-                                <a href="#" style="color: white" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                    {{ Auth::user()->nickname }} <span class="caret"></span>
-                                </a>
+                        {{--@if (Auth::guest())--}}
+                            {{--<li><a href="{{ route('login') }}">登录</a></li>--}}
+                            {{--<li><a href="{{ route('register') }}">注册</a></li>--}}
+                        {{--@else--}}
+                            {{--<li class="dropdown">--}}
+                                {{--<a href="#" style="color: white" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">--}}
+                                    {{--{{ Auth::user()->nickname }} <span class="caret"></span>--}}
+                                {{--</a>--}}
 
-                                <ul class="dropdown-menu" role="menu">
-                                    <li>
-                                        <a href="{{ route('logout') }}"
-                                            onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                            退出
-                                        </a>
-                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                            {{ csrf_field() }}
-                                        </form>
-                                    </li>
-                                </ul>
-                            </li>
-                        @endif
+                                {{--<ul class="dropdown-menu" role="menu">--}}
+                                    {{--<li>--}}
+                                        {{--<a href="{{ route('logout') }}"--}}
+                                            {{--onclick="event.preventDefault();--}}
+                                                     {{--document.getElementById('logout-form').submit();">--}}
+                                            {{--退出--}}
+                                        {{--</a>--}}
+                                        {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
+                                            {{--{{ csrf_field() }}--}}
+                                        {{--</form>--}}
+                                    {{--</li>--}}
+                                {{--</ul>--}}
+                            {{--</li>--}}
+                        {{--@endif--}}
                     </ul>
                 </div>
                 <div class="warp_title">
-                    <span class="speak_title"><h2>HELLO,I AM NHY</h2></span>
-                    <span class="describe_title">Yue_blog是一个基于laravel5开发的博客系统</span>
-                    <div>
-                    <a href="/home"><button class="go_home">HOME</button></a>
-                    <a href="{{route('classifications_show')}}" ><button class="go_home">分类</button></a>
-                    </div>
+                    <span class="speak_title"><h2 style="color: #f5f8fa">{{ config('app.speak', 'Laravel')}}</h2></span>
+                    <span class="describe_title">{{ config('app.describe', 'Laravel')}}</span>
                 </div>
 
             </div>
         </nav>
         @yield('content')
     </div>
+    <!-- Footer -->
+    <footer id="footer">
+        <div class="container">
+            <ul class="icons">
+                <li><a href="#" class="fa fa-twitter"><span class="label">Twitter</span></a></li>
+                <li><a href="#" class="fa fa-facebook"><span class="label">Facebook</span></a></li>
+                <li><a href="#" class="fa fa-instagram"><span class="label">Instagram</span></a></li>
+                <li><a href="#" class="fa fa-envelope"><span class="label">Email</span></a></li>
+            </ul>
+        </div>
+        <div class="copyright">
+            Copyright &copy; 2018.niehengyang123@163.com.<a target="_blank" href="##"></a>
+        </div>
+    </footer>
     <!-- Scripts -->
     {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 </body>

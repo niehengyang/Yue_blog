@@ -13,7 +13,7 @@
     justify-content: center;
 }
 .img-item{
-    width: 100%;
+    width: 700px;
     height: 400px;
     display: flex;
     justify-content: center;
@@ -40,8 +40,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    margin: 20px 0 0 20px;
-    box-shadow: 10px 10px 10px 10px #5e5d5d;
+    /*margin: 20px 0 0 20px;*/
+    /*box-shadow: 10px 10px 10px 10px #5e5d5d;*/
     background-color: white;
 }
 .articleinfo_cade{
@@ -88,6 +88,10 @@
     flex-direction: row;
 }
 
+.pre_item{
+    border: 1px solid #bbbbbb;
+    border-radius: 4px;
+}
 /**评论区**/
 
 .warp_comments{

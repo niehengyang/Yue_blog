@@ -14,8 +14,8 @@ return [
 
     'name' => env('APP_NAME', 'laravel'),
     'home_background' => env('APP_BACKGROUND_IMG','/images/Yue_blog.jpg'),
-    'speak_title' =>env('APP_SPEAK_TITLE','laravel'),
-    'describe_title' =>env('APP_DESCRIBE_TITLE','laravel万岁'),
+    'speak' =>env('APP_SPEAK_TITLE','laravel'),
+    'describe' =>env('APP_DESCRIBE_TITLE','laravel万岁'),
 
 
     /*

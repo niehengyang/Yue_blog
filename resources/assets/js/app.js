@@ -29,6 +29,7 @@ import articleview from './components/articleview.vue'//文章预览,查看
 import commentslist from './components/commentslist.vue'//评论管理
 import classification from './components/classification'//文章分类
 import picturelist from './components/picturelist'//图片管理
+import deskpage from './components/deskpage'//站点管理
 
 Vue.use(VueRouter)
 Vue.use(ElementUI)
@@ -79,6 +80,10 @@ const router = new VueRouter({
         {
             path:'/picturelist',
             component:picturelist
+        },
+        {
+            path:'/deskpage',
+            component:deskpage
         }
     ]
 })

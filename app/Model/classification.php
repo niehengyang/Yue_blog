@@ -14,4 +14,17 @@ class classification extends Model
     public function articles(){
         return $this->hasMany('App\Model\Article','classification_id','id');
     }
+
+
+    protected $appends = ['articles_number'];
+
+    protected function getArticlesNumberAttribute(){
+        $classificationId = $this->attributes['id'] ;
+        if ($classificationId){
+            $articles_number = Article::where('classification_id',$classificationId)->count();
+            return $articles_number;
+        }else{
+            return;
+        }
+    }
 }

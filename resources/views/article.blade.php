@@ -17,7 +17,7 @@
     <div class="warp-breadcrumb">
     <ul class="breadcrumb">
         <li>
-            <a href="/">Yue_blog</a>
+            <a href="/">{{ config('app.name', 'laravel') }}</a>
         </li>
         <li>
             <a href="/home">首页</a>
@@ -66,26 +66,26 @@
     <div class="tools_bar">
         <div class="tools_item">
             @if(!empty($prev_id))
-                <div class="pre_item">
+                <button class="pre_item">
                     <a href="{{route('article_show',array('id'=>$prev_id))}}" class="pre_article">上一篇：{!!$prev_article_title!!}</a>
                     <span class="aticle_name"></span>
-                </div>
+                </button>
                 @else
-                    <div class="pre_item">
+                    <button class="pre_item">
                         <a class="pre_article">没有了</a>
                         <span class="aticle_name"></span>
-                    </div>
+                    </button>
                 @endif
             @if(!empty($next_id))
-                <div class="nex_item">
+                <button class="pre_item">
                     <a href="{{route('article_show',array('id'=>$next_id))}}" class="nex_article">下一篇：{!!$next_article_title!!}</a>
                     <span class="aticle_name"></span>
-                </div>
+                </button>
                 @else
-                    <div class="pre_item">
+                    <button class="pre_item">
                         <a class="pre_article">没有了</a>
                         <span class="aticle_name"></span>
-                    </div>
+                    </button>
                 @endif
         </div>
         <div class="clear"></div>

@@ -32,3 +32,4 @@ $factory->define(App\Model\classification::class, function (Faker\Generator $fak
         'describe' => str_random(30),
     ];
 });
+

@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/home');
 });
 Auth::routes();
 
@@ -85,8 +85,9 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'
 
 //图片管理
 Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'],function (){
-    Route::get('imagelist','imageController@getimagelist');//获取评论列表
+    Route::get('imagelist','imageController@getimagelist');//获取图片列表
+    Route::post('replace_picture','imageController@replacepicture');//图片修改
 //    Route::post('disablecomments','imageController@disableFun');//禁用评论
-//    Route::post('delcomments','imageController@delcomments');//删除评论
+    Route::post('deleteimage','imageController@deletePicture');//删除图片
 //    Route::post('initcomments','imageController@createComments');//生成评论
 });

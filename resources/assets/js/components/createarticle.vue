@@ -25,7 +25,7 @@
                         <img v-if="imageUrl" :src="imageUrl" class="avatar">
                         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                     </el-upload>
-                    <el-button class="delete_picture" @click="delete_picture" title="删除图片" style="margin-top: 30px;">删除图片</el-button>
+                    <el-button v-if="imageUrl" class="delete_picture" @click="delete_picture" title="删除图片" style="margin-top: 30px;">删除图片</el-button>
                 </el-form-item>
                 <el-form-item label="文章内容：" prop="content">
                     <vue-editor v-model="articleForm.content" placeholder="在此输入文章内容" :editorToolbar="customToolbar"
