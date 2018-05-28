@@ -12,7 +12,11 @@
 */
 
 Route::get('/', function () {
-    return redirect('/home');
+    if (\App\Model\Deskpageinfo::find(1)->web_release_size){
+        return redirect('/home');
+    }else{
+        return view('/websitedown');
+    }
 });
 Auth::routes();
 
@@ -87,7 +91,12 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'
 Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'],function (){
     Route::get('imagelist','imageController@getimagelist');//获取图片列表
     Route::post('replace_picture','imageController@replacepicture');//图片修改
-//    Route::post('disablecomments','imageController@disableFun');//禁用评论
     Route::post('deleteimage','imageController@deletePicture');//删除图片
-//    Route::post('initcomments','imageController@createComments');//生成评论
+});
+
+//网站管理
+Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'],function (){
+    Route::post('isdownwebsite','siteupdateController@shotdownwebsite');//关闭网站
+    Route::get('getdeskpageinfo','siteupdateController@getdeskpageinfo');//获取页面信息
+    Route::post('deskpageupdate','siteupdateController@deskpageupdate');//前台页面修改
 });

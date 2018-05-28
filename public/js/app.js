@@ -99465,7 +99465,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n.input_style[data-v-efaa0482]{\r\n    width: 500px;\n}\r\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n/*图片框样式*/\n.avatar-uploader .el-upload[data-v-efaa0482]{\n    border:1px dashed #d9d9d9;\n    border-radius: 6px;\n    cursor: pointer;\n    position: relative;\n    overflow: hidden;\n}\n.avatar-uploader .el-upload[data-v-efaa0482]:hover{\n    border-color: #409EFF;\n}\n.avatar-uploader-icon[data-v-efaa0482]{\n    font-size: 28px;\n    color: #8c939d;\n    width: 178px;\n    height: 178px;\n    line-height: 178px;\n    text-align: center;\n    border: 1px dashed #d4d4d4;\n    border-radius: 6px;\n}\n.avatar[data-v-efaa0482]{\n    width: 500px;\n    height: 330px;\n    display: block;\n}\n/*输入框样式*/\n.input_style[data-v-efaa0482]{\n    width: 500px;\n}\n", ""]);
 
 // exports
 
@@ -99518,15 +99518,33 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     name: "sitemanagement",
     data: function data() {
         return {
             loading: false,
+            // imageUrl:'',
+            // oldImageUrl:'',
             webSiteForm: {},
             rules: {
-                top_image: [{ required: true, message: '请选择网站图片', trigger: 'blur' }],
+                // top_image:[
+                //     {required:true,message:'请选择网站图片',trigger:'blur'}
+                // ],
                 web_title: [{ required: true, message: '请输入网站标题', trigger: 'blur' }, { max: 30, message: '长度最多30个字符', trigger: 'blur' }],
                 web_speak: [{ required: true, message: '请输入网站欢迎语', trigger: 'blur' }, { max: 60, message: '长度最多60个字符', trigger: 'blur' }],
                 web_describe: [{ required: true, message: '请输入网站描述', trigger: 'blur' }, { max: 120, message: '长度最多120个字符', trigger: 'blur' }]
@@ -99534,15 +99552,160 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         };
     },
 
+    created: function created() {
+        //初始化
+        this.LoadPageInfo();
+    },
     methods: {
+        LoadPageInfo: function LoadPageInfo() {
+            var that = this;
+            that.loading = true;
+            axios.get('/admin/getdeskpageinfo').then(function (response) {
+                that.loading = false;
+                if (response && response.data) {
+                    that.webSiteForm = response.data;
+                    that.imageUrl = response.data.top_image;
+                    console.log('获取到的' + response.data);
+                } else {
+                    that.$message.error({ showClose: true, message: '操作异常!', duration: 2000 });
+                }
+            }, function (err) {
+                that.loading = false;
+                that.$message.error({ showClose: true, message: err.response.data, duration: 2000 });
+            }).catch(function (error) {
+                that.loading = false;
+                console.log(error);
+                that.$message.error({ showClose: true, message: '用户信息请求异常', duration: 2000 });
+            });
+        },
         submitForm: function submitForm(FormName) {
-            this.$refs[FormName].validate(function (valid) {
+            var that = this;
+            that.$refs[FormName].validate(function (valid) {
                 if (valid) {
-                    alert('submit');
+                    that.loading = true;
+                    axios.post('/admin/deskpageupdate', that.webSiteForm).then(function (response) {
+                        that.loading = false;
+                        if (response && response.data) {
+                            that.$message.success({ showClose: true, message: response.data, duration: 2000 });
+                        } else {
+                            that.$message.error({ showClose: true, message: '操作异常!', duration: 2000 });
+                        }
+                    }, function (err) {
+                        that.loading = false;
+                        that.$message.error({ showClose: true, message: err.response.data, duration: 2000 });
+                    }).catch(function (error) {
+                        that.loading = false;
+                        console.log(error);
+                        that.$message.error({ showClose: true, message: '用户信息请求异常', duration: 2000 });
+                    });
                 } else {
                     return false;
                 }
             });
+        },
+
+        // handleSuccess(response,res,file){//上传成功
+        //     let that = this;
+        //     that.imageUrl = response.url;
+        //     that.replace_picture();
+        //     console.log('上传成功返回图片信息',response);
+        // },
+        // handleBefore(file){//上传限制条件
+        //     let that = this;
+        //     that.oldImageUrl = that.imageUrl;
+        //     const isJPG = file.type === 'image/jpeg';
+        //     const isLt20M = file.size /1024/1024 < 20;
+        //     if (!isJPG){
+        //         that.$message.error({showClose:true,message:'上传图片只能是JPG格式!'});
+        //     }
+        //     if (!isLt20M){
+        //         that.$message.error({showClose:true,message:'删除图片大小不能超过20MB！'});
+        //     }
+        //     return isJPG && isLt20M;
+        //
+        // },
+        // replace_picture(){
+        //     let that = this;
+        //     if (that.oldImageUrl){
+        //         let picture_name = that.oldImageUrl.substring(9);
+        //         that.loading = true;
+        //         axios.post('/admin/deletepicture',{name:picture_name})
+        //             .then(function (response) {
+        //                 that.loading = false;
+        //                 if (response && response.data){
+        //                     that.$message.success({showClose:true,message:'图片已替换!',duration:2000});
+        //                 }
+        //             },function (err) {
+        //                 that.loading = false;
+        //                 that.$message.error({showCLose:true,message:'替换出错!',duration:2000});
+        //             }).catch(function (error) {
+        //             that.loading = false;
+        //             that.$message.error({showClose:true,message:'请求出现异常!',duration:2000});
+        //         })
+        //     }
+        // },
+        // uploadError(response,file,fileList){//上传失败
+        //     console.log('上传失败，请重试!')
+        // },
+        isdownwebsite: function isdownwebsite() {
+            var that = this;
+            if (that.webSiteForm.web_release_size) {
+                that.$confirm('确定关闭用户网站？', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(function () {
+                    that.loading = true;
+                    that.webSiteForm.web_release_size = 0;
+                    axios.post('/admin/isdownwebsite', that.webSiteForm).then(function (response) {
+                        that.loading = false;
+                        if (response && response.data) {
+                            that.$message.success({ showClose: true, message: response.data, duration: 2000 });
+                        } else {
+                            that.$message.error({ showClose: true, message: '操作异常!', duration: 2000 });
+                        }
+                    }, function (err) {
+                        that.loading = false;
+                        that.webSiteForm.web_release_size = 1;
+                        that.$message.error({ showClose: true, message: err.response.data, duration: 2000 });
+                    }).catch(function (error) {
+                        that.loading = false;
+                        that.webSiteForm.web_release_size = 1;
+                        console.log(error);
+                        that.$message.error({ showClose: true, message: '用户信息请求异常', duration: 2000 });
+                    });
+                }).catch(function () {
+                    console.log('已取消');
+                });
+            } else {
+                that.$confirm('确定开启用户网站？', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(function () {
+                    that.loading = true;
+                    that.webSiteForm.web_release_size = 1;
+                    axios.post('/admin/isdownwebsite', that.webSiteForm).then(function (response) {
+                        that.loading = false;
+                        if (response && response.data) {
+                            that.$message.success({ showClose: true, message: response.data, duration: 2000 });
+                        } else {
+                            that.$message.error({ showClose: true, message: '操作异常!', duration: 2000 });
+                        }
+                    }, function (err) {
+                        that.loading = false;
+                        that.webSiteForm.web_release_size = 0;
+                        that.$message.error({ showClose: true, message: err.response.data, duration: 2000 });
+                    }).catch(function (error) {
+                        that.loading = false;
+                        that.webSiteForm.web_release_size = 0;
+                        console.log(error);
+                        that.$message.error({ showClose: true, message: '用户信息请求异常', duration: 2000 });
+                    });
+                }).catch(function () {
+                    console.log('已取消');
+                });
+            }
         }
     }
 });
@@ -99611,14 +99774,33 @@ var render = function() {
               _c(
                 "el-row",
                 [
-                  _c(
-                    "el-button",
-                    {
-                      staticClass: "fa fa-window-close",
-                      attrs: { size: "small", type: "danger", plain: "" }
-                    },
-                    [_vm._v(" 关闭站点")]
-                  )
+                  _vm.webSiteForm.web_release_size
+                    ? _c(
+                        "el-button",
+                        {
+                          staticClass: "fa fa-window-close",
+                          attrs: { size: "small", type: "danger", plain: "" },
+                          on: {
+                            click: function($event) {
+                              _vm.isdownwebsite()
+                            }
+                          }
+                        },
+                        [_vm._v(" 关闭站点")]
+                      )
+                    : _c(
+                        "el-button",
+                        {
+                          staticClass: "fa fa-window-close",
+                          attrs: { size: "small", type: "success", plain: "" },
+                          on: {
+                            click: function($event) {
+                              _vm.isdownwebsite()
+                            }
+                          }
+                        },
+                        [_vm._v(" 开启站点")]
+                      )
                 ],
                 1
               )
@@ -99651,30 +99833,15 @@ var render = function() {
             [
               _c(
                 "el-form-item",
-                { attrs: { label: "主题图片", prop: "top_image" } },
-                [
-                  _c("el-input", {
-                    staticClass: "input_style",
-                    attrs: { size: "small" },
-                    model: {
-                      value: _vm.webSiteForm.top_image,
-                      callback: function($$v) {
-                        _vm.$set(_vm.webSiteForm, "top_image", $$v)
-                      },
-                      expression: "webSiteForm.top_image"
-                    }
-                  })
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "el-form-item",
                 { attrs: { label: "网站标题", prop: "web_title" } },
                 [
                   _c("el-input", {
                     staticClass: "input_style",
-                    attrs: { size: "small" },
+                    attrs: {
+                      type: "",
+                      size: "small",
+                      onkeyup: "this.value=this.value.replace(/\\s/g,'&nbsp')"
+                    },
                     model: {
                       value: _vm.webSiteForm.web_title,
                       callback: function($$v) {
@@ -99693,7 +99860,10 @@ var render = function() {
                 [
                   _c("el-input", {
                     staticClass: "input_style",
-                    attrs: { size: "small" },
+                    attrs: {
+                      size: "small",
+                      onkeyup: "this.value=this.value.replace(/\\s/g,'&nbsp')"
+                    },
                     model: {
                       value: _vm.webSiteForm.web_speak,
                       callback: function($$v) {
@@ -99712,7 +99882,11 @@ var render = function() {
                 [
                   _c("el-input", {
                     staticClass: "input_style",
-                    attrs: { type: "textarea", size: "small" },
+                    attrs: {
+                      type: "textarea",
+                      size: "small",
+                      onkeyup: "this.value=this.value.replace(/\\s/g,'&nbsp')"
+                    },
                     model: {
                       value: _vm.webSiteForm.web_describe,
                       callback: function($$v) {

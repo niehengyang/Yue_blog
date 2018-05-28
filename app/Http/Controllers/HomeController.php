@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Article;
-use Illuminate\Http\Request;
+use App\Model\Deskpageinfo;
 
 class HomeController extends Controller
 {
@@ -31,4 +31,5 @@ class HomeController extends Controller
             return view('/home',['articleList' =>$articleList]);
         }
     }
+
 }

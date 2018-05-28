@@ -9,7 +9,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'laravel') }}</title>
+    <title>{!! config('app.name', 'Laravel') !!}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -68,7 +68,7 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" style="color: white" href="{{ url('/') }}">
-                        {{ config('app.name', 'Laravel') }}
+                        {!! config('app.name', 'Laravel') !!}
                     </a>
                 </div>
 
@@ -115,8 +115,8 @@
                     </ul>
                 </div>
                 <div class="warp_title">
-                    <span class="speak_title"><h2 style="color: #f5f8fa">{{ config('app.speak', 'Laravel')}}</h2></span>
-                    <span class="describe_title">{{ config('app.describe', 'Laravel')}}</span>
+                    <span class="speak_title"><h2 style="color: #f5f8fa">{!! config('app.speak', 'Laravel') !!}</h2></span>
+                    <span class="describe_title" >{!! config('app.describe', 'Laravel') !!}</span>
                 </div>
 
             </div>
