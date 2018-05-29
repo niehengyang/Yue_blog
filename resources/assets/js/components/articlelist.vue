@@ -128,7 +128,7 @@
             },
             //查询方法
             search(){
-                let that =this;
+                let that = this;
                 let params = {
                     page:that.currentPage,
                     limit: 7,
@@ -138,7 +138,7 @@
                 axios.get('/admin/getList',{params:params})
                     .then(function (response) {
                         that.loading = false;
-                        if (response.data && response.data['data']){
+                        if (response && response.data){
                             that.total = response.data['total'];
                             that.articles = response.data['data'];
                         }

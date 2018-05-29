@@ -16784,7 +16784,7 @@ __WEBPACK_IMPORTED_MODULE_0_vue___default.a.use(__WEBPACK_IMPORTED_MODULE_6_vue2
 var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
     mode: 'hash',
     routes: [{
-        path: '/admin/home',
+        path: '/',
         component: __WEBPACK_IMPORTED_MODULE_8__components_index_vue___default.a
     }, {
         path: '/userlist',
@@ -16800,11 +16800,11 @@ var router = new __WEBPACK_IMPORTED_MODULE_1_vue_router__["a" /* default */]({
         component: __WEBPACK_IMPORTED_MODULE_12__components_articlelist_vue___default.a
     }, {
         path: '/createarticle',
-        name: 'createarticle',
+        name: '/createarticle',
         component: __WEBPACK_IMPORTED_MODULE_13__components_createarticle_vue___default.a
     }, {
         path: '/articleview',
-        name: 'articleview',
+        name: '/articleview',
         component: __WEBPACK_IMPORTED_MODULE_14__components_articleview_vue___default.a
     }, {
         path: '/commentslist',
@@ -93283,7 +93283,7 @@ var render = function() {
                     attrs: { index: "1" },
                     on: {
                       click: function($event) {
-                        _vm.jumpTo("/admin/home")
+                        _vm.jumpTo("/")
                       }
                     }
                   },
@@ -95547,7 +95547,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
             that.loading = true;
             axios.get('/admin/getList', { params: params }).then(function (response) {
                 that.loading = false;
-                if (response.data && response.data['data']) {
+                if (response && response.data) {
                     that.total = response.data['total'];
                     that.articles = response.data['data'];
                 }
@@ -97710,7 +97710,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 comment_content: that.filters.content
             };
             that.loading = true;
-            axios.get('/admin/commentslist', params).then(function (response) {
+            axios.get('/admin/commentslist', { params: params }).then(function (response) {
                 that.loading = false;
                 if (response && response.data) {
                     that.total = response.data['total'];

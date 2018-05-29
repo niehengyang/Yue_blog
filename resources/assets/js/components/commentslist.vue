@@ -96,7 +96,7 @@
                     comment_content: that.filters.content
                 }
                 that.loading = true;
-                axios.get('/admin/commentslist',params)
+                axios.get('/admin/commentslist',{params:params})
                     .then(function (response) {
                         that.loading = false;
                         if(response && response.data){

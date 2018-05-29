@@ -89,29 +89,29 @@
                            {{----}}
                         {{--</li>--}}
                         <!-- Authentication Links -->
-                        {{--@if (Auth::guest())--}}
-                            {{--<li><a href="{{ route('login') }}">登录</a></li>--}}
-                            {{--<li><a href="{{ route('register') }}">注册</a></li>--}}
-                        {{--@else--}}
-                            {{--<li class="dropdown">--}}
-                                {{--<a href="#" style="color: white" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">--}}
-                                    {{--{{ Auth::user()->nickname }} <span class="caret"></span>--}}
-                                {{--</a>--}}
+                        @if (Auth::guest())
+                            <li><a href="{{ route('login') }}">登录</a></li>
+                            <li><a href="{{ route('register') }}">注册</a></li>
+                        @else
+                            <li class="dropdown">
+                                <a href="#" style="color: white" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                                    {{ Auth::user()->nickname }} <span class="caret"></span>
+                                </a>
 
-                                {{--<ul class="dropdown-menu" role="menu">--}}
-                                    {{--<li>--}}
-                                        {{--<a href="{{ route('logout') }}"--}}
-                                            {{--onclick="event.preventDefault();--}}
-                                                     {{--document.getElementById('logout-form').submit();">--}}
-                                            {{--退出--}}
-                                        {{--</a>--}}
-                                        {{--<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">--}}
-                                            {{--{{ csrf_field() }}--}}
-                                        {{--</form>--}}
-                                    {{--</li>--}}
-                                {{--</ul>--}}
-                            {{--</li>--}}
-                        {{--@endif--}}
+                                <ul class="dropdown-menu" role="menu">
+                                    <li>
+                                        <a href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                            退出
+                                        </a>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                            {{ csrf_field() }}
+                                        </form>
+                                    </li>
+                                </ul>
+                            </li>
+                        @endif
                     </ul>
                 </div>
                 <div class="warp_title">

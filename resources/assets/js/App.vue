@@ -37,7 +37,7 @@
             </div>
                 <!--导航菜单-->
             <el-menu default-active="defaultActiveIndex" class="el-menu-vertical-demo" @open="handleOpen" @close="handleClose" :collapse="isCollapse" background-color="#333744" text-color="#ffffff">
-                <el-menu-item index="1" @click="jumpTo('/admin/home')">
+                <el-menu-item index="1" @click="jumpTo('/')">
                     <i  class="fa fa-home"></i>
                     <span slot="title">&nbsp;&nbsp;首页</span>
                 </el-menu-item>

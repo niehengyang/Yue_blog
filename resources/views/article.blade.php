@@ -161,7 +161,7 @@
             <div class="comments_list">
                 <p class="small">全部评论</p>
                 <div class="show_box">
-                    @if(!empty($comments))
+                    @if(!empty($comments[0]))
                         @foreach($comments as $comment)
                     <div class="comment_item">
                         <div class="show_nickname"><span><b>{{$comment->nickname}}</b></span></div>
@@ -172,11 +172,11 @@
                                 <time style="color: #a4aaae;" datetime="{{$comment->created_at->format('C')}}" itemprop="datePublished" pubdate="">{{$comment->created_at->format('d F,Y')}} @ {{mb_substr($comment->created_at,10)}}</time>
                                 <span>&nbsp;/&nbsp;</span>
                                 <a href="">回复</a>
-                                {{--@if($currentUser->id == $comment->user_id)--}}
-                                    {{--<div class="pull-right meta">--}}
-                                        {{--<a href="{{route('comments_destroy',$comment->id)}}" data-method="delete"><i class="fa fa-trash">删除</i></a>--}}
-                                    {{--</div>--}}
-                                {{--@endif--}}
+                                @if(!empty($currentUser) && ($currentUser->id == $comment->user_id))
+                                    <div class="pull-right meta">
+                                        <a href="{{route('comments_destroy',array('id'=>$comment->id))}}" data-method="delete"><i class="fa fa-trash">删除</i></a>
+                                    </div>
+                                    @endif
                             </div>
                             <div class="comment_content"><p class="small">{{$comment->comment_content}}</p></div>
                     </div>

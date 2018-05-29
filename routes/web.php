@@ -26,12 +26,16 @@ Auth::routes();
 //前台页面
 Route::group(['middleware' => 'web'],function (){
     //前台使用默认登录框架
-    Route::get('/home', 'HomeController@index')->name('home');//前台首页
-    Route::get('/article/show','ArticleController@index')->name('article_show');//前台文章页面
-    Route::post('/comments/store','CommentController@store')->name('comments_store');//评论创建
-    Route::post('/comments/destroy{id}','CommentController@destroy')->name('comments_destroy');//评论删除
-    Route::get('/classification/show','ClassificationController@index')->name('classifications_show');//分类列表
-    Route::get('/articlelist','ArticleController@getlist')->name('article_list');//文章列表
+    if (\App\Model\Deskpageinfo::find(1)->web_release_size){
+        Route::get('/home', 'HomeController@index')->name('home');//前台首页
+        Route::get('/article/show','ArticleController@index')->name('article_show');//前台文章页面
+        Route::post('/comments/store','CommentController@store')->name('comments_store');//评论创建
+        Route::get('/comments/destroy','CommentController@destroy')->name('comments_destroy');//评论删除
+        Route::get('/classification/show','ClassificationController@index')->name('classifications_show');//分类列表
+        Route::get('/articlelist','ArticleController@getlist')->name('article_list');//文章列表
+    }else{
+        return view('/websitedown');
+    }
 });
 
 
@@ -39,9 +43,12 @@ Route::group(['middleware' => 'web'],function (){
 
 //后台管理员登录
 Route::group(['prefix' => 'admin','middleware' => 'web' ],function (){
+    Route::get('/',function (){
+        return redirect('admin/home');
+    });
     Route::get('login','Admin\LoginController@showLoginForm')->name('admin.login');
     Route::post('login','Admin\LoginController@postLogin');
-    Route::get('register','Admin\LoginController@getRegister');
+    Route::get('register','Admin\LoginController@getRegister')->name('admin.register');
     Route::post('register','Admin\LoginController@register');
     Route::post('logout','Admin\LoginController@logout');
     Route::get('home','Admin\IndexController@index');//首页展示

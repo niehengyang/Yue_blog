@@ -5,10 +5,12 @@ namespace App\Http\Controllers\Admin;
 
 use App\Model\Account;
 use App\Model\Article;
+use App\Model\comments;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Mockery\Exception;
 use Illuminate\Support\Facades\Storage;
+use PhpParser\Node\Stmt\Foreach_;
 
 class ArticleController extends Controller
 {
@@ -49,8 +51,15 @@ class ArticleController extends Controller
                     throw new Exception('删除失败！');
                 }
             }
+                if (is_array($ids)){
+                    $commentsId = comments::whereIn('article_id',$ids)->pluck('id')->toArray();
+                }else{
+                    $commentsId = comments::where('article_id',$ids)->pluck('id')->toArray();
+                }
+
             //删除文章同时删除图片和评论
             if (Article::destroy($ids) && Storage::disk('public')->delete($imgs)) {
+                comments::destroy($commentsId);
                 return response('删除成功！', 200);
             } else {
                 throw new Exception('删除失败！');

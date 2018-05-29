@@ -19,7 +19,7 @@ class LoginController extends Controller
         AuthenticatesLogout::logout insteadof  AuthenticatesUsers;
     }
 
-    protected $redirectTo = '/admin/home';
+    protected $redirectTo = 'admin/';
     protected $guard = 'admin';
     protected $username;
 //    protected $loginView = 'admin.login';
@@ -59,7 +59,7 @@ class LoginController extends Controller
                 return back()->withErrors($validator)->withInput();
             }
             if (Auth::guard('admin')->attempt(['account_number' =>$request->account_number,'password' =>$request->password])){
-                return Redirect::to('admin/home')->with('success','登录成功!');
+                return Redirect::to('admin/')->with('success','登录成功!');
             }else{
                 return back()->withErrors(['login_error' => '账号或密码错误'])->withInput();
             }
@@ -97,6 +97,9 @@ class LoginController extends Controller
     /****
         注册
      ***/
+    public function getRegister(){
+        return view('admin.register');
+    }
     public function register(Request $request){
         try{
             if ($request->isMethod('post')){

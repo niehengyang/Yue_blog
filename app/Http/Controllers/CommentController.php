@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\comments;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Validator;
@@ -41,10 +42,10 @@ class CommentController extends Controller
         return Redirect::route('/article/show',[$comment->post->id,'#comment-input']);
     }
 
-    public function destroy($id){
-        $comment = comments::findOrFail($id);
-        if (comments::destroy($id)){
-            return Redirect::route('article_show',$comment->article_id);
+    public function destroy(Request $request){
+        $commentId = $request->input('id');
+        if (comments::destroy($commentId)){
+            return Redirect::back()->withErrors('删除成功')->withInput();
         };
     }
 }
