@@ -10,7 +10,6 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Mockery\Exception;
 
 class LoginController extends Controller
 {
@@ -59,7 +58,12 @@ class LoginController extends Controller
                 return back()->withErrors($validator)->withInput();
             }
             if (Auth::guard('admin')->attempt(['account_number' =>$request->account_number,'password' =>$request->password])){
+               $user = Admin::where('account_number',$request->account_number)->first();
+                $user->admin_lastloginip = $request->getClientIp();
+                $user->admin_lastlogintime =date("Y-m-d H:i:s");
+                $user->save();
                 return Redirect::to('admin/')->with('success','登录成功!');
+
             }else{
                 return back()->withErrors(['login_error' => '账号或密码错误'])->withInput();
             }
@@ -84,9 +88,9 @@ class LoginController extends Controller
     /***
         退出登录
      ***/
-    public function logout(Request $request){
+    public function logout(){
         if(Auth::guard('admin')->user()){
-            Auth::guard('admin')->logout();
+            $this->guard()->logout();
             return response('已退出',200);
         }else{
             return response('注销出错！',500);
@@ -101,36 +105,35 @@ class LoginController extends Controller
         return view('admin.register');
     }
     public function register(Request $request){
-        try{
-            if ($request->isMethod('post')){
+            if ($request->isMethod('POST')){
                 $validator = $this->validateRegister($request->input());
                 if ($validator->fails()){
                     return back()->withErrors($validator)->withInput();
                 }
 
                 $user = new Admin();
-                $user->name = $request->get('name');
-                $user->account_number = $request->get('account_number');
-                $user->password = bcrypt($request->get('password'));
-                $user->admin_lastloginip = $request->getClientIp();
-                $user->admin_lastlogintime =date("Y-m-d H:i:s");
+                $user->name = $request->name;
+                $user->account_number = $request->account_number;
+                $user->password = bcrypt($request->password);
+                $user->nickname = $request->nickname;
+                $user->email = $request->email;
                 if ($user->save()){
-                    return response('注册成功！',200);
+                    return Redirect::to('admin/login')->with('success','注册成功！');
                 }else{
-                    throw new Exception('注册失败!');
+                    return back()->withErrors(['register_error' => '注册失败!'])->withInput();
                 }
             }
-        }catch (Exception $e){
-            return response($e->getMessage(),500);
-        }
+        return view('admin.register');
     }
 
     protected function validateRegister(array $data){
         return Validator::make($data,[
-            'name' => 'required|alpha_num|max:255',
-            'account_number' => 'required|alpha_num|unique:admins',
-            'password' => 'required|min:6|confirmed',
-            'password_confirmation' => 'required|min:6'
+            'name' => 'required|alpha_num|max:50',
+            'account_number' => 'required|alpha_num|unique:admins|max:50',
+            'password' => 'required|min:6|confirmed|max:64',
+            'password_confirmation' => 'required|min:6|max:64',
+            'nickname' => 'required|alpha_num|max:50',
+            'email' => 'required|string|email|max:100|unique:users',
         ],[
             'required' => ':attribute 为必填项',
             'min' => ':attribute 长度不符合要求',
@@ -138,12 +141,20 @@ class LoginController extends Controller
             'alpha_num' => ':attribute 必须为字母或数字',
             'max' => ':attribute 长度过长'
         ],[
-            'name' => '昵称',
-            'account_number' => '账号',
+            'name' => '姓名',
+            'account_number' => '管理员账号',
             'password' => '密码',
-            'password_confirmation' => '确认密码'
+            'password_confirmation' => '确认密码',
+            'email' => '管理员邮箱',
+            'nickname' => '昵称'
         ]);
     }
 
+    /****
+     忘记密码
+     ***/
+    public function passwordRequest(){
+
+    }
 
 }

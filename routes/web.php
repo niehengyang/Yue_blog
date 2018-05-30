@@ -49,7 +49,8 @@ Route::group(['prefix' => 'admin','middleware' => 'web' ],function (){
     Route::get('login','Admin\LoginController@showLoginForm')->name('admin.login');
     Route::post('login','Admin\LoginController@postLogin');
     Route::get('register','Admin\LoginController@getRegister')->name('admin.register');
-    Route::post('register','Admin\LoginController@register');
+    Route::post('register','Admin\LoginController@register')->name('register');
+    Route::post('password_request','Admin\LoginController@passwordRequest')->name('password.request');
     Route::post('logout','Admin\LoginController@logout');
     Route::get('home','Admin\IndexController@index');//首页展示
 });

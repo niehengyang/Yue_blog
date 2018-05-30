@@ -27,11 +27,11 @@
     </div>
     <!---文章页面-->
 @if(!empty($article))
-<el-row class="warp_mid" type="flex" justify="center">
-    <el-col class="warp_main" :span="18" :offset="6">
+<div class="el-row warp_mid" type="flex" justify="center">
+    <div class="el-col warp_main" :span="18" :offset="6">
         @if($article->img)
         <div class="img-item">
-            <img style="width: 100%;" src="{{$article->img}}" alt=""/>
+            <img src="{{$article->img}}" alt=""/>
             <div class="clear"></div>
         </div>
         @endif
@@ -59,9 +59,9 @@
             {{--</div>--}}
             <div class="clear"></div>
         </div>
-    </el-col>
+    </div>
     @endif
-</el-row>
+</div>
         <!--tools_bar-->
     <div class="tools_bar">
         <div class="tools_item">
@@ -163,23 +163,25 @@
                 <div class="show_box">
                     @if(!empty($comments[0]))
                         @foreach($comments as $comment)
-                    <div class="comment_item">
-                        <div class="show_nickname"><span><b>{{$comment->nickname}}</b></span></div>
-                        @if(empty($comment->nickname))
-                            <div class="show_nickname"><span><b>游客</b></span></div>
-                        @endif
-                            <div class="reply_item">
-                                <time style="color: #a4aaae;" datetime="{{$comment->created_at->format('C')}}" itemprop="datePublished" pubdate="">{{$comment->created_at->format('d F,Y')}} @ {{mb_substr($comment->created_at,10)}}</time>
-                                <span>&nbsp;/&nbsp;</span>
-                                <a href="">回复</a>
-                                @if(!empty($currentUser) && ($currentUser->id == $comment->user_id))
-                                    <div class="pull-right meta">
+                            @if($comment->release_size)
+                        <div class="comment_item">
+                            <div class="show_nickname"><span><b>{{$comment->nickname}}</b></span></div>
+                                @if(empty($comment->nickname))
+                                    <div class="show_nickname"><span><b>游客</b></span></div>
+                                @endif
+                                    <div class="reply_item">
+                                    <time style="color: #a4aaae;" datetime="{{$comment->created_at->format('C')}}" itemprop="datePublished" pubdate="">{{$comment->created_at->format('d F,Y')}} @ {{mb_substr($comment->created_at,10)}}</time>
+                                    <span>&nbsp;/&nbsp;</span>
+                                    <a href="">回复</a>
+                                        @if(!empty($currentUser) && ($currentUser->id == $comment->user_id))
+                                        <div class="pull-right meta">
                                         <a href="{{route('comments_destroy',array('id'=>$comment->id))}}" data-method="delete"><i class="fa fa-trash">删除</i></a>
-                                    </div>
+                                        </div>
                                     @endif
-                            </div>
+                                </div>
                             <div class="comment_content"><p class="small">{{$comment->comment_content}}</p></div>
-                    </div>
+                        </div>
+                            @endif
                         @endforeach
                     @else
                         <div class="comment_content"><p class="small">暂无评论</p></div>

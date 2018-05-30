@@ -4,6 +4,11 @@
     后台基本页面样式
 **/
 
+.row{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
 /* Containers */
 
 .container {
@@ -165,7 +170,7 @@
 /* Footer */
 
 #footer {
-    padding: 2rem 0 0.1rem 0 ;
+    /*padding: 2rem 0 0.1rem 0 ;*/
     text-align: center;
 }
 
@@ -381,3 +386,4 @@ dl dd {
 ul.alt li {
     border-top-color: rgba(144, 144, 144, 0.25);
 }
+

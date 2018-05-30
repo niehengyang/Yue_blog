@@ -14,7 +14,7 @@
         <el-row class="warp_mid" type="flex" justify="center" v-loading="loading" style="">
             <el-col class="warp_main" :span="18" :offset="6">
                 <div class="img-item" v-show="articleForm.img">
-                    <img style="width: 100%;" :src="articleForm.img" alt=""/>
+                    <img :src="articleForm.img" alt=""/>
                 </div>
                 <div class="show_box">
                         <div class="main" v-show="articleForm.title">
@@ -117,6 +117,8 @@
         padding-bottom: 10px;
         display: flex;
         justify-content: center;
+        align-items: center;
+        align-content: center;
         font-size: 2px;
     }
     .err_show_box{
@@ -124,6 +126,13 @@
         display: flex;
         justify-content: center;
         color: #adadad;
+    }
+
+    img{
+       width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 100%;
     }
     /*文章内图片样式*/
     .content_item{

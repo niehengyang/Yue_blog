@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="">
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/base.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/login.css') }}" rel="stylesheet">
+    <link href="{{asset('css/login.css')}}" rel="stylesheet">
+    <link href="{{asset('css/register.css')}}" rel="stylesheet">
+
 </head>
 
 <body>
@@ -18,20 +20,21 @@
             @yield('content')
         </div>
     </div>
-</div>
-<!-- Footer -->
-<footer id="footer">
-    {{--<div class="container">--}}
+
+    <!-- Footer -->
+    <footer id="footer">
+        {{--<div class="container">--}}
         {{--<ul class="icons">--}}
-            {{--<li><a href="#" class="fa fa-twitter"><span class="label">Twitter</span></a></li>--}}
-            {{--<li><a href="#" class="fa fa-facebook"><span class="label">Facebook</span></a></li>--}}
-            {{--<li><a href="#" class="fa fa-instagram"><span class="label">Instagram</span></a></li>--}}
-            {{--<li><a href="#" class="fa fa-envelope"><span class="label">Email</span></a></li>--}}
+        {{--<li><a href="#" class="fa fa-twitter"><span class="label">Twitter</span></a></li>--}}
+        {{--<li><a href="#" class="fa fa-facebook"><span class="label">Facebook</span></a></li>--}}
+        {{--<li><a href="#" class="fa fa-instagram"><span class="label">Instagram</span></a></li>--}}
+        {{--<li><a href="#" class="fa fa-envelope"><span class="label">Email</span></a></li>--}}
         {{--</ul>--}}
-    {{--</div>--}}
-    <div class="copyright">
-        Copyright &copy; 2018.niehengyang123@163.com.<a target="_blank" href="##"></a>
-    </div>
-</footer>
+        {{--</div>--}}
+        <div class="copyright">
+            Copyright &copy; 2018.niehengyang123@163.com.<a target="_blank" href="##"></a>
+        </div>
+    </footer>
+</div>
 </body>
 </html>

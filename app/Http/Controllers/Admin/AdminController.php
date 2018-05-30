@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Model\Admin;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
+
+    protected function guard()
+    {
+        return auth()->guard('admin');
+    }
     public function getuserinfo(Request $request)
     {
         $admin = Auth::guard('admin')->user();
@@ -38,15 +42,14 @@ class AdminController extends Controller
     public function resetpwd(Request $request)
     {
         try {
-            $adminPassword = $request->get('admin_password');
-            $admin = Auth::guard('admin')->user();
+            $admin= Auth::guard('admin')->user();
             if (is_null($admin)) {
                 return response('用户不存在', 404);
             }
-            if(Auth::guard('admin')->attempt(['password' => $adminPassword])){
+            if(Auth::guard('admin')->attempt(['password' => $request->get('admin_password')])){
                 $admin->password = bcrypt($request->get('admin_newpassword'));
                 $admin->save();
-                return response('密码重置成功',200);
+                return response('密码已重置，请重新登录！',200);
             }else{
                 return response('密码错误',500);
             }
@@ -54,5 +57,6 @@ class AdminController extends Controller
             return response($e->getMessage(), 500);
         }
     }
+
 }
 

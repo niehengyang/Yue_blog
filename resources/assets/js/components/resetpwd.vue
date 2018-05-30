@@ -39,9 +39,11 @@
             var passRepeatCheck = (rule,value,callback)=>{
                 if(value != this.resetPwdForm.newpwd){
                     callback(new Error('两次输入密码不一致!'));
-                }else{
-                    callback();
-                }
+                }else if(value == this.resetPwdForm.oldpwd){
+                        callback(new Error('与当前密码相同,请重新输入!'));
+                    }else{
+                        callback();
+                    }
             };
             return{
                 loadingText:'正在提交数据，请稍后',
@@ -116,7 +118,6 @@
                                 that.$message.error({showClose:true,message:response.data,duration:2000});
                             })
                     }else{
-                        that.loading = false;
                         that.$message.error({showClose:true,message:'请填写完整!',duration:2000});
                     }
                 });

@@ -61,12 +61,12 @@ const router = new VueRouter({
         },
         {
             path:'/createarticle',
-            name:'/createarticle',
+            name:'createarticle',
             component:createarticle
         },
         {
             path:'/articleview',
-            name:'/articleview',
+            name:'articleview',
             component:articleview
         },
         {

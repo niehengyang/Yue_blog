@@ -17,14 +17,13 @@ page{
     width: 100%;
     height:inherit;
 }
-
 .panel{
     display: block;
     overflow: hidden !important;
     z-index: 100;
     text-align: center;
     position: relative;
-    margin-top: 10%;
+    margin-top:15%;
     width: 32%;
     margin-left: auto;
     margin-right: auto;
@@ -42,7 +41,7 @@ page{
     /*border: 1px solid #FFF;*/
     border-radius: 3px;
     margin-top: 10px;
-    height: 52px;
+    height: 42px;
     width: 100%;
 }
 

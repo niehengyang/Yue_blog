@@ -1,7 +1,6 @@
 @extends('admin.base')
 
 
-
 @section('content')
                 <div><h3 class="panel-heading">管理员登录</h3></div>
                 <div class="panel-body">
@@ -42,14 +41,14 @@
                         <div class="bottom_controll">
                         <div class="form-group">
                             <label class="login_pitch f1">
-                                <input type="checkbox" name="checkbox01" class="f1">
+                                <input type="checkbox"  name="remember" {{ old('remember') ? 'checked' : '' }} class="f1">
                                 <div class="f1">&nbsp;记住密码</div>
                                 <div class="clear"></div>
                             </label>
                         </div>
 
                             <div class="right_control">
-                                <a href="#" class="forget_password">忘记密码</a>
+                                <a href="{{ route('password.request') }}" class="forget_password">忘记密码</a>
                                 <span>&nbsp;|&nbsp;</span>
                                 <a href="{{route('admin.register')}}" class="registered">注册</a>
                             </div>
