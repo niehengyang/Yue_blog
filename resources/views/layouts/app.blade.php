@@ -137,6 +137,22 @@
             Copyright &copy; 2018.niehengyang123@163.com.<a target="_blank" href="##"></a>
         </div>
     </footer>
+    <script type="text/javascript">
+        /**
+         * 弹出式回复窗
+         ***/
+        $(function() {
+            $(".reply_btn").click(function () {
+                $("reply_textarea").remove();
+                $(this).parent().parent().append("<div class='reply_textarea'><textarea name='' cols='50' rows='2'></textarea>" +
+                    "<br/><a href='' class='btn btn-primary btn-xs' type='submit'>提交</a></div>");
+            });
+        });
+        /**
+         * 返回@式回复窗
+         * **/
+
+    </script>
     <!-- Scripts -->
     {{--<script src="{{ asset('js/app.js') }}"></script>--}}
 </body>

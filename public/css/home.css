@@ -56,21 +56,21 @@
     margin-right: auto;
 }
 
-.container.\31 25\25 {
+.container{
                      width: 100%;
                      max-width: 100rem;
                      min-width: 80rem;
                  }
 
-.container.\37 5\25 {
+.container{
                     width: 60rem;
                 }
 
-.container.\35 0\25 {
+.container{
                     width: 40rem;
                 }
 
-.container.\32 5\25 {
+.container{
                     width: 20rem;
                 }
 
@@ -80,21 +80,21 @@
 
 @media screen and (max-width: 1680px) {
 
-    .container.\31 25\25 {
+    .container{
                          width: 100%;
                          max-width: 100rem;
                          min-width: 80rem;
                      }
 
-    .container.\37 5\25 {
+    .container{
                         width: 60rem;
                     }
 
-    .container.\35 0\25 {
+    .container{
                         width: 40rem;
                     }
 
-    .container.\32 5\25 {
+    .container{
                         width: 20rem;
                     }
 
@@ -106,21 +106,21 @@
 
 @media screen and (max-width: 1280px) {
 
-    .container.\31 25\25 {
+    .container {
                          width: 100%;
                          max-width: 81.25rem;
                          min-width: 65rem;
                      }
 
-    .container.\37 5\25 {
+    .container{
                         width: 48.75rem;
                     }
 
-    .container.\35 0\25 {
+    .container{
                         width: 32.5rem;
                     }
 
-    .container.\32 5\25 {
+    .container{
                         width: 16.25rem;
                     }
 
@@ -132,21 +132,21 @@
 
 @media screen and (max-width: 980px) {
 
-    .container.\31 25\25 {
+    .container{
                          width: 100%;
                          max-width: 112.5%;
                          min-width: 90%;
                      }
 
-    .container.\37 5\25 {
+    .container{
                         width: 67.5%;
                     }
 
-    .container.\35 0\25 {
+    .container{
                         width: 45%;
                     }
 
-    .container.\32 5\25 {
+    .container{
                         width: 22.5%;
                     }
 
@@ -158,21 +158,21 @@
 
 @media screen and (max-width: 736px) {
 
-    .container.\31 25\25 {
+    .container{
                          width: 100%;
                          max-width: 112.5%;
                          min-width: 90%;
                      }
 
-    .container.\37 5\25 {
+    .container{
                         width: 67.5%;
                     }
 
-    .container.\35 0\25 {
+    .container{
                         width: 45%;
                     }
 
-    .container.\32 5\25 {
+    .container{
                         width: 22.5%;
                     }
 
@@ -184,21 +184,21 @@
 
 @media screen and (max-width: 480px) {
 
-    .container.\31 25\25 {
+    .container{
                          width: 100%;
                          max-width: 112.5%;
                          min-width: 90%;
                      }
 
-    .container.\37 5\25 {
+    .container{
                         width: 67.5%;
                     }
 
-    .container.\35 0\25 {
+    .container{
                         width: 45%;
                     }
 
-    .container.\32 5\25 {
+    .container{
                         width: 22.5%;
                     }
 
@@ -240,6 +240,7 @@ a{
     background-size: cover;
     background-position: center;
     transition: all 0.3s;
+    text-align: center;
 }
 .post-card .featured-image img{
     height:100%;

@@ -1,5 +1,11 @@
 @extends('admin.base')
 
+@section('style')
+@parent
+    <style>
+
+    </style>
+@endsection
 
 @section('content')
                 <div><h3 class="panel-heading">管理员登录</h3></div>

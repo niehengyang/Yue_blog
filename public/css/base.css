@@ -4,6 +4,32 @@
     后台基本页面样式
 **/
 
+body{
+    width: 100%;
+    background-image: url("/images/login_bg.jpg");
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-position: initial;
+    background-size: cover;
+}
+
+page{
+    width: 100%;
+    height:inherit;
+}
+.panel{
+    display: block;
+    overflow: hidden !important;
+    z-index: 100;
+    text-align: center;
+    position: relative;
+    margin-top:15%;
+    width: 32%;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(0,0,0,0.08);
+}
+
 .row{
     display: flex;
     justify-content: center;

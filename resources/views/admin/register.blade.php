@@ -1,5 +1,13 @@
 @extends('admin.base')
 
+
+@section('style')
+    @parent
+    <style>
+
+    </style>
+@endsection
+
 @section('content')
     <div><h3 class="panel-heading">欢迎注册</h3></div>
     <div class="panel-body">

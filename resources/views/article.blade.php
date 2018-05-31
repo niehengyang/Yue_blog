@@ -172,14 +172,14 @@
                                     <div class="reply_item">
                                     <time style="color: #a4aaae;" datetime="{{$comment->created_at->format('C')}}" itemprop="datePublished" pubdate="">{{$comment->created_at->format('d F,Y')}} @ {{mb_substr($comment->created_at,10)}}</time>
                                     <span>&nbsp;/&nbsp;</span>
-                                    <a href="">回复</a>
+                                    <a href="javascript:;" class="reply_btn" rel="">回复</a>
                                         @if(!empty($currentUser) && ($currentUser->id == $comment->user_id))
                                         <div class="pull-right meta">
                                         <a href="{{route('comments_destroy',array('id'=>$comment->id))}}" data-method="delete"><i class="fa fa-trash">删除</i></a>
                                         </div>
                                     @endif
                                 </div>
-                            <div class="comment_content"><p class="small">{{$comment->comment_content}}</p></div>
+                            <div id="pointer" class="comment_content"><p class="small">{{$comment->comment_content}}</p></div>
                         </div>
                             @endif
                         @endforeach
@@ -188,11 +188,11 @@
                     @endif
                 </div>
             </div>
+            <div class="clear"></div>
         </div>
     </div>
-
-
 </div>
+
 <script src="{{asset('js/jquery.min.js')}}"></script>
 <script src="{{asset('js/jquery.poptrox.min.js')}}"></script>
 @endsection

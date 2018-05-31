@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Validator;
 
 class CommentController extends Controller
 {
+
+    public function index(Request $request){
+        $articleId = $request->input('article_id');
+        $comments = comments::where('article_id',$articleId)->paginate(6);
+        return view('article',['comments' =>$comments]);
+    }
     public function store(){
         $input = Input::except('_token');
         $rules = [

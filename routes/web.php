@@ -29,6 +29,7 @@ Route::group(['middleware' => 'web'],function (){
     if (\App\Model\Deskpageinfo::find(1)->web_release_size){
         Route::get('/home', 'HomeController@index')->name('home');//前台首页
         Route::get('/article/show','ArticleController@index')->name('article_show');//前台文章页面
+        Route::get('/comments/index','CommentController@index')->name('comments_index');
         Route::post('/comments/store','CommentController@store')->name('comments_store');//评论创建
         Route::get('/comments/destroy','CommentController@destroy')->name('comments_destroy');//评论删除
         Route::get('/classification/show','ClassificationController@index')->name('classifications_show');//分类列表
@@ -47,11 +48,14 @@ Route::group(['prefix' => 'admin','middleware' => 'web' ],function (){
         return redirect('admin/home');
     });
     Route::get('login','Admin\LoginController@showLoginForm')->name('admin.login');
-    Route::post('login','Admin\LoginController@postLogin');
+    Route::post('login','Admin\LoginController@postLogin');//登录
     Route::get('register','Admin\LoginController@getRegister')->name('admin.register');
-    Route::post('register','Admin\LoginController@register')->name('register');
-    Route::post('password_request','Admin\LoginController@passwordRequest')->name('password.request');
-    Route::post('logout','Admin\LoginController@logout');
+    Route::post('register','Admin\LoginController@register')->name('register');//注册
+    Route::get('password_request','Admin\LoginController@showLinkRequestForm')->name('password.request');//忘记密码
+    Route::post('password_request','Admin\LoginController@passwordRequest')->name('passwordRequest');
+    Route::get('resetpwd','Admin\LoginController@showResetPwdForm')->name('admin.resetpwd');
+    Route::post('resetpwd','Admin\LoginController@resetPwd')->name('resetpwd');//重置密码
+    Route::post('logout','Admin\LoginController@logout');//退出
     Route::get('home','Admin\IndexController@index');//首页展示
 });
 

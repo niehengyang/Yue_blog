@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Password;
 
 class LoginController extends Controller
 {
@@ -37,6 +38,11 @@ class LoginController extends Controller
     }
 
     //use admin guard
+//    protected function guard()
+//    {
+//        return Auth::guard();
+//    }
+
     protected function guard()
     {
         return auth()->guard('admin');
@@ -153,8 +159,111 @@ class LoginController extends Controller
     /****
      忘记密码
      ***/
-    public function passwordRequest(){
-
+    public function showLinkRequestForm()
+    {
+        return view('admin.email');
     }
+
+    public function passwordRequest(Request $request){
+        $this->validateEmail($request);
+
+        $response = $this->broker()->sendResetLink(
+            $request->only('email')
+        );
+
+        return $response == Password::RESET_LINK_SENT
+            ? $this->sendResetLinkResponse($response)
+            : $this->sendResetLinkFailedResponse($request,$response);
+    }
+
+    protected function validateEmail(Request $request)
+    {
+        $this->validate($request, ['email' => 'required|email']);
+    }
+
+    protected function sendResetLinkResponse($response)
+    {
+        return back()->with('status', trans($response));
+    }
+
+    protected function sendResetLinkFailedResponse(Request $request, $response)
+    {
+        return back()->withErrors(
+            ['email' => trans($response)]
+        );
+    }
+
+    public function broker()
+    {
+        return Password::broker();
+    }
+
+    /**
+    重置密码
+     **/
+
+    public function showResetPwdForm(){
+        return view('admin.resetpwd');
+    }
+
+    public function resetPwd(Request $request){
+        $this->validate($request, $this->rules(), $this->validationErrorMessages());
+
+        $response = $this->broker()->reset(
+            $this->credentials($request), function ($user, $password) {
+            $this->resetPassword($user, $password);
+        }
+        );
+
+        return $response == Password::PASSWORD_RESET
+            ? $this->sendResetResponse($response)
+            : $this->sendResetFailedResponse($request, $response);
+    }
+
+    protected function rules()
+    {
+        return [
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:6',
+        ];
+    }
+
+    protected function validationErrorMessages()
+    {
+        return [];
+    }
+
+    protected function credentials(Request $request)
+    {
+        return $request->only(
+            'email', 'password', 'password_confirmation', 'token'
+        );
+    }
+
+    protected function resetPassword($user, $password)
+    {
+        $user->forceFill([
+            'password' => bcrypt($password),
+            'remember_token' => Str::random(60),
+        ])->save();
+
+        $this->guard()->login($user);
+    }
+
+    protected function sendResetResponse($response)
+    {
+        return redirect($this->redirectPath())
+            ->with('status', trans($response));
+    }
+
+    protected function sendResetFailedResponse(Request $request, $response)
+    {
+        return redirect()->back()
+            ->withInput($request->only('email'))
+            ->withErrors(['email' => trans($response)]);
+    }
+
+
 
 }

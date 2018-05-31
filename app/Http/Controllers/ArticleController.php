@@ -16,11 +16,15 @@ class ArticleController extends Controller
         $article_next = Article::where('id','>',$articleId)->min('id');
         $next_article_title = Article::find($article_next)['title'];
         $currentUser = Auth::user();
-        $comments = comments::where('article_id',$articleId)->get();
+        $comments = $this->getComments($articleId);
         if(Article::find($articleId)){
             $article = Article::find($articleId);
             return view('article',['article'=>$article,'prev_id'=>$article_prev,'next_id'=>$article_next,'prev_article_title'=>$prev_article_title,'next_article_title'=>$next_article_title,'currentUser' => $currentUser,'comments' =>$comments]);
         }
+    }
+
+    public function getComments($articleId){
+        return comments::where('article_id',$articleId)->get();
     }
 
     public function getlist(Request $request){
