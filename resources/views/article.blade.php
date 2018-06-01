@@ -91,6 +91,7 @@
         <div class="clear"></div>
     </div>
 
+    <div class="line"></div>
     <!--comments-->
     <div class="warp_comments">
         <div class="comments_item">
@@ -117,7 +118,7 @@
                 @endif
                 <div class="form-group">
                     {!! Form::textarea('comment_content',null,['class' => 'form-control',
-                                'rows' => 3,'placeholder' => '用心评论,文明发言!']) !!}
+                                'id'=> 'comment_textarea','rows' => 3,'placeholder' => '用心评论,文明发言!']) !!}
                 </div>
                 @if($errors->has('comment_content'))
                     <span class="help-block">
@@ -172,7 +173,7 @@
                                     <div class="reply_item">
                                     <time style="color: #a4aaae;" datetime="{{$comment->created_at->format('C')}}" itemprop="datePublished" pubdate="">{{$comment->created_at->format('d F,Y')}} @ {{mb_substr($comment->created_at,10)}}</time>
                                     <span>&nbsp;/&nbsp;</span>
-                                    <a href="javascript:;" class="reply_btn" rel="">回复</a>
+                                    <a href="javascript:;" class="reply_btn" data-replyuser="{{$currentUser}}" data-commentuser="{{$comment->nickname}}" rel="">回复</a>
                                         @if(!empty($currentUser) && ($currentUser->id == $comment->user_id))
                                         <div class="pull-right meta">
                                         <a href="{{route('comments_destroy',array('id'=>$comment->id))}}" data-method="delete"><i class="fa fa-trash">删除</i></a>

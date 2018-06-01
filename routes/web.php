@@ -31,6 +31,7 @@ Route::group(['middleware' => 'web'],function (){
         Route::get('/article/show','ArticleController@index')->name('article_show');//前台文章页面
         Route::get('/comments/index','CommentController@index')->name('comments_index');
         Route::post('/comments/store','CommentController@store')->name('comments_store');//评论创建
+        Route::post('/comments/reply','CommentController@replyComments')->name('reply_comment');//回复评论
         Route::get('/comments/destroy','CommentController@destroy')->name('comments_destroy');//评论删除
         Route::get('/classification/show','ClassificationController@index')->name('classifications_show');//分类列表
         Route::get('/articlelist','ArticleController@getlist')->name('article_list');//文章列表

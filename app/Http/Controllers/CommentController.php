@@ -54,4 +54,9 @@ class CommentController extends Controller
             return Redirect::back()->withErrors('删除成功')->withInput();
         };
     }
+
+    public function replyComments(Request $request){
+        $comment_content = $request->get('comment_content');
+        dd($comment_content);
+    }
 }

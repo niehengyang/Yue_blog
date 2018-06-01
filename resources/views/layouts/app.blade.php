@@ -141,16 +141,39 @@
         /**
          * 弹出式回复窗
          ***/
-        $(function() {
-            $(".reply_btn").click(function () {
-                $("reply_textarea").remove();
-                $(this).parent().parent().append("<div class='reply_textarea'><textarea name='' cols='50' rows='2'></textarea>" +
-                    "<br/><a href='' class='btn btn-primary btn-xs' type='submit'>提交</a></div>");
-            });
-        });
+        {{--$(function() {--}}
+            {{--$(".reply_btn").click(function () {--}}
+                {{--$(".reply_textarea").remove();--}}
+                {{--$(this).parent().parent().append("<div class='reply_textarea'><textarea id='reply_textarea' cols='50' rows='2'></textarea>" +--}}
+                    {{--"<br/><button id='reply_commit_btn'  data-commentuser='{{$comment->user_id}}' class='btn btn-primary btn-xs'>提交</button></div>");--}}
+
+            {{--});--}}
+
+        {{--});--}}
+        {{--$("#reply_commit_btn").on("click",function () {--}}
+            {{--var comment_content =$("#reply_textarea").val();--}}
+            {{--// var replyuserId = $("#reply_commit_btn").attr("data-replyuser");--}}
+            {{--// var commentuserId = $("#reply_commit_btn").attr("data-commentuser");--}}
+            {{--// alert($("#reply_textarea").val());--}}
+            {{--alert( $(this).text() );--}}
+        {{--})--}}
+
+
         /**
          * 返回@式回复窗
          * **/
+
+        $(function() {
+            $(".reply_btn").on('click',function () {
+                $("#comment_textarea").focus();
+                $("#comment_textarea").val(function () {
+                    if(($(".reply_btn").attr("data-commentuser"))){
+                        return '回复'+$(".reply_btn").attr("data-commentuser")+':'
+                    }
+                    return '回复游客'+':'
+                });
+            })
+        });
 
     </script>
     <!-- Scripts -->
