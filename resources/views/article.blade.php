@@ -103,7 +103,7 @@
                 @if(!empty($currentUser))
                 <input type="hidden" name="user_id" value="{{$currentUser->id}}"/>
                 @endif
-                <input type="hidden" name="parent_id" value="{{$article->id}}"/>
+                <input type="hidden" class="reply_parentId" name="parent_id" value="" />
                 @if(empty($currentUser))
                     <div class="form-group">
                     {!! Form::email('email',null,['class' =>'form-control','row' => 3,'placeholder' => '请输入邮箱']) !!}
@@ -125,10 +125,8 @@
                         <strong>{{$errors->first('comment_content')}}</strong>
                     </span>
                 @endif
-                <div></div>
                 <div class="form-group status-post-submit">
                     <p class="text-right">{!! Form::submit('提交评论',['class'=>'btn btn-primary btn-xs','id'=>'reply-create-submit']) !!}</p>
-
                 </div>
                 {!! Form::close() !!}
             </div>
@@ -166,14 +164,15 @@
                         @foreach($comments as $comment)
                             @if($comment->release_size)
                         <div class="comment_item">
-                            <div class="show_nickname"><span><b>{{$comment->nickname}}</b></span></div>
-                                @if(empty($comment->nickname))
-                                    <div class="show_nickname"><span><b>游客</b></span></div>
+                            @if($comment->parent_id)
+                                    <div class="show_nickname"><span><b>{{$comment->nickname}}</b>&nbsp;回复<b>&nbsp;{{$comment->parent_nickname}}</b></span></div>
+                                @else
+                                    <div class="show_nickname"><span><b>{{$comment->nickname}}</b></span></div>
                                 @endif
                                     <div class="reply_item">
                                     <time style="color: #a4aaae;" datetime="{{$comment->created_at->format('C')}}" itemprop="datePublished" pubdate="">{{$comment->created_at->format('d F,Y')}} @ {{mb_substr($comment->created_at,10)}}</time>
                                     <span>&nbsp;/&nbsp;</span>
-                                    <a href="javascript:;" class="reply_btn" data-replyuser="{{$currentUser}}" data-commentuser="{{$comment->nickname}}" rel="">回复</a>
+                                    <a href="javascript:;" class="reply_btn" data-replyuser="{{$currentUser}}" data-commentuser="{{$comment->nickname}}" data-commentId="{{$comment->user_id}}" rel="">回复</a>
                                         @if(!empty($currentUser) && ($currentUser->id == $comment->user_id))
                                         <div class="pull-right meta">
                                         <a href="{{route('comments_destroy',array('id'=>$comment->id))}}" data-method="delete"><i class="fa fa-trash">删除</i></a>

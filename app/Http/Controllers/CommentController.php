@@ -16,6 +16,7 @@ class CommentController extends Controller
         $comments = comments::where('article_id',$articleId)->paginate(6);
         return view('article',['comments' =>$comments]);
     }
+
     public function store(){
         $input = Input::except('_token');
         $rules = [

@@ -19,7 +19,7 @@ class comments extends Model
     }
 
     //数据层添加article_id,nickname,email字段并查找赋值
-    protected $appends = ['article_title','nickname','email'];
+    protected $appends = ['article_title','nickname','email','parent_nickname'];
     protected function getArticleTitleAttribute(){
         $articleId = $this->attributes['article_id'];
         if ($articleId){
@@ -45,6 +45,16 @@ class comments extends Model
             return $account->email;
         }else{
             return $this->attributes['email'];
+        }
+    }
+
+    protected function getParentNicknameAttribute(){
+        $parentId = $this->attributes['parent_id'];
+        $userinfo = User::find($parentId);
+        if ($userinfo){
+            return $userinfo->nickname;
+        }else{
+            return '游客';
         }
     }
 }

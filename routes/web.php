@@ -44,7 +44,7 @@ Route::group(['middleware' => 'web'],function (){
 
 
 //后台管理员登录
-Route::group(['prefix' => 'admin','middleware' => 'web' ],function (){
+Route::group(['prefix' => 'admin'],function (){
     Route::get('/',function (){
         return redirect('admin/home');
     });
@@ -58,24 +58,25 @@ Route::group(['prefix' => 'admin','middleware' => 'web' ],function (){
     Route::post('resetpwd','Admin\LoginController@resetPwd')->name('resetpwd');//重置密码
     Route::post('logout','Admin\LoginController@logout');//退出
     Route::get('home','Admin\IndexController@index');//首页展示
+
 });
 
 
 //用户账户管理
-Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'],function (){
+Route::group(['prefix' => 'admin' , 'namespace' => 'Admin'],function (){
     Route::get('getUserList','AccountController@getList');//获取账户列表
     Route::post('deleteUser','AccountController@deleteAccount');//删除账户
 });
 
 //管理员信息修改
-Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'],function (){
+Route::group(['prefix' => 'admin' , 'namespace' => 'Admin'],function (){
     Route::get('getUserInfo','AdminController@getuserinfo');//获取管理员信息
     Route::post('updateUserInfo','AdminController@updateuserinfo');//修改管理员信息
     Route::post('resetpwd','AdminController@resetpwd');//修改密码
 });
 
 //文章管理
-Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'],function (){
+Route::group(['prefix' => 'admin' , 'namespace' => 'Admin'],function (){
    Route::get('getList','ArticleController@index');//获取文章列表
    Route::post('batchDelArticle','ArticleController@delarticle');//批量删除
    Route::post('initArticle','ArticleController@store');//初始化文章
@@ -86,14 +87,14 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'
 });
 
 //分类管理
-Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'],function (){
+Route::group(['prefix' => 'admin' , 'namespace' => 'Admin'],function (){
     Route::get('classificationList','classificationController@index');//获取文章分类列表
     Route::post('initclassification','classificationController@store');//初始化分类
     Route::post('delclassification','classificationController@deltype');//删除分类
 });
 
 //评论管理
-Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'],function (){
+Route::group(['prefix' => 'admin' , 'namespace' => 'Admin'],function (){
     Route::get('commentslist','commentsController@getcommentslist');//获取评论列表
     Route::post('disablecomments','commentsController@disableFun');//禁用评论
     Route::post('delcomments','commentsController@delcomments');//删除评论
@@ -101,14 +102,14 @@ Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'
 });
 
 //图片管理
-Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'],function (){
+Route::group(['prefix' => 'admin' , 'namespace' => 'Admin'],function (){
     Route::get('imagelist','imageController@getimagelist');//获取图片列表
     Route::post('replace_picture','imageController@replacepicture');//图片修改
     Route::post('deleteimage','imageController@deletePicture');//删除图片
 });
 
 //网站管理
-Route::group(['prefix' => 'admin' , 'namespace' => 'Admin','middleware' => 'web'],function (){
+Route::group(['prefix' => 'admin' , 'namespace' => 'Admin'],function (){
     Route::post('isdownwebsite','siteupdateController@shotdownwebsite');//关闭网站
     Route::get('getdeskpageinfo','siteupdateController@getdeskpageinfo');//获取页面信息
     Route::post('deskpageupdate','siteupdateController@deskpageupdate');//前台页面修改

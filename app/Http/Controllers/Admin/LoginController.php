@@ -19,7 +19,7 @@ class LoginController extends Controller
         AuthenticatesLogout::logout insteadof  AuthenticatesUsers;
     }
 
-    protected $redirectTo = 'admin/';
+    protected $redirectTo = '/admin/home';
     protected $guard = 'admin';
     protected $username;
 //    protected $loginView = 'admin.login';
@@ -27,7 +27,7 @@ class LoginController extends Controller
 
     public function __construct()
     {
-        $this->middleware('guest.admin:admin',['except' => 'logout']);
+        $this->middleware('guest:admin',['except' => 'logout']);
         $this->username = config('admin.global.username');
     }
 
@@ -94,15 +94,23 @@ class LoginController extends Controller
     /***
         退出登录
      ***/
-    public function logout(){
-        if(Auth::guard('admin')->user()){
+//    public function logout(){
+//        if(Auth::guard('admin')->user()){
+//            $this->guard()->logout();
+//            return response('已退出',200);
+//        }else{
+//            return response('注销出错！',500);
+//        }
+//        return Redirect::to('admin/login');
+//    }
+        public function logout(Request $request)
+        {
             $this->guard()->logout();
+            $request->session()->forget($this->guard()->getName());
+            $request->session()->regenerate();
             return response('已退出',200);
-        }else{
-            return response('注销出错！',500);
+            return Redirect::to('admin/login');
         }
-        return Redirect::to('admin/login');
-    }
 
     /****
         注册

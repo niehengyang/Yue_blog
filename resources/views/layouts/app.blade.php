@@ -167,12 +167,13 @@
             $(".reply_btn").on('click',function () {
                 $("#comment_textarea").focus();
                 $("#comment_textarea").val(function () {
-                    if(($(".reply_btn").attr("data-commentuser"))){
-                        return '回复'+$(".reply_btn").attr("data-commentuser")+':'
-                    }
-                    return '回复游客'+':'
+                return '回复'+$(".reply_btn").attr("data-commentuser")+':'
                 });
-            })
+                $(".reply_parentId").attr("value",function () {
+                    return  ($(".reply_btn").attr("data-commentId"));
+                });
+
+            });
         });
 
     </script>
