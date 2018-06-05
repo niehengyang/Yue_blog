@@ -32,4 +32,8 @@ class HomeController extends Controller
         }
     }
 
+    public function tryPage(){
+        return view('/welcome');
+    }
+
 }

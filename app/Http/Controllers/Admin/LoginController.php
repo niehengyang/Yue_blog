@@ -22,8 +22,8 @@ class LoginController extends Controller
     protected $redirectTo = '/admin/home';
     protected $guard = 'admin';
     protected $username;
-//    protected $loginView = 'admin.login';
-//    protected $registerView = 'admin.register';
+    protected $loginView = 'admin.login';
+    protected $registerView = 'admin.register';
 
     public function __construct()
     {
@@ -109,7 +109,7 @@ class LoginController extends Controller
             $request->session()->forget($this->guard()->getName());
             $request->session()->regenerate();
             return response('已退出',200);
-            return Redirect::to('admin/login');
+            return Redirect::to('/admin/login');
         }
 
     /****

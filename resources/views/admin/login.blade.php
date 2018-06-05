@@ -54,7 +54,7 @@
                         </div>
 
                             <div class="right_control">
-                                <a href="{{ route('password.request') }}" class="forget_password">忘记密码</a>
+                                <a href="{{ route('forgetPassword') }}" class="forget_password">忘记密码</a>
                                 <span>&nbsp;|&nbsp;</span>
                                 <a href="{{route('admin.register')}}" class="registered">注册</a>
                             </div>

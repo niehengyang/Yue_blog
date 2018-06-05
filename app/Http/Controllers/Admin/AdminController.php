@@ -13,6 +13,7 @@ class AdminController extends Controller
     {
         return auth()->guard('admin');
     }
+
     public function getuserinfo(Request $request)
     {
         $admin = Auth::guard('admin')->user();

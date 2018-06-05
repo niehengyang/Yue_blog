@@ -42,7 +42,11 @@ class CommentController extends Controller
         }
         $comment->email = $input['email'];
         $comment->comment_content = $input['comment_content'];
-        $comment->parent_id = $input['parent_id'];
+        if (empty($input['parent_id'])){
+            $comment->parent_id = 0;
+        }else{
+            $comment->parent_id = $input['parent_id'];
+        }
         if ($comment->save()){
             return Redirect::back()->withErrors('提交成功')->withInput();
         }

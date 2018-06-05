@@ -162,7 +162,6 @@
         /**
          * 返回@式回复窗
          * **/
-
         $(function() {
             $(".reply_btn").on('click',function () {
                 $("#comment_textarea").focus();
@@ -172,7 +171,6 @@
                 $(".reply_parentId").attr("value",function () {
                     return  ($(".reply_btn").attr("data-commentId"));
                 });
-
             });
         });
 

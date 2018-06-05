@@ -54,21 +54,25 @@ class Handler extends ExceptionHandler
      * @param  \Illuminate\Auth\AuthenticationException  $exception
      * @return \Illuminate\Http\Response
      */
+//    protected function unauthenticated($request, AuthenticationException $exception)
+//    {
+//        if ($request->expectsJson()) {
+//            return response()->json(['error' => 'Unauthenticated.'], 401);
+//        }
+//
+//        return redirect()->guest(route('login'));
+//    }
     protected function unauthenticated($request, AuthenticationException $exception)
     {
         if ($request->expectsJson()) {
             return response()->json(['error' => 'Unauthenticated.'], 401);
         }
-
-        return redirect()->guest(route('login'));
+        //如果后台页面未认证跳转到后台登录页面
+        $guard = $exception->guards();
+        if (in_array('admin',$guard)){
+            return redirect()->guest('/admin/login');
+        }
+        return redirect()->guest('login');
     }
-//    protected function unauthenticated($request, AuthenticationException $exception)
-//    {
-//        if ($request->expectsJson()) {
-//            return response()->json(['message' => $exception->getMessage()], 401);
-//        }else{
-//            return in_array('admin',$exception->guards())? return redirect()->guest('admin/login') : redirect()->guest('login');
-//        }
-//    }
 
 }

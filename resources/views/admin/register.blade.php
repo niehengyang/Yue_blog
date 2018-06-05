@@ -11,7 +11,7 @@
 @section('content')
     <div><h3 class="panel-heading">欢迎注册</h3></div>
     <div class="panel-body">
-        <form class="form-horizontal" role="form" method="POST" action="{{ route('register') }}">
+        <form class="form-horizontal" role="form" method="POST" action="{{ route('admin.register') }}">
             {!! csrf_field() !!}
 
             <div class="form-group{{$errors->has('account_number')? 'has-error':''}}">
