@@ -1,0 +1,315 @@
+@import url(font-awesome.min.css);
+/*@import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700");*/
+
+body{
+    font-family: "Poppins", sans-serif,Serif;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.7;
+    color: #666666;
+}
+#page{
+    position: relative;
+    overflow-x: hidden;/*对横向边缘进行裁剪*/
+    -webkit-transition: 0.5s;
+    transition: 0.5s;/*渐变属性0.5s时长*/
+}
+
+.offcanvas #page{
+    overflow: hidden;/*边缘裁剪*/
+    position: absolute;/*绝对定位*/
+}
+
+.offcanvas #page:after{
+    -webkit-transition: 2s;
+    transition: 2s;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 101;/*垂直定位*/
+    background: rgba(0,0,0,0.7);
+    content: '';/*插入内容*/
+}
+/*
+页面加载
+*/
+/*.gtco-loader{*/
+    /*position: fixed;*/
+    /*left: 0px;*/
+    /*top: 0px;*/
+    /*width: 100%;*/
+    /*height: 100%;*/
+    /*z-index: 9999;*/
+/*}*/
+
+/*
+导航变化前
+*/
+/*
+头部
+*/
+
+a{
+    color: #F73859;
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+    background-color: transparent;/*默认。背景颜色为透明。*/
+}
+
+a:hover,a:active,a:focus{/*设置a标签在鼠标移上去时点击时和焦点选中时的样式*/
+    color: #F73859;
+    outline: none;/*轮廓样式*/
+    text-decoration: none;/*文本修饰*/
+}
+
+p{
+    margin-bottom: 20px;
+}
+
+h1,h2,h3,h4,h5,h6,figure{/*figure标签规定独立的流内容（图像、图表、照片、代码等等）。*/
+    color: #000;
+    font-family: Cambria,Arial,sans-serif;
+    font-weight: 400;
+    margin: 0 0 20px 0;
+}
+
+::selection{/*改变文字被选中时的字体颜色和背景*/
+    color: #fff;
+    background: #F73859;
+}
+
+.copyrights{
+    text-indent: -9999px;
+    height: 0;
+    line-height: 0;
+    font-size: 0;
+    overflow: hidden;
+}
+
+.gtco-nav{
+    position: fixed;
+    top: 0;
+    margin: 0;
+    width: 100%;
+    padding: 25px 0;
+    z-index: 1001;
+    background: transparent;/*透明背景*/
+    transition: 0.5s;/*渐变动画时长0.5秒*/
+}
+
+.gtco-nav > .container{/*为class="gtco-nav"的第一个class="container"子元素赋样式*/
+    padding-bottom: 25px;
+    border-bottom: 1px solid rgba(255,255,255,0.7);
+}
+
+
+@media screen and (min-width: 768px){/*当屏幕宽度小于768px的时候执行下面的样式*/
+    .gtco-nav{
+        padding: 25px 0;
+    }
+}
+
+.gtco-nav #gtco-logo{
+    font-size: 24px;
+    padding: 0;
+    margin: 0;
+    text-transform: uppercase;/*控制文本的大小写。当前是全大写*/
+    font-weight: bold;
+}
+
+@media screen and (max-width: 768px){/*当屏幕宽度大于768px的时候执行以下样式*/
+    .gtco-nav #gtco-logo{
+        margin-bottom: 0;
+    }
+}
+
+.gtco-nav #gtco-logo a > span{
+    color: #F73859;
+}
+.gtco-nav a{
+    padding: 5px 10px;
+    color: #fff;
+}
+
+@media screen and (max-width: 768px){
+    .gtco-nav .menu-1{
+        display: none;
+    }
+}
+
+.gtco-nav ul{
+    padding: 0;
+    margin: 7px 0 0 0;
+}
+.gtco-nav ul li{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: inline;
+    font-family: "Poppins", sans-serif,Serif;
+}
+.gtco-nav ul li > a{
+    font-size: 12px;
+    text-transform: uppercase;/*字母全大写*/
+    letter-spacing: 2px;/*字母间距2px*/
+    padding: 30px 10px;
+    color: rgba(255,255,255,0.5);
+    transition: 0.5s;
+}
+.gtco-nav ul li > a:hover,.gtco-nav ul li > a:focus,.gtco-nav ul li > a:active{
+    color: white;
+}
+.gtco-nav ul li .btn-cta a{
+    color: #F73859;
+}
+
+.gtco-nav ul li .btn-cta a span{
+    background: #f35f55;
+    color: #fff;
+    padding: 4px 20px;
+    display: -moz-inline-stack;
+    display: inline-block;/*行内显示，但是长度不够将整体换行*/
+    zoom: 1;/*设置或检索对象的缩放比例。*/
+    *display:inline;
+    -webkit-transition: 0.3s;
+    transition: 0.3s;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.gtco-nav ul li .btn-cta a:hover span{
+    background: #f14034; !important;
+    -webkit-box-shadow: 0px 14px 20px -9px rgba(0,0,0,0.75);
+    box-shadow: 0px 14px 20px -9px rgba(0,0,0,0.75);
+}
+.gtco-nav ul li .active > a{
+    color: #fff;
+    position: relative;
+}
+
+/*
+页面变化后
+*/
+
+.gtco-nav-toggle{
+    position: fixed;
+    right: 0px;
+    top: 18px;
+    padding: 6px 0 0 0;
+    margin: 0 auto;
+    display: none;
+    height: 44px;
+    width: 44px;
+    z-index: 2001;
+    border-bottom: none !important;/*(!important)IE6及以下浏览器中样式显示与其它浏览器一致*/
+}
+
+.gtco-nav-toggle{
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.gtco-nav-toggle.gtco-nav-white > i{
+    color: #fff;
+    background: #fff;
+}
+
+.gtco-nav-toggle i{
+    position: relative;
+    display: inline-block;
+    width: 25px;
+    height: 2px;
+    font: bold 14px/.4 Helvetica;
+    text-transform: uppercase;
+    text-indent: -55px;
+    transition: all .2s ease-out;
+}
+#gtco-offcanvas{
+    position: fixed;
+    z-index: 1901;
+    width: 270px;
+    background: black;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 45px 40px 40px 40px;
+    display: none;
+    overflow-y: auto;
+    transform: translateX(270px);
+    transition: 0.5s;
+}
+#gtco-offcanvas ul{
+    padding: 0;
+    margin: 0;
+}
+ul,menu,dir{
+    display: block;
+    list-style-type: disc;
+    -webkit-margin-before: 1em;
+    -webkit-margin-after: 1em;
+    -webkit-margin-start: 0px;
+    -webkit-margin-end: 0px;
+    -webkit-padding-start: 40px;
+}
+
+#gtco-offcanvas ul li{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+li{
+    display: list-item;
+    text-align: -webkit-match-parent;
+}
+
+
+.container{
+    margin-right: auto;
+    margin-left: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.row{
+    margin-left: -15px;
+    margin-right: -15px;
+}
+
+.text-left{
+    text-align: left;
+}
+
+
+
+
+
+/*
+背景
+*/
+
+#gtco-header,#gtco-counter,.gtco-bg{
+    background-size: cover;
+    background-repeat:no-repeat;
+    background-position: top center;
+    position: relative;
+}
+.gtco-cover{
+    height: 900px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    float: left;
+    width: 100%;
+}
+.gtco-cover.overlay{
+    z-index: 0;
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(39,41,43,0.7);
+}
