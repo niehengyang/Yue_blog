@@ -164,13 +164,13 @@
          * **/
         $(function() {
             $(".reply_btn").on('click',function () {
+                var commentUser = $(this).attr("data-commentuser");
+                var commentId = $(this).attr("data-commentId");
                 $("#comment_textarea").focus();
                 $("#comment_textarea").val(function () {
-                return '回复'+$(".reply_btn").attr("data-commentuser")+':'
+                    return '回复'+commentUser+':'
                 });
-                $(".reply_parentId").attr("value",function () {
-                    return  ($(".reply_btn").attr("data-commentId"));
-                });
+                $(".reply_parentId").attr("value",commentId);
             });
         });
 

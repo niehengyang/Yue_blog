@@ -16,10 +16,10 @@
 
         <!-- Styles -->
         <style>
-            .gtco-cover{
-                background: url("{{'/images/welcome.jpg'}}");
-                background-position: -25px 55px;
-            }
+            {{--.gtco-cover{--}}
+                {{--background: url("{{'/images/welcome.jpg'}}");--}}
+                {{--background-position: -25px 0px;--}}
+            {{--}--}}
         </style>
     </head>
     <body>
@@ -29,11 +29,11 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-2 text-left">
-                            <div id="gtco-logo"><a href="/welcome">Yue_blog<span>.</span></a></div>
+                            <div id="gtco-logo"><a href="trypage">Yue_blog<span>.</span></a></div>
                         </div>
                         <div class="col-xs-10 text-right menu-1">
                             <ul>
-                                <li><a href="/category">HOME</a></li>
+                                <li><a href="home">HOME</a></li>
                                 <li><a href="/category">ABOUT</a></li>
                                 <li><a href="/category">THEME</a></li>
                                 <li><a href="/category">BLOG</a></li>
@@ -44,23 +44,23 @@
                 </div>
             </nav>
 
-            <header id="gtco-header" class="gtco-cover" role="banner" data-stellar-background-ratio="0.5">
+            <header id="gtco-header" class="gtco-cover" role="banner" style="background-image: url('/images/welcome.jpg');" data-stellar-background-ratio="0.5">
                 <div class="overlay"></div>
                 <div class="container">
                     <div class="row">
-                        {{--<div class="col-md-7 text-left">--}}
-                            {{--<div class="display-t">--}}
-                                {{--<div class="display-tc animate-box" data-animate-effect="fadeInUp">--}}
-                                    {{--<span class="data-post">4 day ago</span>--}}
-                                    {{--<h1 class="mb30">--}}
-                                        {{--<a href="#">How Web Hosting Can Impact Page Load Speed?</a>--}}
-                                    {{--</h1>--}}
-                                    {{--<p>--}}
-                                        {{--<a href="#" class="text-link">Read More</a>--}}
-                                    {{--</p>--}}
-                                {{--</div>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
+                        <div class="col-md-7 text-left">
+                            <div class="display-t">
+                                <div class="display-tc animate-box" data-animate-effect="fadeInUp">
+                                    <span class="data-post">hello！</span>
+                                    <h1 class="mb30">
+                                        <a href="#">Yue_blog是一个基于laravel5开发的博客系统</a>
+                                    </h1>
+                                    <p>
+                                        {{--<a href="#" class="text-link">NHY</a>--}}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </header>

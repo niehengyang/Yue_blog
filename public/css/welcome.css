@@ -58,7 +58,7 @@ a{
     background-color: transparent;/*默认。背景颜色为透明。*/
 }
 
-a:hover,a:active,a:focus{/*设置a标签在鼠标移上去时点击时和焦点选中时的样式*/
+a:hover, a:active, a:focus{/*设置a标签在鼠标移上去时点击时和焦点选中时的样式*/
     color: #F73859;
     outline: none;/*轮廓样式*/
     text-decoration: none;/*文本修饰*/
@@ -68,13 +68,17 @@ p{
     margin-bottom: 20px;
 }
 
-h1,h2,h3,h4,h5,h6,figure{/*figure标签规定独立的流内容（图像、图表、照片、代码等等）。*/
+h1, h2, h3, h4, h5, h6, figure{/*figure标签规定独立的流内容（图像、图表、照片、代码等等）。*/
     color: #000;
     font-family: Cambria,Arial,sans-serif;
     font-weight: 400;
     margin: 0 0 20px 0;
 }
 
+::-webkit-selection{
+    color: #fff;
+    background: #F73859;
+}
 ::selection{/*改变文字被选中时的字体颜色和背景*/
     color: #fff;
     background: #F73859;
@@ -92,10 +96,12 @@ h1,h2,h3,h4,h5,h6,figure{/*figure标签规定独立的流内容（图像、图�
     position: fixed;
     top: 0;
     margin: 0;
+    padding: 0;
     width: 100%;
     padding: 25px 0;
     z-index: 1001;
     background: transparent;/*透明背景*/
+    -webkit-transition: 0.5s;
     transition: 0.5s;/*渐变动画时长0.5秒*/
 }
 
@@ -105,7 +111,7 @@ h1,h2,h3,h4,h5,h6,figure{/*figure标签规定独立的流内容（图像、图�
 }
 
 
-@media screen and (min-width: 768px){/*当屏幕宽度小于768px的时候执行下面的样式*/
+@media screen and (max-width: 768px){/*当屏幕宽度大于768px的时候执行下面的样式*/
     .gtco-nav{
         padding: 25px 0;
     }
@@ -158,14 +164,77 @@ h1,h2,h3,h4,h5,h6,figure{/*figure标签规定独立的流内容（图像、图�
     color: rgba(255,255,255,0.5);
     transition: 0.5s;
 }
-.gtco-nav ul li > a:hover,.gtco-nav ul li > a:focus,.gtco-nav ul li > a:active{
+.gtco-nav ul li > a:hover, .gtco-nav ul li > a:focus, .gtco-nav ul li > a:active{
     color: white;
 }
-.gtco-nav ul li .btn-cta a{
+.gtco-nav ul li.has-dropdown{
+    position: relative;
+}
+
+.gtco-nav ul li.has-dropdown .dropdown{
+    width: 130px;
+    -webkit-box-shadow: 0px 8px 13px -9px rgba(0,0,0,0.75);
+    -moz-box-shadow:  0px 8px 13px -9px rgba(0,0,0,0.75);
+    box-shadow:  0px 8px 13px -9px rgba(0,0,0,0.75);
+    z-index: 1002;
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    text-align: left;
+    background: #fff;
+    padding: 20px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-transition: 0s;
+    transition: 0s;
+}
+
+.gtco-nav ul li.has-dropdown .dropdown:before{
+    bottom: 100%;
+    left: 40px;
+    border: solid transparent;
+    content: ' ';
+    height: 0;
+    width: 0;
+    position: absolute;
+    pointer-events: none;
+    border-bottom-color: #fff;
+    border-width: 8px;
+    margin-left: -8px;
+}
+.gtco-nav ul li.has-dropdown .dropdown li{
+    display: block;
+    margin-bottom: 7px;
+}
+.gtco-nav ul li.has-dropdown .dropdown li:last-child{
+    margin-bottom: 0;
+}
+
+.gtco-nav ul li.has-dropdown .dropdown li > a{
+    text-transform: none;
+    letter-spacing: inherit;
+    padding: 2px 0;
+    display: block;
+    color: #999999;
+    line-height: 1.2;
+    text-transform: none;
+    font-size: 15px;
+}
+.gtco-nav ul li.has-dropdown .dropdown li > a:hover{
+    color: #000;
+}
+.gtco-nav ul li.has-dropdown:hover a,.gtco-nav ul li.has-dropdown:focus a{
+    color: #fff;
+}
+
+.gtco-nav ul li.btn-cta a{
     color: #F73859;
 }
 
-.gtco-nav ul li .btn-cta a span{
+.gtco-nav ul li.btn-cta a span{
     background: #f35f55;
     color: #fff;
     padding: 4px 20px;
@@ -179,123 +248,75 @@ h1,h2,h3,h4,h5,h6,figure{/*figure标签规定独立的流内容（图像、图�
     -moz-border-radius: 4px;
     border-radius: 4px;
 }
-.gtco-nav ul li .btn-cta a:hover span{
+.gtco-nav ul li.btn-cta a:hover span{
     background: #f14034; !important;
     -webkit-box-shadow: 0px 14px 20px -9px rgba(0,0,0,0.75);
     box-shadow: 0px 14px 20px -9px rgba(0,0,0,0.75);
 }
-.gtco-nav ul li .active > a{
+.gtco-nav ul li.active > a{
     color: #fff;
     position: relative;
 }
+
+
 
 /*
 页面变化后
 */
-
-.gtco-nav-toggle{
-    position: fixed;
-    right: 0px;
-    top: 18px;
-    padding: 6px 0 0 0;
-    margin: 0 auto;
-    display: none;
-    height: 44px;
-    width: 44px;
-    z-index: 2001;
-    border-bottom: none !important;/*(!important)IE6及以下浏览器中样式显示与其它浏览器一致*/
-}
-
-.gtco-nav-toggle{
-    cursor: pointer;
-    text-decoration: none;
-}
-
-.gtco-nav-toggle.gtco-nav-white > i{
-    color: #fff;
+.scrolled .gtco-nav{
     background: #fff;
+    padding: 10px 0;
+    -webkit-box-shadow: 0px 5px 7px -7px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0px 5px 7px -7px rgba(0,0,0,0.15);
+    box-shadow: 0px 5px 7px -7px rgba(0,0,0,0.15);
 }
 
-.gtco-nav-toggle i{
+.scrolled .gtco-nav > .container{
+    padding-bottom: 0px;
+    border-bottom: 1px solid transparent;
+}
+.scrolled .gtco-nav a{
+    color: #000;
+}
+
+.scrolled .gtco-nav ul li a:hover, .scrolled .gtco-nav ul li a:focus, .scrolled .gtco-nav ul li a:active{
+    color: #F73859 !important;
+}
+
+.scrolled .gtco-nav ul li.active a{
+    color: #F73859;
+}
+.scrolled .gtco-nav ul li.has-dropdown:hover > a, .scrolled .gtco-nav ul li.has-dropdown:focus > a{
+    color: #F73859;
+}
+
+#gtco-header, #gtco-counter, .gtco-bg{
+    background-size: cover;/*规定背景图像的尺寸*/
+    background-position: top center;/*设置背景图像的起始位置。*/
+    background-repeat: no-repeat;/*设置是否及如何重复背景图像。*/
     position: relative;
-    display: inline-block;
-    width: 25px;
-    height: 2px;
-    font: bold 14px/.4 Helvetica;
-    text-transform: uppercase;
-    text-indent: -55px;
-    transition: all .2s ease-out;
 }
-#gtco-offcanvas{
-    position: fixed;
-    z-index: 1901;
-    width: 270px;
-    background: black;
-    right: 0;
-    top: 0;
-    bottom: 0;
-    padding: 45px 40px 40px 40px;
-    display: none;
-    overflow-y: auto;
-    transform: translateX(270px);
-    transition: 0.5s;
-}
-#gtco-offcanvas ul{
-    padding: 0;
-    margin: 0;
-}
-ul,menu,dir{
-    display: block;
-    list-style-type: disc;
-    -webkit-margin-before: 1em;
-    -webkit-margin-after: 1em;
-    -webkit-margin-start: 0px;
-    -webkit-margin-end: 0px;
-    -webkit-padding-start: 40px;
-}
-
-#gtco-offcanvas ul li{
-    padding: 0;
-    margin: 0;
-    list-style: none;
-}
-
-li{
-    display: list-item;
-    text-align: -webkit-match-parent;
-}
-
-
-.container{
-    margin-right: auto;
-    margin-left: auto;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-
-.row{
-    margin-left: -15px;
-    margin-right: -15px;
-}
-
-.text-left{
-    text-align: left;
-}
-
-
-
-
-
-/*
-背景
-*/
-
-#gtco-header,#gtco-counter,.gtco-bg{
+.gtco-bg{
     background-size: cover;
-    background-repeat:no-repeat;
-    background-position: top center;
+    background-position: center center;
     position: relative;
+    width: 100%;
+    float: left;
 }
+#gtco-header .date-post{
+    display: block;
+    color: rgba(255,255,255,0.5);
+    font-size: 15px;
+    text-transform: uppercase;
+}
+
+#gtco-header a{
+    color: white;
+}
+#gtco-header a:hover{
+    color: white;
+}
+/*背景*/
 .gtco-cover{
     height: 900px;
     background-size: cover;
@@ -304,7 +325,8 @@ li{
     float: left;
     width: 100%;
 }
-.gtco-cover.overlay{
+
+.gtco-cover .overlay{
     z-index: 0;
     position: absolute;
     bottom: 0;
@@ -312,4 +334,334 @@ li{
     left: 0;
     right: 0;
     background: rgba(39,41,43,0.7);
+}
+
+.gtco-cover > .gtco-container{
+    position: relative;
+    z-index: 10;
+}
+
+@media screen and (max-width: 768px){
+    .gtco-cover{
+        height: 600px;
+    }
+}
+
+.gtco-cover .display-t, .gtco-cover .display-tc{
+    z-index: 9;
+    height: 900px;
+    display: table;
+    width: 100%;
+}
+@media screen and (max-width: 768px){
+    .gtco-cover .display-t, .gtco-cover .display-tc{
+        height: 600px;
+    }
+}
+.gtco-cover.gtco-cover-sm{
+    height: 600px;
+}
+@media screen and (max-width: 768px){
+    .gtco-cover.gtco-cover-sm{
+        height: 400px;
+    }
+}
+.gtco-cover.gtco-cover-sm .display-t,
+.gtco-cover.gtco-cover-sm .display-tc{
+    height: 600px;
+    display: table;
+    width: 100%;
+}
+@media screen and (max-width: 768px){
+    .gtco-cover.gtco-cover-sm .display-t,
+    .gtco-cover.gtco-cover-sm .display-tc{
+        height: 400px;
+    }
+}
+
+.row{
+    margin-left: -15px;
+    margin-right: -15px;
+}
+.gtco-staff{
+    text-align: center;
+    margin-bottom: 30px;
+    background: #fff;
+    padding: 30px;
+    float: left;
+    width: 100%;
+}
+
+.gtco-staff img{
+    width: 100%;
+    margin-bottom: 20px;
+    -webkit-border-radius: 50%;
+    border-radius: 50%;
+}
+
+.gtco-staff h3{
+    font-size: 24px;
+    margin-bottom: 5px;
+}
+.gtco-staff p{
+    margin-bottom: 30px;
+}
+.gtco-staff .role{
+    color: #bfbfbf;
+    margin-bottom: 30px;
+    font-weight: normal;
+    display: block;
+}
+
+#gtco-header .display-tc, #gtco-counter .display-tc, .gtco-cover .display-tc{
+    display: table-cell; !important;
+    vertical-align: middle;
+}
+#gtco-header .display-tc h1, #gtco-header .display-tc h2,
+#gtco-counter .display-tc h1, #gtco-counter .display-tc h2,
+.gtco-cover .display-tc h1, .gtco-cover .display-tc h2{
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+#gtco-header .display-tc h1, #gtco-counter .display-tc h1, .gtco-cover .display-tc h1{
+    margin-bottom: 0px;
+    margin-top: 0;
+    font-size: 60px;
+    line-height: 1.1;
+    font-family: "Courier New", monospace, Arial, sans-serif;
+    font-weight: 300;
+}
+@media screen and (max-width: 768px){
+    #gtco-header .display-tc h1, #gtco-counter .display-tc h1, .gtco-cover .display-tc h1{
+        font-size: 40px;
+    }
+}
+#gtco-header .display-tc h2, #gtco-counter .display-tc h2, .gtco-cover .display-tc h2{
+    font-size: 20px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+#gtco-offcanvas{
+    position: fixed;
+    z-index: 1901;
+    width: 270px;
+    background: black;
+    top: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 45px 40px 40px 40px;
+    overflow-y: auto;/*纵向保留*/
+    display: none;
+    -moz-transform: translateX(270px);
+    -webkit-transform: translateX(270px);
+    transform: translateX(270px);/*纵向移动270px距离*/
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+
+}
+
+@media screen and (max-width: 768px){
+    #gtco-offcanvas{
+        display: block;
+    }
+}
+.offcanvas #gtco-offcanvas{
+    -moz-transform: translateX(0px);
+    -ms-transform: translateX(0px);
+    -webkit-transform: translateX(0px);
+    transform: translateX(0px);
+}
+
+#gtco-offcanvas a{
+    color: rgba(255,255,255,0.5);
+}
+#gtco-offcanvas a:hover{
+    color: rgba(255,255,255,0.8);
+}
+#gtco-offcanvas ul{
+    padding: 0;
+    margin: 0;
+}
+#gtco-offcanvas ul li{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+#gtco-offcanvas ul li > ul{
+    padding-left: 20px;
+    display: none;
+}
+#gtco-offcanvas ul li.offcanvas-has-dropdown > a{
+    display: block;
+    position: relative;
+}
+
+#gtco-offcanvas ul li.offcanvas-has-dropdown > a:after{
+    position: absolute;
+    right: 0;
+    font-family: "Courier New", monospace;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    content: "\e921";
+    font-size: 20px;
+    color: rgba(255,255,255,0.2);
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+
+#gtco-offcanvas ul li.offcanvas-has-dropdown .active a:after{
+    -webkit-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+    -ms-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+
+.uppercase{
+    font-size: 14px;
+    color: #000;
+    margin-bottom: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+.gototop{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    opacity: 0;/*设置元素的不透明级别*/
+    visibility: hidden;/*规定元素是否可见*/
+    -webkit-transition: 0.5s;
+    transition: 0.5s;
+}
+.gototop.active{
+    opacity: 1;
+    visibility: visible;
+}
+.gototop a{
+    width: 50px;
+    height: 50px;
+    display: table;
+    background: rgba(0,0,0,0.5);
+    color: #fff;
+    text-align: center;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+}
+.gototop a i{
+    height: 50px;
+    display: table-cell;/*此元素会作为一个表格单元格显示（类似 <td> 和 <th>）*/
+    vertical-align: middle;/*设置元素的垂直对齐方式*/
+}
+
+.gototop a:hover, .gototop a:active, .gototop a:focus{
+    text-decoration: none;
+    outline: none;
+}
+
+.gtco-nav-toggle{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.gtco-nav-toggle.active i::before, .gtco-nav-toggle.active i::after{
+    background: #444;
+}
+
+.gtco-nav-toggle:hover, .gtco-nav-toggle:focus, .gtco-nav-toggle:active{
+    outline: none;
+    border-bottom: none !important;
+}
+.gtco-nav-toggle i{
+    position: relative;
+    display: inline-block;
+    width: 25px;
+    height: 2px;
+    color: #252525;
+    font: bold 14px/.4 Helvetica;
+    text-transform: uppercase;
+    text-indent: -55px;
+    background: #252525;
+    transition: all .2s ease-out;
+}
+.gtco-nav-toggle i::before, .gtco-nav-toggle i::after{
+    content: '';
+    width: 25px;
+    height: 2px;
+    background: #252525;
+    position: absolute;
+    left: 0;
+    transition: all .2s ease-out;
+}
+
+.gtco-nav-toggle.gtco-nav-white > i{
+    color: #fff;
+    background: #fff;
+}
+.gtco-nav-toggle.gtco-nav-white > i::before, .gtco-nav-toggle.gtco-nav-white > i::after{
+    background: #fff;
+}
+.gtco-nav-toggle i::before{
+    top: -7px;
+}
+.gtco-nav-toggle i::after{
+    bottom: -7px;
+}
+.gtco-nav-toggle:hover i::before{/*鼠标移上元素的时候在i标签前面加样式*/
+    top:-10px;
+}
+.gtco-nav-toggle:hover i::after{
+    bottom: -10px;
+}
+.gtco-nav-toggle.active i{
+    background: transparent;
+}
+.gtco-nav-toggle.active i::before{
+    top: 0;
+    -webkit-transform: rotateZ(45deg);
+    -moz-transform: rotateZ(45deg);
+    -ms-transform: rotateZ(45deg);
+    transform: rotateZ(45deg);
+}
+.gtco-nav-toggle.active i::after{
+    bottom: 0;
+    -webkit-transform: rotateZ(-45deg);
+    -moz-transform: rotateZ(-45deg);
+    -ms-transform: rotateZ(-45deg);
+    transform: rotateZ(-45deg);
+}
+
+.gtco-nav-toggle{
+    position: fixed;
+    right: 0;
+    top: 18px;
+    z-index: 21;
+    display: block;
+    padding: 6px 0 0 0;
+    margin: 0 auto;
+    display: none;
+    height: 44px;
+    width: 44px;
+    z-index: 2001;
+    border-bottom: none !important;
+}
+.scrolled .gtco-nav-toggle{
+    top: 5px;
+}
+@media screen and (max-width: 768px){
+    .gtco-nav-toggle{
+        display: block;
+    }
 }
