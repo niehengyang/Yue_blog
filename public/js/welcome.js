@@ -158,13 +158,12 @@
 
             $('html,body').animate({
                 scrollTop: $('html').offset().top
-            },500,'easeInOutExpo');
-
+            },500);
             return false;
         });
         $(window).scroll(function () {
             var $win = $(window);
-            if($win.scrollTop() > 200){
+            if($win.scrollTop() >= 200){
                 $('.js-top').addClass('active');
             }else{
                 $('.js-top').removeClass('active');
@@ -172,16 +171,28 @@
         });
     };
 
-    // var counterWayPoint = function () {
-    //     if ($('#gtco-counter').length > 0){
-    //         $('#gtco-counter').waypoint(function (direction) {
-    //             if(direction === 'down' && !$(this.element).hasClass('animated')){
-    //                 setTimeout(counter,400);
-    //                 $(this.element).addClass('animated');
-    //             }
-    //         },{offset:'90%'});
-    //     }
+    //Loading page
+    var loaderPage = function () {
+        $(".gtco-loader").fadeOut('slow');
+    };
+
+    // var counter = function () {
+    //     $('.js-counter').countTo({
+    //         formatter:function (value, options) {
+    //             return value.toFixed(options.decimal);
+    //         },
+    //     });
     // };
+    var counterWayPoint = function () {
+        if ($('#gtco-counter').length > 0){
+            $('#gtco-counter').waypoint(function (direction) {
+                if(direction === 'down' && !$(this.element).hasClass('animated')){
+                    setTimeout(counter,400);
+                    $(this.element).addClass('animated');
+                }
+            },{offset:'90%'});
+        }
+    };
 
     // var parallax = function () {
     //     if (!isMobile.any()){
@@ -194,7 +205,11 @@
         scrollNavBar();
         offcanvasMenu();
         burgerMenu();
-        // counterWayPoint();
+        dropdown();
+        goToTop();
+        loaderPage();
+        // counter();
+        counterWayPoint();
         // parallax();
     });
 

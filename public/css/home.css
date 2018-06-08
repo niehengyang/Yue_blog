@@ -247,6 +247,7 @@ a{
     background-size: cover;
     background-position: center;
     transition: all 0.3s;
+    position: center
 }
 .post-card .content-warp{
     padding: 0px 16px;

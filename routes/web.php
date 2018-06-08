@@ -39,7 +39,7 @@ Route::group(['middleware' => 'web'],function (){
         return view('/websitedown');
     }
 
-    Route::get('trypage','HomeController@tryPage');
+//    Route::get('trypage','HomeController@tryPage');
 });
 
 

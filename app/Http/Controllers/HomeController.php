@@ -26,9 +26,9 @@ class HomeController extends Controller
     {
         $articleList = Article::paginate(8);
         if (is_null($articleList)){
-            return view('/home')->withErrors('暂无信息');
+            return view('/welcome')->withErrors('暂无信息');
         }else{
-            return view('/home',['articleList' =>$articleList]);
+            return view('/welcome',['articleList' =>$articleList]);
         }
     }
 
