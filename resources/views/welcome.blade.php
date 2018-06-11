@@ -29,21 +29,21 @@
                 <div class="container">
                     <div class="row">
                         <div class="col-xs-2 text-left">
-                            <div id="gtco-logo"><a href="trypage">Yue_blog<span>.</span></a></div>
+                            <div id="gtco-logo"><a href="#">Yue_blog<span>.</span></a></div>
                         </div>
                         <div class="col-xs-10 text-right menu-1">
                             <ul>
-                                <li><a href="home">HOME</a></li>
-                                <li><a href="/category">ABOUT</a></li>
-                                <li><a href="/category">THEME</a></li>
-                                <li><a href="/category">BLOG</a></li>
-                                <li><a href="/category">CONTACT</a></li>
+                                <li><a href="home">首页</a></li>
+                                <li><a href="/category">关于</a></li>
+                                <li><a href="/category">主题</a></li>
+                                <li><a href="/category">博客</a></li>
+                                <li><a href="/category">联系</a></li>
                             </ul>
                         </div>
                     </div>
                 </div>
             </nav>
-
+            <!--header-->
             <header id="gtco-header" class="gtco-cover" role="banner" data-stellar-background-ratio="0.5">
                 <div class="overlay"></div>
                 <div class="container">
@@ -55,18 +55,76 @@
                                     <h1 class="mb30">
                                         <a href="#">Yue_blog是一个基于laravel5开发的博客系统</a>
                                     </h1>
-                                    {{--<p>--}}
-                                        {{--<a href="#" class="text-link">NHY</a>--}}
-                                    {{--</p>--}}
+                                    <p>
+                                        <a href="#" class="text-link">NHY</a>
+                                    </p>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <div class="mouse-icon margin-20">
+                        <div class="scroll"></div>
+                    </div>
                 </div>
             </header>
+            {{--<div id="carousel-example-generic" class="carousel slide hidden-xs" data-ride="carousel" data-interval="4000">--}}
+            {{--<!--滚动头部-->--}}
+            {{--<div class="carousel-inner">--}}
+                {{--@if(!empty($popular_articleList))--}}
+                    {{--@foreach($popular_articleList as $popular_article)--}}
+                        {{--@if($popular_article[0])--}}
+                        {{--<div class="item active">--}}
+                            {{--<img src="{{$popular_article->img}}" alt="...">--}}
+                            {{--<div class="container">--}}
+                                {{--<div class="header-text hidden-xs">--}}
+                                    {{--<div class="col-md-12 text-center">--}}
+                                        {{--<h1>{{$popular_article->title}}</h1>--}}
+                                        {{--<hr>--}}
+                                        {{--<p>{!! $popular_article->abstract !!}</p>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--@endif--}}
+                            {{--<div class="item">--}}
+                                {{--<img src="{{$popular_article->img}}" alt="...">--}}
+                                {{--<div class="container">--}}
+                                    {{--<div class="header-text hidden-xs">--}}
+                                        {{--<div class="col-md-12 text-center">--}}
+                                            {{--<h1>{{$popular_article->title}}</h1>--}}
+                                            {{--<hr>--}}
+                                            {{--<p>{!! $popular_article->abstract !!}</p>--}}
+                                        {{--</div>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                    {{--@endforeach--}}
+                {{--@else--}}
+                        {{--<div class="item active">--}}
+                            {{--<img src="/images/welcome.jpg" alt="...">--}}
+                            {{--<div class="container">--}}
+                                {{--<div class="header-text hidden-xs">--}}
+                                    {{--<div class="col-md-12 text-center">--}}
+                                        {{--<h1>暂无推荐</h1>--}}
+                                        {{--<hr>--}}
+                                        {{--<p>多谢您的光临！！</p>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                {{--@endif--}}
+            {{--</div>--}}
+                {{--<!--控制按钮-->--}}
+                {{--<a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">--}}
+                    {{--<span class="glyphicon glyphicon-chevron-left"></span>--}}
+                {{--</a>--}}
+                {{--<a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">--}}
+                    {{--<span class="glyphicon glyphicon-chevron-right"></span>--}}
+                {{--</a>--}}
+        {{--</div>--}}
 
             <div class="copyrights"></div>
-
+            <!--main-->
             <div id="gtco-main">
                 <div class="container">
                     <div class="row row-pb-md">
@@ -112,90 +170,7 @@
             </div>
 
             <!--底部-->
-            <footer>
-                <div class="wrap-footer">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-footer col-md-3">
-                                <h2 class="footer-title">
-                                    <p>关于我们</p>
-                                </h2>
-                                <div class="textwidget">
-                                    <p>这是关于我们的描述，想要了解更多请关注我们！！</p>
-                                </div>
-                            </div>
-                            <div class="col-footer col-md-3 widget_recent_entries">
-                                <h2 class="footer-title">
-                                    <p>最受欢迎的帖子</p>
-                                    <ul></ul>
-                                </h2>
-                            </div>
-                            <div class="col-footer col-md-3">
-                                <h2 class="footer-title">
-                                    <p>新闻信</p>
-                                </h2>
-                                <p style="vertical-align: inherit;">如果您想收到我们的最新消息直接发送到您的电子邮箱，请在下面留下您的电子邮件地址。订阅式免费的，您可以随时取消。</p>
-                                <form action="#" method="post">
-                                    <input type="text" name="your-name" value size="40" placeholder="您的邮箱">
-                                    <p style="vertical-align: inherit">
-                                        <input type="submit" value="订阅" class="btn btn-skin">
-                                    </p>
-                                </form>
-                            </div>
-                            <div class="col-footer col-md-3">
-                                <h2 class="footer-title">
-                                    <p>分类</p>
-                                </h2>
-                                <div class="footer-tags">
-                                    <a href="#">动物</a>
-                                    <a href="#">烹饪</a>
-                                    <a href="#">国家</a>
-                                    <a href="#">城市</a>
-                                    <a href="#">儿童</a>
-                                    <a href="#">家庭</a>
-                                    <a href="#">照片</a>
-                                    <a href="#">购物</a>
-                                    <a href="#">爱</a>
-                                    <a href="#">学校</a>
-                                    <a href="#">媒体</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="bottom-footer">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <p>@1999-2008 CSDN版权所有</p>
-                                <p>京ICP证09002463号</p>
-                            </div>
-                            <div class="col-md-4">
-                                <ul class="list-inline social-buttons">
-                                    <li>
-                                        <a href="#"><i class="fa fa-twitter"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-facebook"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-linkedin"></i></a>
-                                    </li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-pinterest"></i></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="col-md-4">
-                                <ul>
-                                    <li><a href="#">隐私政策</a></li>
-                                    <li><a href="#">使用条款</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            @include('footer',['popular_articleList' => $popular_articleList])
         </div>
     <div class="gototop js-top">
         <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>

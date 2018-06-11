@@ -17,14 +17,21 @@ class ArticleController extends Controller
         $next_article_title = Article::find($article_next)['title'];
         $currentUser = Auth::user();
         $comments = $this->getComments($articleId);
+        $popular_article = $this->get_popularArticle();
         if(Article::find($articleId)){
             $article = Article::find($articleId);
-            return view('article',['article'=>$article,'prev_id'=>$article_prev,'next_id'=>$article_next,'prev_article_title'=>$prev_article_title,'next_article_title'=>$next_article_title,'currentUser' => $currentUser,'comments' =>$comments]);
+            return view('article',['article'=>$article,'prev_id'=>$article_prev,'next_id'=>$article_next,'prev_article_title'=>$prev_article_title,'next_article_title'=>$next_article_title,
+                'currentUser' => $currentUser,'comments' =>$comments,'popular_articleList' => $popular_article]);
         }
     }
 
     public function getComments($articleId){
         return comments::where('article_id',$articleId)->get();
+    }
+
+    public function get_popularArticle(){
+        $popular_article = Article::where('istop',1)->get();
+        return $popular_article;
     }
 
     public function getlist(Request $request){

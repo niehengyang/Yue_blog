@@ -25,10 +25,11 @@ class HomeController extends Controller
     public function index()
     {
         $articleList = Article::paginate(8);
+        $popular_article = $this->get_popularArticle();
         if (is_null($articleList)){
             return view('/welcome')->withErrors('暂无信息');
         }else{
-            return view('/welcome',['articleList' =>$articleList]);
+            return view('/welcome',['articleList' =>$articleList,'popular_articleList' => $popular_article]);
         }
     }
 
@@ -36,4 +37,8 @@ class HomeController extends Controller
         return view('/welcome');
     }
 
+    public function get_popularArticle(){
+        $popular_article = Article::where('istop',1)->get();
+        return $popular_article;
+    }
 }

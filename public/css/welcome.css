@@ -667,6 +667,156 @@ h1, h2, h3, h4, h5, h6, figure{/*figure标签规定独立的流内容（图像�
     }
 }
 
+.mouse-icon{
+    position: absolute;
+    border: 2px solid #2f2f2f;
+    background: #ffffff;
+    opacity: 0.5;
+    border-radius: 13px;
+    height: 40px;
+    width: 30px;
+    margin: 0 auto;
+    display: block;
+    left: 0;
+    right: 0;
+    bottom: 150px;
+    z-index: 100;
+}
+/*
+头部跑马样式
+*/
+.carousel-inner{
+    position: relative;
+    z-index: -1;
+}
+.carousel-inner::before{
+    background: rgba(0,0,0,6) linear-gradient(transparent,#1a1c1e) repeat scroll 0 0;
+    bottom: 0;
+    content: "";
+    display: block;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    width: 100%;
+    z-index: 10;
+}
+.carousel-inner img{
+    width: 100%;
+}
+.carousel-control{
+    width: 0;
+}
+.carousel-control.left, .carousel-control.right{
+    opacity: 1;
+    filter: alpha(opacity=100);
+    background-image: none;
+    background-repeat: no-repeat;
+    text-shadow: none;
+}
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .glyphicon-chevron-right,
+.carousel-control .icon-prev,
+.carousel-control .icon-next{
+    position: absolute;
+    top: 45%;
+    z-index: 5;
+    display: inline-block;
+}
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .icon-prev{
+    left: 30px;}
+.carousel-control .glyphicon-chevron-right,
+.carousel-control .icon-next{
+    right: 30px;}
+.carousel-control.left span:hover,
+.carousel-control.right span:hover{
+    opacity: .7;
+    filter: alpha(opacity=70);
+}
+.carousel-inner > .item{
+    margin-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    width: 100%;
+    height: auto;
+}
+.carousel-inner > .item > img,
+.carousel-inner > .item > a >img{
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-left: 0;
+    padding-left: 0;
+}
+
+.header-text{
+    position: absolute;
+    top: 25%;
+    left: 8%;
+    right: auto;
+    width: 85%;
+    color: #fff;
+    z-index: 999;
+    border-bottom: 2px solid #fff;
+    padding-bottom: 60px;
+}
+.header-text h1{
+    margin-top: 0;
+    margin-bottom: 0;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: #fff;
+    font-size: 65px;
+}
+.header-text hr{
+    margin: 30px auto;
+}
+.header-text p{
+    margin-bottom: 50px;
+    font-size: 18px;
+    font-weight: 300;
+    color: rgba(255,255,255,.7);
+}
+/*
+小鼠标动态样式
+*/
+.mouse-icon .scroll{
+    -webkit-animation-name: scrolling;
+    -webkit-animation-duration: 1s;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-delay: 0s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-play-state: running;
+    animation-name: scrolling;
+    animation-duration: 1s;
+    animation-timing-function: linear;
+    animation-delay: 0s;
+    animation-iteration-count: infinite;
+    animation-play-state: running;
+}
+.mouse-icon .scroll{
+    position: relative;
+    border-radius: 10px;
+    background: #2f2f2f;
+    width: 4px;
+    height: 8px;
+    top: 4px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@-webkit-keyframes scrolling {
+    0% {top: 2px; opacity: 0}
+    30% {top: 8px; opacity: 1;}
+    100% {top: 16px; opacity: 0;}
+}
+@keyframes scrolling {
+    0% {top: 2px; opacity: 0}
+    30% {top: 8px; opacity: 1;}
+    100% {top: 16px; opacity: 0;}
+}
+
 /*----------------------------------------------------------*/
 /*-----------------------文章列表样式-----------------------*/
 /*----------------------------------------------------------*/

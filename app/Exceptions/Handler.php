@@ -72,7 +72,7 @@ class Handler extends ExceptionHandler
         if (in_array('admin',$guard)){
             return redirect()->guest('/admin/login');
         }
-        return redirect()->guest('login');
+        return redirect()->guest('/home');
     }
 
 }

@@ -5,6 +5,10 @@
         .warp_mid{
             width: 100%;
         }
+        .gtco-cover{
+            background: url("{{$article->img}}");
+        }
+
     </style>
 <script type="text/javascript">
 
@@ -29,12 +33,12 @@
 @if(!empty($article))
 <div class="el-row warp_mid" type="flex" justify="center">
     <div class="el-col warp_main" :span="18" :offset="6">
-        @if($article->img)
-        <div class="img-item">
-            <img src="{{$article->img}}" alt=""/>
-            <div class="clear"></div>
-        </div>
-        @endif
+        {{--@if($article->img)--}}
+        {{--<div class="img-item">--}}
+            {{--<img src="{{$article->img}}" alt=""/>--}}
+            {{--<div class="clear"></div>--}}
+        {{--</div>--}}
+        {{--@endif--}}
         <div class="show_box">
             <div class="main">
                 <div class="header">
