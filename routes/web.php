@@ -40,5 +40,5 @@ Route::group(['middleware' => 'web'],function (){
 
 //前台页面首页
 Route::group(['middleware' => 'web'],function (){
-    Route::get('popular_article','HomeController@get_popularArticle')->name('popularArticle');
+    Route::get('about','HomeController@about_page')->name('about');
 });

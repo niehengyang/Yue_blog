@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Article;
+use App\Model\classification;
 use App\Model\Deskpageinfo;
 
 class HomeController extends Controller
@@ -25,20 +26,15 @@ class HomeController extends Controller
     public function index()
     {
         $articleList = Article::paginate(8);
-        $popular_article = $this->get_popularArticle();
         if (is_null($articleList)){
             return view('/welcome')->withErrors('暂无信息');
         }else{
-            return view('/welcome',['articleList' =>$articleList,'popular_articleList' => $popular_article]);
+            return view('/welcome',['articleList' =>$articleList]);
         }
     }
 
-    public function tryPage(){
-        return view('/welcome');
+    public function about_page(){
+        return view('/about');
     }
 
-    public function get_popularArticle(){
-        $popular_article = Article::where('istop',1)->get();
-        return $popular_article;
-    }
 }

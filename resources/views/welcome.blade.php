@@ -1,48 +1,11 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="description" content="Free HTML5 Website Template by GetTemplates.co"/>
-        <meta name="keywords" content="free website templates,free html5,free template,free bootstrap,free website template,html5,css3,mobile first,responsive"/>
-        <meta name="author" content="GetTemplates.co">
-        <link rel="stylesheet" href="{{asset('css/font-awesome.min.css')}}">
-        <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}" />
-        <link rel="stylesheet" href="{{asset('css/welcome.css')}}" />
-        <title>{{ config('app.name', 'laravel') }}</title>
-
-        <!-- Fonts -->
-        {{--<link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">--}}
-
-        <!-- Styles -->
-        <style>
-            .gtco-cover{
-                background: url("{{'/images/welcome.jpg'}}");
-            }
-        </style>
-    </head>
-    <body>
-    <div class="gtco-loader"></div>
-        <div id="page">
-            <nav class="gtco-nav" role="navigation">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-xs-2 text-left">
-                            <div id="gtco-logo"><a href="#">Yue_blog<span>.</span></a></div>
-                        </div>
-                        <div class="col-xs-10 text-right menu-1">
-                            <ul>
-                                <li><a href="home">首页</a></li>
-                                <li><a href="/category">关于</a></li>
-                                <li><a href="/category">主题</a></li>
-                                <li><a href="/category">博客</a></li>
-                                <li><a href="/category">联系</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </nav>
+@extends('layouts.app')
+<!-- Styles -->
+<style>
+    .gtco-cover{
+        background: url("{{'/images/welcome.jpg'}}");
+    }
+</style>
+@section('content')
             <!--header-->
             <header id="gtco-header" class="gtco-cover" role="banner" data-stellar-background-ratio="0.5">
                 <div class="overlay"></div>
@@ -56,7 +19,7 @@
                                         <a href="#">Yue_blog是一个基于laravel5开发的博客系统</a>
                                     </h1>
                                     <p>
-                                        <a href="#" class="text-link">NHY</a>
+                                        <a href="#" class="text-link" style="font-family: '叶根友毛笔行书2.0版'">【NHY】</a>
                                     </p>
                                 </div>
                             </div>
@@ -150,9 +113,9 @@
                                                 <div class="left">
                                                     <span class="title_span"><time style="color: #a4aaae;" class="fa fa-calendar date" datetime="{{$article->created_at->format('C')}}" itemprop="datePublished" pubdate="">&nbsp;{!!$article->created_at->format('d F,Y')!!}</time></span>
                                                     <span>|</span>
-                                                    <a href="##" class="author_a">{{$article->author}}</a>
+                                                    <a href="#" class="author_a">{{$article->author}}</a>
                                                 </div>
-                                                <a href="##" class="comments_span">{{$article->comments_number}}&nbsp;评论</a>
+                                                <a href="#" class="comments_span">{{$article->comments_number}}&nbsp;评论</a>
                                             </div>
                                         </div>
                                     </a>
@@ -168,18 +131,4 @@
                 </div>
                 <div class="clear"></div>
             </div>
-
-            <!--底部-->
-            @include('footer',['popular_articleList' => $popular_articleList])
-        </div>
-    <div class="gototop js-top">
-        <a href="#" class="js-gotop"><i class="fa fa-arrow-up"></i></a>
-    </div>
-    <!-- Scripts -->
-
-    <script src="{{asset('js/jquery.min.js')}}"></script>
-    <script src="{{asset('js/jquery.poptrox.min.js')}}"></script>
-    <script src="{{asset('js/bootstrap.min.js')}}"></script>
-    <script src="{{asset('js/welcome.js')}}"></script>
-    </body>
-</html>
+@endsection

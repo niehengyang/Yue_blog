@@ -21,16 +21,18 @@
                             <li>
                                 <div class="post-entry">
                                     <div class="post-img">
-                                        <a href="{{route('article_show',array('id'=>$article->id))}}"><img src="{{$popular_article->img}}" class="img-responsive" alt="this is a popular article"></a>
+                                        <a href="{{route('article_show',array('id'=>$popular_article->id))}}"><img src="{{$popular_article->img}}" class="img-responsive" alt="this is a popular article"></a>
                                     </div>
                                 </div>
                                 <div class="post-copy">
-                                    <h4><a href="{{route('article_show',array('id'=>$article->id))}}">{{$popular_article->title}}</a></h4>
+                                    <h4><a href="{{route('article_show',array('id'=>$popular_article->id))}}">{{$popular_article->title}}</a></h4>
                                     <a href="#" class="post-meta"><span class="date-posted"><time style="color: #a4aaae;" class="fa fa-calendar date" datetime="{{$popular_article->created_at->format('C')}}" itemprop="datePublished" pubdate="">&nbsp;{!!$popular_article->created_at->format('d F,Y')!!}</time></span></a>
                                 </div>
                             </li>
                                 @endforeach
                         </ul>
+                        @else
+                        <div>暂无信息</div>
                         @endif
                 </div>
                 <div class="col-footer col-md-3">
@@ -50,17 +52,11 @@
                         <p>分类</p>
                     </h2>
                     <div class="footer-tags">
-                        <a href="#">动物</a>
-                        <a href="#">烹饪</a>
-                        <a href="#">国家</a>
-                        <a href="#">城市</a>
-                        <a href="#">儿童</a>
-                        <a href="#">家庭</a>
-                        <a href="#">照片</a>
-                        <a href="#">购物</a>
-                        <a href="#">爱</a>
-                        <a href="#">学校</a>
-                        <a href="#">媒体</a>
+                        @if(!empty($classifications))
+                            @foreach($classifications as $classification)
+                                <a href="{{route('article_list',array('id'=>$classification->id))}}">{{$classification->name}}</a>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>

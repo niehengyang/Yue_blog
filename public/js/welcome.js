@@ -161,6 +161,7 @@
             },500);
             return false;
         });
+
         $(window).scroll(function () {
             var $win = $(window);
             if($win.scrollTop() >= 200){
@@ -174,6 +175,16 @@
     //Loading page
     var loaderPage = function () {
         $(".gtco-loader").fadeOut('slow');
+    };
+    
+    //about js
+    var aboutTyped = function () {
+        $(".typed").typed({
+            strings:["My Name is Mr.nie","I'm a Web Developers","Love Simplicity"],
+            typeSpeed: 100,
+            backDelay:90,
+            loop:true
+        });
     };
 
     // var counter = function () {
@@ -208,6 +219,7 @@
         dropdown();
         goToTop();
         loaderPage();
+        aboutTyped();
         // counter();
         counterWayPoint();
         // parallax();

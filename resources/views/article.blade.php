@@ -14,7 +14,30 @@
 
 </script>
 @section('content')
-
+    <!--header-->
+    <header id="gtco-header" class="gtco-cover" role="banner" data-stellar-background-ratio="0.5">
+        <div class="overlay"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-7 text-left">
+                    <div class="display-t">
+                        <div class="display-tc animate-box" data-animate-effect="fadeInUp">
+                            <span class="data-post"></span>
+                            <h1 class="mb30">
+                                <a href="#">{{$article->title}}</a>
+                            </h1>
+                            <p>
+                                <a href="#" class="text-link" style="font-family: '叶根友毛笔行书2.0版'">【{{$article->author}}】</a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="mouse-icon margin-20">
+                <div class="scroll"></div>
+            </div>
+        </div>
+    </header>
 
 <div class="page">
     <!--首页路径-->
@@ -29,6 +52,7 @@
         <li class="active">文章详情</li>
     </ul>
     </div>
+
     <!---文章页面-->
 @if(!empty($article))
 <div class="el-row warp_mid" type="flex" justify="center">
@@ -134,30 +158,6 @@
                 </div>
                 {!! Form::close() !!}
             </div>
-
-
-            {{--<div class="comment-input">--}}
-            {{--{{Form::open(['route'=>'comments_store','method'=>'post'])}}--}}
-            {{--<input type="hidden" name="article_id" value="{{$article->id}}"/>--}}
-            {{--<div class="form-group">--}}
-                {{--@if($currentUser)--}}
-                    {{--{{Form::textarea('body',null,['class' =>'form-control',--}}
-                        {{--'rows'=>5,--}}
-                        {{--'placeholder'=>'是否评论?',--}}
-                        {{--'style'=>'overflow:hidden',--}}
-                        {{--'id'=>'reply_content'])}}--}}
-                {{--@else--}}
-                    {{--{{Form::textarea('body',null,['class'=>'form-control','rows'=>5, 'placeholder'=>'用心评论,文明发言!'])}}--}}
-                {{--@endif--}}
-
-            {{--</div>--}}
-            {{--<div class="form-group status-post-submit">--}}
-                {{--<p class="text-right">{{Form::submit('提交评论',['class'=>'btn btn-primary btn-xs'.($currentUser ? '':'disabled'),'id'=>'reply-create-submit'])}}</p>--}}
-
-            {{--</div>--}}
-            {{--{{Form::close()}}--}}
-        {{--</div>--}}
-
     </div>
 
         <div class="show_comments">

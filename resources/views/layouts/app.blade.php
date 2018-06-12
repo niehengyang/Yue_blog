@@ -27,12 +27,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-xs-2 text-left">
-                    <div id="gtco-logo"><a href="#">Yue_blog<span>.</span></a></div>
+                    <div id="gtco-logo"><a href="/home">{{ config('app.name', 'laravel') }}<span>.</span></a></div>
                 </div>
                 <div class="col-xs-10 text-right menu-1">
                     <ul>
                         <li><a href="/home">首页</a></li>
-                        <li><a href="/category">关于</a></li>
+                        <li><a href="/about">关于</a></li>
                         <li><a href="/category">主题</a></li>
                         <li><a href="{{route('classifications_show')}}">博客</a></li>
                         <li><a href="/category">联系</a></li>
@@ -41,30 +41,6 @@
             </div>
         </div>
     </nav>
-    <!--header-->
-    <header id="gtco-header" class="gtco-cover" role="banner" data-stellar-background-ratio="0.5">
-        <div class="overlay"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-7 text-left">
-                    <div class="display-t">
-                        <div class="display-tc animate-box" data-animate-effect="fadeInUp">
-                            <span class="data-post"></span>
-                            <h1 class="mb30">
-                                <a href="#">{{$article->title}}</a>
-                            </h1>
-                            <p>
-                                <a href="#" class="text-link" style="font-family: '叶根友毛笔行书2.0版'">【{{$article->author}}】</a>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mouse-icon margin-20">
-                <div class="scroll"></div>
-            </div>
-        </div>
-    </header>
     @yield('content')
 </div>
 <!-- Footer -->
@@ -115,5 +91,6 @@
 <script src="{{asset('js/jquery.poptrox.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.min.js')}}"></script>
 <script src="{{asset('js/welcome.js')}}"></script>
+<script src="{{asset('js/typed.js')}}"></script>
 </body>
 </html>
