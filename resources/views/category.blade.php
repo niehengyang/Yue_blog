@@ -1,6 +1,6 @@
 @extends('layouts.app')
 <!-- Styles -->
-<link href="{{asset('css/classificationlist.css')}}" rel="stylesheet">
+<link href="{{asset('css/category.css')}}" rel="stylesheet">
 <style>
     .gtco-cover{
         background-image: url("/images/top1.jpg");
@@ -13,19 +13,20 @@
     <!--头部-->
     <header id="gtco-header"  style="height: 400px; background-size: 100% 100%;" class="gtco-cover" role="banner" data-stellar-background-ratio="0.5">
     </header>
-
-    <div class="container">
-        <div class="row row-pb-md">
-            <!--首页路径-->
-            <div class="warp-breadcrumb">
-                <ul class="breadcrumb">
-                    <li>
-                        <a href="/">{{ config('app.name', 'laravel') }}</a>
-                    </li>
-                    <li><a  href="/home">首页</a></li>
-                    <li class="active">分类列表</li>
-                </ul>
-            </div>
+    <div id="gtco-main">
+        <div class="container">
+            <div class="row row-pb-md">
+                <div class="col-md-12">
+            {{--<!--首页路径-->--}}
+            {{--<div class="warp-breadcrumb">--}}
+                {{--<ul class="breadcrumb">--}}
+                    {{--<li>--}}
+                        {{--<a href="/">{{ config('app.name', 'laravel') }}</a>--}}
+                    {{--</li>--}}
+                    {{--<li><a  href="/home">首页</a></li>--}}
+                    {{--<li class="active">分类列表</li>--}}
+                {{--</ul>--}}
+            {{--</div>--}}
 
             <!--分类列表-->
             <div class="col-xs-12 col-sm-12 col-md-8 col-lg-9 col-xl-9">
@@ -35,7 +36,7 @@
                     @if(!empty($popular_articleList))
                         @foreach($popular_articleList as $popular_article)
                             <!--可通过改变class属性而改变文章卡片显示大小(full,two-third,one-third)-->
-                                <li class="full entry animate-box" data-animate-effect="fadeIn">
+                                <li class="two-third entry animate-box" data-animate-effect="fadeIn">
                                     <a href="#">
                                         @if(!empty($popular_article->img))
                                             <a class="permalink" href="{{route('article_show',array('id'=>$popular_article->id))}}">
@@ -105,5 +106,7 @@
             <!--文章列表-->
 
         </div>
+            </div>
+    </div>
     </div>
 @endsection

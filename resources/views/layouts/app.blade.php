@@ -33,9 +33,9 @@
                     <ul>
                         <li><a href="/home">首页</a></li>
                         <li><a href="/about">关于</a></li>
-                        <li><a href="/category">主题</a></li>
+                        <li><a href="#">主题</a></li>
                         <li><a href="{{route('classifications_show')}}">博客</a></li>
-                        <li><a href="/category">联系</a></li>
+                        <li><a href="/contact">联系</a></li>
                     </ul>
                 </div>
             </div>

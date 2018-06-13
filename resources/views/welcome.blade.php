@@ -14,9 +14,9 @@
                         <div class="col-md-7 text-left">
                             <div class="display-t">
                                 <div class="display-tc animate-box" data-animate-effect="fadeInUp">
-                                    <span class="data-post">hello！</span>
+                                    {{--<span class="data-post">{!! config('app.speak', 'Laravel') !!}</span>--}}
                                     <h1 class="mb30">
-                                        <a href="#">Yue_blog是一个基于laravel5开发的博客系统</a>
+                                        <a href="#">{!! config('app.describe', 'Laravel') !!}</a>
                                     </h1>
                                     <p>
                                         <a href="#" class="text-link" style="font-family: '叶根友毛笔行书2.0版'">【NHY】</a>

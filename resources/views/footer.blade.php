@@ -1,4 +1,4 @@
-
+<div class="line"></div>
 <footer>
     <div class="wrap-footer">
         <div class="container">

@@ -41,17 +41,17 @@
 
 <div class="page">
     <!--首页路径-->
-    <div class="warp-breadcrumb">
-    <ul class="breadcrumb">
-        <li>
-            <a href="/">{{ config('app.name', 'laravel') }}</a>
-        </li>
-        <li>
-            <a href="/home">首页</a>
-        </li>
-        <li class="active">文章详情</li>
-    </ul>
-    </div>
+    {{--<div class="warp-breadcrumb">--}}
+    {{--<ul class="breadcrumb">--}}
+        {{--<li>--}}
+            {{--<a href="/">{{ config('app.name', 'laravel') }}</a>--}}
+        {{--</li>--}}
+        {{--<li>--}}
+            {{--<a href="/home">首页</a>--}}
+        {{--</li>--}}
+        {{--<li class="active">文章详情</li>--}}
+    {{--</ul>--}}
+    {{--</div>--}}
 
     <!---文章页面-->
 @if(!empty($article))
@@ -134,7 +134,7 @@
                 <input type="hidden" class="reply_parentId" name="parent_id" value="" />
                 @if(empty($currentUser))
                     <div class="form-group">
-                    {!! Form::email('email',null,['class' =>'form-control','row' => 3,'placeholder' => '请输入邮箱']) !!}
+                    {!! Form::email('email',null,['class' =>'form-control','row' => 3,'placeholder' => '请输入邮箱','required'=> "required"]) !!}
                     </div>
                     @else
                     <input type="hidden" name="email" value="{{$currentUser->email}}"/>
@@ -146,7 +146,7 @@
                 @endif
                 <div class="form-group">
                     {!! Form::textarea('comment_content',null,['class' => 'form-control',
-                                'id'=> 'comment_textarea','rows' => 3,'placeholder' => '用心评论,文明发言!']) !!}
+                                'id'=> 'comment_textarea','rows' => 3,'placeholder' => '用心评论,文明发言!','required'=> "required"]) !!}
                 </div>
                 @if($errors->has('comment_content'))
                     <span class="help-block">
@@ -191,6 +191,26 @@
                         <div class="comment_content"><p class="small">暂无评论</p></div>
                     @endif
                 </div>
+            </div>
+            <div class="row">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+                        <li>
+                        <a href="#" aria-label="Previous">
+                            <span aria-hidden="true">&laquo;</span>
+                        </a>
+                        </li>
+                        <li class="active"><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li>
+                            <a href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
             <div class="clear"></div>
         </div>

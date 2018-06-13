@@ -37,4 +37,12 @@ class HomeController extends Controller
         return view('/about');
     }
 
+    public function contact_me(){
+        return view('/contact');
+    }
+
+    public function Post_contact(){
+        return view('/contact');
+    }
+
 }

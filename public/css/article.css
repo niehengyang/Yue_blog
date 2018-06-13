@@ -144,4 +144,54 @@ img{
 .comment_content{
     padding: 10px;
 }
+/*评论导航*/
+.show_comments .row{
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+.show_comments .pagination a{
+    background: none;
+    border: none !important;
+    color: gray !important;
+}
+.show_comments .pagination a:hover, .show_comments .pagination a:focus, .show_comments .pagination a:active{
+    background: none !important;
+}
+.show_comments .pagination > li > a{
+    margin: 0 2px;
+    font-size: 18px;
+    background: none;
+    padding: 0 !important;
+    -webkit-border-radius: 50% !important;
+    -moz-border-radius: 50% !important;
+    border-radius: 50% !important;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    display: table-cell;
+    vertical-align: middle;
+    z-index: 10;
+    text-align: center;
+}
+
+.show_comments .pagination > li > a:hover{
+    color: #E73859 !important;
+    background: #e6e6e6 !important;
+}
+.show_comments .pagination >li.disabled > a{
+    background: none;
+}
+.show_comments .pagination > li.active > a{
+    z-index: 19;
+    background: #fff !important;
+    -webkit-box-shadow: 4px 11px 35px -14px rgba(0,0,0,0.5);
+    -moz-box-shadow: 4px 11px 35px -14px rgba(0,0,0,0.5);
+    box-shadow: 4px 11px 35px -14px rgba(0,0,0,0.5);
+    color: #E73859 !important;
+}
+.show_comments .pagination > li.active > a:hover{
+    cursor: pointer;
+    background: #f96982 !important;
+}
 

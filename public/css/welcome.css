@@ -1474,3 +1474,7 @@ footer ul.social-buttons li a i{
     font-size: 10px;
     margin-top: 5px;
 }
+.line{
+    width: 100%;
+    border-bottom: 1px dashed  #c0c0c0;
+}

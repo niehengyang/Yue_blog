@@ -40,5 +40,7 @@ Route::group(['middleware' => 'web'],function (){
 
 //前台页面首页
 Route::group(['middleware' => 'web'],function (){
-    Route::get('about','HomeController@about_page')->name('about');
+    Route::get('about','HomeController@about_page')->name('about');//about
+    Route::get('contact','HomeController@contact_me')->name('contact');//contact
+    Route::post('contactpost','HomeController@Post_contact')->name('post_contact');//post contact
 });
