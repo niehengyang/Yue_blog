@@ -93121,7 +93121,7 @@ var render = function() {
             _c(
               "span",
               { staticStyle: { "font-size": "18px", color: "#fff" } },
-              [_vm._v("Yue_blog后台管理系统")]
+              [_vm._v("悦blog后台管理系统")]
             )
           ]),
           _vm._v(" "),

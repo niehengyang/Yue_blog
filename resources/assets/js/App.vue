@@ -3,7 +3,7 @@
         <!--头部-->
         <el-col :span="24" class="topbar-wrap" :loading="loading" element-loading-text="拼命加载中">
             <div class="topbar-title">
-                <span style="font-size: 18px;color: #fff;">Yue_blog后台管理系统</span>
+                <span style="font-size: 18px;color: #fff;">悦blog后台管理系统</span>
             </div>
             <div class="topbar-btn">
                 <el-dropdown trigger="click">
